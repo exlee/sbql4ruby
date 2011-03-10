@@ -21,4 +21,10 @@ class TestBasic < Test::Unit::TestCase
       db = SQLite3::Database.open("../sampledata/basic.sqlite")
     }
   end
+  
+  def test_yaml
+    assert_nothing_thrown("Checking for YAML library") {
+      require "yaml"
+    }
+  end
 end

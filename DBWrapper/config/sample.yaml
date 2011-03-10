@@ -1,0 +1,12 @@
+- Object:
+    Name: ObjectName # Representing object name
+    Table: ObjectTable # Representing object 
+    Attibutes: [Attrib1, Attrib2, Attrib3]                  # Some attributes that can be read/written to directly
+                                                            # by default those are all simple database attributes
+    SubObjects: [Object1, Object2, Object3]                 # Traversable objects - by default those are 
+                                                            # all foreign_keys - please don't break it by using cycling relationships
+- Object:
+    Name: SecondObject
+    Table: SecondTable
+    Attributes: nil
+    SubObjects: nil
