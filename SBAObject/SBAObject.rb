@@ -1,24 +1,42 @@
-module SBAObject
+module SBAStore
 
-  # An abstract class for SBAStore 
+  # SBA store basic abstract class 
   class SBAObject
-  
-    # Parameters: var_Id, var_Name
-    def initiaize(var_Id, var_Name)
-      @VAR_ID = var_Id
+
+    # VAR_OBJECT_COUNTER:Integer - SBAObject instances counter
+    @@VAR_OBJECT_COUNTER = 0
+    
+    # Constructor
+    #
+    # Params:
+    #
+    # var_Name:String - SBA store object name
+    #
+    # Returns: nil
+    def initialize(var_Name)
+      @VAR_ID = @@VAR_OBJECT_COUNTER
       @VAR_NAME = var_Name
+      
+      @@VAR_OBJECT_COUNTER += 1
     end
-  
-    # Getter method for SBAStore object identifier
-    # Returns: VAR_ID
-    def VAR_ID
-      @VAR_ID
-    end
-  
-    def VAR_NAME
-      @VAR_NAME
+
+     # Gets SBAObjects instances counter
+     #
+     # Params:
+     #
+     # var_Name:String - SBA store object name
+     #
+     # Returns: nil
+    def VAR_OBJECT_COUNTER
+      @@VAR_OBJECT_COUNTER
     end
     
+    # VAR_ID:Integer - SBA store object identifier
+    attr :VAR_ID
+    
+     # VAR_NAME:String - SBA store object name
+    attr :VAR_NAME
+         
   end
-   
+ 
 end
