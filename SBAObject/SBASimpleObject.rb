@@ -15,14 +15,15 @@ require "SBAObject"
     #
     # Returns: nil
     def initialize(var_Name, var_Object)
-      super(var_Name)
-
-      @VAR_OBJECT = var_Object
+      if(!var_Object.is_a? String)
+        raise TypeError  "Incorrect object type '(#{var_Object.class})', 'String' expected"
+      end
+      
+      puts "#{var_Object.class}"
+      super(var_Name, var_Object)
     end
   
-    # VAR_ID:Object - SBA store object identifier
-    attr :VAR_OBJECT
-    
   end
- 
+test = SBASimpleObject.new("AAA", 12)
+puts "#{test.VAR_OBJECT}"
 end
