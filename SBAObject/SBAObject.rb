@@ -44,5 +44,4 @@ module SBAStore
     attr :VAR_OBJECT
          
   end
- 
 end
