@@ -23,11 +23,21 @@ module SBAStore
       @@VAR_OBJECT_COUNTER += 1
     end
 
+    # Abstract method, should be implemented by the inheriting 
+    # classes (valids given object)
+    #
+    # Params:
+    #
+    # var_Object:Object - object to be validated
+    #
+    # Returns: TrueClass || FalseClass
+    def isValidType?(var_Object)
+      raise NotImplementedError.new("Abstract method")
+    end
+    
      # Gets SBAObjects instance counter
      #
      # Params:
-     #
-     # var_Name:String - SBA store object name
      #
      # Returns: VAR_OBJECT_COUNTER:INTEGER
     def VAR_OBJECT_COUNTER
@@ -44,4 +54,5 @@ module SBAStore
     attr :VAR_OBJECT
          
   end
+ 
 end
