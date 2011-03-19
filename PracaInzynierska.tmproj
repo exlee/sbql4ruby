@@ -3,13 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>SBAObject/SBASimpleObject.rb</string>
+	<string>SBAObject/SBAComplexObject.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>children</key>
 			<array>
 				<dict>
+					<key>expanded</key>
+					<true/>
 					<key>name</key>
 					<string>sbql4ruby</string>
 					<key>regexFolderFilter</key>
@@ -18,6 +20,8 @@
 					<string></string>
 				</dict>
 			</array>
+			<key>expanded</key>
+			<true/>
 			<key>name</key>
 			<string>Praca magisterska</string>
 		</dict>
@@ -40,44 +44,28 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>SBAObject/SBAObject.rb</key>
+		<key>SBAObject/SBAComplexObject.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>12</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>6</integer>
+				<integer>17</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>6</integer>
-				<key>line</key>
-				<integer>6</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>24</integer>
-				<key>line</key>
-				<integer>6</integer>
-			</dict>
 		</dict>
 		<key>SBAObject/SBASimpleObject.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>34</integer>
 				<key>line</key>
-				<integer>9</integer>
+				<integer>17</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
@@ -88,24 +76,23 @@
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>6</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>9</integer>
+				<integer>0</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>3</integer>
 				<key>line</key>
-				<integer>9</integer>
+				<integer>26</integer>
 			</dict>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>SBAObject/SBAObject.rb</string>
+		<string>SBAObject/SBAComplexObject.rb</string>
 		<string>SBAObject/SBASimpleObject.rb</string>
-		<string>DBWrapper/test/tc_basic.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>

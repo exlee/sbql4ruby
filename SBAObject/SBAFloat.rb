@@ -22,6 +22,21 @@ require "SBASimpleObject"
       super(var_Name, var_Object)
     end
 
+     # Validates given object's type
+     #
+     # Params:
+     #
+     # var_Object:Object - object to be validated
+     #
+     # Returns: TrueClass/FalseClass
+     def isValidType?(var_Object)
+       if(var_Object.is_a? Float)
+         return true
+       end
+       
+       return false
+     end
+      
   end
 
 end

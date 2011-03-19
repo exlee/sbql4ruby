@@ -18,6 +18,18 @@ require "SBAObject"
       super(var_Name, var_Object)
     end
     
+     # Abstract method, should be implemented by the inheriting 
+     # classes (valids given object)
+     #
+     # Params:
+     #
+     # var_Object:Object - object to be validated
+     #
+     # Returns: TrueClass || FalseClass
+     def isValidType?(var_Object)
+       raise NotImplementedError.new("Abstract method")
+     end
+      
   end
   
 end
