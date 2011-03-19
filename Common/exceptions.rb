@@ -1,0 +1,2 @@
+class OverwriteException < RuntimeError
+end
