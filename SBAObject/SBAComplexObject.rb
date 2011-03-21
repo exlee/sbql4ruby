@@ -8,7 +8,7 @@ require "SBAObject"
     # Constructor
     #
     # Params:
-    #
+    #q
     # var_Name:String - SBA store object name
     #
     # var_Object:Object - SBA store complex data object
