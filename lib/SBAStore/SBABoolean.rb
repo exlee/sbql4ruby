@@ -1,35 +1,42 @@
 module SBAStore
-  
+
 require "SBASimpleObject"
+require "exceptions"
+
 
   # SBA store Integer class 
   class SBABoolean < SBASimpleObject
     
-    # Constructor
+    # Method:initialize
     #
     # Params:
     #
     # var_Name:String - SBA store object name
-    #
     # var_Object:TrueClass || FalseClass - SBA store object
     #
-    # Returns: nil
+    # Returns:
+    #
+    # Throws:SBATypeError
     def initialize(var_Name, var_Object)
-      if(!(var_Object.is_a? TrueClass) && !(var_Object.is_a? FalseClass))
-        raise TypeError.new("Incorrect object type [#{var_Object.class}]")
+      if(!SBABoolean.isValidType?(var_Object))
+        raise SBATypeError.new("Incorrect object type [#{var_Object.class}]")
       end
       
       super(var_Name, var_Object)
     end
 
+     # Method:SBABoolean.isValidType?
+     #
      # Validates given object's type
      #
      # Params:
      #
      # var_Object:Object - object to be validated
      #
-     # Returns: TrueClass/FalseClass
-     def isValidType?(var_Object)
+     # Returns:TrueClass/FalseClass
+     #
+     # Throws:
+     def SBABoolean.isValidType?(var_Object)
        if((var_Object.is_a? TrueClass) || (var_Object.is_a? FalseClass))
          return true
        end

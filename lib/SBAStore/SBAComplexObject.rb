@@ -1,35 +1,104 @@
 module SBAStore
   
 require "SBAObject"
+require "exceptions"
+
 
   # SBA store abstract class for simple objects 
-  class SBAComplexObject < SBAStore::SBAObject
+  class SBAComplexObject < SBAObject
 
-    # Constructor
+    # Method:initialize
     #
     # Params:
-    #q
-    # var_Name:String - SBA store object name
     #
+    # var_Name:String - SBA store object name
     # var_Object:Object - SBA store complex data object
     #
-    # Returns: nil
-    def initialize(var_Name, var_Object)
-      super(var_Name, var_Object)
+    # Returns:
+    #
+    # Throws:
+    def initialize(var_Name)
+      super(var_Name, nil)
+      
+      @VAR_REFERENCES = Array.new()
     end
     
-     # Abstract method, should be implemented by the inheriting 
-     # classes (valids given object)
-     #
-     # Params:
-     #
-     # var_Object:Object - object to be validated
-     #
-     # Returns: TrueClass || FalseClass
-     def isValidType?(var_Object)
-       raise NotImplementedError.new("Abstract method")
-     end
+    # Method:add
+    #
+    # Adds a new object's identifier to the complex obejct 
+    # (as attribute). 
+    #
+    # Params:
+    #
+    # var_Id:Integer - SBA store object's identifier
+    #
+    # Returns:
+    #
+    # Throws:SBATypeError, SBAIncorrectIdentifierError
+    def add(var_Id)
+      if(!Integer.is_a(var_Id))
+        raise SBATypeError.new("Incorrect object type [#{var_Object.class}]")
+      end
       
-  end
+      if(find(var_Id) != nil)
+        raise SBAIncorrectIdentifierError.new("Given object's identifier [#{var_Identifier}] is already joined")
+      end
+      
+      @VAR_REFERENCES.push(var_Object)
+    end
+
+    # Method:is_a?
+    #
+    # Compared given object's type with it's type,
+    # returns true if those objects' types are
+    # the same.
+    #
+    # Params:
+    #
+    # var_Identifier:Integer - SBA store object's identifier
+    #
+    # Returns:Integer
+    #
+    # Throws: 
+    def is_a?(var_Object)
+      if(SBASimpleObjectFactory.class == var_Object.class)
+        return true
+      end
+      
+      return false
+    end
+    
+    # Method:find
+    #
+    # Finds the given SBA object's identifier and returns array index
+    #
+    # Params:
+    #
+    # var_Identifier:Integer - SBA store object's identifier
+    #
+    # Returns:Integer
+    #
+    # Throws: 
+    def find(var_Identifier)
+      return @VAR_REFERENCES.index(var_Identifier)
+    end
+    
+    # Method:push
+    #
+    # Alias for find method 
+    #
+    # Params:
+    #
+    # var_Identifier:Integer - SBA store object's identifier
+    #
+    # Returns:Integer
+    #
+    # Throws:
+    alias push add
   
+    # VAR_REFERENCES:Integer - Collection of SBA objects' identifiers
+    attr :VAR_REFERENCES
+    
+  end
+
 end
