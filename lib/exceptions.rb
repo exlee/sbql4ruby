@@ -1,2 +1,0 @@
-class OverwriteException < RuntimeError
-end

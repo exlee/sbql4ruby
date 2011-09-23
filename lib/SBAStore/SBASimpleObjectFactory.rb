@@ -1,9 +1,10 @@
 module SBAStore
   
-require "SBAInteger"
-require "SBAFloat"
-require "SBABoolean"
-require "SBAString"
+require "lib/Common/exceptions"
+require "lib/SBAStore/SBAInteger"
+require "lib/SBAStore/SBAFloat"
+require "lib/SBAStore/SBABoolean"
+require "lib/SBAStore/SBAString"
 
 
   class SBASimpleObjectFactory
@@ -23,21 +24,59 @@ require "SBAString"
     #
     # Throws:SBATypeError
     def SBASimpleObjectFactory.create(var_Name, var_Object) 
-      if(SBAInteger.isValidType?(var_Object))
-        puts "SBASimpleFacotry: Integer"
-        return SBAInteger.new(var_Name, var_Object)
-      elsif(SBAFloat.isValidType?(var_Object))
-         puts "SBASimpleFacotry: Float"
-        return SBAFloat.new(var_Name, var_Object)
-      elsif(SBABoolean.isValidType?(var_Object))
-         puts "SBASimpleFacotry: Boolean"
-        return SBABoolean.new(var_Name, var_Object)
-      elsif(SBAString.isValidType?(var_Object))
-         puts "SBASimpleFacotry: String"
-        return SBAString.new(var_Name, var_Object)
+     
+      var_Tmp = nil
+       
+      #Integer
+      SBASimpleObjectFactory.ignore_exceptions(SBATypeError, ArgumentError) do var_Tmp = SBAInteger.fromString(var_Name, var_Object) end
+      
+      if(var_Tmp != nil)
+         return var_Tmp
       end
       
-      raise SBATypeError.new("Incorrect object type [#{var_Object.class}]")
+      #Float
+      SBASimpleObjectFactory.ignore_exceptions(SBATypeError, ArgumentError) do var_Tmp = SBAFloat.fromString(var_Name, var_Object) end
+      
+      if(var_Tmp != nil)
+        return var_Tmp
+      end
+        
+      #Boolean (TrueClass/FalseClass)
+      SBASimpleObjectFactory.ignore_exceptions(SBATypeError, ArgumentError) do var_Tmp = SBABoolean.fromString(var_Name, var_Object) end
+        
+      if(var_Tmp != nil)
+        return var_Tmp
+      end
+        
+      #String
+      SBASimpleObjectFactory.ignore_exceptions(SBATypeError, ArgumentError) do var_Tmp = SBAString.fromString(var_Name, var_Object) end
+      
+      if(var_Tmp != nil)
+        return var_Tmp
+      end     
+       
+      #Not supported type
+      if(var_Tmp == nil)
+        raise SBATypeError.new(self.to_s() + "Incorrect object type [#{var_Object.class}]")        
+      end 
+
+    end
+    
+    # Method:SBASimpleObjectFactory.ignore_exceptions
+    #
+    # Executes given code and ignores specified exceptions
+    #
+    # Params:
+    #
+    # var_Exceptions:String - exceptions to be ignored
+    #
+    # Returns:
+    #
+    # Throws:    
+    def SBASimpleObjectFactory.ignore_exceptions(*var_Exceptions)
+       yield
+     rescue *var_Exceptions => e
+       Common::Logger.print(Common::VAR_DEBUG, self, "Ignored exception [#{e}]")
     end
     
     # Method:SBASimpleObjectFactory.isValidType?

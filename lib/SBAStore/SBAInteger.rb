@@ -1,7 +1,7 @@
 module SBAStore
   
-require "SBASimpleObject"
-require "exceptions"
+require "lib/SBAStore/SBASimpleObject"
+require "lib/Common/exceptions"
 
 
   # SBA store Integer class 
@@ -20,7 +20,7 @@ require "exceptions"
     # Throws:SBATypeError
     def initialize(var_Name, var_Object)
       if(!SBAInteger.isValidType?(var_Object))
-        raise SBATypeError.new("Incorrect object type [#{var_Object.class}]")
+        raise SBATypeError.new("Incorrect object type [#{var_Object.class}], Integer expected")
       end
       
       super(var_Name, var_Object)
@@ -41,8 +41,29 @@ require "exceptions"
       if(var_Object.is_a? Integer)
         return true
       end
-       
+     
       return false
+    end
+    
+    # Method:SBAInteger.fromString
+    #
+    # Casts given string value to integer 
+    # if possible
+    #
+    # Params:
+    #
+    # var_Name:String - object's name
+    # var_Object:Object - string object
+    #
+    # Returns:SBAInteger
+    #
+    # Throws:SBATypeError, ArgumentError
+    def SBAInteger.fromString(var_Name, var_Object)
+      if(!var_Object.instance_of? String)
+        raise SBATypeError.new("Incorrect object type [#{var_Object.class}], String expected")
+      end
+      
+      return SBAInteger.new(var_Name, Integer(var_Object))
     end
       
   end

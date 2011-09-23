@@ -1,10 +1,10 @@
 module XMLDB
   
 require "rexml/document"
-require "exceptions"
-require "SBAStore"
 
-require "Listener"
+require "lib/Common/exceptions"
+require "lib/SBAStore/SBAStore"
+require "lib/XMLDB/Listener"
 
 
   class XMLParser

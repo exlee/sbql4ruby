@@ -1,7 +1,7 @@
 module SBAStore
   
-require "SBAObject"
-require "exceptions"
+require "lib/SBAStore/SBAObject"
+require "lib/Common/exceptions"
 
 
   # SBA store abstract class for simple objects 

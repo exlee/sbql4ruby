@@ -1,20 +1,20 @@
 module XMLDB
-  
+
+require 'lib/Common/exceptions'
+require 'lib/Common/logger'
+
 require 'rexml/document'
 require 'rexml/streamlistener'
  
-require "exceptions"
-
-require "SBAComplexObject"
-require "SBASimpleObjectFactory"
+require "lib/Common/exceptions"
+require "lib/SBAStore/SBAComplexObject"
+require "lib/SBAStore/SBASimpleObjectFactory"
 
 include REXML
 
 
   class Listener 
     include REXML::StreamListener
-    
-    @@VAR_ROOT_TAG            = "root"
    
     # Method:initialize
     #
@@ -26,11 +26,13 @@ include REXML
     #
     # Throws:SBATypeError
     def initialize(var_Store)
-      @VAR_STORE = var_Store
       
+      # Store
+      @VAR_STORE = var_Store
+           
       # The array of complex objects which are not
-      # currently added to the store (their tags
-      # are not closed).
+      # currently added to the store (until their
+      # tags are not closed).
       @VAR_COMPLEX_OBJECTS          = Array.new()
       @VAR_COMPLEX_OBJECTS_NAMES    = Array.new()
       @VAR_COMPLEX_OBJECTS_INDEXES  = Array.new()
@@ -58,83 +60,79 @@ include REXML
       # Getting a current tag name
       var_TagName = var_Args[0] 
       
-      puts  "TAG_START: given tag name = ["       + var_TagName + 
-            "], existing current object name = [" + @VAR_CURRENT_OBJECT_NAME.to_s() +
-            "], CMPX INDEX="                      + @VAR_COMPLEX_OBJECT_INDEX.to_s()
-      
-      if(@VAR_COMPLEX_OBJECTS_INDEXES == 0)  
-         
-        # First object in the store
-        @VAR_CURRENT_OBJECT = nil
-        @VAR_CURRENT_OBJECT_NAME = var_TagName
-        
-        puts "TAG_START: First object in the XML file = [" + @VAR_CURRENT_OBJECT_NAME + "]"       
-        
-      else
-       
-        if(@VAR_CURRENT_OBJECT == nil)
+      Common::Logger.print(Common::VAR_DEBUG, self,
+        "[TAG_START]: New tag, name = ["      + var_TagName + 
+        "], existing current object name = [" + @VAR_CURRENT_OBJECT_NAME.to_s()   +
+        "], current complex index="           + @VAR_COMPLEX_OBJECT_INDEX.to_s())
+              
+        # Previous object is not registered and it hasn't object value. 
+        # That means, previous object is a complex object and it needs
+        # to be added to te complex objects list before a new object 
+        # will be analysed.
+        if(@VAR_CURRENT_OBJECT_NAME != nil && @VAR_CURRENT_OBJECT == nil)
+          
+          Common::Logger.print(Common::VAR_DEBUG, self, 
+            "[TAG_START]: Previous object is a not added complex object = [" + @VAR_CURRENT_OBJECT_NAME + "]")
           
           @VAR_CURRENT_OBJECT = SBAStore::SBAComplexObject.new(@VAR_CURRENT_OBJECT_NAME)
-          addComplexObject(@VAR_CURRENT_OBJECT)
-        
-        end
-        
-        @VAR_CURRENT_OBJECT = nil
-        @VAR_CURRENT_OBJECT_NAME = var_TagName
           
-        puts "TAG_START: Next object in the XML file = [" + @VAR_CURRENT_OBJECT_NAME + "]"   
-               
-      end
+          storeObject(@VAR_CURRENT_OBJECT)
+          
+          Common::Logger.print(Common::VAR_DEBUG, self, "[TAG_START]: Next object = [" + var_TagName + "]")
+          
+          @VAR_CURRENT_OBJECT_NAME = var_TagName
+          @VAR_CURRENT_OBJECT = nil
+          
+        elsif(@VAR_CURRENT_OBJECT_NAME != nil && @VAR_CURRENT_OBJECT != nil)
+          raise InternalError.new("Previous object " + @VAR_CURRENT_OBJECT.to_s() + " is not added to the store")
+        else
+          Common::Logger.print(Common::VAR_DEBUG, self, "[TAG_START]: Next object = [" + var_TagName + "]")
+          
+          @VAR_CURRENT_OBJECT_NAME = var_TagName
+          @VAR_CURRENT_OBJECT = nil
+        end
     end
   
     def text(data)
      return if data =~ /^\W*$/
 
-     puts  "TAG_DATA: given data= [#{data}] for current object name=["  + @VAR_CURRENT_OBJECT_NAME.to_s() +
-           "], CMPX INDEX="                                             + @VAR_COMPLEX_OBJECT_INDEX.to_s()
+     Common::Logger.print(Common::VAR_DEBUG, self, 
+      "[TAG_DATA]: given data objet [#{data}] for current object name=["   + @VAR_CURRENT_OBJECT_NAME.to_s() +
+      "], CMPX INDEX="                                                     + @VAR_COMPLEX_OBJECT_INDEX.to_s())
           
      @VAR_CURRENT_OBJECT = SBAStore::SBASimpleObjectFactory.create(@VAR_CURRENT_OBJECT_NAME, data);
      
-     puts "TAG_DATA: current object=" + @VAR_CURRENT_OBJECT.to_s()
-     
-     #abbrev = data[0..40] + (data.length > 40 ? "..." : "")
-    
-     #puts "  text   :   #{abbrev.inspect}"
-     
-     # jeżeli jest wartość:
-     #do nazwy dodaj wartość, spróbuj zrobić rzutowanie
-     #Jeżeli ok to simple, jeżeli nie to wyjątek
+      Common::Logger.print(Common::VAR_DEBUG, self, "[TAG_DATA]: current object=[" + @VAR_CURRENT_OBJECT.to_s() + "], type=[" + @VAR_CURRENT_OBJECT.class.to_s() + "]")
    end
    
    def tag_end(data)
-     
-     puts   "TAG_END: given data= [#{data}] for current object name=["  + @VAR_CURRENT_OBJECT_NAME.to_s() +
-            "], CMPX INDEX="                                             + @VAR_COMPLEX_OBJECT_INDEX.to_s()
+
+     Common::Logger.print(Common::VAR_DEBUG, self, 
+      "[TAG_END]: given data= [#{data}] for current object name=["  + @VAR_CURRENT_OBJECT_NAME.to_s() +
+      "], CMPX INDEX="                                              + @VAR_COMPLEX_OBJECT_INDEX.to_s())
             
      if(@VAR_CURRENT_OBJECT_NAME == nil)
-       puts "ERROR, closing not existing tag!"
+       Common::Logger.print(Common::VAR_DEBUG, self, 
+        "[WARNING], closing not existing tag!"  + @VAR_COMPLEX_OBJECTS_NAMES[@VAR_COMPLEX_OBJECT_INDEX-1] + 
+        ", "                                    + @VAR_COMPLEX_OBJECTS[@VAR_COMPLEX_OBJECT_INDEX-1].to_s())
+        
+        storeComplexObject(@VAR_COMPLEX_OBJECTS[@VAR_COMPLEX_OBJECT_INDEX-1])
      else
-       # Current object has registered name, but it hasn't any value,
-       # so next object will be registered as attribute.
-       if(@VAR_CURRENT_OBJECT == nil)
-         @VAR_CURRENT_OBJECT = SBAStore::SBAComplexObject.new()
-       end
        
        # If the copmlex object index is equal 0, it means that
        # there wasn't any complex object detected yet and the
        # current object is a simple object.
        if(@VAR_COMPLEX_OBJECT_INDEX == 0)
-         puts "TAG_END: storing into SBAStore"
+          Common::Logger.print(Common::VAR_DEBUG, self, "[TAG_END]: storing into SBAStore")
          
          storeObject(@VAR_CURRENT_OBJECT)
          
          @VAR_CURRENT_OBJECT_NAME = nil
          @VAR_CURRENT_OBJECT      = nil
        else
-         puts "TAG_END: storing into array"
-         
-         storeObject(@VAR_CURRENT_OBJECT)
-         addComplexObject(@VAR_CURRENT_OBJECT)
+          Common::Logger.print(Common::VAR_DEBUG, self, "[TAG_END]: storing into array [" + @VAR_CURRENT_OBJECT.to_s() + "]")
+  
+          storeObject(@VAR_CURRENT_OBJECT)
          
           @VAR_CURRENT_OBJECT_NAME = nil
           @VAR_CURRENT_OBJECT      = nil
@@ -144,39 +142,67 @@ include REXML
    
    def addComplexObject(var_Object)
      
+     Common::Logger.print(Common::VAR_DEBUG, self, "addig object [" + var_Object.to_s() + "] to the array list")
+     
+     if(!var_Object.is_a?(SBAStore::SBAComplexObject))
+       raise SBATypeError.new("SBAStore::SBAComplexObject expected")
+     end
+
+     @VAR_COMPLEX_OBJECT_INDEX+=1
+      
      # Add object to the array
-     @VAR_COMPLEX_OBJECTS.push(var_Object)
-     @VAR_COMPLEX_OBJECTS_NAMES.push(var_Object)
-     @VAR_COMPLEX_OBJECTS_INDEXES.push(var_Object.VAR_ID)
+     @VAR_COMPLEX_OBJECTS[@VAR_COMPLEX_OBJECT_INDEX-1] = var_Object
+     @VAR_COMPLEX_OBJECTS_NAMES[@VAR_COMPLEX_OBJECT_INDEX-1] = var_Object.VAR_NAME
+     @VAR_COMPLEX_OBJECTS_INDEXES[@VAR_COMPLEX_OBJECT_INDEX-1] = var_Object.VAR_ID
      
      # Add complex object to the previous complex object
-     if(SBAComplexObject.is_a?(var_Object) && VAR_COMPLEX_OBJECT_INDEX > 0)
-       @VAR_COMPLEX_OBJECTS[VAR_COMPLEX_OBJECT_INDEX-1].add(var_Object.VAR_ID)
+     if(@VAR_COMPLEX_OBJECT_INDEX > 1)
+       @VAR_COMPLEX_OBJECTS[@VAR_COMPLEX_OBJECT_INDEX-2].add(var_Object.VAR_ID)
      end
-      
-     @VAR_COMPLEX_OBJECT_INDEX+=1
      
-     puts "addComplexObject: puts [#{var_Object.to_s()}] to the array"
+     Common::Logger.print(Common::VAR_DEBUG, self, "puts [#{var_Object.to_s()}] to the array")
      
    end
   
    def storeObject(var_Object)
-     
-     # Store object's identifier in the last complex object
-     if(SBASimpleObjectFactory.isValidSBAType?(var_Object))
+    
+     # Complex object can be added to the store on the end of its tag  
+     if(var_Object.is_a?(SBAStore::SBAComplexObject))
+       addComplexObject(var_Object)
+     else
+       # Add simple object to the previous complex object
+       if(@VAR_COMPLEX_OBJECT_INDEX > 0)
+         Common::Logger.print(Common::VAR_DEBUG, self, "addig simple object [" + var_Object.to_s() + "] to the complex object [" + @VAR_COMPLEX_OBJECTS[@VAR_COMPLEX_OBJECT_INDEX-1].to_s())
+         
+         @VAR_COMPLEX_OBJECTS[@VAR_COMPLEX_OBJECT_INDEX-1].add(var_Object.VAR_ID)
+       end
+
+       Common::Logger.print(Common::VAR_DEBUG, self, "addig simple object [" + var_Object.to_s() + "] to the store")
        
-       @VAR_COMPLEX_OBJECTS[VAR_COMPLEX_OBJECT_INDEX-1].add(var_Object.VAR_ID)
-       @VAR_STORE.add(var_Object)
+       #Store object in the SBAStore
+       @VAR_STORE.add(var_Object)   
+     end
+   end
+   
+   def storeComplexObject(var_Object)
+     
+     if(!var_Object.is_a?(SBAStore::SBAComplexObject))
+       raise SBATypeError.new(SBAStore::SBAComplexObject.class.to_s() + " expected")
      end
      
-     #Store object in the SBAStore
-     @VAR_STORE.add(var_Object)
+     if(@VAR_COMPLEX_OBJECT_INDEX == 0)
+       raise InternalError.new("The complex object array list is empty [" + @VAR_COMPLEX_OBJECT_INDEX.to_s() + "]")
+     end
      
-     # Clean references
-     @VAR_CURRENT_OBJECT = nil
-     @VAR_CURRENT_OBJECT_NAME = nil
+     Common::Logger.print(Common::VAR_DEBUG, self, "addig complex object [" + var_Object.to_s() + "],[" + @VAR_COMPLEX_OBJECT_INDEX.to_s() + "] to the store")
      
-     puts "storeObject: puts [#{var_Object.to_s()}] to the store"
+      #Store object in the SBAStore
+      @VAR_STORE.add(var_Object)
+      
+      # Revome the last complex object from the array list
+      @VAR_COMPLEX_OBJECTS_NAMES[@VAR_COMPLEX_OBJECT_INDEX-1] = nil
+      @VAR_COMPLEX_OBJECTS[@VAR_COMPLEX_OBJECT_INDEX-1] = nil
+      @VAR_COMPLEX_OBJECT_INDEX-=1
    end
    
    # VAR_STORE:SBAStore - Complex object flag  
@@ -198,7 +224,7 @@ include REXML
    attr :VAR_CURRENT_OBJECT
    
    # VAR_CURRENT_OBJECT_NAME:String - Array of the complex objects' names
-   attr :VAR_CURRENT_OBJECT
+   attr :VAR_CURRENT_OBJECT_NAME
 
   end
 

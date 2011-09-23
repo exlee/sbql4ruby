@@ -1,7 +1,7 @@
 module SBAStore
   
-require "SBAObject"
-require "exceptions"
+require "lib/SBAStore/SBAObject"
+require "lib/Common/exceptions"
 
 
   # SBA store abstract class for simple objects 
@@ -36,7 +36,7 @@ require "exceptions"
     #
     # Throws:SBATypeError, SBAIncorrectIdentifierError
     def add(var_Id)
-      if(!Integer.is_a(var_Id))
+      if(!var_Id.is_a?(Integer))
         raise SBATypeError.new("Incorrect object type [#{var_Object.class}]")
       end
       
@@ -44,12 +44,12 @@ require "exceptions"
         raise SBAIncorrectIdentifierError.new("Given object's identifier [#{var_Identifier}] is already joined")
       end
       
-      @VAR_REFERENCES.push(var_Object)
+      @VAR_REFERENCES.push(var_Id)
     end
 
     # Method:is_a?
     #
-    # Compared given object's type with it's type,
+    # Compares given object's type with it's type,
     # returns true if those objects' types are
     # the same.
     #
@@ -82,7 +82,24 @@ require "exceptions"
     def find(var_Identifier)
       return @VAR_REFERENCES.index(var_Identifier)
     end
-    
+
+    # Method:to_s
+    #
+    # Returns a string representation of SBAObject
+    #
+    # Params:
+    #
+    # Returns: String
+    #
+    # Throws:
+    def to_s
+       var_text = "ID=[" + @VAR_ID.to_s() + "], Name=[" + @VAR_NAME + "], indexes: ["
+
+        @VAR_REFERENCES.each{|object| var_text += " " + object.to_s()}
+
+        return var_text + " ]"
+    end
+          
     # Method:push
     #
     # Alias for find method 

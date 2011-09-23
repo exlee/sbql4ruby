@@ -1,7 +1,7 @@
 module SBAStore
   
-require "SBASimpleObject"
-require "exceptions"
+require "lib/SBAStore/SBASimpleObject"
+require "lib/Common/exceptions"
 
   # SBA store Integer class 
   class SBAString < SBASimpleObject
@@ -43,6 +43,28 @@ require "exceptions"
       return false
     end
 
+    # Method:SBAString.fromString
+    #
+    # Verifies whether given object 
+    # has a String type and returns 
+    # this object if true.
+    #
+    # Params:
+    #
+    # var_Name:String - object's name
+    # var_Object:Object - string object
+    #
+    # Returns:String
+    #
+    # Throws:SBATypeError, ArgumentError
+    def SBAString.fromString(var_Name, var_Object)
+      if(!var_Object.instance_of? String)
+        raise SBATypeError.new("Incorrect object type [#{var_Object.class}], String expected")
+      end
+
+      return SBAString.new(var_Name, var_Object)
+    end
+    
   end
 
 end

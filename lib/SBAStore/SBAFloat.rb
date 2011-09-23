@@ -1,7 +1,7 @@
 module SBAStore
   
-require "SBASimpleObject"
-require "exceptions"
+require "lib/SBAStore/SBASimpleObject"
+require "lib/Common/exceptions"
 
 
   # SBA store Integer class 
@@ -44,7 +44,27 @@ require "exceptions"
        
       return false
     end
+     
+    # Method:SBAFloat.fromString
+    #
+    # Casts given string value to float 
+    # if possible
+    #
+    # Params:
+    #
+    # var_Name:String - object's name
+    # var_Object:Object - string object
+    #
+    # Returns:SBAFloat
+    #
+    # Throws:SBATypeError, ArgumentError
+    def SBAFloat.fromString(var_Name, var_Object)
+      if(!var_Object.instance_of? String)
+        raise SBATypeError.new("Incorrect object type [#{var_Object.class}], String expected")
+      end
       
+      return SBAFloat.new(var_Name, Float(var_Object))
+    end      
   end
 
 end

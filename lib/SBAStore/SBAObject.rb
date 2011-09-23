@@ -1,6 +1,6 @@
 module SBAStore
 
-require "exceptions"
+require "lib/Common/exceptions"
 
 
   # SBA store basic abstract class 
@@ -52,6 +52,19 @@ require "exceptions"
     # Returns: VAR_OBJECT_COUNTER:INTEGER
     #
     # Throws:
+    def SBAObject.VAR_OBJECT_COUNTER
+      @@VAR_OBJECT_COUNTER
+    end
+    
+    # Method:VAR_OBJECT_COUNTER
+    #
+    # Gets current object's identifier
+    #
+    # Params:
+    #
+    # Returns: VAR_OBJECT_COUNTER:INTEGER
+    #
+    # Throws:
     def VAR_OBJECT_COUNTER
       @@VAR_OBJECT_COUNTER
     end
@@ -66,7 +79,11 @@ require "exceptions"
     #
     # Throws:
     def to_s
-      return "ID=[" + @VAR_ID.to_s() + "], Name=[" + @VAR_NAME + "], Value=[" + @VAR_OBJECT.to_s() + "]"
+      if(@VAR_OBJECT == nil)
+        return "ID=[" + @VAR_ID.to_s() + "], Name=[" + @VAR_NAME + "], Value=[nil]"
+      else
+        return "ID=[" + @VAR_ID.to_s() + "], Name=[" + @VAR_NAME + "], Value=[" + @VAR_OBJECT.to_s() + "], Type=[" + @VAR_OBJECT.class.to_s() + "]"
+      end
     end
     
     # VAR_ID:Integer - SBA store object identifier

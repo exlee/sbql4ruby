@@ -1,6 +1,6 @@
 module SBAStore
 
-require "exceptions"
+require "lib/Common/exceptions"
 
   
   class SBAStore
@@ -68,7 +68,7 @@ require "exceptions"
     def to_s
       var_text = "Store=[#{self.class}], objects=[#{@VAR_OBJECTS_COUNTER.to_s()}]\n"
       
-      @VAR_OBJECTS.each{|object| var_text+=object.to_s()}
+      @VAR_OBJECTS.each{|object| var_text+=object.to_s()+"\n"}
       
       return var_text
     end
