@@ -9,11 +9,10 @@ require "lib/Common/exceptions"
     # VAR_OBJECT_COUNTER:Integer - SBAObject instances counter
     @@VAR_OBJECT_COUNTER = 0
     
-    # Method:initialize
-    #
     # Params:
     #
     # var_Name:String - SBA store object name
+    #
     # var_Object:Object - SBA store encapsulated object
     #
     # Returns:
@@ -27,10 +26,8 @@ require "lib/Common/exceptions"
       @@VAR_OBJECT_COUNTER += 1
     end
 
-    # Method:SBAObject.isValidType?
-    #
     # Abstract method, should be implemented by the inheriting 
-    # classes (valids given object)
+    # classes (valids given object).
     #
     # Params:
     #
@@ -43,9 +40,7 @@ require "lib/Common/exceptions"
       raise SBANotImplementedError.new("Abstract method")
     end
     
-    # Method:VAR_OBJECT_COUNTER
-    #
-    # Gets SBAObjects instance counter
+    # Gets SBAObjects instance counter.
     #
     # Params:
     #
@@ -56,9 +51,7 @@ require "lib/Common/exceptions"
       @@VAR_OBJECT_COUNTER
     end
     
-    # Method:VAR_OBJECT_COUNTER
-    #
-    # Gets current object's identifier
+    # Gets current object's identifier.
     #
     # Params:
     #
@@ -69,9 +62,7 @@ require "lib/Common/exceptions"
       @@VAR_OBJECT_COUNTER
     end
     
-    # Method:to_s
-    #
-    # Returns a string representation of SBAObject
+    # Returns a string representation of SBAObject.
     #
     # Params:
     #

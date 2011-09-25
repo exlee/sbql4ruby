@@ -7,11 +7,10 @@ require "lib/Common/exceptions"
   # SBA store abstract class for simple objects 
   class SBASimpleObject < SBAObject
 
-    # Method:initialize
-    #
     # Params:
     #
     # var_Name:String - SBA store object name
+    #
     # var_Object:Object - SBA store encapsulated object
     #
     # Returns:
@@ -21,10 +20,8 @@ require "lib/Common/exceptions"
       super(var_Name, var_Object)
     end
     
-    # Method:SBASimpleObject.isValidType?
-    #
     # Abstract method, should be implemented by the inheriting 
-    # classes (valids given object)
+    # classes (valids given object).
     #
     # Params:
     #

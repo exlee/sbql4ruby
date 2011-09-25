@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/XMLDB/Listener.rb</string>
+	<string>test/XMLParserTest.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -41,39 +41,54 @@
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>lib/Common/logger.rb</key>
+		<key>lib/XMLDB/XMLParser.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>14</integer>
+				<integer>22</integer>
 				<key>line</key>
-				<integer>49</integer>
+				<integer>32</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>6</integer>
+			<integer>0</integer>
 		</dict>
-		<key>lib/XMLDB/Listener.rb</key>
+		<key>sampledata/data.xml</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
 				<integer>11</integer>
 				<key>line</key>
-				<integer>92</integer>
+				<integer>25</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>52</integer>
+			<integer>0</integer>
+		</dict>
+		<key>test/XMLParserTest.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>8</integer>
+				<key>line</key>
+				<integer>23</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>lib/XMLDB/Listener.rb</string>
-		<string>lib/Common/logger.rb</string>
+		<string>sampledata/data.xml</string>
+		<string>test/XMLParserTest.rb</string>
+		<string>lib/XMLDB/XMLParser.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>

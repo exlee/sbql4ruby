@@ -7,11 +7,10 @@ require "lib/Common/exceptions"
   # SBA store Integer class 
   class SBABoolean < SBASimpleObject
     
-    # Method:initialize
-    #
     # Params:
     #
     # var_Name:String - SBA store object name
+    #
     # var_Object:TrueClass || FalseClass - SBA store object
     #
     # Returns:
@@ -25,9 +24,7 @@ require "lib/Common/exceptions"
       super(var_Name, var_Object)
     end
 
-     # Method:SBABoolean.isValidType?
-     #
-     # Validates given object's type
+     # Validates given object's type.
      #
      # Params:
      #
@@ -44,14 +41,13 @@ require "lib/Common/exceptions"
        return false
      end
      
-     # Method:SBABoolean.fromString
-     #
      # Casts given string value to TrueClass/FalseClass 
-     # if possible
+     # if possible.
      #
      # Params:
      #
      # var_Name:String - object's name
+     #
      # var_Object:Object - string object
      #
      # Returns:SBABoolean

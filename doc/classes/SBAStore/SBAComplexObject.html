@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/lib/SBAObject/SBAComplexObject_rb.html">
-                lib/SBAObject/SBAComplexObject.rb
+                <a href="../../files/lib/SBAStore/SBAComplexObject_rb.html">
+                lib/SBAStore/SBAComplexObject.rb
                 </a>
         <br />
             </td>
@@ -66,7 +66,7 @@
             <td><strong>Parent:</strong></td>
             <td>
                 <a href="SBAObject.html">
-                SBAStore::SBAObject
+                SBAObject
                </a>
             </td>
         </tr>
@@ -94,8 +94,12 @@ SBA store abstract class for simple objects
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000016">isValidType?</a>&nbsp;&nbsp;
-      <a href="#M000015">new</a>&nbsp;&nbsp;
+      <a href="#M000034">add</a>&nbsp;&nbsp;
+      <a href="#M000036">find</a>&nbsp;&nbsp;
+      <a href="#M000035">is_a?</a>&nbsp;&nbsp;
+      <a href="#M000033">new</a>&nbsp;&nbsp;
+      <a href="#M000038">push</a>&nbsp;&nbsp;
+      <a href="#M000037">to_s</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -110,6 +114,22 @@ SBA store abstract class for simple objects
 
 
 
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">VAR_REFERENCES</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+VAR_REFERENCES:Integer - Collection of SBA objects&#8217; identifiers
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
       
 
 
@@ -117,60 +137,163 @@ SBA store abstract class for simple objects
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000015" class="method-detail">
-        <a name="M000015"></a>
+      <div id="method-M000033" class="method-detail">
+        <a name="M000033"></a>
 
         <div class="method-heading">
-          <a href="SBAComplexObject.src/M000015.html" target="Code" class="method-signature"
-            onclick="popupCode('SBAComplexObject.src/M000015.html');return false;">
-          <span class="method-name">new</span><span class="method-args">(var_Name, var_Object)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <pre>
- Constructor
-
- Params:
-</pre>
-<p>
-q
-</p>
-<pre>
- var_Name:String - SBA store object name
-
- var_Object:Object - SBA store complex data object
-
- Returns: nil
-</pre>
-        </div>
-      </div>
-
-      <h3 class="section-bar">Public Instance methods</h3>
-
-      <div id="method-M000016" class="method-detail">
-        <a name="M000016"></a>
-
-        <div class="method-heading">
-          <a href="SBAComplexObject.src/M000016.html" target="Code" class="method-signature"
-            onclick="popupCode('SBAComplexObject.src/M000016.html');return false;">
-          <span class="method-name">isValidType?</span><span class="method-args">(var_Object)</span>
+          <a href="SBAComplexObject.src/M000033.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAComplexObject.src/M000033.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(var_Name)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Abstract method, should be implemented by the inheriting classes (valids
-given object)
+Params:
+</p>
+<p>
+var_Name:String - SBA store object name
+</p>
+<p>
+var_Object:Object - SBA store complex data object
+</p>
+<p>
+Returns:
+</p>
+<p>
+Throws:
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
+
+        <div class="method-heading">
+          <a href="SBAComplexObject.src/M000034.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAComplexObject.src/M000034.html');return false;">
+          <span class="method-name">add</span><span class="method-args">(var_Id)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds a <a href="SBAComplexObject.html#M000033">new</a> object&#8216;s
+identifier to the complex obejct (as attribute).
 </p>
 <p>
 Params:
 </p>
 <p>
-var_Object:Object - object to be validated
+var_Id:Integer - SBA store object&#8216;s identifier
 </p>
 <p>
-Returns: TrueClass || FalseClass
+Returns:
+</p>
+<p>
+Throws:<a href="../SBATypeError.html">SBATypeError</a>,
+SBAIncorrectIdentifierError
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+          <a href="SBAComplexObject.src/M000036.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAComplexObject.src/M000036.html');return false;">
+          <span class="method-name">find</span><span class="method-args">(var_Identifier)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Finds the given SBA object&#8216;s identifier and returns array index.
+</p>
+<p>
+Params:
+</p>
+<p>
+var_Identifier:Integer - SBA store object&#8216;s identifier
+</p>
+<p>
+Returns:Integer
+</p>
+<p>
+Throws:
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+          <a href="SBAComplexObject.src/M000035.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAComplexObject.src/M000035.html');return false;">
+          <span class="method-name">is_a?</span><span class="method-args">(var_Object)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Compares given object&#8216;s type with it&#8216;s type, returns true if
+those objects&#8217; types are the same.
+</p>
+<p>
+Params:
+</p>
+<p>
+var_Identifier:Integer - SBA store object&#8216;s identifier
+</p>
+<p>
+Returns:Integer
+</p>
+<p>
+Throws:
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <span class="method-name">push</span><span class="method-args">(var_Id)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="SBAComplexObject.html#M000034">add</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="SBAComplexObject.src/M000037.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAComplexObject.src/M000037.html');return false;">
+          <span class="method-name">to_s</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a string representation of <a href="SBAObject.html">SBAObject</a>.
+</p>
+<p>
+Params:
+</p>
+<p>
+Returns: String
+</p>
+<p>
+Throws:
 </p>
         </div>
       </div>

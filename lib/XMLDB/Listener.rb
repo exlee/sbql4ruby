@@ -15,9 +15,7 @@ include REXML
 
   class Listener 
     include REXML::StreamListener
-   
-    # Method:initialize
-    #
+    
     # Params:
     #
     # var_Store:SBAStore - SBA store
@@ -43,10 +41,7 @@ include REXML
       @VAR_CURRENT_OBJECTS_NAME     = nil
     end
     
-    # Method:tag_start
-    #
-    # Used by XML parser if notifies beginning
-    # of a new tag. 
+    # Opening tag listener. 
     #
     # Params:
     #
@@ -93,23 +88,41 @@ include REXML
         end
     end
   
-    def text(data)
-     return if data =~ /^\W*$/
+    # Tag data listener. 
+    #
+    # Params:
+    #
+    # var_Data:Object - tag data
+    #
+    # Returns:
+    #
+    # Throws:
+    def text(var_Data)
+     return if var_Data =~ /^\W*$/
 
      Common::Logger.print(Common::VAR_DEBUG, self, 
-      "[TAG_DATA]: given data objet [#{data}] for current object name=["   + @VAR_CURRENT_OBJECT_NAME.to_s() +
-      "], CMPX INDEX="                                                     + @VAR_COMPLEX_OBJECT_INDEX.to_s())
+      "[TAG_DATA]: given data objet [#{var_Data}] for current object name=["  + @VAR_CURRENT_OBJECT_NAME.to_s() +
+      "], CMPX INDEX="                                                        + @VAR_COMPLEX_OBJECT_INDEX.to_s())
           
-     @VAR_CURRENT_OBJECT = SBAStore::SBASimpleObjectFactory.create(@VAR_CURRENT_OBJECT_NAME, data);
+     @VAR_CURRENT_OBJECT = SBAStore::SBASimpleObjectFactory.create(@VAR_CURRENT_OBJECT_NAME, var_Data);
      
       Common::Logger.print(Common::VAR_DEBUG, self, "[TAG_DATA]: current object=[" + @VAR_CURRENT_OBJECT.to_s() + "], type=[" + @VAR_CURRENT_OBJECT.class.to_s() + "]")
    end
-   
-   def tag_end(data)
+
+   # Closing tag listener. 
+   #
+   # Params:
+   #
+   # var_Data:Object - tag data
+   #
+   # Returns:
+   #
+   # Throws:
+   def tag_end(var_Data)
 
      Common::Logger.print(Common::VAR_DEBUG, self, 
-      "[TAG_END]: given data= [#{data}] for current object name=["  + @VAR_CURRENT_OBJECT_NAME.to_s() +
-      "], CMPX INDEX="                                              + @VAR_COMPLEX_OBJECT_INDEX.to_s())
+      "[TAG_END]: given data= [#{var_Data}] for current object name=["  + @VAR_CURRENT_OBJECT_NAME.to_s() +
+      "], CMPX INDEX="                                                  + @VAR_COMPLEX_OBJECT_INDEX.to_s())
             
      if(@VAR_CURRENT_OBJECT_NAME == nil)
        Common::Logger.print(Common::VAR_DEBUG, self, 
@@ -140,6 +153,15 @@ include REXML
      end
    end
    
+   # Adds complex object to the array. 
+   #
+   # Params:
+   #
+   # var_Object:SBAComplexObject - complex object
+   #
+   # Returns:
+   #
+   # Throws:
    def addComplexObject(var_Object)
      
      Common::Logger.print(Common::VAR_DEBUG, self, "addig object [" + var_Object.to_s() + "] to the array list")
@@ -160,10 +182,18 @@ include REXML
        @VAR_COMPLEX_OBJECTS[@VAR_COMPLEX_OBJECT_INDEX-2].add(var_Object.VAR_ID)
      end
      
-     Common::Logger.print(Common::VAR_DEBUG, self, "puts [#{var_Object.to_s()}] to the array")
-     
+     Common::Logger.print(Common::VAR_DEBUG, self, "puts [#{var_Object.to_s()}] to the array")   
    end
   
+   # Puts given object to the SBA store. 
+   #
+   # Params:
+   #
+   # var_Object:SBAComplexObject - complex object
+   #
+   # Returns:
+   #
+   # Throws:
    def storeObject(var_Object)
     
      # Complex object can be added to the store on the end of its tag  
@@ -183,7 +213,16 @@ include REXML
        @VAR_STORE.add(var_Object)   
      end
    end
-   
+
+   # Puts complex object to the SBA store. 
+   #
+   # Params:
+   #
+   # var_Object:SBAComplexObject - complex object
+   #
+   # Returns:
+   #
+   # Throws:   
    def storeComplexObject(var_Object)
      
      if(!var_Object.is_a?(SBAStore::SBAComplexObject))

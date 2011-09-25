@@ -1,13 +1,19 @@
 module SBAStore
 
-$:<< "/Users/mqs74/Dropbox/Workspace/sbql4ruby/lib/SBAStore"
-
 require "test/unit"
 
+
   class SBAStoreTest < Test::Unit::TestCase
- 
+  
+    # Creates few SBA objects and puts those to the store.
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
     def test_SBAStore
-      #puts $:
+      
       assert_nothing_thrown("Creating SBA objects") {
         require "SBAInteger"
         require "SBAFloat"

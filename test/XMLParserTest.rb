@@ -11,16 +11,25 @@ require 'lib/Common/logger'
 
   class XMLParserTest < Test::Unit::TestCase
    
+    # Loads correct XML test file and builds SBA store.
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:
     def test_ParseXML
       assert_nothing_thrown("Checking for RubyGem") {
         require "lib/XMLDB/XMLParser"
         
         # Set debug log level
-        Common::Logger.setLogLevel(Common::VAR_DEBUG)
+        Common::Logger.setLogLevel(Common::VAR_INFO)
         
         parser = XMLParser.new();
         
-        parser.loadXML("sampledata/data.xml")
+        var_store = parser.loadXML("sampledata/data.xml")
+        
+        puts "Stack:\n" + var_store.to_s()
       }
     end
     

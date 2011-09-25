@@ -7,11 +7,10 @@ require "lib/Common/exceptions"
   # SBA store abstract class for simple objects 
   class SBAComplexObject < SBAObject
 
-    # Method:initialize
-    #
     # Params:
     #
     # var_Name:String - SBA store object name
+    #
     # var_Object:Object - SBA store complex data object
     #
     # Returns:
@@ -23,8 +22,6 @@ require "lib/Common/exceptions"
       @VAR_REFERENCES = Array.new()
     end
     
-    # Method:add
-    #
     # Adds a new object's identifier to the complex obejct 
     # (as attribute). 
     #
@@ -47,8 +44,6 @@ require "lib/Common/exceptions"
       @VAR_REFERENCES.push(var_Id)
     end
 
-    # Method:is_a?
-    #
     # Compares given object's type with it's type,
     # returns true if those objects' types are
     # the same.
@@ -68,9 +63,7 @@ require "lib/Common/exceptions"
       return false
     end
     
-    # Method:find
-    #
-    # Finds the given SBA object's identifier and returns array index
+    # Finds the given SBA object's identifier and returns array index.
     #
     # Params:
     #
@@ -83,9 +76,7 @@ require "lib/Common/exceptions"
       return @VAR_REFERENCES.index(var_Identifier)
     end
 
-    # Method:to_s
-    #
-    # Returns a string representation of SBAObject
+    # Returns a string representation of SBAObject.
     #
     # Params:
     #
@@ -100,9 +91,7 @@ require "lib/Common/exceptions"
         return var_text + " ]"
     end
           
-    # Method:push
-    #
-    # Alias for find method 
+    # Alias for find method.
     #
     # Params:
     #

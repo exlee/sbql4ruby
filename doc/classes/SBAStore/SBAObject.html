@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/lib/SBAObject/SBAObject_rb.html">
-                lib/SBAObject/SBAObject.rb
+                <a href="../../files/lib/SBAStore/SBAObject_rb.html">
+                lib/SBAStore/SBAObject.rb
                 </a>
         <br />
             </td>
@@ -92,9 +92,11 @@ SBA store basic abstract class
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000014">VAR_OBJECT_COUNTER</a>&nbsp;&nbsp;
-      <a href="#M000013">isValidType?</a>&nbsp;&nbsp;
-      <a href="#M000012">new</a>&nbsp;&nbsp;
+      <a href="#M000026">VAR_OBJECT_COUNTER</a>&nbsp;&nbsp;
+      <a href="#M000027">VAR_OBJECT_COUNTER</a>&nbsp;&nbsp;
+      <a href="#M000025">isValidType?</a>&nbsp;&nbsp;
+      <a href="#M000024">new</a>&nbsp;&nbsp;
+      <a href="#M000028">to_s</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -148,21 +150,74 @@ VAR_OBJECT:Object - SBA store encapsulated object
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000012" class="method-detail">
-        <a name="M000012"></a>
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
 
         <div class="method-heading">
-          <a href="SBAObject.src/M000012.html" target="Code" class="method-signature"
-            onclick="popupCode('SBAObject.src/M000012.html');return false;">
+          <a href="SBAObject.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAObject.src/M000026.html');return false;">
+          <span class="method-name">VAR_OBJECT_COUNTER</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets SBAObjects instance counter.
+</p>
+<p>
+Params:
+</p>
+<p>
+Returns: <a href="SBAObject.html#M000026">VAR_OBJECT_COUNTER</a>:INTEGER
+</p>
+<p>
+Throws:
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="SBAObject.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAObject.src/M000025.html');return false;">
+          <span class="method-name">isValidType?</span><span class="method-args">(var_Object)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Abstract method, should be implemented by the inheriting classes (valids
+given object).
+</p>
+<p>
+Params:
+</p>
+<p>
+var_Object:Object - object to be validated
+</p>
+<p>
+Returns:
+</p>
+<p>
+Throws: SBANotImplementedError
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="SBAObject.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAObject.src/M000024.html');return false;">
           <span class="method-name">new</span><span class="method-args">(var_Name, var_Object)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Constructor
-</p>
-<p>
 Params:
 </p>
 <p>
@@ -172,59 +227,64 @@ var_Name:String - SBA store object name
 var_Object:Object - SBA store encapsulated object
 </p>
 <p>
-Returns: nil
+Returns:
+</p>
+<p>
+Throws:
 </p>
         </div>
       </div>
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000014" class="method-detail">
-        <a name="M000014"></a>
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
 
         <div class="method-heading">
-          <a href="SBAObject.src/M000014.html" target="Code" class="method-signature"
-            onclick="popupCode('SBAObject.src/M000014.html');return false;">
+          <a href="SBAObject.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAObject.src/M000027.html');return false;">
           <span class="method-name">VAR_OBJECT_COUNTER</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Gets SBAObjects instance counter
+Gets current object&#8216;s identifier.
 </p>
 <p>
 Params:
 </p>
 <p>
-Returns: <a href="SBAObject.html#M000014">VAR_OBJECT_COUNTER</a>:INTEGER
+Returns: <a href="SBAObject.html#M000026">VAR_OBJECT_COUNTER</a>:INTEGER
+</p>
+<p>
+Throws:
 </p>
         </div>
       </div>
 
-      <div id="method-M000013" class="method-detail">
-        <a name="M000013"></a>
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
 
         <div class="method-heading">
-          <a href="SBAObject.src/M000013.html" target="Code" class="method-signature"
-            onclick="popupCode('SBAObject.src/M000013.html');return false;">
-          <span class="method-name">isValidType?</span><span class="method-args">(var_Object)</span>
+          <a href="SBAObject.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAObject.src/M000028.html');return false;">
+          <span class="method-name">to_s</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Abstract method, should be implemented by the inheriting classes (valids
-given object)
+Returns a string representation of <a href="SBAObject.html">SBAObject</a>.
 </p>
 <p>
 Params:
 </p>
 <p>
-var_Object:Object - object to be validated
+Returns: String
 </p>
 <p>
-Returns: TrueClass || FalseClass
+Throws:
 </p>
         </div>
       </div>

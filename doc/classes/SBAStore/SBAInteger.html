@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/lib/SBAObject/SBAInteger_rb.html">
-                lib/SBAObject/SBAInteger.rb
+                <a href="../../files/lib/SBAStore/SBAInteger_rb.html">
+                lib/SBAStore/SBAInteger.rb
                 </a>
         <br />
             </td>
@@ -94,8 +94,9 @@ SBA store Integer class
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000008">isValidType?</a>&nbsp;&nbsp;
-      <a href="#M000007">new</a>&nbsp;&nbsp;
+      <a href="#M000014">fromString</a>&nbsp;&nbsp;
+      <a href="#M000013">isValidType?</a>&nbsp;&nbsp;
+      <a href="#M000012">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -117,21 +118,76 @@ SBA store Integer class
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000007" class="method-detail">
-        <a name="M000007"></a>
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
 
         <div class="method-heading">
-          <a href="SBAInteger.src/M000007.html" target="Code" class="method-signature"
-            onclick="popupCode('SBAInteger.src/M000007.html');return false;">
+          <a href="SBAInteger.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAInteger.src/M000014.html');return false;">
+          <span class="method-name">fromString</span><span class="method-args">(var_Name, var_Object)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Casts given string value to integer if possible.
+</p>
+<p>
+Params:
+</p>
+<p>
+var_Name:String - object&#8216;s name var_Object:Object - string object
+</p>
+<p>
+Returns:<a href="SBAInteger.html">SBAInteger</a>
+</p>
+<p>
+Throws:<a href="../SBATypeError.html">SBATypeError</a>, ArgumentError
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="SBAInteger.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAInteger.src/M000013.html');return false;">
+          <span class="method-name">isValidType?</span><span class="method-args">(var_Object)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Validates given object&#8216;s type.
+</p>
+<p>
+Params:
+</p>
+<p>
+var_Object:Object - object to be validated
+</p>
+<p>
+Returns:TrueClass/FalseClass
+</p>
+<p>
+Throws:
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="SBAInteger.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAInteger.src/M000012.html');return false;">
           <span class="method-name">new</span><span class="method-args">(var_Name, var_Object)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Constructor
-</p>
-<p>
 Params:
 </p>
 <p>
@@ -141,35 +197,10 @@ var_Name:String - SBA store object name
 var_Object:Integer - SBA store object
 </p>
 <p>
-Returns: nil
-</p>
-        </div>
-      </div>
-
-      <h3 class="section-bar">Public Instance methods</h3>
-
-      <div id="method-M000008" class="method-detail">
-        <a name="M000008"></a>
-
-        <div class="method-heading">
-          <a href="SBAInteger.src/M000008.html" target="Code" class="method-signature"
-            onclick="popupCode('SBAInteger.src/M000008.html');return false;">
-          <span class="method-name">isValidType?</span><span class="method-args">(var_Object)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Validates given object&#8216;s type
+Returns:
 </p>
 <p>
-Params:
-</p>
-<p>
-var_Object:Object - object to be validated
-</p>
-<p>
-Returns: TrueClass/FalseClass
+Throws:<a href="../SBATypeError.html">SBATypeError</a>
 </p>
         </div>
       </div>

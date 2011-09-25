@@ -7,8 +7,6 @@ require "lib/Common/exceptions"
   # SBA store Integer class 
   class SBAFloat < SBASimpleObject
     
-    # Method:initialize
-    #
     # Params:
     #
     # var_Name:String - SBA store object name
@@ -26,9 +24,7 @@ require "lib/Common/exceptions"
       super(var_Name, var_Object)
     end
 
-    # Method:SBAFloat.isValidType?
-    #
-    # Validates given object's type
+    # Validates given object's type.
     #
     # Params:
     #
@@ -45,10 +41,8 @@ require "lib/Common/exceptions"
       return false
     end
      
-    # Method:SBAFloat.fromString
-    #
     # Casts given string value to float 
-    # if possible
+    # if possible.
     #
     # Params:
     #

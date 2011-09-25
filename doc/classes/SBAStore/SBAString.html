@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/lib/SBAObject/SBAString_rb.html">
-                lib/SBAObject/SBAString.rb
+                <a href="../../files/lib/SBAStore/SBAString_rb.html">
+                lib/SBAStore/SBAString.rb
                 </a>
         <br />
             </td>
@@ -94,7 +94,9 @@ SBA store Integer class
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000009">new</a>&nbsp;&nbsp;
+      <a href="#M000021">fromString</a>&nbsp;&nbsp;
+      <a href="#M000020">isValidType?</a>&nbsp;&nbsp;
+      <a href="#M000019">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -116,31 +118,91 @@ SBA store Integer class
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000009" class="method-detail">
-        <a name="M000009"></a>
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
 
         <div class="method-heading">
-          <a href="SBAString.src/M000009.html" target="Code" class="method-signature"
-            onclick="popupCode('SBAString.src/M000009.html');return false;">
+          <a href="SBAString.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAString.src/M000021.html');return false;">
+          <span class="method-name">fromString</span><span class="method-args">(var_Name, var_Object)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Verifies whether given object has a String type and returns this object if
+true.
+</p>
+<p>
+Params:
+</p>
+<p>
+var_Name:String - object&#8216;s name
+</p>
+<p>
+var_Object:Object - string object
+</p>
+<p>
+Returns:String
+</p>
+<p>
+Throws:<a href="../SBATypeError.html">SBATypeError</a>, ArgumentError
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="SBAString.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAString.src/M000020.html');return false;">
+          <span class="method-name">isValidType?</span><span class="method-args">(var_Object)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Validates given object&#8216;s type.
+</p>
+<p>
+Params:
+</p>
+<p>
+var_Object:Object - object to be validated
+</p>
+<p>
+Returns: TrueClass/FalseClass
+</p>
+<p>
+Throws:
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="SBAString.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('SBAString.src/M000019.html');return false;">
           <span class="method-name">new</span><span class="method-args">(var_Name, var_Object)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Constructor
-</p>
-<p>
 Params:
 </p>
 <p>
-var_Name:String - SBA store object name
+var_Name:String - SBA store object name var_Object:String - SBA store
+object
 </p>
 <p>
-var_Object:String - SBA store object
+Returns:
 </p>
 <p>
-Returns: nil
+Throws:<a href="../SBATypeError.html">SBATypeError</a>
 </p>
         </div>
       </div>

@@ -5,8 +5,6 @@ require "lib/Common/exceptions"
   
   class SBAStore
     
-    # Method:initialize
-    #
     # Initialises array for SBA store.
     #
     # Params:
@@ -19,8 +17,6 @@ require "lib/Common/exceptions"
       @VAR_OBJECTS_COUNTER = 0
     end
     
-    # Method:add
-    #
     # Adds a new object to the SBA store.
     #
     # Params:
@@ -39,8 +35,6 @@ require "lib/Common/exceptions"
       @VAR_OBJECTS_COUNTER+=1
     end
 
-    # Method:remove
-    #
     # Removes object from the SBA store. This method finds object
     # using given id and deletes reference.
     #
@@ -55,10 +49,8 @@ require "lib/Common/exceptions"
 
     end 
     
-    # Method:to_s
-    #
     # Returns a string representation of SBAStore
-    # and all its attributes
+    # and all its attributes.
     #
     # Params:
     #

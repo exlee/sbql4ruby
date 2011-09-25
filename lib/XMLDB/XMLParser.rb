@@ -9,15 +9,13 @@ require "lib/XMLDB/Listener"
 
   class XMLParser
      
-    # Method:XMLParser.validXML?
-    #
-    # Valids given XML data
+    # Loads given XML data and builds SBA store.
     #
     # Params:
     #
     # var_Identifier:String - XML data
     #
-    # Returns:
+    # Returns:SBAStore
     #
     # Throws:IncorrectFileNameException
     def loadXML(var_FileName)
@@ -32,12 +30,10 @@ require "lib/XMLDB/Listener"
       
       REXML::Document.parse_stream(var_File, var_Listener)
       
-      puts "Stack:\n" + var_Store.to_s()
+      return var_Store
     end
     
-    # Method:XMLParser.validXML?
-    #
-    # Valids given XML data
+    # Valids given XML data.
     #
     # Params:
     #

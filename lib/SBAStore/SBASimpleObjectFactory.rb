@@ -9,8 +9,6 @@ require "lib/SBAStore/SBAString"
 
   class SBASimpleObjectFactory
     
-    # Method:SBASimpleObjectFactory.create
-    #
     # Verifies given simple object type and
     # creates a new SBA object depending
     # on the verify result.
@@ -18,6 +16,7 @@ require "lib/SBAStore/SBAString"
     # Params:
     #
     # var_Name:String - SBA store object name
+    #
     # var_Object:String - SBA store object
     #
     # Returns:SBAObject
@@ -62,9 +61,7 @@ require "lib/SBAStore/SBAString"
 
     end
     
-    # Method:SBASimpleObjectFactory.ignore_exceptions
-    #
-    # Executes given code and ignores specified exceptions
+    # Executes given code and ignores specified exceptions.
     #
     # Params:
     #
@@ -79,8 +76,6 @@ require "lib/SBAStore/SBAString"
        Common::Logger.print(Common::VAR_DEBUG, self, "Ignored exception [#{e}]")
     end
     
-    # Method:SBASimpleObjectFactory.isValidType?
-    #
     # Verifies given object type and returns 
     # true if it's an instance of object
     # that is suppotrted by the SBAObject.
