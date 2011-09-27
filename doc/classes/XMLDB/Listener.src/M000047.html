@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>storeObject (XMLDB::Listener)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/XMLDB/Listener.rb, line 197</span>
+   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">storeObject</span>(<span class="ruby-identifier">var_Object</span>)
+    
+     <span class="ruby-comment cmt"># Complex object can be added to the store on the end of its tag  </span>
+     <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">var_Object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">SBAStore</span><span class="ruby-operator">::</span><span class="ruby-constant">SBAComplexObject</span>))
+       <span class="ruby-identifier">addComplexObject</span>(<span class="ruby-identifier">var_Object</span>)
+     <span class="ruby-keyword kw">else</span>
+       <span class="ruby-comment cmt"># Add simple object to the previous complex object</span>
+       <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@VAR_COMPLEX_OBJECT_INDEX</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+         <span class="ruby-constant">Common</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">print</span>(<span class="ruby-constant">Common</span><span class="ruby-operator">::</span><span class="ruby-constant">VAR_DEBUG</span>, <span class="ruby-keyword kw">self</span>, <span class="ruby-value str">&quot;addig simple object [&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">var_Object</span>.<span class="ruby-identifier">to_s</span>() <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;] to the complex object [&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@VAR_COMPLEX_OBJECTS</span>[<span class="ruby-ivar">@VAR_COMPLEX_OBJECT_INDEX</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>].<span class="ruby-identifier">to_s</span>())
+         
+         <span class="ruby-ivar">@VAR_COMPLEX_OBJECTS</span>[<span class="ruby-ivar">@VAR_COMPLEX_OBJECT_INDEX</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>].<span class="ruby-identifier">add</span>(<span class="ruby-identifier">var_Object</span>.<span class="ruby-constant">VAR_ID</span>)
+       <span class="ruby-keyword kw">end</span>
+
+       <span class="ruby-constant">Common</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">print</span>(<span class="ruby-constant">Common</span><span class="ruby-operator">::</span><span class="ruby-constant">VAR_DEBUG</span>, <span class="ruby-keyword kw">self</span>, <span class="ruby-value str">&quot;addig simple object [&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">var_Object</span>.<span class="ruby-identifier">to_s</span>() <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;] to the store&quot;</span>)
+       
+       <span class="ruby-comment cmt">#Store object in the SBAStore</span>
+       <span class="ruby-ivar">@VAR_STORE</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">var_Object</span>)   
+     <span class="ruby-keyword kw">end</span>
+   <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
