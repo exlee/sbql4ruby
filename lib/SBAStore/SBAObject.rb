@@ -66,7 +66,7 @@ require "lib/Common/exceptions"
     #
     # Params:
     #
-    # Returns: String
+    # Returns:String
     #
     # Throws:
     def to_s

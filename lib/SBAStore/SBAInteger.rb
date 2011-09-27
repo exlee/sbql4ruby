@@ -47,6 +47,7 @@ require "lib/Common/exceptions"
     # Params:
     #
     # var_Name:String - object's name
+    #
     # var_Object:Object - string object
     #
     # Returns:SBAInteger

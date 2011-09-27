@@ -10,3 +10,6 @@ end
 class LogLevelError < RuntimeError
 end
 
+class QRESTypeError < ArgumentError
+end
+
