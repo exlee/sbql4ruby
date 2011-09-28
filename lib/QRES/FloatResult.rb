@@ -9,10 +9,10 @@ require "lib/QRES/AbstractSimpleQueryResult"
     def initialize(var_Object)
       if(!SBAStore::SBAFloat.isValidType?(var_Object))
         raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + Float.to_s() + " expected")
-       end
+      end
 
-       @VAR_OBJECT = var_Object
-     end
+      @VAR_OBJECT = var_Object
+    end
       
   end
 
