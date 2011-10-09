@@ -1,6 +1,7 @@
 module SBAStore
   
 require "lib/Common/exceptions"
+require "lib/Common/Logger"
 require "lib/SBAStore/SBAInteger"
 require "lib/SBAStore/SBAFloat"
 require "lib/SBAStore/SBABoolean"
@@ -25,7 +26,7 @@ require "lib/SBAStore/SBAString"
     def SBASimpleObjectFactory.create(var_Name, var_Object) 
      
       var_Tmp = nil
-       
+      
       #Integer
       SBASimpleObjectFactory.ignore_exceptions(SBATypeError, ArgumentError) do var_Tmp = SBAInteger.fromString(var_Name, var_Object) end
       

@@ -12,7 +12,7 @@ require "lib/QRES/AbstractSimpleQueryResult"
                                 "/" + FalseClass.to_s() + " expected")
       end
 
-      @VAR_OBJECT = var_Object
+      super(var_Object)
      end
        
   end

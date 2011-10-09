@@ -29,9 +29,9 @@ require "lib/Common/exceptions"
     #
     # Returns:
     #
-    # Throws:SBANotImplementedError
+    # Throws:AbstractMethodException
     def SBASimpleObject.isValidType?(var_Object)
-      raise SBANotImplementedError.new("Abstract method")
+      raise AbstractMethodException.new("Abstract method")
     end
          
   end

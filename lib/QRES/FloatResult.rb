@@ -11,7 +11,7 @@ require "lib/QRES/AbstractSimpleQueryResult"
         raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + Float.to_s() + " expected")
       end
 
-      @VAR_OBJECT = var_Object
+      super(var_Object)
     end
       
   end

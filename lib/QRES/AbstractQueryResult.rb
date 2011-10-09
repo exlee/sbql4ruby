@@ -4,7 +4,7 @@ module QRES
   class AbstractQueryResult
       
       def initialize(var_Object)
-        super(var_Object)
+        @VAR_OBJECT = var_Object
       end
       
       # Compares QRES value objects 
@@ -15,9 +15,9 @@ module QRES
       #
       # Returns:TrueClass/FalseClass
       #
-      # Throws:SBANotImplementedError
+      # Throws:AbstractMethodException
       def equals(var_Object)
-        raise SBANotImplementedError.new("Abstract method")
+        raise AbstractMethodException.new("Abstract method")
       end
       
       # Returns a string representation of QRES value object.
@@ -26,9 +26,9 @@ module QRES
       #
       # Returns:String
       #
-      # Throws:SBANotImplementedError
-      def to_s
-        raise SBANotImplementedError.new("Abstract method")
+      # Throws:
+      def to_s()
+        return @VAR_OBJECT.to_s()
       end
       
       # VAR_OBJECT:Object - object identifier of the structure of identifires

@@ -34,21 +34,47 @@ require "lib/Common/exceptions"
       @VAR_OBJECTS.push(var_Object)
       @VAR_OBJECTS_COUNTER+=1
     end
-
-    # Removes object from the SBA store. This method finds object
-    # using given id and deletes reference.
+    
+    # Returns an object indicated by the index.
     #
     # Params:
     #
-    # var_Identifier:Integer - SBA store object's identifier
+    # var_Index:Fixnum - Object index
     #
     # Returns:
     #
-    # Throws:
-    def remove(var_Identifier)
-
-    end 
+    # Throws:SBATypeError
+    def get(var_Index)
+      if(var_Index > @VAR_OBJECTS.size || var_Index < 0)
+        raise SBAIndexError.new("Incorrect object index [#{var_Index}], current idex range [0 .. #{@VAR_OBJECTS.size}]")
+      end
+       
+     return @VAR_OBJECTS[var_Index]
+    end
     
+    # Finds an object indicated by the SBA identifier.
+    #
+    # Params:
+    #
+    # var_Identifier:Fixnum - SBA object identifier
+    #
+    # Returns:
+    #
+    # Throws:SBAIdentifierError
+    def find(var_Identifier)
+      if(var_Identifier > SBAObject.VAR_OBJECT_COUNTER || var_Identifier < 0)
+        raise SBAIdentifierError.new("Incorrect SBA object identifier [#{var_Identifier}], current idex range [0 .. #{SBAObject.VAR_OBJECT_COUNTER}]")
+      end
+      
+      @VAR_OBJECTS.each do |object|
+        if(object.VAR_ID == var_Identifier)
+          return object
+        end
+      end
+  
+      return nil
+    end
+
     # Returns a string representation of SBAStore
     # and all its attributes.
     #
@@ -57,7 +83,7 @@ require "lib/Common/exceptions"
     # Returns:String
     #
     # Throws:
-    def to_s
+    def to_s()
       var_text = "Store=[#{self.class}], objects=[#{@VAR_OBJECTS_COUNTER.to_s()}]\n"
       
       @VAR_OBJECTS.each{|object| var_text+=object.to_s()+"\n"}
@@ -70,9 +96,7 @@ require "lib/Common/exceptions"
     
     # VAR_OBJECT_COUNTER:Integer - SBA store object counter
     attr :VAR_OBJECTS_COUNTER
-    
-    
-     
+      
   end   
       
 end

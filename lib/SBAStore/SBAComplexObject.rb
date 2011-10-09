@@ -4,22 +4,18 @@ require "lib/SBAStore/SBAObject"
 require "lib/Common/exceptions"
 
 
-  # SBA store abstract class for simple objects 
+  # SBA store class for simple objects 
   class SBAComplexObject < SBAObject
 
     # Params:
     #
     # var_Name:String - SBA store object name
     #
-    # var_Object:Object - SBA store complex data object
-    #
     # Returns:
     #
     # Throws:
     def initialize(var_Name)
-      super(var_Name, nil)
-      
-      @VAR_REFERENCES = Array.new()
+      super(var_Name, Array.new())
     end
     
     # Adds a new object's identifier to the complex obejct 
@@ -41,7 +37,7 @@ require "lib/Common/exceptions"
         raise SBAIncorrectIdentifierError.new("Given object's identifier [#{var_Identifier}] is already joined")
       end
       
-      @VAR_REFERENCES.push(var_Id)
+      @VAR_OBJECT.push(var_Id)
     end
 
     # Compares given object's type with it's type,
@@ -73,7 +69,7 @@ require "lib/Common/exceptions"
     #
     # Throws: 
     def find(var_Identifier)
-      return @VAR_REFERENCES.index(var_Identifier)
+      return @VAR_OBJECT.index(var_Identifier)
     end
 
     # Returns a string representation of SBAObject.
@@ -86,7 +82,7 @@ require "lib/Common/exceptions"
     def to_s
        var_text = "ID=[" + @VAR_ID.to_s() + "], Name=[" + @VAR_NAME + "], indexes: ["
 
-        @VAR_REFERENCES.each{|object| var_text += " " + object.to_s()}
+        @VAR_OBJECT.each{|object| var_text += " " + object.to_s()}
 
         return var_text + " ]"
     end
@@ -101,10 +97,7 @@ require "lib/Common/exceptions"
     #
     # Throws:
     alias push add
-  
-    # VAR_REFERENCES:Integer - Collection of SBA objects' identifiers
-    attr :VAR_REFERENCES
-    
+
   end
 
 end

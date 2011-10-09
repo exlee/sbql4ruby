@@ -27,17 +27,6 @@ module QRES
         
         return false
       end
-      
-      # Returns a string representation of QRES value object.
-      #
-      # Params:
-      #
-      # Returns:String
-      #
-      # Throws:
-      def to_s
-        return @VAR_OBJECT.to_s()
-      end
         
   end
 

@@ -35,9 +35,9 @@ require "lib/Common/exceptions"
     #
     # Returns:
     #
-    # Throws: SBANotImplementedError
+    # Throws: AbstractMethodException
     def SBAObject.isValidType?(var_Object)
-      raise SBANotImplementedError.new("Abstract method")
+      raise AbstractMethodException.new("Abstract method")
     end
     
     # Gets SBAObjects instance counter.
@@ -78,13 +78,13 @@ require "lib/Common/exceptions"
     end
     
     # VAR_ID:Integer - SBA store object identifier
-    attr :VAR_ID
+    attr_reader :VAR_ID
     
     # VAR_NAME:String - SBA store object name
-    attr :VAR_NAME
+    attr_reader :VAR_NAME
     
     # VAR_OBJECT:Object - SBA store encapsulated object
-    attr :VAR_OBJECT
+    attr_reader :VAR_OBJECT
          
   end
  

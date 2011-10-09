@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/QRES/AbstractSimpleQueryResult.rb</string>
+	<string>test/QRESTest.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -37,14 +37,70 @@
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>lib/QRES/AbstractSimpleQueryResult.rb</key>
+		<key>lib/QRES/BagResult.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>16</integer>
+				<integer>53</integer>
 				<key>line</key>
-				<integer>38</integer>
+				<integer>24</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>lib/QRES/BinderResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>lib/QRES/ReferenceResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>15</integer>
+				<key>line</key>
+				<integer>5</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>lib/QRES/StructResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>test/QRESTest.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>46</integer>
+				<key>line</key>
+				<integer>90</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -54,11 +110,15 @@
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>lib/QRES/AbstractSimpleQueryResult.rb</string>
+		<string>lib/QRES/BagResult.rb</string>
+		<string>lib/QRES/BinderResult.rb</string>
+		<string>lib/QRES/ReferenceResult.rb</string>
+		<string>lib/QRES/StructResult.rb</string>
+		<string>test/QRESTest.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{211, 43}, {1229, 835}}</string>
+	<string>{{0, 43}, {1229, 835}}</string>
 </dict>
 </plist>

@@ -106,7 +106,7 @@ include REXML
           
      @VAR_CURRENT_OBJECT = SBAStore::SBASimpleObjectFactory.create(@VAR_CURRENT_OBJECT_NAME, var_Data);
      
-      Common::Logger.print(Common::VAR_DEBUG, self, "[TAG_DATA]: current object=[" + @VAR_CURRENT_OBJECT.to_s() + "], type=[" + @VAR_CURRENT_OBJECT.class.to_s() + "]")
+     Common::Logger.print(Common::VAR_DEBUG, self, "[TAG_DATA]: current object=[" + @VAR_CURRENT_OBJECT.to_s() + "], type=[" + @VAR_CURRENT_OBJECT.class.to_s() + "]")
    end
 
    # Closing tag listener. 
