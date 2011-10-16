@@ -79,7 +79,7 @@ require "lib/Common/exceptions"
     # Returns: String
     #
     # Throws:
-    def to_s
+    def to_s()
        var_text = "ID=[" + @VAR_ID.to_s() + "], Name=[" + @VAR_NAME + "], indexes: ["
 
         @VAR_OBJECT.each{|object| var_text += " " + object.to_s()}

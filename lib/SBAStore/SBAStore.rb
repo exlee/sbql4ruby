@@ -46,7 +46,7 @@ require "lib/Common/exceptions"
     # Throws:SBATypeError
     def get(var_Index)
       if(var_Index > @VAR_OBJECTS.size || var_Index < 0)
-        raise SBAIndexError.new("Incorrect object index [#{var_Index}], current idex range [0 .. #{@VAR_OBJECTS.size}]")
+        raise SBAIndexError.new("Incorrect object index [#{var_Index}], current index range [0...#{@VAR_OBJECTS.size}]")
       end
        
      return @VAR_OBJECTS[var_Index]
@@ -90,6 +90,17 @@ require "lib/Common/exceptions"
       
       return var_text
     end
+    
+    # Alias for add method.
+    #
+    # Params:
+    #
+    # var_Object:AbstractQueryResult - QRES object
+    #
+    # Returns:
+    #
+    # Throws:
+    alias push add
     
     # VAR_BASE:Array - SBA store objects array
     attr :VAR_OBJECTS

@@ -6,9 +6,9 @@ require "lib/Common/Stack"
   class AbstractComplexQueryResult < AbstractQueryResult
       
       def initialize(var_Object)
-        if(!var_Object.is_a?(Common::Stack))
-          raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + Common::Stack.to_s() + " expected")
-        end
+        #if(!var_Object.is_a?(Common::Stack))
+        #  raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + Common::Stack.to_s() + " expected")
+        #end
           
         super(var_Object)
       end
@@ -47,10 +47,6 @@ require "lib/Common/Stack"
       #
       # Throws:
       def equals(var_Object)
-        if(!var_Object.is_a?(QRES::BagResult))
-          raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + QRES::BagResult.to_s() + " expected")
-        end
-        
         return self.VAR_OBJECT.equals(var_Object.VAR_OBJECT)
       end
         

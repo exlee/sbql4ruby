@@ -6,7 +6,9 @@ module XMLDB
   
 require "test/unit"
 
-require 'lib/Common/logger'
+require "lib/Common/logger"
+require "lib/XMLDB/XMLParser"
+
 
 
   class XMLParserTest < Test::Unit::TestCase
@@ -20,16 +22,18 @@ require 'lib/Common/logger'
     # Throws:
     def test_ParseXML
       assert_nothing_thrown("Checking for RubyGem") {
-        require "lib/XMLDB/XMLParser"
         
         # Set debug log level
         Common::Logger.setLogLevel(Common::VAR_INFO)
         
         parser = XMLParser.new();
         
-        var_store = parser.loadXML("sampledata/data.xml")
+        store = parser.loadXML("sampledata/data.xml")
         
-        puts "Stack:\n" + var_store.to_s()
+        assert_equal(26, store.VAR_OBJECTS.size())
+        assert_equal("s0001", store.find(16).VAR_OBJECT)
+        
+        puts "Stack:\n" + store.to_s()
       }
     end
     

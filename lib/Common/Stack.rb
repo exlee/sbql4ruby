@@ -79,6 +79,8 @@ module Common
     #
     # Params:
     #
+    # var_Object:Stack object
+    #
     # Returns:FrueClass/FalseClass
     #
     # Throws:   
@@ -104,17 +106,17 @@ module Common
     #
     # Throws:
     def to_s()
-      var_Message = "Stack: "
+      var_Message = "("
       
-      for i in (0...@VAR_STACK.length-1)
-        if(i==0)
-          var_Message += "index=[" + i.to_s() + "] value=[" + @VAR_STACK[i].to_s() + "]"  
-        else
-          var_Message += ", index=[" + i.to_s() + "] value=[" + @VAR_STACK[i].to_s() + "]"     
-        end 
+      for i in (0...@VAR_STACK.length)
+        var_Message += @VAR_STACK[i].to_s()
+        
+        if(i<@VAR_STACK.length-1)
+          var_Message += ", "  
+        end
       end
       
-      return var_Message
+      return var_Message + ")"
     end
         
   end
