@@ -21,7 +21,7 @@ require "lib/Common/Stack"
       return @VAR_STACK.pop()
     end
     
-    # Returns a string representation of Stack object.
+    # Returns a string representation of QRES object.
     #
     # Params:
     #

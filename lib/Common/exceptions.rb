@@ -25,3 +25,10 @@ end
 class QRESTypeError < ArgumentError
 end
 
+# ENVS exceptions
+class ENVSTypeError < ArgumentError
+end
+
+class ENVNotInitialisedObjectException < RuntimeError
+end
+
