@@ -1,6 +1,8 @@
 module SBAStore
   
 require "lib/SBAStore/SBAObject"
+require "lib/SBAStore/SBAComplexObjectIterator"
+
 require "lib/Common/exceptions"
 
 
@@ -39,7 +41,46 @@ require "lib/Common/exceptions"
       
       @VAR_OBJECT.push(var_Id)
     end
+    
+    # Finds the given SBA object's identifier and returns array index.
+    #
+    # Params:
+    #
+    # var_Identifier:Integer - SBA store object's identifier
+    #
+    # Returns:Integer
+    #
+    # Throws: 
+    def find(var_Identifier)
+      return @VAR_OBJECT.index(var_Identifier)
+    end
 
+    # Returns SBA object taken from the array using given array index.
+    #
+    # Params:
+    #
+    # var_Index:Integer - array index
+    #
+    # Returns:Integer
+    #
+    # Throws: 
+    def get(var_Index)
+      return @VAR_OBJECT[var_Index]
+    end
+
+    # Returns iterator.
+    #
+    # Params:
+    #
+    # var_Index:Integer - array index
+    #
+    # Returns:Integer
+    #
+    # Throws:
+    def iterator()
+      var_Iterator = SBAComplexObjectIterator.new(self)
+    end
+    
     # Compares given object's type with it's type,
     # returns true if those objects' types are
     # the same.
@@ -55,23 +96,10 @@ require "lib/Common/exceptions"
       if(SBASimpleObjectFactory.class == var_Object.class)
         return true
       end
-      
+
       return false
     end
-    
-    # Finds the given SBA object's identifier and returns array index.
-    #
-    # Params:
-    #
-    # var_Identifier:Integer - SBA store object's identifier
-    #
-    # Returns:Integer
-    #
-    # Throws: 
-    def find(var_Identifier)
-      return @VAR_OBJECT.index(var_Identifier)
-    end
-
+         
     # Returns a string representation of SBAObject.
     #
     # Params:

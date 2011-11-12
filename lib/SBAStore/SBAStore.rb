@@ -35,7 +35,7 @@ require "lib/Common/exceptions"
       @VAR_OBJECTS_COUNTER+=1
     end
     
-    # Returns an object indicated by the index.
+    # Returns an object indicated by the array index.
     #
     # Params:
     #
@@ -52,6 +52,21 @@ require "lib/Common/exceptions"
      return @VAR_OBJECTS[var_Index]
     end
     
+    # Returns the bottom object from the stack 
+    #
+    # Params:
+    #
+    # Returns:SBAObjects
+    #
+    # Throws:     
+    def getRootObject()
+      if(@VAR_OBJECTS == nil || @VAR_OBJECTS.size() == 0)
+        return nil
+      end
+
+      return self.find(0)
+    end
+      
     # Finds an object indicated by the SBA identifier.
     #
     # Params:

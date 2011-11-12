@@ -9,6 +9,15 @@ require "lib/Common/Stack"
       @VAR_STACK = Common::Stack.new()
     end
     
+    # Push QRES object into the stack 
+    #
+    # Params:
+    #
+    # var_Object:AbstractQueryResult - QRES object
+    #
+    # Returns:
+    #
+    # Throws:    
     def push(var_Object)
       if(!var_Object.is_a?(AbstractQueryResult))
         raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + AbstractQueryResult.to_s() + " expected")
@@ -17,6 +26,13 @@ require "lib/Common/Stack"
       @VAR_STACK.push(var_Object)
     end
     
+    # Gets QRES object from the stack 
+    #
+    # Params:
+    #
+    # Returns:AbstractQueryResult
+    #
+    # Throws:
     def pop()
       return @VAR_STACK.pop()
     end

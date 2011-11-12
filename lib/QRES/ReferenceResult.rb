@@ -1,11 +1,12 @@
 module QRES
 
 require "lib/QRES/IntegerResult"
+require "lib/QRES/AbstractComplexQueryResult"
   
   
   class ReferenceResult < AbstractComplexQueryResult
       
-    def initialize(var_Identifier))
+    def initialize(var_Identifier)
       if(var_Identifier == nil)
         raise ArgumentError.new("Object identifier expected")
       end
@@ -66,7 +67,7 @@ require "lib/QRES/IntegerResult"
     #
     # Throws:
     def to_s()
-      return self.class.to_s() + super()
+      return self.class.to_s() + "(value=" + super() + ")"
     end
     
     # Alias for push method

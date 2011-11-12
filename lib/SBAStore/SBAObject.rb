@@ -3,7 +3,7 @@ module SBAStore
 require "lib/Common/exceptions"
 
 
-  # SBA store basic abstract class 
+  # SBA store basic abstract class. 
   class SBAObject
 
     # VAR_OBJECT_COUNTER:Integer - SBAObject instances counter

@@ -11,6 +11,9 @@ end
 class LogLevelError < RuntimeError
 end
 
+class IncorrectArgumentError < ArgumentError
+end
+
 # SBA exceptions
 class SBATypeError < ArgumentError
 end
@@ -22,6 +25,9 @@ class SBAIdentifierError < ArgumentError
 end
 
 # QRES exceptions
+class NotInitialisedStackException < RuntimeError
+end
+
 class QRESTypeError < ArgumentError
 end
 
@@ -29,6 +35,9 @@ end
 class ENVSTypeError < ArgumentError
 end
 
-class ENVNotInitialisedObjectException < RuntimeError
+class ENVSNotInitialisedObjectException < RuntimeError
+end
+
+class ENVSIncorrectArgumentException < ArgumentError
 end
 

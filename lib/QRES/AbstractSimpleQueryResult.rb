@@ -1,5 +1,9 @@
 module QRES
 
+require "lib/QRES/IntegerResult"
+require "lib/QRES/ReferenceResult"
+require "lib/QRES/AbstractQueryResult"
+
 
   class AbstractSimpleQueryResult < AbstractQueryResult
       

@@ -9,6 +9,7 @@ require "lib/SBAStore/SBAString"
 require "lib/SBAStore/SBAStore"
 require "lib/SBAStore/SBASimpleObjectFactory"
 require "lib/SBAStore/SBAComplexObject"
+require "lib/SBAStore/SBAComplexObjectIterator"
   
 
   class SBAStoreTest < Test::Unit::TestCase

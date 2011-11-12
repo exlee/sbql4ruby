@@ -1,22 +1,32 @@
 module ENVS
 
+require "lib/Common/exceptions"
+
+require "lib/ENVS/Binder"
+
+
   class Frame
     
     def initialize(*args)
+      
+      puts "args counter=" + args.size().to_s()
+      
       case(args.size)
         when 0
           @VAR_BINDER = nil
         when 1
-          if(args.is_a?(Binder))
-            @VAR_BINDER = args
-          elsif
-            raise ENVSTypeError.new("Incorrect object type [#{var_Object.class}], " + Binder.to_s() + " expected")
+          if(args[0].is_a?(NilClass))
+            @VAR_BINDER = nil
+          elsif(args[0].is_a?(Array))
+            @VAR_BINDER = args[0]
+          else
+            raise ENVSTypeError.new("Incorrect object type [#{args[0].class}], " + Array.to_s() + " expected")
           end
         else
-          raise ArgumentError.new("Incorrect number of arguments [#{args.size}]")
+          raise ENVSIncorrectArgumentException.new("Incorrect number of arguments [#{args.size}]")
       end
     end
-    
+  
     # Returns a string representation of Frame object.
     #
     # Params:
@@ -26,16 +36,14 @@ module ENVS
     # Throws:
     def to_s()
       if(@VAR_BINDER == nil)
-        raise ENVNotInitialisedObjectException.new("Not initilised binder object")
+        return "nil"
       end
       
-      for i in (0...@VAR_BINDER.length)
-        var_Message += @VAR_BINDER[i].to_s()
-
-        if(i<@VAR_BINDER.length-1)
-          var_Message += ", "  
-        end
-      end  
+      #puts "TEST=" + @VAR_BINDER.length.to_s + ", " + @VAR_BINDER.class.to_s
+      
+      var_Message = ""
+      
+      @VAR_BINDER.each {|binder| var_Message += binder.to_s() + "\n"}
           
       return var_Message
     end
