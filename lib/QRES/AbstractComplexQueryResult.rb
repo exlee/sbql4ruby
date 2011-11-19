@@ -1,6 +1,7 @@
 module QRES
 
 require "lib/Common/Stack"
+require "lib/QRES/AbstractQueryResult"
 
 
   class AbstractComplexQueryResult < AbstractQueryResult

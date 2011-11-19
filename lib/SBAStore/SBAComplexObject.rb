@@ -72,13 +72,11 @@ require "lib/Common/exceptions"
     #
     # Params:
     #
-    # var_Index:Integer - array index
-    #
-    # Returns:Integer
+    # Returns:SBAComplexObjectIterator
     #
     # Throws:
     def iterator()
-      var_Iterator = SBAComplexObjectIterator.new(self)
+      return SBAComplexObjectIterator.new(self)
     end
     
     # Compares given object's type with it's type,

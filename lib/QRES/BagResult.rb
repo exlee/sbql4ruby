@@ -2,6 +2,9 @@ module QRES
 
 require "lib/Common/Stack"
 
+require "lib/QRES/AbstractComplexQueryResult"
+require "lib/QRES/BagResultIterator"
+
 
   class BagResult < AbstractComplexQueryResult
     
@@ -57,7 +60,18 @@ require "lib/Common/Stack"
       
       raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + BagResult.to_s() + " expected")
     end
-    
+
+    # Returns iterator.
+    #
+    # Params:
+    #
+    # Returns:BagResultIterator
+    #
+    # Throws:
+    def iterator()
+      return BagResultIterator.new(self)
+    end
+         
     # Returns a string representation of QRES value object.
     #
     # Params:

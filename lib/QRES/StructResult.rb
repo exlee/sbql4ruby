@@ -1,5 +1,7 @@
 module QRES
 
+require "lib/QRES/StructResultIterator"
+
 
   class StructResult < AbstractComplexQueryResult
     
@@ -55,7 +57,18 @@ module QRES
 
       raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + StructResult.to_s() + " expected")
     end
-     
+
+    # Returns iterator.
+    #
+    # Params:
+    #
+    # Returns:StructResultIterator
+    #
+    # Throws:
+    def iterator()
+      return StructResultIterator.new(self)
+    end
+         
     # Returns a string representation of QRES value object.
     #
     # Params:

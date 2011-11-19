@@ -2,60 +2,203 @@ module ENVS
 
 require "lib/SBAStore/SBAComplexObject"
 require "lib/QRES/ReferenceResult"
+require "lib/QRES/StructResult"
+require "lib/QRES/BagResult"
+require "lib/QRES/BinderResult"
 
+require 'lib/Common/logger'
 require "lib/Common/exceptions"
 
 
   class ENVS
     
     def initialize(var_Store)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Initialisation for given store")
+          
       @VAR_STACK = Array.new()
       
       if(!var_Store.is_a?(SBAStore::SBAStore))
         raise ENVSTypeError.new("Incorrect object type [#{var_Store.class}], " + SBAStore.to_s() + " expected")
       else
+        Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Creating frame for root object [" + var_Store.getRootObject().to_s() + "]")
+        
         frame = createFrame(var_Store.getRootObject(), var_Store)
         
-         if(frame.is_a?(NilClass))
-            puts "Object=nil"
-          else
-            puts "Object=" + frame.class.to_s()
-            puts "Iniside=\n" + frame.to_s()
-          end
-          
+        Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Created frame:\n" + frame.to_s())
+            
         @VAR_STACK.push(frame)
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: End ")
       end
     end
     
-    def createFrame(var_SBAObject, var_Store)
-      return Frame.new(createBinder(var_SBAObject, var_Store))
+    def createFrame(var_Object, var_Store)
+        
+      Common::Logger.print(Common::VAR_DEBUG, self, "[createFrame]: Creating frame for [#{var_Object.to_s()}]")
+      
+      binderList = createBinder(var_Object, var_Store)
+       
+      Common::Logger.print(Common::VAR_DEBUG, self, "[createFrame]: Created binder list, lenght [#{binderList.to_s()}], data [#{binderList.to_s()}]")
+      
+      frame = Frame.new(binderList)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[createFrame]: Created frame\n[#{frame.to_s()}]")
+      
+      return Frame.new(binderList)
     end
     
-    def createBinder(var_SBAObject, var_Store)
+    def createBinder(var_Object, var_Store)
       
+      Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{var_Object.to_s()}]")
+       
       # Binder list to be returned
       var_BinderList = Array.new()
       
-      if(var_SBAObject.is_a?(SBAStore::SBAComplexObject))
-        iterator = var_SBAObject.iterator()
+      # Nested for SBAObject used for ENVS initialisation
+      if(var_Object.is_a?(SBAStore::SBAComplexObject))
         
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{SBAStore::SBAComplexObject.to_s()}], searching in the store")
+        
+        iterator = var_Object.iterator()
+
         while(iterator.hasNext())
+          
           object = var_Store.find(iterator.next())
           
-          var_BinderList.push(Binder.new(object.VAR_NAME, QRES::ReferenceResult.new(object.VAR_ID)))
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Found object [#{object.to_s()}], creting binder")
+          
+          binder = Binder.new(object.VAR_NAME, QRES::ReferenceResult.new(object.VAR_ID))
+        
+          #binder = createBinder(object, var_Store)
+                    
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder [#{binder.to_s()}], adding to the array")
+          
+          var_BinderList.push(binder)
+          
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array length [#{var_BinderList.length().to_s()}]")
         end
         
         return var_BinderList
-      end
+      elsif(var_Object.is_a?(QRES::ReferenceResult))
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{QRES::ReferenceResult.to_s()}], searching in the store")
+        
+        object = var_Store.find(var_Object.VAR_OBJECT)
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Found [#{object.to_s()}], creating binder")
+        
+        binderList = createBinder(object, var_Store)
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder array, length [#{binderList.length().to_s()}], data [#{binderList.to_s()}]")
+        #Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array before join, length [#{var_BinderList.length().to_s()}], data [#{var_BinderList.to_s()}]")
+        
+        #binderList.each{|biner| var_BinderList.push(binder)}
+        
+        #Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array after join, length [#{var_BinderList.length().to_s()}], data [#{var_BinderList.to_s()}]")
+        
+        return binderList
+      elsif(var_Object.is_a?(QRES::BagResult) || var_Object.is_a?(QRES::StructResult))
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{var_Object.class.to_s()}], searching in the store")
+        
+        iterator = var_Object.iterator()
+        
+        while(iterator.hasNext())
+          object = var_Store.find(iterator.next())
 
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Found object [#{object.to_s()}], creting binder")
+          
+          binder = createBinder(object, var_Store)
+          
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder array, length [#{binder.length().to_s()}]")
+
+          binderList.each{|biner| var_BinderList.push(binder)}
+          
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array length [#{var_BinderList.length().to_s()}]")
+          
+          return var_BinderList
+        end    
+      elsif(var_Object.is_a?(QRES::BinderResult))
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{QRES::BinderResult.to_s()}], creating binder")
+        
+        binerList = Binder.new(object.VAR_NAME, object.VAR_OBJECT)
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder, length [#{binderList.length().to_s()}]")
+        
+        binderList.each{|biner| var_BinderList.push(binder)}
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array after join, length [#{var_BinderList.length().to_s()}]")
+        
+        return var_BinderList
+      end
+      
+      return var_BinderList
     end
 
-    def bind()
+    def bind(var_Name)
       
+      Common::Logger.print(Common::VAR_DEBUG, self, "[bind]: Binding for object name [#{var_Name}]")
+       
+      bag = QRES::BagResult.new()
+        
+      i = @VAR_STACK.length-1
+    
+      Common::Logger.print(Common::VAR_DEBUG, self, "[bind]: The number of frames in the stack [#{@VAR_STACK.length.to_s()}]")
+       
+      while(i>=0)
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[bind]: Searching for object name [#{var_Name}], frame [#{i.to_s()}]")
+        
+        bag = @VAR_STACK[i].findAllByName(var_Name)
+             
+        if(bag.VAR_OBJECT().size() > 0)
+          
+          Common::Logger.print(Common::VAR_DEBUG, self, "[bind]: Found [#{bag.to_s()}], breaking")
+          
+          break
+        end
+              
+        i -= 1
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[bind]: Returning [#{bag.to_s()}]")
+      
+      return bag
     end
     
-    def nested()
+    def nested(var_SBAObject, var_Store)
       
+      Common::Logger.print(Common::VAR_DEBUG, self, "[nested]: Nested for object [#{var_SBAObject.to_s()}]")
+      
+      frame = createFrame(var_SBAObject, var_Store)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[nested]: Pushing frame into the stack [#{frame.to_s()}]")
+      
+      @VAR_STACK.push(frame)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[nested]: End")
+    end
+    
+    # Returns a string representation of Frame object.
+    #
+    # Params:
+    #
+    # Returns:String
+    #
+    # Throws:
+    def to_s()
+      var_Message = "ENVS Stack:"
+      if(@VAR_STACK == nil)
+        return var_Message += " nil"
+      end
+
+      var_Message += "\n"
+      
+      @VAR_STACK.each {|frame| var_Message += frame.to_s() + "\n"}
+          
+      return var_Message
     end
     
     # VAR_STACK:Frame - object name  

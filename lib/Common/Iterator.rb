@@ -65,7 +65,7 @@ module Common
       if(hasNext())
         @VAR_ARRAY_INDEX += 1
 
-        return @VAR_ARRAY[@VAR_ARRAY_INDEX]
+        return @VAR_ARRAY[@VAR_ARRAY_INDEX-1]
       end
      
       return nil
@@ -81,7 +81,7 @@ module Common
     #
     # Throws:
     def hasNext()
-      if(@VAR_ARRAY_INDEX == @VAR_ARRAY.size()-1)
+      if(@VAR_ARRAY_INDEX == @VAR_ARRAY.size())
         return false
       else
         return true

@@ -3,12 +3,12 @@ module SBAStore
 require "lib/Common/Iterator"
 
 
-  # Extend iterator class for SBA complex objects.
+  # Extends iterator class for SBA complex objects.
   class SBAComplexObjectIterator < Common::Iterator
   
     # Params:
     #
-    # var_SBAObject:String - SBA complex object
+    # var_SBAObject:SBAComplexObject - SBA complex object
     #
     # Returns:
     #
