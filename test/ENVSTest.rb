@@ -7,7 +7,10 @@ require "lib/SBAStore/SBAStore"
 require "lib/XMLDB/XMLParser"
 require "lib/ENVS/Frame"
 require "lib/ENVS/ENVS"
+require "lib/QRES/QRES"
 require "lib/QRES/ReferenceResult"
+
+require "lib/Operator/Utils"
 
 
   class ENVSTest < Test::Unit::TestCase
@@ -26,11 +29,11 @@ require "lib/QRES/ReferenceResult"
         # Set debug log level
         Common::Logger.setLogLevel(Common::VAR_DEBUG)
         
-        parser = XMLDB::XMLParser.new();
+        parser = XMLDB::XMLParser.new()
         
         store = parser.loadXML("sampledata/data.xml")
         
-        puts store.to_s()
+        #puts store.to_s()
         
         envs = ENVS.new(store)
         
@@ -45,10 +48,13 @@ require "lib/QRES/ReferenceResult"
         envs.nested(referenceResult, store)
         
         #puts envs.to_s()
+
+        test_bind = envs.bind("book")
         
-        #frame = Frame.new(store)
+        qres = QRES::QRES.new()
         
-        #puts "Test=" + frame.to_s()
+        Operator::Utils.eval("book", qres, envs)
+        
       }
     end
     

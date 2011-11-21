@@ -43,8 +43,6 @@ require "lib/ENVS/Binder"
       Common::Logger.print(Common::VAR_DEBUG, self, "[findAllByName]: Looking for the object [#{var_Name}] in the frame")
       
       bag = QRES::BagResult.new()
-      
-      Common::Logger.print(Common::VAR_DEBUG, self, "[findAllByName]:  [#{bag.to_s()}]")
        
       for i in 0..@VAR_BINDER_LIST.length()-1
         
