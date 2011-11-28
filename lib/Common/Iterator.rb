@@ -13,7 +13,7 @@ module Common
     def initialize(var_Array)
       
       if(!var_Array.is_a?(Array))
-        raise IncorrectArgumentError("Incorrect object type [#{var_Array.class}], " + Array.to_s() + " expected")
+        raise IncorrectArgumentError.new("Incorrect object type [#{var_Array.class}], " + Array.to_s() + " expected")
       end
       
       @VAR_ARRAY = var_Array

@@ -12,8 +12,8 @@ require "lib/Common/exceptions"
 
   class ENVS
     
-    def initialize(var_Store)
-      
+    
+    def initialize(var_Store) 
       Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Initialisation for given store")
           
       @VAR_STACK = Array.new()
@@ -33,6 +33,17 @@ require "lib/Common/exceptions"
       end
     end
     
+    # Creates ENVS frame
+    #
+    # Params:
+    #
+    # var_Object:AbstractQueryResult - QRES object
+    #
+    # var_Store:SBAStore - SBA store
+    #
+    # Returns:Frame
+    #
+    # Throws:
     def createFrame(var_Object, var_Store)
         
       Common::Logger.print(Common::VAR_DEBUG, self, "[createFrame]: Creating frame for [#{var_Object.to_s()}]")
@@ -47,7 +58,18 @@ require "lib/Common/exceptions"
       
       return Frame.new(binderList)
     end
-    
+
+    # Creates ENVS binder
+    #
+    # Params:
+    #
+    # var_Object:AbstractQueryResult - QRES object
+    #
+    # var_Store:SBAStore - SBA store
+    #
+    # Returns:Frame
+    #
+    # Throws:    
     def createBinder(var_Object, var_Store)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{var_Object.to_s()}]")
@@ -91,12 +113,7 @@ require "lib/Common/exceptions"
         binderList = createBinder(object, var_Store)
         
         Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder array, length [#{binderList.length().to_s()}], data [#{binderList.to_s()}]")
-        #Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array before join, length [#{var_BinderList.length().to_s()}], data [#{var_BinderList.to_s()}]")
-        
-        #binderList.each{|biner| var_BinderList.push(binder)}
-        
-        #Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array after join, length [#{var_BinderList.length().to_s()}], data [#{var_BinderList.to_s()}]")
-        
+ 
         return binderList
       elsif(var_Object.is_a?(QRES::BagResult) || var_Object.is_a?(QRES::StructResult))
         
@@ -105,7 +122,7 @@ require "lib/Common/exceptions"
         iterator = var_Object.iterator()
         
         while(iterator.hasNext())
-          object = var_Store.find(iterator.next())
+          object = var_Store.find(iterator.next().VAR_OBJECT())
 
           Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Found object [#{object.to_s()}], creting binder")
           
@@ -113,7 +130,7 @@ require "lib/Common/exceptions"
           
           Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder array, length [#{binder.length().to_s()}]")
 
-          binderList.each{|biner| var_BinderList.push(binder)}
+          binder.each{|biner| var_BinderList.push(binder)}
           
           Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array length [#{var_BinderList.length().to_s()}]")
           
@@ -132,11 +149,22 @@ require "lib/Common/exceptions"
         Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array after join, length [#{var_BinderList.length().to_s()}]")
         
         return var_BinderList
+      else
+        puts "DUPAAAAA:" + var_Object.class.to_s()
       end
       
       return var_BinderList
     end
 
+    # Binds given object name
+    #
+    # Params:
+    #
+    # var_Name:Strig - Object name
+    #
+    # Returns:BagResult
+    #
+    # Throws:
     def bind(var_Name)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[bind]: Binding for object name [#{var_Name}]")
@@ -154,7 +182,6 @@ require "lib/Common/exceptions"
         bag = @VAR_STACK[i].findAllByName(var_Name)
              
         if(bag.VAR_OBJECT().size() > 0)
-          
           Common::Logger.print(Common::VAR_DEBUG, self, "[bind]: Found [#{bag.to_s()}], breaking")
           
           break
@@ -167,18 +194,40 @@ require "lib/Common/exceptions"
       
       return bag
     end
-    
+
+    # Nested operation on ENVS stack
+    #
+    # Params:
+    #
+    # var_SBAObject:SBAObject - SBA object
+    #
+    # var_Store:SBAStore - SBA store
+    #
+    # Returns:
+    #
+    # Throws:    
     def nested(var_SBAObject, var_Store)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[nested]: Nested for object [#{var_SBAObject.to_s()}]")
       
       frame = createFrame(var_SBAObject, var_Store)
       
-      Common::Logger.print(Common::VAR_DEBUG, self, "[nested]: Pushing frame into the stack [#{frame.to_s()}]")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[nested]: Pushing frame into the stack\n[#{frame.to_s()}]")
       
       @VAR_STACK.push(frame)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[nested]: End")
+    end
+    
+    # Getsobject from the stack 
+    #
+    # Params:
+    #
+    # Returns:AbstractQueryResult
+    #
+    # Throws: 
+    def pop()
+      return @VAR_STACK.pop()
     end
     
     # Returns a string representation of Frame object.
@@ -200,6 +249,8 @@ require "lib/Common/exceptions"
           
       return var_Message
     end
+    
+    alias push createFrame
     
     # VAR_STACK:Frame - object name  
     attr_reader :VAR_STACK

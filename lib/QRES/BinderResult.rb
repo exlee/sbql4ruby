@@ -1,6 +1,5 @@
 module QRES
 
-
   class BinderResult < AbstractComplexQueryResult
 
     def initialize(var_Name, var_Object)

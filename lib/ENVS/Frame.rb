@@ -51,7 +51,7 @@ require "lib/ENVS/Binder"
         if(@VAR_BINDER_LIST[i].VAR_NAME == var_Name)
           Common::Logger.print(Common::VAR_DEBUG, self, "[findAllByName]: Objects are matched by the name [#{var_Name}], pushing into the bag")
           
-          bag.push(@VAR_BINDER_LIST[i])
+          bag.push(@VAR_BINDER_LIST[i].VAR_VALUE())
         end
       end
       

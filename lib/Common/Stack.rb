@@ -118,6 +118,8 @@ module Common
       
       return var_Message + ")"
     end
+    
+    attr_reader :VAR_STACK
         
   end
   

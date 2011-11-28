@@ -1,6 +1,5 @@
 module Operator
   
-  class Utils
-    
+  class AbstractOperator
   end
 end

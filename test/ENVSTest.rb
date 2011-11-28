@@ -10,7 +10,7 @@ require "lib/ENVS/ENVS"
 require "lib/QRES/QRES"
 require "lib/QRES/ReferenceResult"
 
-require "lib/Operator/Utils"
+require "lib/Operator/Dotres"
 
 
   class ENVSTest < Test::Unit::TestCase
@@ -37,23 +37,23 @@ require "lib/Operator/Utils"
         
         envs = ENVS.new(store)
         
-        bag = envs.bind("emp")
+        #bag = envs.bind("emp")
         
         #puts "Bag=" + bag.to_s()
         
         #puts bag.to_s()
         
-        referenceResult = QRES::ReferenceResult.new(2)
+        #referenceResult = QRES::ReferenceResult.new(2)
         
-        envs.nested(referenceResult, store)
+        #envs.nested(referenceResult, store)
         
         #puts envs.to_s()
-
-        test_bind = envs.bind("book")
-        
+ 
         qres = QRES::QRES.new()
         
-        Operator::Utils.eval("book", qres, envs)
+        Operator::Dotres.eval("emp", "address", qres, envs, store)
+        #Operator::Wheres.eval("number", 20, qres, envs, store)
+        puts "#{store.to_s()}"
         
       }
     end

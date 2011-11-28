@@ -22,7 +22,7 @@ module ENVS
     #
     # Throws:
     def to_s()
-      return "Name=[#{@VAR_NAME}], Value=[#{@VAR_VALUE.to_s()}, Type=[#{@VAR_VALUE.class.to_s()}]]"
+      return "ContainerName=[#{@VAR_NAME}], ContainerType=[#{self.class.to_s()}], DataValue=[#{@VAR_VALUE.to_s()}]"
     end
         
     # VAR_NAME:String - object name  

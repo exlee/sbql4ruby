@@ -28,7 +28,7 @@ module QRES
       #
       # Throws:
       def to_s()
-        return @VAR_OBJECT.to_s()
+        return "[#{@VAR_OBJECT.class.to_s()}, #{@VAR_OBJECT.to_s()}]"
       end
       
       # VAR_OBJECT:Object - object identifier of the structure of identifires

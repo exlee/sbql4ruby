@@ -3,6 +3,8 @@ module QRES
 require "lib/Common/Iterator"
 require "lib/QRES/StructResult"
 
+require "lib/Common/exceptions"
+
 
   # Extends iterator class for BagResult objects.
   class StructResultIterator < Common::Iterator
@@ -17,7 +19,7 @@ require "lib/QRES/StructResult"
     def initialize(var_StructResult)
       
       if(!var_StructResult.is_a?(StructResult))
-        raise IncorrectArgumentError("Incorrect object type [#{var_Object.class}], " + StructResult.to_s() + " expected")
+        raise IncorrectArgumentError.new("Incorrect object type [#{var_Object.class}], " + StructResult.to_s() + " expected")
       end
       
       super(var_StructResult.VAR_OBJECT)
