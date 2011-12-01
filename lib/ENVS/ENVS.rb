@@ -1,10 +1,13 @@
 module ENVS
 
 require "lib/SBAStore/SBAComplexObject"
+
 require "lib/QRES/ReferenceResult"
 require "lib/QRES/StructResult"
 require "lib/QRES/BagResult"
 require "lib/QRES/BinderResult"
+
+require "lib/Operator/DataTypeException"
 
 require 'lib/Common/logger'
 require "lib/Common/exceptions"
@@ -21,7 +24,8 @@ require "lib/Common/exceptions"
       if(!var_Store.is_a?(SBAStore::SBAStore))
         raise ENVSTypeError.new("Incorrect object type [#{var_Store.class}], " + SBAStore.to_s() + " expected")
       else
-        Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Creating frame for root object [" + var_Store.getRootObject().to_s() + "]")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Creating frame for root object [" + 
+          var_Store.getRootObject().to_s() + "]")
         
         frame = createFrame(var_Store.getRootObject(), var_Store)
         
@@ -43,14 +47,15 @@ require "lib/Common/exceptions"
     #
     # Returns:Frame
     #
-    # Throws:
+    # Throws:DataTypeException
     def createFrame(var_Object, var_Store)
         
       Common::Logger.print(Common::VAR_DEBUG, self, "[createFrame]: Creating frame for [#{var_Object.to_s()}]")
       
       binderList = createBinder(var_Object, var_Store)
        
-      Common::Logger.print(Common::VAR_DEBUG, self, "[createFrame]: Created binder list, lenght [#{binderList.to_s()}], data [#{binderList.to_s()}]")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[createFrame]: Created binder list, lenght " +
+        "[#{binderList.to_s()}], data [#{binderList.to_s()}]")
       
       frame = Frame.new(binderList)
       
@@ -69,7 +74,7 @@ require "lib/Common/exceptions"
     #
     # Returns:Frame
     #
-    # Throws:    
+    # Throws:DataTypeException    
     def createBinder(var_Object, var_Store)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{var_Object.to_s()}]")
@@ -80,7 +85,8 @@ require "lib/Common/exceptions"
       # Nested for SBAObject used for ENVS initialisation
       if(var_Object.is_a?(SBAStore::SBAComplexObject))
         
-        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{SBAStore::SBAComplexObject.to_s()}], searching in the store")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for " +
+          "[#{SBAStore::SBAComplexObject.to_s()}], searching in the store")
         
         iterator = var_Object.iterator()
 
@@ -94,17 +100,20 @@ require "lib/Common/exceptions"
         
           #binder = createBinder(object, var_Store)
                     
-          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder [#{binder.to_s()}], adding to the array")
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder [#{binder.to_s()}], " +
+            "adding to the array")
           
           var_BinderList.push(binder)
           
-          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array length [#{var_BinderList.length().to_s()}]")
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array length " +
+            "[#{var_BinderList.length().to_s()}]")
         end
         
         return var_BinderList
       elsif(var_Object.is_a?(QRES::ReferenceResult))
         
-        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{QRES::ReferenceResult.to_s()}], searching in the store")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{QRES::ReferenceResult.to_s()}], " +
+          "searching in the store")
         
         object = var_Store.find(var_Object.VAR_OBJECT)
         
@@ -112,45 +121,53 @@ require "lib/Common/exceptions"
         
         binderList = createBinder(object, var_Store)
         
-        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder array, length [#{binderList.length().to_s()}], data [#{binderList.to_s()}]")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder array, length " +
+          "[#{binderList.length().to_s()}], data [#{binderList.to_s()}]")
  
         return binderList
       elsif(var_Object.is_a?(QRES::BagResult) || var_Object.is_a?(QRES::StructResult))
         
-        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{var_Object.class.to_s()}], searching in the store")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for " +
+          "[#{var_Object.class.to_s()}], searching in the store")
         
         iterator = var_Object.iterator()
         
         while(iterator.hasNext())
           object = var_Store.find(iterator.next().VAR_OBJECT())
 
-          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Found object [#{object.to_s()}], creting binder")
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Found object [#{object.to_s()}], " + 
+            "creating binder")
           
           binder = createBinder(object, var_Store)
           
-          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder array, length [#{binder.length().to_s()}]")
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder array, length " +
+            "[#{binder.length().to_s()}]")
 
           binder.each{|biner| var_BinderList.push(binder)}
           
-          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array length [#{var_BinderList.length().to_s()}]")
+          Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array length " +
+            "[#{var_BinderList.length().to_s()}]")
           
           return var_BinderList
         end    
       elsif(var_Object.is_a?(QRES::BinderResult))
         
-        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for [#{QRES::BinderResult.to_s()}], creating binder")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for " +
+          "[#{QRES::BinderResult.to_s()}], creating binder")
         
         binerList = Binder.new(object.VAR_NAME, object.VAR_OBJECT)
         
-        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder, length [#{binderList.length().to_s()}]")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder, length " +
+          "[#{binderList.length().to_s()}]")
         
         binderList.each{|biner| var_BinderList.push(binder)}
         
-        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array after join, length [#{var_BinderList.length().to_s()}]")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array after join, length " +
+          "[#{var_BinderList.length().to_s()}]")
         
         return var_BinderList
       else
-        puts "DUPAAAAA:" + var_Object.class.to_s()
+        raise DataTypeException.new("Not supoerted data type [#{var_Object.to_s()}]")
       end
       
       return var_BinderList
@@ -205,7 +222,7 @@ require "lib/Common/exceptions"
     #
     # Returns:
     #
-    # Throws:    
+    # Throws:DataTypeException    
     def nested(var_SBAObject, var_Store)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[nested]: Nested for object [#{var_SBAObject.to_s()}]")

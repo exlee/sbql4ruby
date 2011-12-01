@@ -33,28 +33,13 @@ require "lib/Operator/Dotres"
         
         store = parser.loadXML("sampledata/data.xml")
         
-        #puts store.to_s()
-        
         envs = ENVS.new(store)
         
-        #bag = envs.bind("emp")
+        bag = envs.bind("emp")
         
-        #puts "Bag=" + bag.to_s()
+        referenceResult = QRES::ReferenceResult.new(2)
         
-        #puts bag.to_s()
-        
-        #referenceResult = QRES::ReferenceResult.new(2)
-        
-        #envs.nested(referenceResult, store)
-        
-        #puts envs.to_s()
- 
-        qres = QRES::QRES.new()
-        
-        Operator::Dotres.eval("emp", "address", qres, envs, store)
-        #Operator::Wheres.eval("number", 20, qres, envs, store)
-        puts "#{store.to_s()}"
-        
+        envs.nested(referenceResult, store)
       }
     end
     
