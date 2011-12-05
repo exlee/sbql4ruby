@@ -38,7 +38,7 @@ require "lib/AST/Expression"
        if(@VAR_VALUE == nil)
          return super()
        else
-         return "[Type=#{self.class.to_s()}, LeftValue=#{self.VAR_VALUE[:var_Left].to_s()}, RightValue=#{self.VAR_VALUE[:var_Right].to_s()}]"
+         return "[Type=#{self.class.to_s()}, LeftValue=#{@VAR_NAME}, RightValue=#{self.VAR_VALUE.to_s()}]"
        end
      end
      

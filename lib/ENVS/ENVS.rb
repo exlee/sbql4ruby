@@ -7,6 +7,9 @@ require "lib/QRES/StructResult"
 require "lib/QRES/BagResult"
 require "lib/QRES/BinderResult"
 
+require "lib/ENVS/Binder"
+require "lib/ENVS/Frame"
+
 require "lib/Operator/DataTypeException"
 
 require 'lib/Common/logger'

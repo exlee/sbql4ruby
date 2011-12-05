@@ -13,8 +13,20 @@ require "lib/AST/Expression"
     # Returns:
     #
     # Throws:    
-     def initialize(var_Value)
-       super(var_Value)
-     end    
+    def initialize(var_Value)
+      super(var_Value)
+    end
+    
+    # Abstract method, should be implemented by the inheriting 
+    # classes (valids given object).
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws: AbstractMethodExcepion
+    def execute(var_AST)
+      raise AbstractMethodExcepion.new("Abstract method")
+    end    
   end
 end

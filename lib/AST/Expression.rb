@@ -20,12 +20,10 @@ require "lib/AST/AbstractMethodException"
     #
     # Params:
     #
-    # var_Visitor:Visitor - visitor that will be call by the method
-    #
     # Returns:
     #
     # Throws: AbstractMethodExcepion
-    def accept(var_Visitor)
+    def execute(var_AST)
       raise AbstractMethodExcepion.new("Abstract method")
     end
     
