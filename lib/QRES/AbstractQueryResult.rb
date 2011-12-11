@@ -1,5 +1,7 @@
 module QRES
 
+require "lib/QRES/AbstractMethodException"
+
 
   class AbstractQueryResult
       
@@ -17,6 +19,19 @@ module QRES
       #
       # Throws:AbstractMethodException
       def equals(var_Object)
+        raise AbstractMethodException.new("Abstract method")
+      end
+      
+      # Abstract method to be implemented by inheriting classes.
+      #
+      # Params:
+      #
+      # var_Store - SBA store where the current object will be dereferenced
+      #
+      # Returns:
+      #
+      # Throws:AbstractMethodException
+      def dereference(var_Store)
         raise AbstractMethodException.new("Abstract method")
       end
       

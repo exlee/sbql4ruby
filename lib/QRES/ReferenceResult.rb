@@ -1,7 +1,12 @@
 module QRES
 
+require "lib/Common/logger"
+
 require "lib/QRES/IntegerResult"
 require "lib/QRES/AbstractComplexQueryResult"
+require "lib/QRES/IncorrectArgumentException"
+
+require "lib/SBAStore/SBAStore"
   
   
   class ReferenceResult < AbstractComplexQueryResult
@@ -58,7 +63,31 @@ require "lib/QRES/AbstractComplexQueryResult"
       
       raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + ReferenceResult.to_s() + " expected")
     end
-    
+
+    # Dereferences current QRES object searching in SBA store.
+    #
+    # Params:
+    #
+    # var_Store:SBAStore - SBA store object
+    #
+    # Returns:SBAObject
+    #
+    # Throws:IncorrectArgumentException
+    def dereference(var_Store)
+      if(!var_Store.is_a?(SBAStore::SBAStore))
+        raise IncorrectArgumentException.new("Incorrect argument type [#{var_Store.to_s()}] , expected [SBAStore]")
+      end      
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[dereference]: Executing in context of current object: [#{self.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[dereference]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")    
+      
+      var_SBAObject = var_Store.find(self.VAR_OBJECT())
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[dereference]: Found [#{var_SBAObject.to_s()}]")
+      
+      return var_SBAObject
+    end
+        
     # Returns a string representation of QRES value object.
     #
     # Params:

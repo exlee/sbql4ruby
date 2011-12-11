@@ -5,18 +5,40 @@ require "lib/AST/BinaryExpression"
 
   class PlusExpression < BinaryExpression
  
+    # Params:
+    #
+    # var_LeftExpression:Expression - L-Value
+    #
+    # var_RightExpression:Expression - R-Value
+    #
+    # Returns:
+    #
+    # Throws:
     def initialize(var_LeftExpression, var_RightExpression)
       super(var_LeftExpression, var_RightExpression)
     end
     
-    def execute(var_QRES, var_ENVS)
-      Common::Logger.print(Common::VAR_DEBUG, self, "[visit]: Executing opeartor: [#{self.to_s()}]")
+    # Executes current expression using given AST object.
+    #
+    # Params:
+    #
+    # var_AST:AST - AST object which executes current expression. 
+    # Current expression invokes 'exec' method giving it selves
+    # as attribute.
+    #
+    # Returns:
+    #
+    # Throws:
+    def execute(var_AST)
+      if(!var_AST.is_a?(AST))
+        raise IncorrectArgumentException.new("Incorrect argument type [#{var_AST.class.to_s()}], expected [AST]")
+      end
       
-      # Executing left and right expressions
-      self.getLeftExpression().execute()
-      self.getRightExpression().execute()
+      Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Executing for arguments: [#{self.class.to_s()}], [#{var_AST.class.to_s()}]")
       
-      Common::Logger.print(Common::VAR_DEBUG, self, "[visit]: #{var_QRES.to_s()}\n#{var_ENVS.to_s()}")
+      var_AST.plusExpressionExec(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Done.")
     end
   end
 end

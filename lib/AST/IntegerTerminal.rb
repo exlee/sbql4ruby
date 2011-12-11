@@ -5,6 +5,8 @@ require "lib/AST/Utils"
 
 require "lib/AST/IncorrectArgumentException"
 
+require "lib/QRES/IntegerResult"
+
 
   class IntegerTerminal < TerminalExpression
     
@@ -41,9 +43,20 @@ require "lib/AST/IncorrectArgumentException"
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Executing for arguments: [#{self.class.to_s()}], [#{var_AST.class.to_s()}]")
       
-      Utils.execute(self, var_AST)
+      var_AST.integerTerminalExec(self)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Done.")
+    end
+
+    # Casts current object value into QRES object.
+    #
+    # Params:
+    #
+    # Returns:AbstractQueryResult
+    #
+    # Throws:    
+    def to_qres()
+      return QRES::IntegerResult.new(self.VAR_VALUE)
     end
   end
 end

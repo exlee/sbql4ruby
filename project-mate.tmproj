@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>test/ASTTest.rb</string>
+	<string>lib/QRES/BagResult.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -17,6 +17,8 @@
 			<string>lib</string>
 		</dict>
 		<dict>
+			<key>expanded</key>
+			<true/>
 			<key>name</key>
 			<string>test</string>
 			<key>regexFolderFilter</key>
@@ -34,7 +36,7 @@
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
-	<integer>200</integer>
+	<integer>299</integer>
 	<key>metaData</key>
 	<dict>
 		<key>lib/AST/AST.rb</key>
@@ -42,79 +44,65 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>71</integer>
+				<integer>56</integer>
 				<key>line</key>
-				<integer>85</integer>
+				<integer>125</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>9</integer>
+			<integer>81</integer>
 		</dict>
-		<key>lib/AST/FloatTerminal.rb</key>
+		<key>lib/AST/Utils.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
 				<integer>3</integer>
 				<key>line</key>
-				<integer>22</integer>
+				<integer>30</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>lib/AST/IntegerTerminal.rb</key>
+		<key>lib/Common/Stack.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>23</integer>
+				<integer>21</integer>
 				<key>line</key>
-				<integer>9</integer>
+				<integer>108</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>26</integer>
 		</dict>
-		<key>lib/AST/PlusExpression.rb</key>
+		<key>lib/QRES/BagResult.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>4</integer>
+				<integer>6</integer>
 				<key>line</key>
-				<integer>10</integer>
+				<integer>101</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>lib/AST/TerminalExpression.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>4</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>44</integer>
 		</dict>
 		<key>test/ASTTest.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>32</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>42</integer>
+				<integer>17</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -124,14 +112,15 @@
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>lib/AST/PlusExpression.rb</string>
 		<string>lib/AST/AST.rb</string>
-		<string>lib/AST/FloatTerminal.rb</string>
+		<string>lib/QRES/BagResult.rb</string>
+		<string>lib/Common/Stack.rb</string>
+		<string>lib/AST/Utils.rb</string>
 		<string>test/ASTTest.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{0, 60}, {1069, 1358}}</string>
+	<string>{{0, 60}, {970, 1358}}</string>
 </dict>
 </plist>

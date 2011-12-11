@@ -49,8 +49,6 @@ require "lib/QRES/AbstractQueryResult"
       # Throws:
       def equals(var_Object)
         return self.VAR_OBJECT.equals(var_Object.VAR_OBJECT)
-      end
-        
+      end     
   end
-
 end
