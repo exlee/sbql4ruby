@@ -13,11 +13,13 @@ require "lib/Common/exceptions"
     #
     # var_Object:Object - SBA store encapsulated object
     #
+    # var_ID:String - SBA object identifier
+    #
     # Returns:
     #
     # Throws:
-    def initialize(var_Name, var_Object)
-      super(var_Name, var_Object)
+    def initialize(var_Name, var_Object, var_ID=nil)
+      super(var_Name, var_Object, var_ID)
     end
     
     # Abstract method, should be implemented by the inheriting 

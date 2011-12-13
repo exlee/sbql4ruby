@@ -54,17 +54,23 @@ require "lib/Common/exceptions"
     
     # Returns the bottom object from the stack 
     #
+    # var_Prefix:String - SBA identifier prefix if it's different than default
+    #
     # Params:
     #
     # Returns:SBAObjects
     #
     # Throws:     
-    def getRootObject()
+    def getRootObject(var_Prefix=nil)
       if(@VAR_OBJECTS == nil || @VAR_OBJECTS.size() == 0)
         return nil
       end
 
-      return self.find(0)
+      if(var_Prefix == nil)
+        return self.find(SBAObject.VAR_IDENTIFIER_PREFIX + "0")
+      end
+      
+      return self.find(var_Prefix + "0")
     end
       
     # Finds an object indicated by the SBA identifier.
@@ -77,8 +83,8 @@ require "lib/Common/exceptions"
     #
     # Throws:SBAIdentifierError
     def find(var_Identifier)
-      if(var_Identifier > SBAObject.VAR_OBJECT_COUNTER || var_Identifier < 0)
-        raise SBAIdentifierError.new("Incorrect SBA object identifier [#{var_Identifier}], current idex range [0 .. #{SBAObject.VAR_OBJECT_COUNTER}]")
+      if(var_Identifier==nil)
+        raise IncorrectArgumentException.new("Incorrect SBA object identifier [#{var_Identifier}]")
       end
       
       @VAR_OBJECTS.each do |object|

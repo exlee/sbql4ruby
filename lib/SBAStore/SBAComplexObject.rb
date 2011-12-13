@@ -13,11 +13,13 @@ require "lib/Common/exceptions"
     #
     # var_Name:String - SBA store object name
     #
+    # var_ID:String - SBA object identifier
+    #
     # Returns:
     #
     # Throws:
-    def initialize(var_Name)
-      super(var_Name, Array.new())
+    def initialize(var_Name, var_ID=nil)
+      super(var_Name, Array.new(), var_ID)
     end
     
     # Adds a new object's identifier to the complex obejct 
@@ -25,14 +27,14 @@ require "lib/Common/exceptions"
     #
     # Params:
     #
-    # var_Id:Integer - SBA store object's identifier
+    # var_Id:String - SBA store object's identifier
     #
     # Returns:
     #
     # Throws:SBATypeError, SBAIncorrectIdentifierError
     def add(var_Id)
-      if(!var_Id.is_a?(Integer))
-        raise SBATypeError.new("Incorrect object type [#{var_Object.class}]")
+      if(!var_Id.is_a?(String))
+        raise SBATypeError.new("Incorrect object type [#{var_Id.class.to_s()}]")
       end
       
       if(find(var_Id) != nil)
@@ -59,9 +61,9 @@ require "lib/Common/exceptions"
     #
     # Params:
     #
-    # var_Index:Integer - array index
+    # var_Index:String - array index
     #
-    # Returns:Integer
+    # Returns:SBAObject
     #
     # Throws: 
     def get(var_Index)

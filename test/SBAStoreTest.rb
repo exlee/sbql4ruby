@@ -32,10 +32,10 @@ require "lib/SBAStore/SBAComplexObjectIterator"
         store.add(SBASimpleObjectFactory.create("Boolean object test", "true"))
         
         complexObject = SBAComplexObject.new("Complex test object")
-        complexObject.add(0)
+        complexObject.add(SBAObject.VAR_IDENTIFIER_PREFIX + 0.to_s())
         
         for i in 1..100
-          complexObject.push(i)
+          complexObject.push(SBAObject.VAR_IDENTIFIER_PREFIX + i.to_s())
         end
         
         store.add(complexObject)
@@ -44,9 +44,9 @@ require "lib/SBAStore/SBAComplexObjectIterator"
         
         assert_equal("Complex test object", store.VAR_OBJECTS[4].VAR_NAME.to_s())
         assert_equal(101, store.VAR_OBJECTS[4].VAR_OBJECT.size())
-        assert_equal(0, store.VAR_OBJECTS[4].VAR_OBJECT[0])
+        assert_equal("SBA0", store.VAR_OBJECTS[4].VAR_OBJECT[0])
         
-        assert_equal("TEST", store.find(2).VAR_OBJECT)
+        assert_equal("TEST", store.find(SBAObject.VAR_IDENTIFIER_PREFIX + 2.to_s()).VAR_OBJECT)
       }
     end
     

@@ -6,6 +6,9 @@ require "lib/Common/exceptions"
   # SBA store basic abstract class. 
   class SBAObject
 
+    # VAR_IDENTIFIER_PREFIX - Identifier prefix
+    @@VAR_IDENTIFIER_PREFIX = "SBA"
+    
     # VAR_OBJECT_COUNTER:Integer - SBAObject instances counter
     @@VAR_OBJECT_COUNTER = 0
     
@@ -15,11 +18,18 @@ require "lib/Common/exceptions"
     #
     # var_Object:Object - SBA store encapsulated object
     #
+    # var_ID:String - SBA object identifier, if nil SBAObject will create default identifier
+    #
     # Returns:
     #
     # Throws:
-    def initialize(var_Name, var_Object)
-      @VAR_ID = @@VAR_OBJECT_COUNTER
+    def initialize(var_Name, var_Object, var_ID=nil)
+      if(var_ID==nil)
+        @VAR_ID = @@VAR_IDENTIFIER_PREFIX + @@VAR_OBJECT_COUNTER.to_s()
+      else
+        @VAR_ID = var_ID
+      end
+      
       @VAR_NAME = var_Name
       @VAR_OBJECT = var_Object
       
@@ -51,6 +61,17 @@ require "lib/Common/exceptions"
       @@VAR_OBJECT_COUNTER
     end
     
+    # Gets SBAObjects default identifier's prefix.
+    #
+    # Params:
+    #
+    # Returns: VAR_OBJECT_COUNTER:INTEGER
+    #
+    # Throws:
+    def SBAObject.VAR_IDENTIFIER_PREFIX
+      @@VAR_IDENTIFIER_PREFIX
+    end    
+    
     # Gets current object's identifier.
     #
     # Params:
@@ -77,7 +98,7 @@ require "lib/Common/exceptions"
       end
     end
     
-    # VAR_ID:Integer - SBA store object identifier
+    # VAR_ID:String - SBA store object identifier
     attr_reader :VAR_ID
     
     # VAR_NAME:String - SBA store object name

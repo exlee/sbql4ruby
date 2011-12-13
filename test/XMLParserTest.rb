@@ -6,6 +6,7 @@ module XMLDB
   
 require "test/unit"
 
+require "lib/SBAStore/SBAObject"
 require "lib/Common/logger"
 require "lib/XMLDB/XMLParser"
 
@@ -31,7 +32,7 @@ require "lib/XMLDB/XMLParser"
         store = parser.loadXML("sampledata/data.xml")
         
         assert_equal(26, store.VAR_OBJECTS.size())
-        assert_equal("s0001", store.find(16).VAR_OBJECT)
+        assert_equal("s0001", store.find(SBAStore::SBAObject.VAR_IDENTIFIER_PREFIX + 16.to_s()).VAR_OBJECT)
         
         puts "Stack:\n" + store.to_s()
       }

@@ -3,6 +3,7 @@ module ENVS
 require "test/unit"
 
 require "lib/Common/logger"
+require "lib/SBAStore/SBAObject"
 require "lib/SBAStore/SBAStore"
 require "lib/XMLDB/XMLParser"
 require "lib/ENVS/Frame"
@@ -37,7 +38,7 @@ require "lib/Operator/Dotres"
         
         bag = envs.bind("emp")
         
-        referenceResult = QRES::ReferenceResult.new(2)
+        referenceResult = QRES::ReferenceResult.new(SBAStore::SBAObject.VAR_IDENTIFIER_PREFIX + 2.to_s())
         
         envs.nested(referenceResult, store)
       }
