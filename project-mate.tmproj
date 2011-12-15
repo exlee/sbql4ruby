@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>test/ENVSTest.rb</string>
+	<string>lib/QRES/BooleanResult.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -39,6 +39,20 @@
 	<integer>299</integer>
 	<key>metaData</key>
 	<dict>
+		<key>lib/Operator/Equal.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>6</integer>
+				<key>line</key>
+				<integer>39</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>lib/Operator/Utils.rb</key>
 		<dict>
 			<key>caret</key>
@@ -69,6 +83,20 @@
 				<integer>2</integer>
 			</dict>
 		</dict>
+		<key>lib/QRES/BooleanResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>43</integer>
+				<key>line</key>
+				<integer>87</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>41</integer>
+		</dict>
 		<key>test/ASTTest.rb</key>
 		<dict>
 			<key>caret</key>
@@ -83,28 +111,15 @@
 			<key>firstVisibleLine</key>
 			<integer>27</integer>
 		</dict>
-		<key>test/ENVSTest.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>29</integer>
-				<key>line</key>
-				<integer>29</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>2</integer>
-		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>test/ENVSTest.rb</string>
+		<string>lib/Operator/Equal.rb</string>
+		<string>lib/QRES/BooleanResult.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{0, 43}, {1130, 835}}</string>
+	<string>{{0, 60}, {970, 1358}}</string>
 </dict>
 </plist>

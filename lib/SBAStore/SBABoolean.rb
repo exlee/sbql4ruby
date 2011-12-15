@@ -13,15 +13,17 @@ require "lib/Common/exceptions"
     #
     # var_Object:TrueClass || FalseClass - SBA store object
     #
+    # var_ID:String - SBA object identifier
+    #
     # Returns:
     #
     # Throws:SBATypeError
-    def initialize(var_Name, var_Object)
+    def initialize(var_Name, var_Object, var_ID=nil)
       if(!SBABoolean.isValidType?(var_Object))
         raise SBATypeError.new("Incorrect object type [#{var_Object.class}]")
       end
       
-      super(var_Name, var_Object)
+      super(var_Name, var_Object, var_ID)
     end
 
      # Validates given object's type.

@@ -269,5 +269,38 @@ require "lib/Operator/Divide"
       Common::Logger.print(Common::VAR_DEBUG, self, "[divideExpressionExec]: Execute finished, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[divideExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
+
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def equalExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(EqualExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + EqualExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::Equal.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end    
+    
   end
 end
