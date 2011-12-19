@@ -66,11 +66,13 @@ require "lib/Common/exceptions"
         return nil
       end
 
-      if(var_Prefix == nil)
-        return self.find(SBAObject.VAR_IDENTIFIER_PREFIX + "0")
-      end
+      #if(var_Prefix == nil)
+      #  return self.find(SBAObject.VAR_IDENTIFIER_PREFIX + "0")
+      #end
       
-      return self.find(var_Prefix + "0")
+      #return self.find(var_Prefix + "0")
+      
+      return @VAR_OBJECTS[0]
     end
       
     # Finds an object indicated by the SBA identifier.
@@ -96,6 +98,28 @@ require "lib/Common/exceptions"
       return nil
     end
 
+    # Sorts store by object's identifier.
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:
+    def sortByObjectIdentifier(var_Prefix=nil)
+      
+      # SBA auto-created identifiers
+      if(var_Prefix==nil)
+        @VAR_OBJECTS.sort!{|object1, object2| 
+          Integer(object1.VAR_ID[SBAObject.VAR_IDENTIFIER_PREFIX().length()..object1.VAR_ID.length()-1]) <=> 
+          Integer(object2.VAR_ID[SBAObject.VAR_IDENTIFIER_PREFIX().length()..object1.VAR_ID.length()-1]) }
+      else
+        # Exteral identifier prefix
+        @VAR_OBJECTS.sort!{|object1, object2| 
+          Integer(object1.VAR_ID[var_Prefix.length()..object1.VAR_ID.length()-1]) <=> 
+          Integer(object2.VAR_ID[var_Prefix.length()..object1.VAR_ID.length()-1]) }         
+      end
+    end
+    
     # Returns a string representation of SBAStore
     # and all its attributes.
     #

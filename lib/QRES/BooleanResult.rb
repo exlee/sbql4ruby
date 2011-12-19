@@ -106,6 +106,85 @@ require "lib/QRES/AbstractSimpleQueryResult"
         
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
+    
+    # Overloaded operator 'equal'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:SyntaxError    
+    def ==(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[==]: Executing for: [#{self.to_s()}] == [#{var_RValue.to_s()}]")
+ 
+      if(var_RValue.is_a?(self.class))
+        return BooleanResult.new(self.VAR_OBJECT == var_RValue.VAR_OBJECT())
+      end
+        
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'greather' is not allowed for BooleanResult.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:AbstractSimpleQueryResult
+    #
+    # Throws:IncorrectArgumentException  
+    def >(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[>]: Executing for: [#{self.to_s()}] > [#{var_RValue.to_s()}]")
+        
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'greather equal' is not allowed for BooleanResult.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:AbstractSimpleQueryResult
+    #
+    # Throws:IncorrectArgumentException  
+    def >=(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[>=]: Executing for: [#{self.to_s()}] >= [#{var_RValue.to_s()}]")
+        
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'less' is not allowed for BooleanResult.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:AbstractSimpleQueryResult
+    #
+    # Throws:IncorrectArgumentException  
+    def <(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[<]: Executing for: [#{self.to_s()}] < [#{var_RValue.to_s()}]")
+        
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'less equal' is not allowed for BooleanResult.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:AbstractSimpleQueryResult
+    #
+    # Throws:IncorrectArgumentException  
+    def <=(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[<=]: Executing for: [#{self.to_s()}] <= [#{var_RValue.to_s()}]")
+        
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
         
     # Casts current object value into SBA object.
     #

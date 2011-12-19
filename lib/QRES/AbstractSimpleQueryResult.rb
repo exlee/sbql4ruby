@@ -18,7 +18,7 @@ require "lib/QRES/AbstractMethodException"
     #
     # Returns:TrueClass/FalseClass
     #
-    # Throws:
+    # Throws:QRESTypeError
     def equals(var_Object)
       if(!var_Object.is_a?(AbstractSimpleQueryResult))
         raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], AbstractSimpleQueryResult expected")
@@ -80,6 +80,19 @@ require "lib/QRES/AbstractMethodException"
     #
     # Throws:AbstractMethodExcepion    
     def /(var_RValue)
+      raise AbstractMethodException.new("Abstract method")  
+    end
+    
+    # Abstract method to be implemented by inheriting classes.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:AbstractMethodExcepion    
+    def ==(var_RValue)
       raise AbstractMethodException.new("Abstract method")  
     end
     

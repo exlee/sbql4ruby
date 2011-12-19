@@ -17,6 +17,11 @@ require "lib/Operator/Plus"
 require "lib/Operator/Minus"
 require "lib/Operator/Multiply"
 require "lib/Operator/Divide"
+require "lib/Operator/Equal"
+require "lib/Operator/Greather"
+require "lib/Operator/GreatherEqual"
+require "lib/Operator/Less"
+require "lib/Operator/LessEqual"
 
 
   class AST
@@ -35,6 +40,8 @@ require "lib/Operator/Divide"
       end
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[initalize]: Initialising for arguments: [#{var_XMLDataPath}]")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[initalize]: Object initialised, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[initalize]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
       
       var_parser = XMLDB::XMLParser.new()
       
@@ -301,6 +308,138 @@ require "lib/Operator/Divide"
       Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: Execute finished, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end    
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def greatherExpressionExec(var_Object)
+      puts "\n\n\nFOO\n\n\n"
+      if(!var_Object.is_a?(GreatherExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + GreatherExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::Greather.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def greatherEqualExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(GreatherEqualExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + GreatherEqualExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[greatherEqualExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[greatherEqualExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[greatherEqualExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::GreatherEqual.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[greatherEqualExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[greatherEqualExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def lessExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(LessExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + LessExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::Less.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def lessEqualExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(LessEqualExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + LessEqualExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessEqualExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessEqualExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessEqualExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::LessEqual.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessEqualExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[lessEqualExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    attr_reader :VAR_QRES
+    attr_reader :VAR_ENVS
+    attr_reader :VAR_STORE
     
   end
 end

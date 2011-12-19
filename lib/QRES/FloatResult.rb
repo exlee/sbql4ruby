@@ -1,7 +1,9 @@
 module QRES
 
 require "lib/SBAStore/SBAFloat"
+
 require "lib/QRES/AbstractSimpleQueryResult"
+require "lib/QRES/BooleanResult"
   
 
   class FloatResult < AbstractSimpleQueryResult
@@ -128,6 +130,111 @@ require "lib/QRES/AbstractSimpleQueryResult"
       else
         raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
       end
+    end
+    
+    # Overloaded operator 'equal'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:SyntaxError    
+    def ==(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[==]: Executing for: [#{self.to_s()}] == [#{var_RValue.to_s()}]")
+
+      if(var_RValue.is_a?(self.class) || var_RValue.is_a?(IntegerResult))
+        return BooleanResult.new(self.VAR_OBJECT == var_RValue.VAR_OBJECT())
+      else
+        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
+      end
+              
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'greather'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:SyntaxError    
+    def >(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[>]: Executing for: [#{self.to_s()}] > [#{var_RValue.to_s()}]")
+
+      if(var_RValue.is_a?(self.class) || var_RValue.is_a?(IntegerResult))
+        return BooleanResult.new(self.VAR_OBJECT > var_RValue.VAR_OBJECT())
+      else
+        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
+      end
+              
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'greather equal'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:SyntaxError    
+    def >=(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[>=]: Executing for: [#{self.to_s()}] >= [#{var_RValue.to_s()}]")
+
+      if(var_RValue.is_a?(self.class) || var_RValue.is_a?(IntegerResult))
+        return BooleanResult.new(self.VAR_OBJECT >= var_RValue.VAR_OBJECT())
+      else
+        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
+      end
+              
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'less'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:SyntaxError    
+    def <(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[<]: Executing for: [#{self.to_s()}] < [#{var_RValue.to_s()}]")
+
+      if(var_RValue.is_a?(self.class) || var_RValue.is_a?(IntegerResult))
+        return BooleanResult.new(self.VAR_OBJECT < var_RValue.VAR_OBJECT())
+      else
+        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
+      end
+              
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'less equal'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:SyntaxError    
+    def <=(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[<=]: Executing for: [#{self.to_s()}] <= [#{var_RValue.to_s()}]")
+
+      if(var_RValue.is_a?(self.class) || var_RValue.is_a?(IntegerResult))
+        return BooleanResult.new(self.VAR_OBJECT <= var_RValue.VAR_OBJECT())
+      else
+        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
+      end
+              
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
         
     # Casts current object value into SBA object.

@@ -72,17 +72,6 @@ require "lib/Common/exceptions"
       @@VAR_IDENTIFIER_PREFIX
     end    
     
-    # Gets current object's identifier.
-    #
-    # Params:
-    #
-    # Returns: VAR_OBJECT_COUNTER:INTEGER
-    #
-    # Throws:
-    def VAR_OBJECT_COUNTER
-      @@VAR_OBJECT_COUNTER
-    end
-    
     # Returns a string representation of SBAObject.
     #
     # Params:

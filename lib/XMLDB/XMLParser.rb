@@ -30,6 +30,11 @@ require "lib/XMLDB/Listener"
       
       REXML::Document.parse_stream(var_File, var_Listener)
       
+      # Listener does not guarantees the object will be sorted by object's identifier
+      # So, it needs to be sorted, because store looks a root node with array identifier
+      # equals 0
+      var_Store.sortByObjectIdentifier()
+        
       return var_Store
     end
     

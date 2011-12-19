@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/QRES/BooleanResult.rb</string>
+	<string>lib/AST/LessExpression.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -39,14 +39,42 @@
 	<integer>299</integer>
 	<key>metaData</key>
 	<dict>
-		<key>lib/Operator/Equal.rb</key>
+		<key>lib/AST/AST.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>6</integer>
+				<integer>19</integer>
 				<key>line</key>
-				<integer>39</integer>
+				<integer>400</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>364</integer>
+		</dict>
+		<key>lib/AST/LessExpression.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>59</integer>
+				<key>line</key>
+				<integer>16</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>lib/AST/PlusExpression.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>5</integer>
+				<key>line</key>
+				<integer>29</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -83,43 +111,118 @@
 				<integer>2</integer>
 			</dict>
 		</dict>
+		<key>lib/QRES/BinderResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>1</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>lib/QRES/BooleanResult.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>43</integer>
+				<integer>93</integer>
 				<key>line</key>
-				<integer>87</integer>
+				<integer>153</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>41</integer>
+			<integer>122</integer>
+		</dict>
+		<key>lib/QRES/FloatResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>8</integer>
+				<key>line</key>
+				<integer>196</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>160</integer>
+		</dict>
+		<key>lib/QRES/IntegerResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>51</integer>
+				<key>line</key>
+				<integer>200</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>172</integer>
+		</dict>
+		<key>lib/QRES/StringResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>59</integer>
+				<key>line</key>
+				<integer>169</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>141</integer>
+		</dict>
+		<key>lib/SBAStore/NotInitialisedStoreException.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>3</integer>
+				<key>line</key>
+				<integer>4</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
 		</dict>
 		<key>test/ASTTest.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>71</integer>
+				<integer>24</integer>
 				<key>line</key>
-				<integer>66</integer>
+				<integer>170</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>27</integer>
+			<integer>137</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>lib/Operator/Equal.rb</string>
+		<string>test/ASTTest.rb</string>
+		<string>lib/AST/AST.rb</string>
+		<string>lib/AST/LessExpression.rb</string>
 		<string>lib/QRES/BooleanResult.rb</string>
+		<string>lib/QRES/FloatResult.rb</string>
+		<string>lib/QRES/IntegerResult.rb</string>
+		<string>lib/QRES/StringResult.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{0, 60}, {970, 1358}}</string>
+	<string>{{0, 43}, {1130, 835}}</string>
 </dict>
 </plist>

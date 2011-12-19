@@ -21,6 +21,7 @@ require "lib/Common/exceptions"
     
     def initialize(var_Store) 
       Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Initialisation for given store")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Store dump:\n#{var_Store.to_s()}")
           
       @VAR_STACK = Array.new()
       
@@ -170,7 +171,7 @@ require "lib/Common/exceptions"
         
         return var_BinderList
       else
-        raise Operator::DataTypeException.new("Not supported data type [#{var_Object.class.to_s()}]")
+        raise Operator::DataTypeException.new("Not supported data type [#{var_Object.class.to_s()}], value [#{var_Object.to_s()}]")
       end
       
       return var_BinderList

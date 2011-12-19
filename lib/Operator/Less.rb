@@ -6,9 +6,9 @@ require "lib/Operator/RuntimeException"
 require "lib/QRES/Utils"
 
   
-  class Equal < AbstractOperator
+  class Less < AbstractOperator
     
-    # Evaluates 'equal' operator 
+    # Evaluates 'less' operator 
     #
     # Params:
     #
@@ -25,8 +25,8 @@ require "lib/QRES/Utils"
     # Returns:
     #
     # Throws:AbstractMethodException
-    def Equal.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
-      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue} == #{var_RValue}")  
+    def Less.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue} < #{var_RValue}")  
 
       if(!QRES::Utils::isSimpleObject?(var_LValue) && !QRES::Utils::isSimpleObject?(var_RValue))
         raise RuntimeException.new(
@@ -36,7 +36,7 @@ require "lib/QRES/Utils"
       var_LValue = QRES::Utils::getBagResultAsSimpleObject(var_LValue)
       var_RValue = QRES::Utils::getBagResultAsSimpleObject(var_RValue)
       
-      var_QRES.push(var_LValue == var_RValue)  
+      var_QRES.push(var_LValue < var_RValue)  
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: END")  
     end
