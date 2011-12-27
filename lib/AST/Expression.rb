@@ -2,6 +2,7 @@ module AST
   
 require "lib/AST/AbstractMethodException"
 
+
   class Expression
  
     # Params:
@@ -24,7 +25,7 @@ require "lib/AST/AbstractMethodException"
     #
     # Throws: AbstractMethodExcepion
     def execute(var_AST)
-      raise AbstractMethodExcepion.new("Abstract method")
+      raise AbstractMethodException.new("Abstract method")
     end
     
     # Returns a string representation of Expression object.

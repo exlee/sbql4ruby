@@ -7,9 +7,9 @@ require "lib/QRES/Utils"
 require "lib/QRES/BooleanResult"
 
   
-  class Greather < AbstractOperator
+  class Different < AbstractOperator
     
-    # Evaluates 'greather' operator 
+    # Evaluates 'different' operator 
     #
     # Params:
     #
@@ -26,8 +26,8 @@ require "lib/QRES/BooleanResult"
     # Returns: BooleanResult
     #
     # Throws:AbstractMethodException
-    def Greather.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
-      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue} > #{var_RValue}")  
+    def Different.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue} != #{var_RValue}")  
 
       if(!QRES::Utils::isSimpleObject?(var_LValue) && !QRES::Utils::isSimpleObject?(var_RValue))
         raise RuntimeException.new(
@@ -37,7 +37,8 @@ require "lib/QRES/BooleanResult"
       var_LValue = QRES::Utils::getBagResultAsSimpleObject(QRES::Utils::dereference(var_LValue, var_Store))
       var_RValue = QRES::Utils::getBagResultAsSimpleObject(QRES::Utils::dereference(var_RValue, var_Store))
       
-      var_QRES.push(QRES::BooleanResult.new(var_LValue > var_RValue))  
+      # Operator != can't be overloaded
+      var_QRES.push(QRES::BooleanResult.new(var_LValue.different(var_RValue)))  
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: END")  
     end

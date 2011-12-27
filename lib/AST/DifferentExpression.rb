@@ -3,7 +3,7 @@ module AST
 require "lib/AST/BinaryExpression"
   
 
-  class OrExpression < BinaryExpression
+  class DifferentExpression < BinaryExpression
 
     # Params:
     #
@@ -28,7 +28,7 @@ require "lib/AST/BinaryExpression"
     #
     # Returns:
     #
-    # Throws:IncorrectArgumentException
+    # Throws:
     def execute(var_AST)
       if(!var_AST.is_a?(AST))
         raise IncorrectArgumentException.new("Incorrect argument type [#{var_AST.class.to_s()}], expected [AST]")
@@ -36,7 +36,7 @@ require "lib/AST/BinaryExpression"
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Executing for arguments: [#{self.class.to_s()}], [#{var_AST.class.to_s()}]")
       
-      var_AST.orExpressionExec(self)
+      var_AST.differentExpressionExec(self)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Done.")
     end

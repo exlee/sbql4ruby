@@ -23,9 +23,9 @@ require "lib/QRES/StringResult"
     #
     # var_Store - SBA store where the current object will be dereferenced
     #
-    # Returns:
+    # Returns:AbstractSimpleQueryResult
     #
-    # Throws:
+    # Throws:*IncorrectArgumentException*
     def dereference(var_Store)
       if(!var_Store.is_a?(SBAStore::SBAStore))
         raise IncorrectArgumentException("Incorrect argument type [#{var_Store.class.to_s()}], expected [SBAStore]")
@@ -155,8 +155,16 @@ require "lib/QRES/StringResult"
     def ==(var_RValue)
       Common::Logger.print(Common::VAR_DEBUG, self, "[==]: Executing for: [#{self.to_s()}] == [#{var_RValue.to_s()}]")
 
+      # Overloaded 'equal' operator returns BooleanResult, but Ruby 'not equal' operator uses 'equal' operator 
+      # expecting TrueClass/FalseClass result. In this case it's impossible to compare FloatResult with nil 
+      # in proper way. Following implementation of nil support allows comparison like this: 
+      # foo<FloatResult> != nil and foo<FloatResult> == nil.
+      if(var_RValue.is_a?(NilClass))
+        return false
+      end
+      
       if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
-        return BooleanResult.new(self.VAR_OBJECT == var_RValue.VAR_OBJECT())
+        return self.VAR_OBJECT == var_RValue.VAR_OBJECT()
       else
         raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
       end
@@ -177,7 +185,7 @@ require "lib/QRES/StringResult"
       Common::Logger.print(Common::VAR_DEBUG, self, "[>]: Executing for: [#{self.to_s()}] > [#{var_RValue.to_s()}]")
 
       if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
-        return BooleanResult.new(self.VAR_OBJECT > var_RValue.VAR_OBJECT())
+        return self.VAR_OBJECT > var_RValue.VAR_OBJECT()
       else
         raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
       end
@@ -198,7 +206,7 @@ require "lib/QRES/StringResult"
       Common::Logger.print(Common::VAR_DEBUG, self, "[>=]: Executing for: [#{self.to_s()}] >= [#{var_RValue.to_s()}]")
 
       if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
-        return BooleanResult.new(self.VAR_OBJECT >= var_RValue.VAR_OBJECT())
+        return self.VAR_OBJECT >= var_RValue.VAR_OBJECT()
       else
         raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
       end
@@ -219,7 +227,7 @@ require "lib/QRES/StringResult"
       Common::Logger.print(Common::VAR_DEBUG, self, "[<]: Executing for: [#{self.to_s()}] < [#{var_RValue.to_s()}]")
 
       if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
-        return BooleanResult.new(self.VAR_OBJECT < var_RValue.VAR_OBJECT())
+        return self.VAR_OBJECT < var_RValue.VAR_OBJECT()
       else
         raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
       end
@@ -240,12 +248,84 @@ require "lib/QRES/StringResult"
       Common::Logger.print(Common::VAR_DEBUG, self, "[>=]: Executing for: [#{self.to_s()}] <= [#{var_RValue.to_s()}]")
 
       if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
-        return BooleanResult.new(self.VAR_OBJECT <= var_RValue.VAR_OBJECT())
+        return self.VAR_OBJECT <= var_RValue.VAR_OBJECT()
       else
         raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
       end
               
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'different'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:SyntaxError    
+    def different(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[!=]: Executing for: [#{self.to_s()}] != [#{var_RValue.to_s()}]")
+
+      if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
+        return self.VAR_OBJECT != var_RValue.VAR_OBJECT()
+      else
+        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
+      end
+              
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'modulo'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:AbstractSimpleQueryResult
+    #
+    # Throws:SyntaxError    
+    def %(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[%]: Executing for: [#{self.to_s()}] % [#{var_RValue.to_s()}]")
+
+      if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
+        return FloatResult.new(Float(self.VAR_OBJECT % var_RValue.VAR_OBJECT()))
+      else
+        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
+      end
+              
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+    end
+    
+    # Overloaded operator 'and'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:SyntaxError    
+    def and(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[&&]: Executing for: [#{self.to_s()}] && [#{var_RValue.to_s()}]")
+       
+      return self.VAR_OBJECT && var_RValue.VAR_OBJECT()
+    end
+    
+    # Overloaded operator 'or'.
+    #
+    # Params:
+    #
+    # var_RValue:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:SyntaxError    
+    def or(var_RValue)
+      Common::Logger.print(Common::VAR_DEBUG, self, "[||]: Executing for: [#{self.to_s()}] || [#{var_RValue.to_s()}]")
+       
+      return self.VAR_OBJECT || var_RValue.VAR_OBJECT()
     end
             
     # Casts current object value into SBA object.

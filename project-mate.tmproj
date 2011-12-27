@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/AST/LessExpression.rb</string>
+	<string>lib/Operator/And.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -17,8 +17,6 @@
 			<string>lib</string>
 		</dict>
 		<dict>
-			<key>expanded</key>
-			<true/>
 			<key>name</key>
 			<string>test</string>
 			<key>regexFolderFilter</key>
@@ -46,35 +44,35 @@
 				<key>column</key>
 				<integer>19</integer>
 				<key>line</key>
-				<integer>400</integer>
+				<integer>564</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>364</integer>
+			<integer>528</integer>
 		</dict>
-		<key>lib/AST/LessExpression.rb</key>
+		<key>lib/Operator/And.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>59</integer>
+				<integer>32</integer>
 				<key>line</key>
-				<integer>16</integer>
+				<integer>38</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>lib/AST/PlusExpression.rb</key>
+		<key>lib/Operator/Or.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>5</integer>
+				<integer>32</integer>
 				<key>line</key>
-				<integer>29</integer>
+				<integer>38</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -130,56 +128,72 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>93</integer>
+				<integer>15</integer>
 				<key>line</key>
-				<integer>153</integer>
+				<integer>243</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>122</integer>
+			<integer>232</integer>
 		</dict>
 		<key>lib/QRES/FloatResult.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>8</integer>
+				<integer>10</integer>
 				<key>line</key>
-				<integer>196</integer>
+				<integer>319</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>160</integer>
+			<integer>284</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>291</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>10</integer>
+				<key>line</key>
+				<integer>319</integer>
+			</dict>
 		</dict>
 		<key>lib/QRES/IntegerResult.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>51</integer>
+				<integer>4</integer>
 				<key>line</key>
-				<integer>200</integer>
+				<integer>329</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>172</integer>
+			<integer>288</integer>
 		</dict>
 		<key>lib/QRES/StringResult.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>59</integer>
+				<integer>5</integer>
 				<key>line</key>
-				<integer>169</integer>
+				<integer>292</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>141</integer>
+			<integer>255</integer>
 		</dict>
 		<key>lib/SBAStore/NotInitialisedStoreException.rb</key>
 		<dict>
@@ -200,21 +214,22 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>24</integer>
+				<integer>20</integer>
 				<key>line</key>
-				<integer>170</integer>
+				<integer>525</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>137</integer>
+			<integer>501</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>test/ASTTest.rb</string>
 		<string>lib/AST/AST.rb</string>
-		<string>lib/AST/LessExpression.rb</string>
+		<string>lib/Operator/And.rb</string>
+		<string>lib/Operator/Or.rb</string>
 		<string>lib/QRES/BooleanResult.rb</string>
 		<string>lib/QRES/FloatResult.rb</string>
 		<string>lib/QRES/IntegerResult.rb</string>

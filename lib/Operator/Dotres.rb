@@ -22,7 +22,7 @@ require "lib/QRES/BagResult"
     #
     # var_Store:SBAStore - SBA store
     #
-    # Returns:
+    # Returns: AbstractSimpleQueryResult
     #
     # Throws:AbstractMethodException
     def Dotres.eval(var_ObjectName, var_AttributeName, var_QRES, var_ENVS, var_Store)

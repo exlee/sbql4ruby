@@ -22,6 +22,11 @@ require "lib/Operator/Greather"
 require "lib/Operator/GreatherEqual"
 require "lib/Operator/Less"
 require "lib/Operator/LessEqual"
+require "lib/Operator/Different"
+require "lib/Operator/Modulo"
+require "lib/Operator/Or"
+require "lib/Operator/And"
+require "lib/Operator/Dotres"
 
 
   class AST
@@ -435,6 +440,166 @@ require "lib/Operator/LessEqual"
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[lessEqualExpressionExec]: Execute finished, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[lessEqualExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def differentExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(DifferentExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + DifferentExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[differentExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[differentExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[differentExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::Different.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[differentExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[differentExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def moduloExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(ModuloExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + ModuloExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[moduloExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[moduloExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[moduloExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::Modulo.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[moduloExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[moduloExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def orExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(OrExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + OrExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::Or.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def andExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(AndExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + AndExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::And.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def dotExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(DotExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + DotExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      var_Object.getLeftExpression().execute(self)
+      var_Object.getRightExpression().execute(self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+      
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::Dotres.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
     attr_reader :VAR_QRES

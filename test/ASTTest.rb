@@ -18,6 +18,10 @@ require "lib/AST/GreatherExpression"
 require "lib/AST/GreatherEqualExpression"
 require "lib/AST/LessExpression"
 require "lib/AST/LessEqualExpression"
+require "lib/AST/DifferentExpression"
+require "lib/AST/ModuloExpression"
+require "lib/AST/OrExpression"
+require "lib/AST/AndExpression"
 
 require "lib/AST/AnyExpression"
 require "lib/AST/AsExpression"
@@ -369,6 +373,276 @@ require "lib/QRES/BooleanResult"
       expression.execute(var_AST)
 
       assert_equal(true, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+      } 
+    end
+
+    # Tests for 'different' expression
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_diferentExpression
+      
+      # Set debug log level
+      Common::Logger.setLogLevel(Common::VAR_DEBUG)   
+      
+      assert_nothing_thrown("Creating AST objects") { 
+        
+      var_AST = AST.new("sampledata/data.xml")
+ 
+      # float != float -> true
+      expression = DifferentExpression.new(FloatTerminal.new(123.882), FloatTerminal.new(123.883))
+      expression.execute(var_AST)
+      
+      assert_equal(true, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float != float -> true
+      expression = DifferentExpression.new(FloatTerminal.new(123.880), FloatTerminal.new(123.882))
+      expression.execute(var_AST)
+      
+      assert_equal(true, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float != integer -> true
+      expression = DifferentExpression.new(FloatTerminal.new(123.01), IntegerTerminal.new(123))
+      expression.execute(var_AST)
+      
+      assert_equal(true, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float != float -> false
+      expression = DifferentExpression.new(FloatTerminal.new(123.0000), FloatTerminal.new(123.0000))
+      expression.execute(var_AST)
+      
+      assert_equal(false, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+
+      # integer != integer -> true
+      expression = DifferentExpression.new(IntegerTerminal.new(122), IntegerTerminal.new(123))
+      expression.execute(var_AST)
+
+      assert_equal(true, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+        
+      # integer != float -> true
+      expression = DifferentExpression.new(IntegerTerminal.new(123), FloatTerminal.new(123.01))
+      expression.execute(var_AST)
+      
+      assert_equal(true, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # integer != float -> false
+      expression = DifferentExpression.new(IntegerTerminal.new(123), FloatTerminal.new(123.0000))
+      expression.execute(var_AST)
+      
+      assert_equal(false, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+      
+      # string != string -> true
+      expression = DifferentExpression.new(StringTerminal.new("12"), StringTerminal.new("123"))
+      expression.execute(var_AST)
+
+      assert_equal(true, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+      } 
+    end
+    
+    # Tests for 'modulo' expression
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_moduloExpression
+      
+      # Set debug log level
+      Common::Logger.setLogLevel(Common::VAR_DEBUG)   
+      
+      assert_nothing_thrown("Creating AST objects") { 
+        
+      var_AST = AST.new("sampledata/data.xml")
+ 
+      # float % float -> 0
+      expression = ModuloExpression.new(FloatTerminal.new(123.882), FloatTerminal.new(123.882))
+      expression.execute(var_AST)
+      
+      assert_equal(0.0, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float % float -> 123.88
+      expression = ModuloExpression.new(FloatTerminal.new(123.880), FloatTerminal.new(123.882))
+      expression.execute(var_AST)
+      
+      assert_equal(123.88, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float % integer -> 0
+      expression = ModuloExpression.new(FloatTerminal.new(123.00), IntegerTerminal.new(123))
+      expression.execute(var_AST)
+      
+      assert_equal(0, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float % float -> 123.0
+      expression = ModuloExpression.new(FloatTerminal.new(123.0000), FloatTerminal.new(123.0001))
+      expression.execute(var_AST)
+      
+      assert_equal(123.0, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+
+      # integer % integer -> 122.0
+      expression = ModuloExpression.new(IntegerTerminal.new(122), IntegerTerminal.new(123))
+      expression.execute(var_AST)
+
+      assert_equal(122.0, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+        
+      # integer % float -> 123.0
+      expression = ModuloExpression.new(IntegerTerminal.new(123), FloatTerminal.new(123.01))
+      expression.execute(var_AST)
+      
+      assert_equal(123.0, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # integer % float -> 0
+      expression = ModuloExpression.new(IntegerTerminal.new(123), FloatTerminal.new(123.0000))
+      expression.execute(var_AST)
+      
+      assert_equal(0, var_AST.VAR_QRES().pop().VAR_OBJECT())     
+      } 
+    end
+    
+    # Tests for 'or' expression
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_orExpression
+      
+      # Set debug log level
+      Common::Logger.setLogLevel(Common::VAR_DEBUG)   
+      
+      assert_nothing_thrown("Creating AST objects") { 
+        
+      var_AST = AST.new("sampledata/data.xml")
+ 
+      # false || false -> false
+      expression = OrExpression.new(BooleanTerminal.new(false), BooleanTerminal.new(false))
+      expression.execute(var_AST)
+      
+      assert_equal(false, var_AST.VAR_QRES().pop().VAR_OBJECT())
+
+      # float || float -> 123.0
+      expression = OrExpression.new(FloatTerminal.new(123.0), FloatTerminal.new(123.882))
+      expression.execute(var_AST)
+      
+      assert_equal(123.0, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float || integer -> 123.00
+      expression = OrExpression.new(FloatTerminal.new(123.00), IntegerTerminal.new(123))
+      expression.execute(var_AST)
+      
+      assert_equal(123.00, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float || float -> 123.1234
+      expression = OrExpression.new(FloatTerminal.new(123.1234), FloatTerminal.new(123.0001))
+      expression.execute(var_AST)
+      
+      assert_equal(123.1234, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+
+      # integer || integer -> 122
+      expression = OrExpression.new(IntegerTerminal.new(122), IntegerTerminal.new(123))
+      expression.execute(var_AST)
+
+      assert_equal(122, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+        
+      # integer || float -> 123
+      expression = OrExpression.new(IntegerTerminal.new(123), FloatTerminal.new(123.01))
+      expression.execute(var_AST)
+      
+      assert_equal(123, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # integer || float -> 123
+      expression = OrExpression.new(IntegerTerminal.new(123), FloatTerminal.new(123.0000))
+      expression.execute(var_AST)
+      
+      assert_equal(123, var_AST.VAR_QRES().pop().VAR_OBJECT())     
+      
+      # string || string -> "Test1"
+      expression = OrExpression.new(StringTerminal.new("Test1"), StringTerminal.new("123.0000"))
+      expression.execute(var_AST)
+        
+      assert_equal("Test1", var_AST.VAR_QRES().pop().VAR_OBJECT())    
+      
+      # string || float -> "Test1"
+      expression = OrExpression.new(StringTerminal.new("Test1"), FloatTerminal.new(123.0000))
+      expression.execute(var_AST)
+        
+      assert_equal("Test1", var_AST.VAR_QRES().pop().VAR_OBJECT()) 
+      } 
+    end
+    
+    # Tests for 'and' expression
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_andExpression
+      
+      # Set debug log level
+      Common::Logger.setLogLevel(Common::VAR_DEBUG)   
+      
+      assert_nothing_thrown("Creating AST objects") { 
+        
+      var_AST = AST.new("sampledata/data.xml")
+ 
+      # false && true -> false
+      expression = AndExpression.new(BooleanTerminal.new(false), BooleanTerminal.new(false))
+      expression.execute(var_AST)
+      
+      assert_equal(false, var_AST.VAR_QRES().pop().VAR_OBJECT())
+
+      # float && float -> 123.882
+      expression = AndExpression.new(FloatTerminal.new(123.0), FloatTerminal.new(123.882))
+      expression.execute(var_AST)
+      
+      assert_equal(123.882, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float && integer -> 123
+      expression = AndExpression.new(FloatTerminal.new(123.00), IntegerTerminal.new(123))
+      expression.execute(var_AST)
+      
+      assert_equal(123, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # float && float -> 123.0001
+      expression = AndExpression.new(FloatTerminal.new(123.1234), FloatTerminal.new(123.0001))
+      expression.execute(var_AST)
+      
+      assert_equal(123.0001, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+
+      # integer && integer -> 123
+      expression = AndExpression.new(IntegerTerminal.new(122), IntegerTerminal.new(123))
+      expression.execute(var_AST)
+
+      assert_equal(123, var_AST.VAR_QRES().pop().VAR_OBJECT())    
+        
+      # integer && float -> 123
+      expression = AndExpression.new(IntegerTerminal.new(123), FloatTerminal.new(123.01))
+      expression.execute(var_AST)
+      
+      assert_equal(123.01, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      
+      # integer && float -> 123.0000
+      expression = AndExpression.new(IntegerTerminal.new(123), FloatTerminal.new(123.0000))
+      expression.execute(var_AST)
+      
+      assert_equal(123.0000, var_AST.VAR_QRES().pop().VAR_OBJECT())     
+      
+      # string && string -> "123.0000"
+      expression = AndExpression.new(StringTerminal.new("Test1"), StringTerminal.new("123.0000"))
+      expression.execute(var_AST)
+        
+      assert_equal("123.0000", var_AST.VAR_QRES().pop().VAR_OBJECT())    
+      
+      # string && float -> "123.0000"
+      expression = AndExpression.new(StringTerminal.new("Test1"), FloatTerminal.new(123.0000))
+      expression.execute(var_AST)
+        
+      assert_equal(123.0000, var_AST.VAR_QRES().pop().VAR_OBJECT()) 
       } 
     end
     

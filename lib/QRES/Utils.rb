@@ -65,5 +65,22 @@ require "lib/QRES/BagResult"
 
       return var_Object.getAsSimpleResult()
     end
+    
+    # Dereferences given ReferentResult object.
+    #
+    # Params:
+    #
+    # var_ObjectName:ReferenceResult - QRES object
+    #
+    # Returns:ReferenceResult
+    #
+    # Throws:    
+    def Utils::dereference(var_Reference, var_Store)
+      if(var_Reference.is_a?(ReferenceResult))
+        return (var_Reference.dereference(var_Store)).to_sba()
+      end
+
+      return var_Reference
+    end
   end
 end

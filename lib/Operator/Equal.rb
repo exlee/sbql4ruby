@@ -4,7 +4,7 @@ require "lib/Operator/AbstractOperator"
 require "lib/Operator/RuntimeException"
 
 require "lib/QRES/Utils"
-
+require "lib/QRES/BooleanResult"
   
   class Equal < AbstractOperator
     
@@ -22,7 +22,7 @@ require "lib/QRES/Utils"
     #
     # var_Store:SBAStore - SBA store
     #
-    # Returns:
+    # Returns: BooleanResult
     #
     # Throws:AbstractMethodException
     def Equal.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
@@ -33,10 +33,10 @@ require "lib/QRES/Utils"
           "Incorrect object type: [#{var_LValue}], [#{var_RValue}], expected [#{QRES::AbstractSimpleQueryResult.class.to_s()}]")
       end
 
-      var_LValue = QRES::Utils::getBagResultAsSimpleObject(var_LValue)
-      var_RValue = QRES::Utils::getBagResultAsSimpleObject(var_RValue)
+      var_LValue = QRES::Utils::getBagResultAsSimpleObject(QRES::Utils::dereference(var_LValue, var_Store))
+      var_RValue = QRES::Utils::getBagResultAsSimpleObject(QRES::Utils::dereference(var_RValue, var_Store))
       
-      var_QRES.push(var_LValue == var_RValue)  
+      var_QRES.push(QRES::BooleanResult.new(var_LValue == var_RValue))  
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: END")  
     end
