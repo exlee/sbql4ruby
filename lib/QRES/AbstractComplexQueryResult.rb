@@ -49,6 +49,57 @@ require "lib/QRES/AbstractQueryResult"
       # Throws:
       def equals(var_Object)
         return self.VAR_OBJECT.equals(var_Object.VAR_OBJECT)
-      end     
+      end    
+      
+      # Evaluates 'wheres' function 
+      #
+      # Params:
+      #
+      # var_RValue:AbstractSimpleQueryResult - QRES simple object
+      #
+      # Returns:BagResult
+      #
+      # Throws:
+      def wheres(var_RValue, var_AST)
+        
+        bagResult = BagResult.new()
+        
+        bagIterator = self.iterator()
+         
+        while(bagIterator.hasNext())
+          object = bagIterator.next()
+
+          Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: Calling nested for object type [#{object.class.to_s()}], data [#{object.to_s()}]")
+          Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
+
+          # Nested for the given object
+          var_AST.VAR_ENVS().nested(object, var_AST.VAR_STORE())
+
+          # Executing the right side of query
+          var_RValue.execute(var_AST)
+
+          # Taking query result from QRES stack
+          expressionResult = var_AST.VAR_QRES().pop()
+
+          # If result is not a simple query result throw an exception, otherwise compare with left side condition
+          if(!Utils.isSimpleObject?(expressionResult))
+            raise RuntimeError.new("Incorrect object type [#{result.class.to_s()}]") 
+          end
+          
+          expressionResult = Utils::getBagResultAsSimpleObject(Utils::dereference(expressionResult, var_AST.VAR_STORE()))  
+          
+          if(expressionResult.VAR_OBJECT == true)
+            bagResult.push(object)
+          end
+          
+          # Removing the last frame from ENVS stack
+          var_AST.VAR_ENVS().pop()
+
+          Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: Expression results: #{bagResult.to_s()}")
+          Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
+        end
+          
+        return bagResult
+      end 
   end
 end

@@ -11,64 +11,24 @@ require "lib/QRES/BagResult"
     #
     # Params:
     #
-    # var_ObjectName:String - object name
+    # var_LValue:AbstractQueryResult - left side of expression
     #
-    # var_AttributeName:String - attribute name
+    # var_RValue:AbstractQueryResult - right side of expression
     #
-    # var_QRES:QRES - qres stack
+    # var_AST:AST - AST visitor
     #
-    # var_ENVS:ENVS - envs stack
-    #
-    # var_Store:SBAStore - SBA store
-    #
-    # Returns:
-    #
-    # Throws:AbstractMethodException
-    def Wheres.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
-      
-      Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: Beginning operation for l-value [#{var_LValue.to_s()}], r-value [#{var_RValue.to_s()}]")
-      Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: #{var_QRES.to_s()}\n#{var_ENVS.to_s()}")
-      
-      bagResult = BagResult.new()
-      
-      # Evaluate specified object
-      Evaluate.eval(var_LValue, var_QRES, var_ENVS)
-      
-      # Getting eval results from QRES stack
-      lValueBagResult = var_QRES.pop()
-      
-      Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: BagResult taken from the QRES stack [#{lValueBagResult.to_s()}]")
-      
-      # Bag iterator
-      bagIterator = lValueBagResult.iterator()
+    # Throws:
+    def Wheres.eval(var_LValue, var_RValue, var_AST)
 
-      while(bagIterator.hasNext())
-        object = bagIterator.next()
-        
-        Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: Calling nested for object type [#{object.class.to_s()}], data [#{object.to_s()}]")
-        Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: Stacks before nested:\n#{var_QRES.to_s()}\n#{var_ENVS.to_s()}")
+      Common::Logger.print(Common::VAR_DEBUG, self, 
+          "[wheres]: Beginning operation for object name [#{var_LValue.to_s()}], attribute name [#{var_RValue.to_s()}]")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
 
-        # Nested for the given object
-        var_ENVS.nested(object, var_Store)
+      # Evaluating the right side if the expression
+      var_AST.VAR_QRES().push(var_LValue.wheres(var_RValue, var_AST))
 
-        # Evaluate specified object
-        Evaluate.eval(var_RValue, var_QRES, var_ENVS)
-        
-        # Getting eval results from QRES stack
-        rValueBagResult = var_QRES.pop()
-        
-        
-        
-        # Binding the attribute name, pushing into the bag result
-        #bagResult.push(var_ENVS.bind(var_AttributeName))
-
-        #var_ENVS.push(bagResult, var_Store)
-        #var_ENVS.pop()
-      end
-        
-      end
-      
-      Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: After operation:\n#{var_QRES.to_s()}\n#{var_ENVS.to_s()}")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: After operation, object name [#{var_LValue.to_s()}], attribute name [#{var_RValue.to_s()}]")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")    
     end
   end
 end

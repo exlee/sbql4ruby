@@ -26,15 +26,17 @@ require "lib/QRES/BooleanResult"
     #
     # Throws:AbstractMethodException
     def Equal.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
-      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue} == #{var_RValue}")  
+      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue.to_s()} == #{var_RValue.to_s()}")  
 
       if(!QRES::Utils::isSimpleObject?(var_LValue) && !QRES::Utils::isSimpleObject?(var_RValue))
         raise RuntimeException.new(
           "Incorrect object type: [#{var_LValue}], [#{var_RValue}], expected [#{QRES::AbstractSimpleQueryResult.class.to_s()}]")
       end
 
-      var_LValue = QRES::Utils::getBagResultAsSimpleObject(QRES::Utils::dereference(var_LValue, var_Store))
-      var_RValue = QRES::Utils::getBagResultAsSimpleObject(QRES::Utils::dereference(var_RValue, var_Store))
+      var_LValue = QRES::Utils::dereference(QRES::Utils::getBagResultAsSimpleObject(var_LValue), var_Store)
+      var_RValue = QRES::Utils::dereference(QRES::Utils::getBagResultAsSimpleObject(var_RValue), var_Store)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue.to_s()} == #{var_RValue.to_s()}")  
       
       var_QRES.push(QRES::BooleanResult.new(var_LValue == var_RValue))  
       

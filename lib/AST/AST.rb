@@ -26,7 +26,9 @@ require "lib/Operator/Different"
 require "lib/Operator/Modulo"
 require "lib/Operator/Or"
 require "lib/Operator/And"
+require "lib/Operator/Evaluate"
 require "lib/Operator/Dotres"
+require "lib/Operator/Wheres"
 
 
   class AST
@@ -324,7 +326,7 @@ require "lib/Operator/Dotres"
     #
     # Throws: IncorrectArgumentException
     def greatherExpressionExec(var_Object)
-      puts "\n\n\nFOO\n\n\n"
+
       if(!var_Object.is_a?(GreatherExpression))
         raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + GreatherExpression.to_s() + " expected") 
       end
@@ -579,27 +581,91 @@ require "lib/Operator/Dotres"
     # Returns:
     #
     # Throws: IncorrectArgumentException
+    def nameExpressionExec(var_Object)
+
+      if(!var_Object.is_a?(NameExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + NameExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[nameExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[nameExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      Operator::Evaluate.eval(var_Object.VAR_NAME(), @VAR_QRES, @VAR_ENVS)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[nameExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[nameExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
     def dotExpressionExec(var_Object)
       
       if(!var_Object.is_a?(DotExpression))
         raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + DotExpression.to_s() + " expected") 
       end
       
-      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
-      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[dotExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[dotExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
       
+      # Executing left query side
       var_Object.getLeftExpression().execute(self)
-      var_Object.getRightExpression().execute(self)
-      
-      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
-      
-      var_RightValue = @VAR_QRES.pop()
+    
+      #Getting results from QRES
       var_LeftValue = @VAR_QRES.pop()
       
-      Operator::Dotres.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      # Only BagResult and StructResult are supported here
+      if(!var_LeftValue.is_a?(QRES::BagResult) && !var_LeftValue.is_a?(QRES::StructResult))
+        raise DataTypeException.new(
+          "Incorrect object type [#{evalBagResult.class}], #{QRES::BagResult.to_s()} or #{QRES::StructResult.to_s()} are expected")
+      end
       
-      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: Execute finished, stacks dump:")
-      Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+      Operator::Dotres.eval(var_LeftValue, var_Object.getRightExpression(), self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[dotExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[dotExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def whereExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(WhereExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + WhereExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[whereExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[whereExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      # Executing left query side
+      var_Object.getLeftExpression().execute(self)
+    
+      #Getting results from QRES
+      var_LeftValue = @VAR_QRES.pop()
+      
+      # Only BagResult and StructResult are supported here
+      if(!var_LeftValue.is_a?(QRES::BagResult) && !var_LeftValue.is_a?(QRES::StructResult))
+        raise DataTypeException.new(
+          "Incorrect object type [#{evalBagResult.class}], #{QRES::BagResult.to_s()} or #{QRES::StructResult.to_s()} are expected")
+      end
+      
+      Operator::Wheres.eval(var_LeftValue, var_Object.getRightExpression(), self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[whereExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[whereExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
     attr_reader :VAR_QRES

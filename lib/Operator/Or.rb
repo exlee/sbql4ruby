@@ -35,8 +35,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
           "Incorrect object type: [#{var_LValue}], [#{var_RValue}], expected [#{QRES::AbstractSimpleQueryResult.class.to_s()}]")
       end
 
-      var_LValue = QRES::Utils::getBagResultAsSimpleObject(QRES::Utils::dereference(var_LValue, var_Store))
-      var_RValue = QRES::Utils::getBagResultAsSimpleObject(QRES::Utils::dereference(var_RValue, var_Store))
+      var_LValue = QRES::Utils::dereference(QRES::Utils::getBagResultAsSimpleObject(var_LValue), var_Store)
+      var_RValue = QRES::Utils::dereference(QRES::Utils::getBagResultAsSimpleObject(var_RValue), var_Store)
       
       var_QRES.push(QRES::AbstractSimpleQueryResultFactory.create(var_LValue.or(var_RValue)))
       

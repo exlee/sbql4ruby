@@ -3,6 +3,9 @@ module SBAStore
 require "lib/SBAStore/SBASimpleObject"
 require "lib/Common/exceptions"
 
+require "lib/QRES/StringResult"
+
+
   # SBA store Integer class 
   class SBAString < SBASimpleObject
     
@@ -61,6 +64,17 @@ require "lib/Common/exceptions"
       end
 
       return SBAString.new(var_Name, var_Object)
+    end
+    
+    # Casts object into QRES::StringResult.
+    #
+    # Params:
+    #
+    # Returns:QRES::StringResult
+    #
+    # Throws:
+    def to_qres()
+      return QRES::StringResult.new(self.VAR_OBJECT)
     end
     
   end

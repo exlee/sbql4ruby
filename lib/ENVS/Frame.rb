@@ -47,7 +47,7 @@ require "lib/ENVS/Binder"
       for i in 0..@VAR_BINDER_LIST.length()-1
         
         Common::Logger.print(Common::VAR_DEBUG, self, "[findAllByName]: Looking for the binder object [#{@VAR_BINDER_LIST[i].to_s()}] in the frame")
-        
+       
         if(@VAR_BINDER_LIST[i].VAR_NAME == var_Name)
           Common::Logger.print(Common::VAR_DEBUG, self, "[findAllByName]: Objects are matched by the name [#{var_Name}], pushing into the bag")
           

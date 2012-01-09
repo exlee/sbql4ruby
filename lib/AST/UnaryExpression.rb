@@ -15,9 +15,9 @@ require "lib/AST/Expression"
     # Returns:
     #
     # Throws:IncorrectArgumentException    
-    def initialize(var_Name, var_Expression)
+    def initialize(var_Name, var_Expression=nil)
  
-      if(!var_Name.is_a?(String) || !var_Expression.is_a?(Expression))
+      if(!var_Name.is_a?(String) || (!var_Expression.is_a?(Expression) && var_Expression != nil))
         IncorrectArgumentException.new("Incorrect arguments type [#{var_Name.class.to_s()}], [#{var_Expression.class.to_s()}] " +
           "expected [[#{String.class.to_s()}]], [#{Expression.class.to_s()}]")
       end
@@ -35,10 +35,12 @@ require "lib/AST/Expression"
      #
      # Throws:
      def to_s
-       if(@VAR_VALUE == nil)
+       if(@VAR_NAME == nil)
          return super()
+       elsif(@VAR_VALUE == nil)
+         return "[Type=#{self.class.to_s()}, Name=#{@VAR_NAME}]"
        else
-         return "[Type=#{self.class.to_s()}, LeftValue=#{@VAR_NAME}, RightValue=#{self.VAR_VALUE.to_s()}]"
+         return "[Type=#{self.class.to_s()}, Name=#{@VAR_NAME}, Value=#{self.VAR_VALUE.to_s()}]"
        end
      end
      

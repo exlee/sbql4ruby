@@ -3,6 +3,8 @@ module SBAStore
 require "lib/SBAStore/SBASimpleObject"
 require "lib/Common/exceptions"
 
+require "lib/QRES/BooleanResult"
+
 
   # SBA store Integer class 
   class SBABoolean < SBASimpleObject
@@ -67,6 +69,17 @@ require "lib/Common/exceptions"
        end
        
        raise ArgumentError.new("invalid value for TrueClass/FalseClass: " + var_Object);
+     end
+     
+     # Casts object into QRES::BooleanResult.
+     #
+     # Params:
+     #
+     # Returns:QRES::BooleanResult
+     #
+     # Throws:
+     def to_qres()
+       return QRES::BooleanResult.new(self.VAR_OBJECT)
      end
       
   end

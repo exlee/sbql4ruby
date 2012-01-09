@@ -5,7 +5,25 @@ require "lib/QRES/BagResult"
  
   
   class Utils
-    
+  
+    # Checks given object's type. Returns true
+    # if it's Ruby simple object type.
+    #
+    # Params:
+    #
+    # var_ObjectName:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:    
+    def Utils::isRubyNumericType?(var_Object)
+      if(var_Object.is_a?(Fixnum) || var_Object.is_a?(Float) || var_Object.is_a?(Bignum))
+        return true
+      end
+
+      return false
+    end
+      
     # Checks given object's type. Returns true
     # if it's AbstractSimpleQueryResult or
     # BagResult which provides one object.
@@ -72,12 +90,12 @@ require "lib/QRES/BagResult"
     #
     # var_ObjectName:ReferenceResult - QRES object
     #
-    # Returns:ReferenceResult
+    # Returns:AbstractSimpleQueryResult
     #
     # Throws:    
     def Utils::dereference(var_Reference, var_Store)
       if(var_Reference.is_a?(ReferenceResult))
-        return (var_Reference.dereference(var_Store)).to_sba()
+        return var_Reference.dereference(var_Store).to_qres()
       end
 
       return var_Reference

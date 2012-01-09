@@ -35,6 +35,18 @@ require "lib/Common/exceptions"
     def SBASimpleObject.isValidType?(var_Object)
       raise AbstractMethodException.new("Abstract method")
     end
+    
+    # Abstract method, should be implemented by the inheriting 
+    # classes (valids given object).
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:AbstractMethodException
+    def to_qres()
+      raise AbstractMethodException.new("Abstract method")
+    end
          
   end
  

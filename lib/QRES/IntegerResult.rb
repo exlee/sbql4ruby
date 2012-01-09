@@ -60,7 +60,7 @@ require "lib/QRES/StringResult"
     # Throws:SyntaxError    
     def +(var_RValue)
       Common::Logger.print(Common::VAR_DEBUG, self, "[+]: Executing for: [#{self.to_s()}] + [#{var_RValue.to_s()}]")
-        
+      
       if(var_RValue.is_a?(self.class))
         return IntegerResult.new(self.VAR_OBJECT + var_RValue.VAR_OBJECT())
       elsif(var_RValue.is_a?(FloatResult))
@@ -155,14 +155,10 @@ require "lib/QRES/StringResult"
     def ==(var_RValue)
       Common::Logger.print(Common::VAR_DEBUG, self, "[==]: Executing for: [#{self.to_s()}] == [#{var_RValue.to_s()}]")
 
-      # Overloaded 'equal' operator returns BooleanResult, but Ruby 'not equal' operator uses 'equal' operator 
-      # expecting TrueClass/FalseClass result. In this case it's impossible to compare FloatResult with nil 
-      # in proper way. Following implementation of nil support allows comparison like this: 
-      # foo<FloatResult> != nil and foo<FloatResult> == nil.
       if(var_RValue.is_a?(NilClass))
         return false
       end
-      
+
       if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
         return self.VAR_OBJECT == var_RValue.VAR_OBJECT()
       else
