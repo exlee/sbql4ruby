@@ -5,11 +5,13 @@ require "test/unit"
 require "lib/Common/logger"
 
 require "lib/AST/TerminalExpression"
+require "lib/AST/StringTerminal"
 require "lib/AST/NameExpression"
 require "lib/AST/DotExpression"
 require "lib/AST/WhereExpression"
 require "lib/AST/EqualExpression"
 require "lib/AST/GreatherExpression"
+require "lib/AST/CommaExpression"
 
 require "lib/QRES/ReferenceResult"
 
@@ -88,6 +90,28 @@ require "lib/AST/AST"
                 
         assert_equal("SBA45", result.pop().dereference(var_AST.VAR_STORE()).VAR_ID())
         assert_equal("SBA32", result.pop().dereference(var_AST.VAR_STORE()).VAR_ID())
+      }
+    end
+    
+    # Tests for AST
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_CommaExpression
+      
+      assert_nothing_thrown("Creating AST objects") {  
+        
+        # Set debug log level
+        Common::Logger.setLogLevel(Common::VAR_DEBUG)
+        
+        var_AST = AST.new("sampledata/data.xml")
+        
+        expression = CommaExpression.new(IntegerTerminal.new(600), StringTerminal.new("operator test"))
+        
+        expression.execute(var_AST)
       }
     end
   end

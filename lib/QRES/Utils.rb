@@ -1,7 +1,6 @@
 module QRES
  
 require "lib/QRES/AbstractSimpleQueryResult"
-require "lib/QRES/BagResult"
  
   
   class Utils
@@ -71,7 +70,7 @@ require "lib/QRES/BagResult"
     #
     # Params:
     #
-    # var_ObjectName:BagResult - QRES object
+    # var_Object:BagResult - QRES object
     #
     # Returns:AbstractQueryResult
     #
@@ -82,6 +81,26 @@ require "lib/QRES/BagResult"
       end
 
       return var_Object.getAsSimpleResult()
+    end
+    
+    # Puts given object into new BagResult.
+    #
+    # Params:
+    #
+    # var_Object:AbstractSimpleQueryResult - QRES simple object
+    #
+    # Returns:BagResult
+    #
+    # Throws:    
+    def Utils::getSimpleObjectAsBagResult(var_Object)
+      if(!var_Object.is_a?(AbstractSimpleQueryResult))
+        return var_Object
+      end
+
+      var_Result = BagResult.new()
+      var_Result.push(var_Object)
+       
+      return var_Result
     end
     
     # Dereferences given ReferentResult object.

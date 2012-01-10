@@ -29,6 +29,7 @@ require "lib/Operator/And"
 require "lib/Operator/Evaluate"
 require "lib/Operator/Dotres"
 require "lib/Operator/Wheres"
+require "lib/Operator/Comma"
 
 
   class AST
@@ -666,6 +667,34 @@ require "lib/Operator/Wheres"
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[whereExpressionExec]: Execute finished, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[whereExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def commaExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(CommaExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + CommaExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[commaExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      # Only BagResult and StructResult are supported here
+      #if(!var_LeftValue.is_a?(QRES::BagResult) && !var_LeftValue.is_a?(QRES::StructResult))
+      #  raise DataTypeException.new(
+      #    "Incorrect object type [#{evalBagResult.class}], #{QRES::BagResult.to_s()} or #{QRES::StructResult.to_s()} are expected")
+      #end
+      
+      Operator::Comma.eval(var_Object.getLeftExpression(), var_Object.getRightExpression(), self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[commaExpressionExec]: Execute finished")
     end
     
     attr_reader :VAR_QRES

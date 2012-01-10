@@ -1,6 +1,7 @@
 module QRES
 
 require "lib/Common/Stack"
+require "lib/QRES/Utils"
 require "lib/QRES/AbstractQueryResult"
 
 
@@ -62,6 +63,8 @@ require "lib/QRES/AbstractQueryResult"
       # Throws:
       def wheres(var_RValue, var_AST)
         
+        Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: Calling perator on the object #{self.to_s()}")
+        
         bagResult = BagResult.new()
         
         bagIterator = self.iterator()
@@ -101,5 +104,57 @@ require "lib/QRES/AbstractQueryResult"
           
         return bagResult
       end 
+      
+      # Evaluates 'comma' function 
+      #
+      # Params:
+      #
+      # var_RValue:AbstractSimpleQueryResult - QRES simple object
+      #
+      # Returns:BagResult
+      #
+      # Throws:
+      def comma(var_RValue, var_AST)
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: Calling operator on the object #{self.to_s()}")
+        
+        bagResult = BagResult.new()
+        
+        # Evaluating the right side of the expression
+        var_RValue.execute(var_AST)
+
+        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue is executed, stacks dump:")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
+        
+        rValue =  Utils.getSimpleObjectAsBagResult(var_AST.VAR_QRES().pop())
+            
+        leftIterator = self.iterator()
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: lValue iterator: #{leftIterator.to_s()}")
+         
+        while(leftIterator.hasNext())
+          leftObject = leftIterator.next()
+
+          rightIterator = rValue.iterator()
+          
+          Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")
+          
+          while(rightIterator.hasNext())
+            tmpResult = StructResult.new()
+          
+            rightObject = rightIterator.next()
+            
+            tmpResult.push(rightObject)
+            tmpResult.push(leftObject)
+            
+            bagResult.push(tmpResult)
+          end  
+        end
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: Expression results: #{bagResult.to_s()}")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
+        
+        return bagResult
+      end
   end
 end
