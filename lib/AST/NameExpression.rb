@@ -7,15 +7,21 @@ require "lib/AST/UnaryExpression"
  
     # Params:
     #
-    # var_LeftExpression:Expression - L-Value
-    #
-    # var_RightExpression:Expression - R-Value
+    # var_Name:String - Objects name
     #
     # Returns:
     #
     # Throws:
     def initialize(var_Name)
-      super(var_Name)
+      if(!var_Name.is_a?(String))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Name.class.to_s()}], " + String.to_s() + " expected")  
+      end
+      
+      if(var_Name == nil)
+        raise IncorrectArgumentException.new("Incorrect object value [#{var_Name}]")  
+      end
+      
+      @VAR_NAME = var_Name
     end
     
     # Executes current expression using given AST object.
@@ -51,5 +57,18 @@ require "lib/AST/UnaryExpression"
     def to_qres()
       return QRES::StringResult.new(self.VAR_NAME())
     end
+    
+    # Returns a string representation of NameExpression object.
+    #
+    # Params:
+    #
+    # Returns:String
+    #
+    # Throws:
+    def to_s
+        return super() + ", [Name=#{@VAR_NAME}]"
+    end
+    
+    attr_reader :VAR_NAME
   end
 end

@@ -8,26 +8,21 @@ require "lib/AST/Expression"
       
     # Params:
     #
-    # var_Name:String - Name
-    #
     # var_Expression:Expression - Expression
     #
     # Returns:
     #
     # Throws:IncorrectArgumentException    
-    def initialize(var_Name, var_Expression=nil)
+    def initialize(var_Expression=nil)
  
-      if(!var_Name.is_a?(String) || (!var_Expression.is_a?(Expression) && var_Expression != nil))
-        IncorrectArgumentException.new("Incorrect arguments type [#{var_Name.class.to_s()}], [#{var_Expression.class.to_s()}] " +
-          "expected [[#{String.class.to_s()}]], [#{Expression.class.to_s()}]")
+      if(!var_Expression.is_a?(Expression) && var_Expression != nil)
+        IncorrectArgumentException.new("Incorrect arguments type [#{var_Expression.class.to_s()}] expected [#{Expression.class.to_s()}]")
       end
-       
-      @VAR_NAME = var_Name 
        
       super(var_Expression)
      end
      
-     # Returns a string representation of BinaryExpression object.
+     # Returns a string representation of UnaryExpression object.
      #
      # Params:
      #
@@ -35,15 +30,11 @@ require "lib/AST/Expression"
      #
      # Throws:
      def to_s
-       if(@VAR_NAME == nil)
-         return super()
-       elsif(@VAR_VALUE == nil)
-         return "[Type=#{self.class.to_s()}, Name=#{@VAR_NAME}]"
+       if(@VAR_VALUE == nil)
+         return "[Type=#{self.class.to_s()}]"
        else
-         return "[Type=#{self.class.to_s()}, Name=#{@VAR_NAME}, Value=#{self.VAR_VALUE.to_s()}]"
+         return "[Type=#{self.class.to_s()}, Value=#{self.VAR_VALUE.to_s()}]"
        end
      end
-     
-     attr_reader :VAR_NAME
   end
 end

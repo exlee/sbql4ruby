@@ -22,7 +22,7 @@ require "lib/Common/exceptions"
         raise IncorrectArgumentError.new("Incorrect object type [#{var_Object.class}], " + StructResult.to_s() + " expected")
       end
       
-      super(var_StructResult.VAR_OBJECT)
+      super(var_StructResult.VAR_OBJECT().VAR_STACK())
     end 
   end
   

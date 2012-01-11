@@ -30,6 +30,8 @@ require "lib/Operator/Evaluate"
 require "lib/Operator/Dotres"
 require "lib/Operator/Wheres"
 require "lib/Operator/Comma"
+require "lib/Operator/Bag"
+require "lib/Operator/Struct"
 
 
   class AST
@@ -686,15 +688,53 @@ require "lib/Operator/Comma"
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[commaExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
       
-      # Only BagResult and StructResult are supported here
-      #if(!var_LeftValue.is_a?(QRES::BagResult) && !var_LeftValue.is_a?(QRES::StructResult))
-      #  raise DataTypeException.new(
-      #    "Incorrect object type [#{evalBagResult.class}], #{QRES::BagResult.to_s()} or #{QRES::StructResult.to_s()} are expected")
-      #end
-      
       Operator::Comma.eval(var_Object.getLeftExpression(), var_Object.getRightExpression(), self)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[commaExpressionExec]: Execute finished")
+    end
+
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def bagExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(BagExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + BagExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[bagExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      Operator::Bag.eval(var_Object.VAR_VALUE(), self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[bagExpressionExec]: Execute finished")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def structExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(StructExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + StructExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[structExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      Operator::Struct.eval(var_Object.VAR_VALUE(), self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[structExpressionExec]: Execute finished")
     end
     
     attr_reader :VAR_QRES

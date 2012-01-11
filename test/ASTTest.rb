@@ -664,8 +664,6 @@ require "lib/QRES/BooleanResult"
         integerTerminal = IntegerTerminal.new(10)
         
         binaryExpression = BinaryExpression.new(stringTerminal, integerTerminal)
-        anyExpression = AnyExpression.new(stringTerminal, integerTerminal)
-        asExpression = AsExpression.new(stringTerminal, integerTerminal)
         integerTerminal = IntegerTerminal.new(123)
         floatTerminal = FloatTerminal.new(788.231)
         booleanTerminal = BooleanTerminal.new(false)

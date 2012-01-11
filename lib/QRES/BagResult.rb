@@ -25,8 +25,8 @@ require "lib/QRES/InternalException"
     # Throws:    
     def push(var_Object)
       
-      # Pushing BagResult to another BagResult
-      if(var_Object.is_a?(BagResult))
+      # Pushing BagResult or StructResult to another BagResult
+      if(var_Object.is_a?(BagResult) || var_Object.is_a?(StructResult))
         for i in 0..var_Object.VAR_OBJECT.size()-1
           self.VAR_OBJECT.push(var_Object.VAR_OBJECT.get(i))
         end
