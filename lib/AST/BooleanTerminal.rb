@@ -3,6 +3,7 @@ module AST
 require "lib/AST/IncorrectArgumentException"
 
 require "lib/QRES/BooleanResult"
+require "lib/AST/TerminalExpression"
 
 
   class BooleanTerminal < TerminalExpression

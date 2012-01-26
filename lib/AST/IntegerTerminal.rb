@@ -4,7 +4,7 @@ require "lib/AST/AST"
 require "lib/AST/Utils"
 
 require "lib/AST/IncorrectArgumentException"
-
+require "lib/AST/TerminalExpression"
 require "lib/QRES/IntegerResult"
 
 

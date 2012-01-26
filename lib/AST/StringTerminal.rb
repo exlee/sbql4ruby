@@ -1,7 +1,7 @@
 module AST
   
 require "lib/AST/IncorrectArgumentException"
-
+require "lib/AST/TerminalExpression"
 require "lib/QRES/StringResult"
 
 
