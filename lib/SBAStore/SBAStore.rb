@@ -3,8 +3,13 @@ module SBAStore
 require "lib/Common/exceptions"
 
   
+  # class: SBAStore
+  # 
+  # Implements Stack Based Architecture object store
   class SBAStore
     
+    # Method: initialize (constructor)
+    #
     # Initialises array for SBA store.
     #
     # Params:
@@ -17,6 +22,8 @@ require "lib/Common/exceptions"
       @VAR_OBJECTS_COUNTER = 0
     end
     
+    # Method: add
+    # 
     # Adds a new object to the SBA store.
     #
     # Params:
@@ -35,6 +42,8 @@ require "lib/Common/exceptions"
       @VAR_OBJECTS_COUNTER+=1
     end
     
+    # Method: get
+    #
     # Returns an object indicated by the array index.
     #
     # Params:
@@ -75,6 +84,8 @@ require "lib/Common/exceptions"
       return @VAR_OBJECTS[0]
     end
       
+    # Method: find
+    #
     # Finds an object indicated by the SBA identifier.
     #
     # Params:
@@ -98,6 +109,8 @@ require "lib/Common/exceptions"
       return nil
     end
 
+    # Method: sortByObjectIdentifier
+    #
     # Sorts store by object's identifier.
     #
     # Params:
@@ -120,6 +133,8 @@ require "lib/Common/exceptions"
       end
     end
     
+    # Method: to_s
+    #
     # Returns a string representation of SBAStore
     # and all its attributes.
     #

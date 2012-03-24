@@ -6,9 +6,14 @@ require "lib/Common/exceptions"
 require "lib/QRES/BooleanResult"
 
 
+  # Class: SBABoolean
+  # Extends: SBASimpleObject
+  #
   # SBA store Integer class 
   class SBABoolean < SBASimpleObject
     
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Name:String - SBA store object name
@@ -28,6 +33,8 @@ require "lib/QRES/BooleanResult"
       super(var_Name, var_Object, var_ID)
     end
 
+     # Static Method: isValidType?
+     #
      # Validates given object's type.
      #
      # Params:
@@ -45,6 +52,8 @@ require "lib/QRES/BooleanResult"
        return false
      end
      
+     # Static Method: fromString
+     #
      # Casts given string value to TrueClass/FalseClass 
      # if possible.
      #
@@ -71,6 +80,8 @@ require "lib/QRES/BooleanResult"
        raise ArgumentError.new("invalid value for TrueClass/FalseClass: " + var_Object);
      end
      
+     # Method: to_qres
+     #
      # Casts object into QRES::BooleanResult.
      #
      # Params:

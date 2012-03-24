@@ -6,9 +6,14 @@ require "lib/Common/exceptions"
 require "lib/QRES/IntegerResult"
 
 
+  # Class: SBAInteger
+  # Extends: SBASimpleObject
+  #
   # SBA store Integer class 
   class SBAInteger < SBASimpleObject
     
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Name:String - SBA store object name
@@ -28,6 +33,8 @@ require "lib/QRES/IntegerResult"
       super(var_Name, var_Object, var_ID)
     end
 
+    # Static method: isValidType?
+    #
     # Validates given object's type.
     #
     # Params:
@@ -45,6 +52,8 @@ require "lib/QRES/IntegerResult"
       return false
     end
     
+    # Static Method: fromString
+    #
     # Casts given string value to integer 
     # if possible.
     #
@@ -65,6 +74,8 @@ require "lib/QRES/IntegerResult"
       return SBAInteger.new(var_Name, Integer(var_Object))
     end
     
+    # Method: to_qres
+    #
     # Casts object into QRES::IntegerResult.
     #
     # Params:

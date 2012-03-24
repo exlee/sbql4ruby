@@ -8,8 +8,13 @@ require "lib/SBAStore/SBABoolean"
 require "lib/SBAStore/SBAString"
 
 
+  # class SBASimpleObjectFactory
+  #
+  # Factory, which creates SBA Object from data in store
   class SBASimpleObjectFactory
     
+    # Static Method: create
+    #
     # Verifies given simple object type and
     # creates a new SBA object depending
     # on the verify result.
@@ -62,6 +67,8 @@ require "lib/SBAStore/SBAString"
 
     end
     
+    # Static Method: ignore_exceptions
+    #
     # Executes given code and ignores specified exceptions.
     #
     # Params:
@@ -77,6 +84,8 @@ require "lib/SBAStore/SBAString"
        Common::Logger.print(Common::VAR_DEBUG, self, "Ignored exception [#{e}]")
     end
     
+    # Static Method: isValidType?
+    #
     # Verifies given object type and returns 
     # true if it's an instance of object
     # that is suppotrted by the SBAObject.
@@ -99,7 +108,7 @@ require "lib/SBAStore/SBAString"
       return false
     end
     
-    # Method:SBASimpleObjectFactory.isValidSBAType?
+    # Static Method: isValidSBAType?
     #
     # Verifies given object type and returns 
     # true if it's an instance of SBAObject.
