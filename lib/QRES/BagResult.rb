@@ -8,19 +8,30 @@ require "lib/QRES/BagResultIterator"
 require "lib/QRES/InternalException"
 
 
+  # Class: BagResult
+  # Extends: AbstractComplexQueryResult
+  # 
+  # Implements Query result in Bag form
   class BagResult < AbstractComplexQueryResult
     
+    # Method: initialize (constructor)
+    # 
+    # Initializes new Bag result
+    # 
+    # Params: None
     def initialize()
       super(Common::Stack.new())
     end
 
+    # Method: push
+    #
     # Push QRES object into BagResult 
     #
     # Params:
     #
     # var_Object:AbstractQueryResult - QRES object
     #
-    # Returns:
+    # Returns: 
     #
     # Throws:    
     def push(var_Object)
@@ -35,6 +46,8 @@ require "lib/QRES/InternalException"
       end
     end
 
+    # Method: pop
+    #
     # Gets QRES object from BagResult 
     #
     # Params:
@@ -46,6 +59,8 @@ require "lib/QRES/InternalException"
       return self.VAR_OBJECT.pop()
     end
 
+    # Method: equals
+    #
     # Compares QRES value objects 
     #
     # Params:
@@ -63,6 +78,8 @@ require "lib/QRES/InternalException"
       raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + BagResult.to_s() + " expected")
     end
 
+    # Method: iterator
+    #
     # Returns iterator.
     #
     # Params:
@@ -74,6 +91,8 @@ require "lib/QRES/InternalException"
       return BagResultIterator.new(self)
     end
     
+    # Method: dereference
+    #
     # Dereferences current QRES object searching in SBA store.
     #
     # Params:
@@ -97,6 +116,8 @@ require "lib/QRES/InternalException"
       return var_SBAObject
     end
     
+    # Method: isSimpleObject?
+    #
     # Checks whether current BagResult object may be treated
     # as simple object (is has to provide exactly one simple object).
     #
@@ -119,6 +140,8 @@ require "lib/QRES/InternalException"
      return true
     end
     
+    # Method: getAsSimpleResult
+    #
     # Checks whether current BagResult object may be treated
     # as simple object (is has to provide exactly one simple object).
     #
@@ -139,6 +162,8 @@ require "lib/QRES/InternalException"
       return self.VAR_OBJECT.get(self.VAR_OBJECT.size()-1)
     end
               
+    # Method: to_s
+    #
     # Returns a string representation of QRES value object.
     #
     # Params:

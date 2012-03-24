@@ -5,8 +5,14 @@ require "lib/AST/TerminalExpression"
 require "lib/QRES/StringResult"
 
 
+  # Class: StringTerminal
+  # Extends: TerminalExpression
+  #
+  # Class representing terminal in String form
   class StringTerminal < TerminalExpression
     
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Value:String
@@ -22,6 +28,8 @@ require "lib/QRES/StringResult"
       super(var_Value)
     end
     
+    # Method: execute
+    #
     # Executes current expression using given AST object.
     #
     # Params:
@@ -44,6 +52,8 @@ require "lib/QRES/StringResult"
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Done.")
     end    
+    # Method: to_qres
+    #
     # Casts current object value into QRES object.
     #
     # Params:

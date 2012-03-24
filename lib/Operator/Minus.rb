@@ -6,8 +6,14 @@ require "lib/Operator/RuntimeException"
 require "lib/QRES/Utils"
 
   
+  # Class: Minus
+  # Extends: AbstractOperator
+  #
+  # Class implementing "Minus" operator
   class Minus < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'minus' operator 
     #
     # Params:

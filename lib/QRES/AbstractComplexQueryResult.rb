@@ -5,8 +5,16 @@ require "lib/QRES/Utils"
 require "lib/QRES/AbstractQueryResult"
 
 
+  # Class: AbstractComplexQueryResult
+  # Extends: AbstractQueryResult
+  # 
+  # Abstract class for comple query results
   class AbstractComplexQueryResult < AbstractQueryResult
       
+      # Method: initialize (constructor)
+      # 
+      # Initializes new AbstractComplexQueryResult
+      # (for use in sub objects)
       def initialize(var_Object)
         #if(!var_Object.is_a?(Common::Stack))
         #  raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + Common::Stack.to_s() + " expected")
@@ -15,6 +23,8 @@ require "lib/QRES/AbstractQueryResult"
         super(var_Object)
       end
       
+      # Method: push
+      #
       # Abstract method, pushes QRES object into BagResult 
       #
       # Params:
@@ -28,7 +38,9 @@ require "lib/QRES/AbstractQueryResult"
         raise AbstractMethodException.new("Abstract method")
       end
 
-      # Abstract methid, gets QRES object from BagResult   
+      # Method: pop
+      #
+      # Abstract method, gets QRES object from BagResult   
       #
       # Params:
       #
@@ -39,6 +51,8 @@ require "lib/QRES/AbstractQueryResult"
        raise AbstractMethodException.new("Abstract method")
       end
       
+      # Method: equals
+      #
       # Compares QRES value objects 
       #
       # Params:
@@ -52,6 +66,8 @@ require "lib/QRES/AbstractQueryResult"
         return self.VAR_OBJECT.equals(var_Object.VAR_OBJECT)
       end    
       
+      # Method: wheres
+      #
       # Evaluates 'wheres' function 
       #
       # Params:
@@ -105,6 +121,8 @@ require "lib/QRES/AbstractQueryResult"
         return bagResult
       end 
       
+      # Method: comma
+      #
       # Evaluates 'comma' function 
       #
       # Params:

@@ -4,8 +4,21 @@ require "lib/SBAStore/SBAString"
 require "lib/QRES/AbstractSimpleQueryResult"
 
 
+  # Class: StringResult
+  # Extends: AbstractSimpleQueryResult
+  # 
+  # Class implements query result representation for String datatype
   class StringResult < AbstractSimpleQueryResult
  
+    # Method: initialize (constructor)
+    # 
+    # Method initializes new StringResult object
+    # 
+    # Params:
+    # var_Object - object to be transformed into StringResult
+    # 
+    # Throws:
+    # QRESTypeError - when object is not castable into StringResult
     def initialize(var_Object)
       if(!SBAStore::SBAString.isValidType?(var_Object))
         raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + String.to_s() + " expected")
@@ -14,6 +27,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       super(var_Object)
     end
     
+    # Method: dereference
+    #
     # Dereferences current QRES object searching in SBA store.
     #
     # Params:
@@ -44,6 +59,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       return var_SBAObject  
     end
 
+    # Method: + (overloaded addition)
+    #
     # Overloaded operator adds the StringResult encapsulated values
     # and returns a new AbstractSimpleQueryResult object which provides 
     # result.
@@ -67,6 +84,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       end
     end   
     
+    # Method: - (overloaded substraction)
+    #
     # Overloaded operator 'minus' is not allowed for StringResult.
     #
     # Params:
@@ -82,6 +101,7 @@ require "lib/QRES/AbstractSimpleQueryResult"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end 
     
+    # Method: * (overloaded multiplication)
     # Overloaded operator 'multiply' is not allowed for StringResult.
     #
     # Params:
@@ -97,6 +117,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: / (overloaded division)
+    #
     # Overloaded operator 'division' is not allowed for StringResult.
     #
     # Params:
@@ -112,6 +134,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
      end
    
+     # Method: == (overloaded equal)
+     #
      # Overloaded operator 'equal'.
      #
      # Params:
@@ -141,7 +165,9 @@ require "lib/QRES/AbstractSimpleQueryResult"
        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
      end
      
-     # Overloaded operator 'greather'.
+     # Method: > (overloaded greater than)
+     #
+     # Overloaded operator 'greater'.
      #
      # Params:
      #
@@ -162,7 +188,9 @@ require "lib/QRES/AbstractSimpleQueryResult"
        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
      end
      
-     # Overloaded operator 'greather equal'.
+     # Method: >= (overloaded greater-equal)
+     #
+     # Overloaded operator 'greater equal'.
      #
      # Params:
      #
@@ -183,6 +211,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
      end
      
+     # Method: < (overloaded smaller than)
+     #
      # Overloaded operator 'less'.
      #
      # Params:
@@ -204,6 +234,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
      end
      
+     # Method: <= (overloaded smaller-equal than)
+     #
      # Overloaded operator 'less equal'.
      #
      # Params:
@@ -225,6 +257,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
      end
      
+     # Method: different
+     #
      # Overloaded operator 'different'.
      #
      # Params:
@@ -246,6 +280,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
      end
     
+     # Method: % (overloaded modulo)
+     #
      # Overloaded operator 'modulo'.
      #
      # Params:
@@ -261,6 +297,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
        raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
      end
      
+     # Method: and
+     #
      # Overloaded operator 'and'.
      #
      # Params:
@@ -276,6 +314,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
        return self.VAR_OBJECT && var_RValue.VAR_OBJECT()
      end
 
+     # Method: or
+     #
      # Overloaded operator 'or'.
      #
      # Params:
@@ -291,6 +331,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
        return self.VAR_OBJECT || var_RValue.VAR_OBJECT()
      end
       
+    # Method: to_sba
+    #
     # Casts current object value into SBA object.
     #
     # Params:

@@ -3,12 +3,21 @@ module QRES
 require "lib/QRES/AbstractMethodException"
 
 
+  # Class: AbstractQueryResult
+  #
+  # Abstract class which represents query results
   class AbstractQueryResult
       
+      # Method: initialize (constructor)
+      # 
+      # Creates new AbstractQueryResult
+      # ( for use by subclasses )
       def initialize(var_Object)
         @VAR_OBJECT = var_Object
       end
       
+      # Method: equals
+      #
       # Compares QRES value objects 
       #
       # Params:
@@ -22,6 +31,8 @@ require "lib/QRES/AbstractMethodException"
         raise AbstractMethodException.new("Abstract method")
       end
       
+      # Method: dereference
+      #
       # Abstract method to be implemented by inheriting classes.
       #
       # Params:
@@ -35,6 +46,8 @@ require "lib/QRES/AbstractMethodException"
         raise AbstractMethodException.new("Abstract method")
       end
       
+      # Method: to_s
+      #
       # Returns a string representation of QRES value object.
       #
       # Params:

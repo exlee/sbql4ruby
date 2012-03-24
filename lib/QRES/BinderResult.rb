@@ -1,7 +1,18 @@
 module QRES
 
+  # Class: BinderResult
+  # Extends: AbstractComplexQueryResult
+  # 
+  # Class represents query result as a binder
   class BinderResult < AbstractComplexQueryResult
 
+    # Method: initialize
+    # 
+    # Initializes new binder results
+    # 
+    # Params:
+    # var_Name - binder name
+    # var_Object - object to bind
     def initialize(var_Name, var_Object)
       if(var_Name == nil)
         raise ArgumentError.new("Binder name expected")
@@ -12,6 +23,8 @@ module QRES
       super(var_Object)
     end
 
+    # Method: push
+    #
     # Pushes a pair (name and object) to the binder object 
     #
     # Params:
@@ -31,6 +44,8 @@ module QRES
       self.VAR_OBJECT = var_Object
     end
 
+    # Method: pop
+    #
     # Returns kept object   
     #
     # Params:
@@ -42,6 +57,8 @@ module QRES
       return self.VAR_OBJECT
     end
 
+    # Method: equals
+    #
     # Compares QRES value objects 
     #
     # Params:
@@ -59,6 +76,8 @@ module QRES
       raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + BinderResult.to_s() + " expected")
     end
     
+    # Method: to_s
+    #
     # Returns a string representation of QRES value object.
     #
     # Params:

@@ -4,12 +4,22 @@ require "lib/QRES/AbstractQueryResult"
 require "lib/QRES/AbstractMethodException"
 
 
+  # Class: AbstractSimpleQueryResult
+  # Extends: AbstractQueryResult
+  # 
+  # Abstract class which represents simple-typed query results
   class AbstractSimpleQueryResult < AbstractQueryResult
       
+    # Method: initialize (constructor)
+    # 
+    # Initializes new AbstractSimpleQueryResult
+    # ( for use in subclasses )
     def initialize(var_Object)
       super(var_Object)
     end
       
+    # Method: equals
+    #
     # Compares QRES value objects 
     #
     # Params:
@@ -31,6 +41,8 @@ require "lib/QRES/AbstractMethodException"
       return false
     end
     
+    # Method: + (overloaded addition)
+    #
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -44,6 +56,7 @@ require "lib/QRES/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")
     end
 
+    # Method: - (overloaded substraction)
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -57,6 +70,8 @@ require "lib/QRES/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")     
     end
 
+    # Method: * (overloaded multiplication)
+    # 
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -70,6 +85,8 @@ require "lib/QRES/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")       
     end
     
+    # Method: / (overloaded division)
+    #
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -83,6 +100,8 @@ require "lib/QRES/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")  
     end
     
+    # Method: == (overloaded equal)
+    #
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -96,6 +115,8 @@ require "lib/QRES/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")  
     end
     
+    # Method: to_sba
+    #
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:

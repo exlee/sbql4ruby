@@ -6,9 +6,14 @@ require "lib/QRES/BagResult"
 require "lib/Common/exceptions"
 
 
+  # Class: BagResultIterator
+  # Extends: Common::Iterator
+  #
   # Extends iterator class for BagResult objects.
   class BagResultIterator < Common::Iterator
     
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_BagResult:BagResult - BagResult object

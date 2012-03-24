@@ -7,8 +7,14 @@ require "lib/QRES/Utils"
 require "lib/QRES/BooleanResult"
 
   
+  # Class: Less
+  # Extends: AbstractOperator
+  #
+  # Class implementing "Smaller Than" operator
   class Less < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'less' operator 
     #
     # Params:

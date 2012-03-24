@@ -7,8 +7,14 @@ require "lib/QRES/BagResult"
 require "lib/QRES/StructResult"  
 
   
+  # Class: Bag
+  # Extends: AbstractOperator
+  #
+  # Class which implements Bag operator
   class Bag < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'bag' operator 
     #
     # Params:

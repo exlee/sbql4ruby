@@ -3,8 +3,14 @@ module AST
 require "lib/AST/UnaryExpression"
   
 
+  # Class: NameExpression
+  # Extends: UnaryExpression
+  #
+  # Class implementing Name expression
   class NameExpression < UnaryExpression
  
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Name:String - Objects name
@@ -24,6 +30,7 @@ require "lib/AST/UnaryExpression"
       @VAR_NAME = var_Name
     end
     
+    # Method: execute
     # Executes current expression using given AST object.
     #
     # Params:
@@ -47,6 +54,8 @@ require "lib/AST/UnaryExpression"
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Done.")
     end
     
+    # Method: to_qres
+    #
     # Casts current object value into QRES object.
     #
     # Params:
@@ -58,6 +67,8 @@ require "lib/AST/UnaryExpression"
       return QRES::StringResult.new(self.VAR_NAME())
     end
     
+    # Method: to_s
+    #
     # Returns a string representation of NameExpression object.
     #
     # Params:

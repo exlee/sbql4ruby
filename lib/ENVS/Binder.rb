@@ -1,7 +1,21 @@
 module ENVS
 
+  # Class: Binder
+  # 
+  # Binds object with provided name
   class Binder
    
+    # Method: initialize (constructor)
+    # 
+    # Initializes object using name and value
+    # 
+    # Params:
+    # var_name - Name for which bind happens
+    # var_value - Object for which bind happens
+    # 
+    # Throws:
+    # ENVSIncorrectArgumentException (when name or value not supplied)
+
     def initialize(var_Name, var_Value)
       
       if(var_Name == nil || var_Value == nil)
@@ -14,6 +28,8 @@ module ENVS
       @VAR_VALUE = var_Value
     end
     
+    # Method: to_s
+    #
     # Returns a string representation of Binder object.
     #
     # Params:

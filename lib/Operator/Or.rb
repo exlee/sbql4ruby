@@ -8,8 +8,14 @@ require "lib/QRES/BooleanResult"
 require "lib/QRES/AbstractSimpleQueryResultFactory"
 
   
+  # Class: Or
+  # Extends: AbstractOperator
+  #
+  # Class implementing Or operator
   class Or < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'or' operator 
     #
     # Params:

@@ -3,8 +3,14 @@ module AST
 require "lib/AST/UnaryExpression"
   
 
+  # Class: BagExpression
+  # Extends: UnaryExpression
+  #
+  # Class implementing Bag Expression
   class BagExpression < UnaryExpression
  
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Expression:Expression - Expression
@@ -16,6 +22,8 @@ require "lib/AST/UnaryExpression"
       super(var_Expression)
     end
     
+    # Method: execute
+    #
     # Executes current expression using given AST object.
     #
     # Params:

@@ -94,7 +94,7 @@ require "lib/Common/exceptions"
     #
     # Returns:
     #
-    # Throws:SBAIdentifierError
+    # Throws: IncorrectArgumentException
     def find(var_Identifier)
       if(var_Identifier==nil)
         raise IncorrectArgumentException.new("Incorrect SBA object identifier [#{var_Identifier}]")

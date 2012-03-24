@@ -10,12 +10,18 @@ module Common
   VAR_INFO = 0
   
   
+  # Class: Logger
+  # 
+  # Logging class, with main functionality being able to print
+  # pretty formatted logs to the console (debugging purpose)
   class Logger
     
     # @@VAR_CURRENT_LEVEL:Integer - Current log level
     @@VAR_CURRENT_LEVEL = 0
     
     
+    # Static Method: print
+    #
     # Puts message to stdout with debug data format
     #
     # Params:
@@ -39,6 +45,8 @@ module Common
       end
     end
     
+    # Static Method: setLogLevel
+    #
     # Sets log level
     #
     # Params:
@@ -56,6 +64,8 @@ module Common
       @@VAR_CURRENT_LEVEL = var_Level
     end
     
+    # Static Method: validLogLevel
+    #
     # Checks log level
     #
     # Params:

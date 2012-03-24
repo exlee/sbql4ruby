@@ -3,12 +3,20 @@ module QRES
 require "lib/Common/Stack"
 
 
+  # Class: QRES
+  # 
+  # Class implements Query Result Stack
   class QRES
     
+    # Method: initialize (constructor)
+    # 
+    # Initializes empty Query Result Stack
     def initialize()
       @VAR_STACK = Common::Stack.new()
     end
     
+    # Method: push
+    #
     # Push QRES object into the stack 
     #
     # Params:
@@ -26,6 +34,8 @@ require "lib/Common/Stack"
       @VAR_STACK.push(var_Object)
     end
     
+    # Method: pop
+    #
     # Gets QRES object from the stack 
     #
     # Params:
@@ -37,6 +47,8 @@ require "lib/Common/Stack"
       return @VAR_STACK.pop()
     end
     
+    # Method: to_s
+    #
     # Returns a string representation of QRES object.
     #
     # Params:

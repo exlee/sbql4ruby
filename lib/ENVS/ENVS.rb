@@ -16,9 +16,21 @@ require 'lib/Common/logger'
 require "lib/Common/exceptions"
 
 
+  # Class: ENVS
+  # 
+  # Class which implements Environment Stack
   class ENVS
     
     
+    # Method: initialize (constructor)
+    # 
+    # Initializes ENVS stack using SBA Store
+    # 
+    # Params:
+    # var_store - SBAStore object, for which ENVS Stack will be created
+    # 
+    # Throws:
+    # ENVSTypeError - when store is not SBAStore object
     def initialize(var_Store) 
       Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Initialisation for given store")
       Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Store dump:\n#{var_Store.to_s()}")
@@ -41,6 +53,8 @@ require "lib/Common/exceptions"
       end
     end
     
+    # Method: createFrame
+    #
     # Creates ENVS frame
     #
     # Params:
@@ -68,6 +82,8 @@ require "lib/Common/exceptions"
       return Frame.new(binderList)
     end
 
+    # Method: createBinder
+    #
     # Creates ENVS binder
     #
     # Params:
@@ -177,6 +193,8 @@ require "lib/Common/exceptions"
       return var_BinderList
     end
 
+    # Method: bind
+    #
     # Binds given object name
     #
     # Params:
@@ -216,6 +234,8 @@ require "lib/Common/exceptions"
       return bag
     end
 
+    # Method: nested
+    #
     # Nested operation on ENVS stack
     #
     # Params:
@@ -240,7 +260,9 @@ require "lib/Common/exceptions"
       Common::Logger.print(Common::VAR_DEBUG, self, "[nested]: End")
     end
     
-    # Getsobject from the stack 
+    # Method: pop
+    #
+    # Gets object from the stack 
     #
     # Params:
     #
@@ -251,6 +273,8 @@ require "lib/Common/exceptions"
       return @VAR_STACK.pop()
     end
     
+    # Method: to_s
+    #
     # Returns a string representation of Frame object.
     #
     # Params:

@@ -3,8 +3,13 @@ module QRES
 require "lib/QRES/AbstractSimpleQueryResult"
  
   
+  # Class: Utils
+  #
+  # Utilitary class with various static methods
   class Utils
   
+    # Static Method: isRubyNumericType?
+    #
     # Checks given object's type. Returns true
     # if it's Ruby simple object type.
     #
@@ -23,6 +28,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       return false
     end
       
+    # Static Method: isSimpleObject?
+    #
     # Checks given object's type. Returns true
     # if it's AbstractSimpleQueryResult or
     # BagResult which provides one object.
@@ -46,6 +53,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       return false
     end
     
+    # StaticMethod: isBagResult?
+    #
     # Checks given object's type. Returns true
     # if it's BagResult.
     #
@@ -64,6 +73,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       return false
     end
     
+    # Static Method: getBagResultAsSimpleObject
+    #
     # Gets an object provided by BagResult treated as QRES 
     # simple object (BagResult must provide exactly one simple 
     # object).
@@ -83,6 +94,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       return var_Object.getAsSimpleResult()
     end
     
+    # Static Method: getSimpleObjectAsBagResult
+    #
     # Puts given object into new BagResult.
     #
     # Params:
@@ -103,6 +116,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       return var_Result
     end
     
+    # Static Method: dereference
+    #
     # Dereferences given ReferentResult object.
     #
     # Params:

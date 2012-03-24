@@ -7,8 +7,14 @@ require "lib/QRES/Utils"
 require "lib/QRES/BooleanResult"
 
   
+  # Class: Different
+  # Extend: AbstractOperator
+  #
+  # Class implementing Different operator
   class Different < AbstractOperator
     
+    # Static method: eval
+    #
     # Evaluates 'different' operator 
     #
     # Params:

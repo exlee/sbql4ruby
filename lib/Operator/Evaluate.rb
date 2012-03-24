@@ -4,8 +4,14 @@ require "lib/Operator/AbstractOperator"
 require "lib/QRES/BagResult"
  
   
+  # Class: Evaluate
+  # Extends: AbstractOperator
+  # 
+  # Class implementing Evaluate operator
   class Evaluate < AbstractOperator
 
+    # Static Method: eval
+    #
     # Evaluates 'evaluate' operator 
     #
     # Params:
