@@ -22,6 +22,42 @@ require "lib/QRES/AbstractSimpleQueryResult"
 
       return false
     end
+    
+    # Checks given object's type. Returns true
+    # if it's QRES number.
+    #
+    # Params:
+    #
+    # var_ObjectName:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:    
+    def Utils::isQRESNumericType?(var_Object)
+      if(var_Object.is_a?(IntegerResult) || var_Object.is_a?(FloatResult))
+        return true
+      end
+
+      return false
+    end
+    
+    # Checks given object's type. Returns true
+    # if it's QRES or Ruby number.
+    #
+    # Params:
+    #
+    # var_ObjectName:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:    
+    def Utils::isNumericType?(var_Object)
+      if(Utils::isQRESNumericType?(var_Object) || Utils::isRubyNumericType?(var_Object))
+        return true
+      end
+
+      return false
+    end
       
     # Checks given object's type. Returns true
     # if it's AbstractSimpleQueryResult or

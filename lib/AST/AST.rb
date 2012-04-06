@@ -32,6 +32,9 @@ require "lib/Operator/Wheres"
 require "lib/Operator/Comma"
 require "lib/Operator/Bag"
 require "lib/Operator/Struct"
+require "lib/Operator/Min"
+require "lib/Operator/Max"
+require "lib/Operator/Avg"
 
 
   class AST
@@ -735,6 +738,72 @@ require "lib/Operator/Struct"
       Operator::Struct.eval(var_Object.VAR_VALUE(), self)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[structExpressionExec]: Execute finished")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def minExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(MinExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + MinExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[minExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      Operator::Min.eval(var_Object.VAR_VALUE(), self)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[minExpressionExec]: Execute finished")
+    end
+
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def maxExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(MaxExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + MaxExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[maxExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      Operator::Max.eval(var_Object.VAR_VALUE(), self)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[maxExpressionExec]: Execute finished")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def avgExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(AvgExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + AvgExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[avgExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      Operator::Avg.eval(var_Object.VAR_VALUE(), self)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[avgExpressionExec]: Execute finished")
     end
     
     attr_reader :VAR_QRES

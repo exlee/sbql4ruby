@@ -14,8 +14,12 @@ require "lib/AST/GreatherExpression"
 require "lib/AST/CommaExpression"
 require "lib/AST/BagExpression"
 require "lib/AST/StructExpression"
+require "lib/AST/MinExpression"
+require "lib/AST/MaxExpression"
+require "lib/AST/AvgExpression"
 
 require "lib/QRES/ReferenceResult"
+require "lib/QRES/StructResult"
 
 require "lib/AST/AST"
 
@@ -114,6 +118,14 @@ require "lib/AST/AST"
         expression = CommaExpression.new(CommaExpression.new(IntegerTerminal.new(600), StringTerminal.new("operator test")), FloatTerminal.new(123.321))
         
         expression.execute(var_AST)
+        
+        result = var_AST.VAR_QRES().pop()
+         
+        assert_equal("QRES::BagResult", result.class.to_s())
+        assert_equal(600, result.pop().VAR_OBJECT())
+        assert_equal(123.321, result.pop().VAR_OBJECT())
+        assert_equal("operator test", result.pop().VAR_OBJECT())
+        assert_equal(123.321, result.pop().VAR_OBJECT())
       }
     end
  
@@ -136,6 +148,12 @@ require "lib/AST/AST"
         expression = BagExpression.new(CommaExpression.new(IntegerTerminal.new(600), FloatTerminal.new(123.321)))
         
         expression.execute(var_AST)
+        
+        result = var_AST.VAR_QRES().pop()
+        
+        assert_equal("QRES::BagResult", result.class.to_s())
+        assert_equal(600, result.pop().VAR_OBJECT())
+        assert_equal(123.321, result.pop().VAR_OBJECT())
       }
     end   
  
@@ -158,8 +176,120 @@ require "lib/AST/AST"
         expression = StructExpression.new(CommaExpression.new(IntegerTerminal.new(700), FloatTerminal.new(223.321)))
         
         expression.execute(var_AST)
+        
+        result = var_AST.VAR_QRES().pop()
+        
+        assert_equal(700, result.pop().VAR_OBJECT())
+        assert_equal(223.321, result.pop().VAR_OBJECT())
       }
     end
-       
+    
+    # Tests for AST
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_4MinExpression
+      
+      assert_nothing_thrown("Creating AST objects") {  
+        
+        # Set debug log level
+        Common::Logger.setLogLevel(Common::VAR_DEBUG)
+        
+        var_AST = AST.new("sampledata/data.xml")
+        
+        expression = MinExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321)))
+        
+        expression.execute(var_AST)
+        
+        assert_equal(11.321, var_AST.VAR_QRES().pop().VAR_OBJECT())
+        
+        expression = MinExpression.new(CommaExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321)), IntegerTerminal.new(12)))
+        
+        expression.execute(var_AST)
+        
+        assert_equal(11.321, var_AST.VAR_QRES().pop().VAR_OBJECT())
+        
+        expression = MinExpression.new(IntegerTerminal.new(12))
+        
+        expression.execute(var_AST)
+        
+        assert_equal(12, var_AST.VAR_QRES().pop().VAR_OBJECT())       
+      }
+    end
+
+    # Tests for AST
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_5MaxExpression
+      
+      assert_nothing_thrown("Creating AST objects") {  
+        
+        # Set debug log level
+        Common::Logger.setLogLevel(Common::VAR_DEBUG)
+        
+        var_AST = AST.new("sampledata/data.xml")
+        
+        expression = MaxExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321)))
+        
+        expression.execute(var_AST)
+        
+        assert_equal(888, var_AST.VAR_QRES().pop().VAR_OBJECT())
+        
+        expression = MaxExpression.new(CommaExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321)), IntegerTerminal.new(12)))
+        
+        expression.execute(var_AST)
+        
+        assert_equal(888, var_AST.VAR_QRES().pop().VAR_OBJECT())
+        
+        expression = MaxExpression.new(IntegerTerminal.new(12))
+        
+        expression.execute(var_AST)
+        
+        assert_equal(12, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      }
+    end
+    
+    # Tests for AST
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_6AvgExpression
+      
+      assert_nothing_thrown("Creating AST objects") {  
+        
+        # Set debug log level
+        Common::Logger.setLogLevel(Common::VAR_DEBUG)
+        
+        var_AST = AST.new("sampledata/data.xml")
+        
+        expression = AvgExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321)))
+        
+        expression.execute(var_AST)
+        
+        assert_equal(449.6605, var_AST.VAR_QRES().pop().VAR_OBJECT())
+        
+        expression = AvgExpression.new(CommaExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321)), IntegerTerminal.new(12)))
+        
+        expression.execute(var_AST)
+        
+        assert_equal(230.83025, var_AST.VAR_QRES().pop().VAR_OBJECT())
+        
+        expression = AvgExpression.new(IntegerTerminal.new(12))
+        
+        expression.execute(var_AST)
+        
+        assert_equal(12, var_AST.VAR_QRES().pop().VAR_OBJECT())
+      }
+    end
   end
 end

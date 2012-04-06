@@ -86,7 +86,7 @@ require "lib/SBAStore/SBAStore"
       
       return var_SBAObject
     end
-        
+            
     # Returns a string representation of QRES value object.
     #
     # Params:

@@ -323,7 +323,7 @@ require "lib/QRES/StringResult"
        
       return self.VAR_OBJECT || var_RValue.VAR_OBJECT()
     end
-            
+                
     # Casts current object value into SBA object.
     #
     # Params:

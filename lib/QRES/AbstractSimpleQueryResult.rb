@@ -95,7 +95,7 @@ require "lib/QRES/AbstractMethodException"
     def ==(var_RValue)
       raise AbstractMethodException.new("Abstract method")  
     end
-    
+        
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:

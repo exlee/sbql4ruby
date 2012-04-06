@@ -265,7 +265,7 @@ require "lib/QRES/AbstractSimpleQueryResult"
         
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
-    
+        
     # Casts current object value into SBA object.
     #
     # Params:
