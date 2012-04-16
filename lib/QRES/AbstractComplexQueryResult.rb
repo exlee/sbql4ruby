@@ -51,6 +51,19 @@ require "lib/QRES/AbstractQueryResult"
       def equals(var_Object)
         return self.VAR_OBJECT.equals(var_Object.VAR_OBJECT)
       end    
+
+      # Abstract method, finds QRES objects 
+      #
+      # Params:
+      #
+      # var_Object:AbstractSimpleQueryResult - QRES object
+      #
+      # Returns:
+      #
+      # Throws:AbstractMethodException    
+      def is_contained?(var_Object)
+        raise AbstractMethodException.new("Abstract method")
+      end
       
       # Evaluates 'wheres' function 
       #

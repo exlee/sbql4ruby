@@ -35,6 +35,8 @@ require "lib/Operator/Struct"
 require "lib/Operator/Min"
 require "lib/Operator/Max"
 require "lib/Operator/Avg"
+require "lib/Operator/Union"
+require "lib/Operator/SetMinus"
 
 
   class AST
@@ -804,6 +806,72 @@ require "lib/Operator/Avg"
       Operator::Avg.eval(var_Object.VAR_VALUE(), self)
 
       Common::Logger.print(Common::VAR_DEBUG, self, "[avgExpressionExec]: Execute finished")
+    end
+
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def unionExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(UnionExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + UnionExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[unionExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      # Executing left query side
+      var_Object.getLeftExpression().execute(self)
+      
+      # Executing right query side
+      var_Object.getRightExpression().execute(self)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[unionExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+
+      Operator::Union.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[unionExpressionExec]: Execute finished")
+    end
+
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def setMinusExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(SetMinusExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + SetMinusExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[setMinusExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      # Executing left query side
+      var_Object.getLeftExpression().execute(self)
+      
+      # Executing right query side
+      var_Object.getRightExpression().execute(self)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[setMinusExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+
+      Operator::SetMinus.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[setMinusExpressionExec]: Execute finished")
     end
     
     attr_reader :VAR_QRES

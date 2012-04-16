@@ -57,6 +57,30 @@ require "lib/QRES/StructResultIterator"
 
       raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + StructResult.to_s() + " expected")
     end
+    
+    # Finds QRES objects in BagResult
+    # and returns 'true' if found
+    #
+    # Params:
+    #
+    # var_Object:AbstractSimpleQueryResult
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:
+    def is_contained?(var_Object)
+      if(!var_Object.is_a?(AbstractSimpleQueryResult))
+        throw QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + AbstractSimpleQueryResult.to_s() + " expected")
+      end
+     
+      @VAR_OBJECT.VAR_STACK().each() do|object|
+        if(object == var_Object)
+          return true
+        end
+      end
+      
+      return false
+    end
 
     # Returns iterator.
     #

@@ -134,11 +134,9 @@ require "lib/QRES/AbstractSimpleQueryResult"
        
        if(var_RValue.is_a?(self.class))
          return self.VAR_OBJECT == var_RValue.VAR_OBJECT()
-       else
-         raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
        end
 
-       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+       return false
      end
      
      # Overloaded operator 'greather'.

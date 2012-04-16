@@ -39,6 +39,34 @@
 	<integer>194</integer>
 	<key>metaData</key>
 	<dict>
+		<key>lib/Operator/CollectionMinus.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>22</integer>
+				<key>line</key>
+				<integer>41</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>6</integer>
+		</dict>
+		<key>lib/QRES/BagResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>9</integer>
+				<key>line</key>
+				<integer>84</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>58</integer>
+		</dict>
 		<key>lib/SBAStore/NotInitialisedStoreException.rb</key>
 		<dict>
 			<key>caret</key>
@@ -58,19 +86,35 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>35</integer>
+				<integer>8</integer>
 				<key>line</key>
-				<integer>288</integer>
+				<integer>374</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>248</integer>
+			<integer>351</integer>
+		</dict>
+		<key>test/QRESTest.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>55</integer>
+				<key>line</key>
+				<integer>55</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>13</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>test/ASTComplexTest.rb</string>
+		<string>lib/Operator/CollectionMinus.rb</string>
+		<string>lib/QRES/BagResult.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
