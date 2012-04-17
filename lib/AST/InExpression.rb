@@ -3,7 +3,7 @@ module AST
 require "lib/AST/BinaryExpression"
   
 
-  class IntersectExpression < BinaryExpression
+  class InExpression < BinaryExpression
  
     # Params:
     #
@@ -36,7 +36,7 @@ require "lib/AST/BinaryExpression"
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Executing for arguments: [#{self.class.to_s()}], [#{var_AST.class.to_s()}]")
       
-      var_AST.intersectExpressionExec(self)
+      var_AST.inExpressionExec(self)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Done.")
     end

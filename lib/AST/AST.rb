@@ -37,6 +37,8 @@ require "lib/Operator/Max"
 require "lib/Operator/Avg"
 require "lib/Operator/Union"
 require "lib/Operator/SetMinus"
+require "lib/Operator/Intersect"
+require "lib/Operator/In"
 
 
   class AST
@@ -872,6 +874,72 @@ require "lib/Operator/SetMinus"
       Operator::SetMinus.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
 
       Common::Logger.print(Common::VAR_DEBUG, self, "[setMinusExpressionExec]: Execute finished")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def intersectExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(IntersectExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + IntersectExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[intersectExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      # Executing left query side
+      var_Object.getLeftExpression().execute(self)
+      
+      # Executing right query side
+      var_Object.getRightExpression().execute(self)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[intersectExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+
+      Operator::Intersect.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[intersectExpressionExec]: Execute finished")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def inExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(InExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + InExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[inExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+      
+      # Executing left query side
+      var_Object.getLeftExpression().execute(self)
+      
+      # Executing right query side
+      var_Object.getRightExpression().execute(self)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[inExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
+
+      var_RightValue = @VAR_QRES.pop()
+      var_LeftValue = @VAR_QRES.pop()
+
+      Operator::In.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[inExpressionExec]: Execute finished")
     end
     
     attr_reader :VAR_QRES

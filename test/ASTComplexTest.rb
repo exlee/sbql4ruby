@@ -19,6 +19,8 @@ require "lib/AST/MaxExpression"
 require "lib/AST/AvgExpression"
 require "lib/AST/UnionExpression"
 require "lib/AST/SetMinusExpression"
+require "lib/AST/IntersectExpression"
+require "lib/AST/InExpression"
 
 require "lib/QRES/ReferenceResult"
 require "lib/QRES/StructResult"
@@ -356,7 +358,7 @@ require "lib/AST/AST"
     # Returns:
     #
     # Throws:   
-    def test_7CollectionMinusExpression
+    def test_7SetMinusExpression
       
       assert_nothing_thrown("Creating AST objects") {  
         
@@ -388,6 +390,87 @@ require "lib/AST/AST"
         assert_equal(888, result.pop().VAR_OBJECT())
         assert_equal(11.321, result.pop().VAR_OBJECT())
       }
+    end
+    
+    # Tests for AST
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_8IntersectExpression
+      
+      assert_nothing_thrown("Creating AST objects") {  
+        
+        # Set debug log level
+        Common::Logger.setLogLevel(Common::VAR_DEBUG)
+        
+        var_AST = AST.new("sampledata/data.xml")
+        
+        expression =  IntersectExpression.new(
+                        BagExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321))),
+                        BagExpression.new(CommaExpression.new(StringTerminal.new("Test"), IntegerTerminal.new(888))))
+        
+        expression.execute(var_AST)
+
+        result = var_AST.VAR_QRES().pop()
+        
+        assert_equal("QRES::BagResult", result.class.to_s())
+        assert_equal(888, result.pop().VAR_OBJECT())
+        
+        expression =  IntersectExpression.new(
+                        StructExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321))),
+                        StructExpression.new(CommaExpression.new(StringTerminal.new("Test"), IntegerTerminal.new(600))))
+        
+        expression.execute(var_AST)
+        
+        result = var_AST.VAR_QRES().pop()
+        
+        assert_equal("QRES::BagResult", result.class.to_s())
+        assert_equal(0, result.VAR_OBJECT().size())
+      }
+    end
+
+    # Tests for AST
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_9InExpression
+      
+      assert_nothing_thrown("Creating AST objects") {  
+        
+        # Set debug log level
+        Common::Logger.setLogLevel(Common::VAR_DEBUG)
+        
+        var_AST = AST.new("sampledata/data.xml")
+        
+        expression =  InExpression.new(
+                        BagExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321))),
+                        BagExpression.new(CommaExpression.new(StringTerminal.new("Test"), IntegerTerminal.new(888))))
+        
+        expression.execute(var_AST)
+
+        result = var_AST.VAR_QRES().pop()
+        
+        assert_equal("QRES::BagResult", result.class.to_s())
+        assert_equal(0, result.VAR_OBJECT().size())
+        
+        expression =  IntersectExpression.new(
+                        StructExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321))),
+                        StructExpression.new(CommaExpression.new(FloatTerminal.new(11.321), IntegerTerminal.new(888))))
+        
+        expression.execute(var_AST)
+        
+        result = var_AST.VAR_QRES().pop()
+        
+        assert_equal("QRES::BagResult", result.class.to_s())
+        assert_equal(888, result.pop().VAR_OBJECT())
+        assert_equal(11.321, result.pop().VAR_OBJECT())      
+        }
     end
   end
 end
