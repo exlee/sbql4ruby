@@ -3,7 +3,7 @@ module QRES
   class BinderResult < AbstractComplexQueryResult
 
     def initialize(var_Name, var_Object)
-      if(var_Name == nil)
+      if(var_Name == nil || !var_Name.is_a?(String))
         raise ArgumentError.new("Binder name expected")
       end
       

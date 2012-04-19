@@ -21,6 +21,8 @@ require "lib/AST/UnionExpression"
 require "lib/AST/SetMinusExpression"
 require "lib/AST/IntersectExpression"
 require "lib/AST/InExpression"
+require "lib/AST/AsExpression"
+require "lib/AST/GroupAsExpression"
 
 require "lib/QRES/ReferenceResult"
 require "lib/QRES/StructResult"
@@ -472,5 +474,115 @@ require "lib/AST/AST"
         assert_equal(11.321, result.pop().VAR_OBJECT())      
         }
     end
-  end
+    
+    # Tests for AST
+    #
+    # Params:
+    #
+    # Returns:
+    #
+    # Throws:   
+    def test_9aAsExpression
+      
+      assert_nothing_thrown("Creating AST objects") {  
+        
+        # Set debug log level
+        Common::Logger.setLogLevel(Common::VAR_DEBUG)
+        
+        var_AST = AST.new("sampledata/data.xml")
+        
+        expression =  AsExpression.new(FloatTerminal.new(11.321), "test_object")
+        
+        expression.execute(var_AST)
+
+        result = var_AST.VAR_QRES().pop()
+        
+        assert_equal("QRES::BinderResult", result.class.to_s())
+        assert_equal(11.321, result.VAR_OBJECT().VAR_OBJECT())
+        assert_equal("test_object", result.VAR_NAME())
+        
+        expression =  AsExpression.new(
+                        StructExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321))),
+                        "test_complex_object")
+        
+        expression.execute(var_AST)
+        
+        result = var_AST.VAR_QRES().pop()
+        
+        assert_equal("QRES::StructResult", result.class.to_s())
+        assert_equal(888, result.pop().VAR_OBJECT().VAR_OBJECT())
+        assert_equal(11.321, result.pop().VAR_OBJECT().VAR_OBJECT())      
+        
+        expression =  AsExpression.new(
+                        BagExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321))),
+                        "test_complex_object")
+        
+        expression.execute(var_AST)
+        
+        result = var_AST.VAR_QRES().pop()
+        
+        assert_equal("QRES::BagResult", result.class.to_s())
+        assert_equal(888, result.pop().VAR_OBJECT().VAR_OBJECT())
+        assert_equal(11.321, result.pop().VAR_OBJECT().VAR_OBJECT())
+        }
+      end
+      
+      # Tests for AST
+      #
+      # Params:
+      #
+      # Returns:
+      #
+      # Throws:   
+      def test_9bGroupAsExpression
+
+        assert_nothing_thrown("Creating AST objects") {  
+
+          # Set debug log level
+          Common::Logger.setLogLevel(Common::VAR_DEBUG)
+
+          var_AST = AST.new("sampledata/data.xml")
+
+          expression =  GroupAsExpression.new(FloatTerminal.new(11.321), "test_object")
+
+          expression.execute(var_AST)
+
+          result = var_AST.VAR_QRES().pop()
+
+          assert_equal("QRES::BinderResult", result.class.to_s())
+          assert_equal(11.321, result.VAR_OBJECT().VAR_OBJECT())
+          assert_equal("test_object", result.VAR_NAME())
+
+          expression =  GroupAsExpression.new(
+                          StructExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321))),
+                          "test_complex_object")
+
+          expression.execute(var_AST)
+
+          result = var_AST.VAR_QRES().pop()
+
+          assert_equal("QRES::BinderResult", result.class.to_s())
+          
+          result = result.pop()
+          
+          assert_equal(888, result.pop().VAR_OBJECT())
+          assert_equal(11.321, result.pop().VAR_OBJECT())      
+
+          expression =  GroupAsExpression.new(
+                          BagExpression.new(CommaExpression.new(IntegerTerminal.new(888), FloatTerminal.new(11.321))),
+                          "test_complex_object")
+
+          expression.execute(var_AST)
+
+          result = var_AST.VAR_QRES().pop()
+
+          assert_equal("QRES::BinderResult", result.class.to_s())
+          
+          result = result.pop()
+          
+          assert_equal(888, result.pop().VAR_OBJECT())
+          assert_equal(11.321, result.pop().VAR_OBJECT())
+          }
+        end
+    end
 end

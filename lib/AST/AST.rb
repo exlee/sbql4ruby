@@ -39,6 +39,8 @@ require "lib/Operator/Union"
 require "lib/Operator/SetMinus"
 require "lib/Operator/Intersect"
 require "lib/Operator/In"
+require "lib/Operator/As"
+require "lib/Operator/GroupAs"
 
 
   class AST
@@ -941,6 +943,50 @@ require "lib/Operator/In"
 
       Common::Logger.print(Common::VAR_DEBUG, self, "[inExpressionExec]: Execute finished")
     end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def asExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(AsExpression))
+         raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + AsExpression.to_s() + " expected") 
+       end
+
+       Common::Logger.print(Common::VAR_DEBUG, self, "[asExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")   
+
+       Operator::As.eval(var_Object.VAR_VALUE(), var_Object.VAR_NAME(), self)
+
+       Common::Logger.print(Common::VAR_DEBUG, self, "[asExpressionExec]: Execute finished")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def groupAsExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(GroupAsExpression))
+         raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + GroupAsExpression.to_s() + " expected") 
+       end
+
+       Common::Logger.print(Common::VAR_DEBUG, self, "[groupAsExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+
+       Operator::GroupAs.eval(var_Object.VAR_VALUE(), var_Object.VAR_NAME(), self)
+
+       Common::Logger.print(Common::VAR_DEBUG, self, "[groupAsExpressionExec]: Execute finished")
+    end    
     
     attr_reader :VAR_QRES
     attr_reader :VAR_ENVS
