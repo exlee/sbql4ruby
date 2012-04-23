@@ -170,8 +170,6 @@ require "lib/Common/exceptions"
           "[#{var_BinderList.length().to_s()}]")
         
         return var_BinderList
-      else
-        raise Operator::DataTypeException.new("Not supported data type [#{var_Object.class.to_s()}], value [#{var_Object.to_s()}]")
       end
       
       return var_BinderList

@@ -41,6 +41,7 @@ require "lib/Operator/Intersect"
 require "lib/Operator/In"
 require "lib/Operator/As"
 require "lib/Operator/GroupAs"
+require "lib/Operator/Join"
 
 
   class AST
@@ -987,6 +988,43 @@ require "lib/Operator/GroupAs"
 
        Common::Logger.print(Common::VAR_DEBUG, self, "[groupAsExpressionExec]: Execute finished")
     end    
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def joinExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(JoinExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + JoinExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[joinExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[joinExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      # Executing left query side
+      var_Object.getLeftExpression().execute(self)
+    
+      #Getting results from QRES
+      var_LeftValue = @VAR_QRES.pop()
+      
+      # Only BagResult and StructResult are supported here
+      #if(!var_LeftValue.is_a?(QRES::BagResult) && !var_LeftValue.is_a?(QRES::StructResult))
+      #  raise DataTypeException.new(
+      #    "Incorrect object type [#{evalBagResult.class}], #{QRES::BagResult.to_s()} or #{QRES::StructResult.to_s()} are expected")
+      #end
+      
+      Operator::Join.eval(var_LeftValue, var_Object.getRightExpression(), self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[joinExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[joinExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+
     
     attr_reader :VAR_QRES
     attr_reader :VAR_ENVS

@@ -23,6 +23,7 @@ require "lib/AST/IntersectExpression"
 require "lib/AST/InExpression"
 require "lib/AST/AsExpression"
 require "lib/AST/GroupAsExpression"
+require "lib/AST/JoinExpression"
 
 require "lib/QRES/ReferenceResult"
 require "lib/QRES/StructResult"
@@ -583,6 +584,92 @@ require "lib/AST/AST"
           assert_equal(888, result.pop().VAR_OBJECT())
           assert_equal(11.321, result.pop().VAR_OBJECT())
           }
+        end
+        
+        # Tests for AST
+        #
+        # Params:
+        #
+        # Returns:
+        #
+        # Throws:     
+        def test_9cJoinExpression
+
+          assert_nothing_thrown("Creating AST objects") {  
+
+            # Set debug log level
+            Common::Logger.setLogLevel(Common::VAR_DEBUG)
+
+            var_AST = AST.new("sampledata/data.xml")
+            
+            expression =  JoinExpression.new(
+                            BagExpression.new(CommaExpression.new(IntegerTerminal.new(1), StringTerminal.new("test"))),
+                            BagExpression.new(CommaExpression.new(FloatTerminal.new(22.11), IntegerTerminal.new(347))))
+
+            expression.execute(var_AST)
+            
+            result = var_AST.VAR_QRES().pop()
+
+            assert_equal("QRES::BagResult", result.class.to_s())
+            assert_equal(22.11, result.pop().VAR_OBJECT())
+            assert_equal(1, result.pop().VAR_OBJECT())
+            assert_equal(347, result.pop().VAR_OBJECT())
+            assert_equal(1, result.pop().VAR_OBJECT())
+            assert_equal(22.11, result.pop().VAR_OBJECT())
+            assert_equal("test", result.pop().VAR_OBJECT())
+            assert_equal(347, result.pop().VAR_OBJECT())
+            assert_equal("test", result.pop().VAR_OBJECT())
+
+            expression =  JoinExpression.new(
+                            StructExpression.new(CommaExpression.new(IntegerTerminal.new(1), StringTerminal.new("test"))),
+                            StructExpression.new(CommaExpression.new(FloatTerminal.new(22.11), IntegerTerminal.new(347))))
+
+            expression.execute(var_AST)
+            
+            result = var_AST.VAR_QRES().pop()
+
+            assert_equal("QRES::BagResult", result.class.to_s())
+            assert_equal(22.11, result.pop().VAR_OBJECT())
+            assert_equal(1, result.pop().VAR_OBJECT())
+            assert_equal(347, result.pop().VAR_OBJECT())
+            assert_equal(1, result.pop().VAR_OBJECT())
+            assert_equal(22.11, result.pop().VAR_OBJECT())
+            assert_equal("test", result.pop().VAR_OBJECT())
+            assert_equal(347, result.pop().VAR_OBJECT())
+            assert_equal("test", result.pop().VAR_OBJECT()) 
+            
+            expression =  JoinExpression.new(
+                            StructExpression.new(CommaExpression.new(IntegerTerminal.new(1), StringTerminal.new("test"))),
+                            BagExpression.new(CommaExpression.new(FloatTerminal.new(22.11), IntegerTerminal.new(347))))
+
+            expression.execute(var_AST)
+            
+            result = var_AST.VAR_QRES().pop()
+
+            assert_equal("QRES::BagResult", result.class.to_s())
+            assert_equal(22.11, result.pop().VAR_OBJECT())
+            assert_equal(1, result.pop().VAR_OBJECT())
+            assert_equal(347, result.pop().VAR_OBJECT())
+            assert_equal(1, result.pop().VAR_OBJECT())
+            assert_equal(22.11, result.pop().VAR_OBJECT())
+            assert_equal("test", result.pop().VAR_OBJECT())
+            assert_equal(347, result.pop().VAR_OBJECT())
+            assert_equal("test", result.pop().VAR_OBJECT())  
+            
+            expression =  JoinExpression.new(
+                            StructExpression.new(CommaExpression.new(IntegerTerminal.new(1), StringTerminal.new("test"))),
+                            FloatTerminal.new(22.11))
+
+            expression.execute(var_AST)
+            
+            result = var_AST.VAR_QRES().pop()
+
+            assert_equal("QRES::BagResult", result.class.to_s())
+            assert_equal(22.11, result.pop().VAR_OBJECT())
+            assert_equal(1, result.pop().VAR_OBJECT())
+            assert_equal(22.11, result.pop().VAR_OBJECT())
+            assert_equal("test", result.pop().VAR_OBJECT())
+            }
         end
     end
 end
