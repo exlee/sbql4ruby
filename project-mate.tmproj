@@ -41,78 +41,6 @@
 	<integer>194</integer>
 	<key>metaData</key>
 	<dict>
-		<key>lib/AST/AST.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>82</integer>
-				<key>line</key>
-				<integer>1030</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>991</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>16</integer>
-				<key>line</key>
-				<integer>1030</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>82</integer>
-				<key>line</key>
-				<integer>1030</integer>
-			</dict>
-		</dict>
-		<key>lib/Operator/OrderBy.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>53</integer>
-				<key>line</key>
-				<integer>33</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>lib/QRES/AbstractSetQueryResult.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>346</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>301</integer>
-		</dict>
-		<key>lib/QRES/QRESComparator.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>13</integer>
-				<key>line</key>
-				<integer>35</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
 		<key>lib/SBAStore/NotInitialisedStoreException.rb</key>
 		<dict>
 			<key>caret</key>
@@ -146,23 +74,19 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>97</integer>
+				<integer>57</integer>
 				<key>line</key>
-				<integer>770</integer>
+				<integer>788</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>753</integer>
+			<integer>755</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>test/ASTComplexTest.rb</string>
-		<string>lib/AST/AST.rb</string>
-		<string>lib/Operator/OrderBy.rb</string>
-		<string>lib/QRES/QRESComparator.rb</string>
-		<string>lib/QRES/AbstractSetQueryResult.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>

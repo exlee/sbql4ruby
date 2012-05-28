@@ -775,121 +775,30 @@ require "lib/AST/AST"
             result = var_AST.VAR_QRES().pop()
 
             assert_equal("QRES::BagResult", result.class.to_s())
-=begin            
+           
             _result = result.pop()
             assert_equal("QRES::StructResult", _result.class.to_s())
             
-            assert_equal(347, _result.pop().VAR_OBJECT())
-            assert_equal("test", _result.pop().VAR_OBJECT())
-            
-            _result = result.pop()
-            assert_equal("QRES::StructResult", _result.class.to_s())
-            
-            assert_equal(22.11, _result.pop().VAR_OBJECT())
-            assert_equal("test", _result.pop().VAR_OBJECT())
-
-            _result = result.pop()
-            assert_equal("QRES::StructResult", _result.class.to_s())
-            
-            assert_equal(347, _result.pop().VAR_OBJECT())
-            assert_equal(1, _result.pop().VAR_OBJECT())
-
-            _result = result.pop()
-            assert_equal("QRES::StructResult", _result.class.to_s())
-
-            assert_equal(22.11, _result.pop().VAR_OBJECT())
-            assert_equal(1, _result.pop().VAR_OBJECT())
-
-            expression =  JoinExpression.new(
-                            StructExpression.new(CommaExpression.new(IntegerTerminal.new(1), StringTerminal.new("test"))),
-                            StructExpression.new(CommaExpression.new(FloatTerminal.new(22.11), IntegerTerminal.new(347))))
-
-            expression.execute(var_AST)
-            
-            result = var_AST.VAR_QRES().pop()
-
-            assert_equal("QRES::BagResult", result.class.to_s())  
-
-            _result = result.pop()
-            assert_equal("QRES::StructResult", _result.class.to_s())
-                                  
-            assert_equal(347, _result.pop().VAR_OBJECT())
-            assert_equal("test", _result.pop().VAR_OBJECT())
+            assert_equal(256, _result.pop().VAR_OBJECT())
+            assert_equal(521, _result.pop().VAR_OBJECT())
             
             _result = result.pop()
             assert_equal("QRES::StructResult", _result.class.to_s())
             
-            assert_equal(22.11, _result.pop().VAR_OBJECT())
-            assert_equal("test", _result.pop().VAR_OBJECT())
-            
+            assert_equal(22, _result.pop().VAR_OBJECT())
+            assert_equal(521, _result.pop().VAR_OBJECT())
+
             _result = result.pop()
             assert_equal("QRES::StructResult", _result.class.to_s())
             
-            assert_equal(347, _result.pop().VAR_OBJECT())
-            assert_equal(1, _result.pop().VAR_OBJECT())
-            
+            assert_equal(256, _result.pop().VAR_OBJECT())
+            assert_equal(128, _result.pop().VAR_OBJECT())
+
             _result = result.pop()
             assert_equal("QRES::StructResult", _result.class.to_s())
-            
-            assert_equal(22.11, _result.pop().VAR_OBJECT())
-            assert_equal(1, _result.pop().VAR_OBJECT()) 
-            
-            expression =  JoinExpression.new(
-                            StructExpression.new(CommaExpression.new(IntegerTerminal.new(1), StringTerminal.new("test"))),
-                            BagExpression.new(CommaExpression.new(FloatTerminal.new(22.11), IntegerTerminal.new(347))))
 
-            expression.execute(var_AST)
-            
-            result = var_AST.VAR_QRES().pop()
-
-            assert_equal("QRES::BagResult", result.class.to_s())
-            
-            _result = result.pop()
-             assert_equal("QRES::StructResult", _result.class.to_s())
-
-             assert_equal(347, _result.pop().VAR_OBJECT())
-             assert_equal("test", _result.pop().VAR_OBJECT())
-
-             _result = result.pop()
-             assert_equal("QRES::StructResult", _result.class.to_s())
-
-             assert_equal(22.11, _result.pop().VAR_OBJECT())
-             assert_equal("test", _result.pop().VAR_OBJECT())
-
-             _result = result.pop()
-             assert_equal("QRES::StructResult", _result.class.to_s())
-
-             assert_equal(347, _result.pop().VAR_OBJECT())
-             assert_equal(1, _result.pop().VAR_OBJECT())
-
-             _result = result.pop()
-             assert_equal("QRES::StructResult", _result.class.to_s())
-
-             assert_equal(22.11, _result.pop().VAR_OBJECT())
-             assert_equal(1, _result.pop().VAR_OBJECT())
-            
-            expression =  JoinExpression.new(
-                            StructExpression.new(CommaExpression.new(IntegerTerminal.new(1), StringTerminal.new("test"))),
-                            FloatTerminal.new(22.11))
-
-            expression.execute(var_AST)
-            
-            result = var_AST.VAR_QRES().pop()
-
-            assert_equal("QRES::BagResult", result.class.to_s())
-            
-            _result = result.pop()
-             assert_equal("QRES::StructResult", _result.class.to_s())
-            
-            assert_equal(22.11, _result.pop().VAR_OBJECT())
-            assert_equal("test", _result.pop().VAR_OBJECT())
-            
-            _result = result.pop()
-             assert_equal("QRES::StructResult", _result.class.to_s())
-            
-            assert_equal(22.11, _result.pop().VAR_OBJECT())
-            assert_equal(1, _result.pop().VAR_OBJECT())
-=end
+            assert_equal(22, _result.pop().VAR_OBJECT())
+            assert_equal(128, _result.pop().VAR_OBJECT())
             }
         end
     end

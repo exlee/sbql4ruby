@@ -355,7 +355,7 @@ require "lib/QRES/Utils"
       #
       # var_AST:AST - AST object
       #
-      # Returns:Array
+      # Returns:Integer
       #
       # Throws:      
       def compare(var_Value, var_AST)
