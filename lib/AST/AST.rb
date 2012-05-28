@@ -42,6 +42,7 @@ require "lib/Operator/In"
 require "lib/Operator/As"
 require "lib/Operator/GroupAs"
 require "lib/Operator/Join"
+require "lib/Operator/OrderBy"
 
 
   class AST
@@ -828,20 +829,9 @@ require "lib/Operator/Join"
         raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + UnionExpression.to_s() + " expected") 
       end
       
-      Common::Logger.print(Common::VAR_DEBUG, self, "[unionExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
-      
-      # Executing left query side
-      var_Object.getLeftExpression().execute(self)
-      
-      # Executing right query side
-      var_Object.getRightExpression().execute(self)
-
       Common::Logger.print(Common::VAR_DEBUG, self, "[unionExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
 
-      var_RightValue = @VAR_QRES.pop()
-      var_LeftValue = @VAR_QRES.pop()
-
-      Operator::Union.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      Operator::Union.eval(var_Object.getLeftExpression(), var_Object.getRightExpression(), self)
 
       Common::Logger.print(Common::VAR_DEBUG, self, "[unionExpressionExec]: Execute finished")
     end
@@ -862,19 +852,8 @@ require "lib/Operator/Join"
       end
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[setMinusExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
-      
-      # Executing left query side
-      var_Object.getLeftExpression().execute(self)
-      
-      # Executing right query side
-      var_Object.getRightExpression().execute(self)
 
-      Common::Logger.print(Common::VAR_DEBUG, self, "[setMinusExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")  
-
-      var_RightValue = @VAR_QRES.pop()
-      var_LeftValue = @VAR_QRES.pop()
-
-      Operator::SetMinus.eval(var_LeftValue, var_RightValue, @VAR_QRES, @VAR_ENVS, @VAR_STORE)
+      Operator::SetMinus.eval(var_Object.getLeftExpression(), var_Object.getRightExpression(), self)
 
       Common::Logger.print(Common::VAR_DEBUG, self, "[setMinusExpressionExec]: Execute finished")
     end
@@ -1025,6 +1004,35 @@ require "lib/Operator/Join"
       Common::Logger.print(Common::VAR_DEBUG, self, "[joinExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
 
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def orderByExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(OrderByExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + OrderByExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orderByExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orderByExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      # Executing left query side
+      var_Object.getLeftExpression().execute(self)
+    
+      #Getting results from QRES
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::OrderBy.eval(var_LeftValue, var_Object.getRightExpression(), self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orderByExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orderByExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
     
     attr_reader :VAR_QRES
     attr_reader :VAR_ENVS

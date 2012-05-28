@@ -100,6 +100,24 @@ require "lib/QRES/AbstractSimpleQueryResult"
       return false
     end
     
+    # Checks given object's type. Returns true
+    # if it's StructResult.
+    #
+    # Params:
+    #
+    # var_ObjectName:AbstractQueryResult - QRES object
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:    
+    def Utils::isStructResult?(var_Object)
+      if(var_Object.is_a?(StructResult))
+        return true
+      end
+
+      return false
+    end
+    
     # Gets an object provided by BagResult treated as QRES 
     # simple object (BagResult must provide exactly one simple 
     # object).

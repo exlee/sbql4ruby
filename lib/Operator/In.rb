@@ -28,29 +28,32 @@ require "lib/QRES/Utils"
     #
     # Throws:AbstractMethodException
     def In.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
-      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue} IN #{var_RValue}")  
+      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue.to_s()} IN #{var_RValue.to_s()}")  
     
-      bagResult = QRES::BagResult.new()
+      foundResult = QRES::BagResult.new()
+      notFoundResult = QRES::BagResult.new()
       
-      iterator = var_LValue.iterator()
+      iterator = var_LValue.nestedIterator()
       
+      objectNotFound = 0
+            
       while(iterator.hasNext())
         object = QRES::Utils::dereference(QRES::Utils::getBagResultAsSimpleObject(iterator.next()), var_Store)
         
         if(var_RValue.is_contained?(object))
-          bagResult.push(object)
+          foundResult.push(object)
+        else
+          notFoundResult.push(object)
         end
       end
-     
-      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: R-Value set size=#{var_RValue.VAR_OBJECT().size().to_s()}, result set size=#{bagResult.VAR_OBJECT().size()}")  
+          
+      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: Obejcts found=#{foundResult.VAR_OBJECT().size().to_s()}, objects not found=#{notFoundResult.VAR_OBJECT().size()}")  
              
-      if(bagResult.VAR_OBJECT().size() != var_RValue.VAR_OBJECT().size())
-        bagResult = QRES::BagResult.new()
+      if(notFoundResult.VAR_OBJECT().size()>0)
+        foundResult = QRES::BagResult.new()
       end  
-
-      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{bagResult.to_s()}")  
       
-      var_QRES.push(bagResult)  
+      var_QRES.push(foundResult)  
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: END")  
     end

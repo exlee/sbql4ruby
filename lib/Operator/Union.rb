@@ -14,31 +14,28 @@ require "lib/QRES/Utils"
     #
     # Params:
     #
-    # var_ObjectName:String - object name
+    # var_Value:AbstractQueryResult - expression to be executed
+ 
+    # var_AST:AST - AST visitor
     #
-    # var_AttributeName:String - attribute name
-    #
-    # var_QRES:QRES - qres stack
-    #
-    # var_ENVS:ENVS - envs stack
-    #
-    # var_Store:SBAStore - SBA store
-    #
-    # Returns: AbstractSimpleQueryResult
-    #
-    # Throws:AbstractMethodException
-    def Union.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
+    # Throws:
+    def Union.eval(var_LValue, var_RValue, var_AST)
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue} UNION #{var_RValue}")  
 
-     
-      result = QRES::BagResult.new()
-      
-      result.push(var_LValue)
-      result.push(var_RValue)
+      # Executing left query side
+      var_LValue.execute(var_AST)
+
+      # Executing right query side
+      var_RValue.execute(var_AST)
+
+      var_RValue = var_AST.VAR_QRES().pop()
+      var_LValue = var_AST.VAR_QRES().pop() 
+             
+      result = var_LValue.union(var_RValue)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{result.to_s()}")  
       
-      var_QRES.push(result)  
+      var_AST.VAR_QRES().push(result)  
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: END")  
     end

@@ -14,39 +14,39 @@ require "lib/QRES/Utils"
     #
     # Params:
     #
-    # var_ObjectName:String - object name
+    # var_LValue:AbstractQueryResult - left side of expression
     #
-    # var_AttributeName:String - attribute name
+    # var_RValue:AbstractQueryResult - right side of expression
     #
-    # var_QRES:QRES - qres stack
+    # var_AST:AST - AST visitor
     #
-    # var_ENVS:ENVS - envs stack
-    #
-    # var_Store:SBAStore - SBA store
-    #
-    # Returns: AbstractSimpleQueryResult
-    #
-    # Throws:AbstractMethodException
-    def SetMinus.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
-      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue} MINUS #{var_RValue}")  
-    
-      bagResult = QRES::BagResult.new()
+    # Throws:
+    def SetMinus.eval(var_LValue, var_RValue, var_AST) 
+      Common::Logger.print(Common::VAR_DEBUG, self, 
+        "[comma]: Beginning operation for lValue=[#{var_LValue.to_s()}], rValue=[#{var_RValue.to_s()}]")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
+
+      # Evaluating left side of the expression
+      var_LValue.execute(var_AST)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: lValue is executed, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
+
+      # Evaluating right side of the expression
+      var_RValue.execute(var_AST)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue is executed, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
+
+      var_RValue = var_AST.VAR_QRES().pop()
+      var_LValue = var_AST.VAR_QRES().pop()
       
-      iterator = var_LValue.iterator()
+      operatorResult = var_LValue.setMinus(var_RValue, var_AST)
+
+      var_AST.VAR_QRES().push(operatorResult)
       
-      while(iterator.hasNext())
-        object = QRES::Utils::dereference(QRES::Utils::getBagResultAsSimpleObject(iterator.next()), var_Store)
-        
-        if(!var_RValue.is_contained?(object))
-          bagResult.push(object)
-        end
-      end
-            
-      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{bagResult.to_s()}")  
-      
-      var_QRES.push(bagResult)  
-      
-      Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: END")  
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: After operation, object name [#{var_LValue.to_s()}], attribute name [#{var_RValue.to_s()}]")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
     end
   end
 end

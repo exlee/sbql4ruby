@@ -1,7 +1,10 @@
 module Common
   
+require "lib/Common/Iterator"
+  
+  
   # Simple iterator class
-  class Iterator
+  class NestedIterator < Iterator
 
     # Params:
     #
@@ -18,9 +21,13 @@ module Common
       
       @VAR_ARRAY = var_Array
       @VAR_ARRAY_INDEX = 0
+      
+      @VAR_NESTED_ITERATOR = nil
+      
+      #first()
     end
     
-    # Returns the first object from array.
+    # Set array index for the first object.
     #
     # Params:
     #
@@ -28,26 +35,18 @@ module Common
     #
     # Throws:
     def first()
-      if(var_Array == nil)
-        return nil
-      end
-      
-      return @VAR_ARRAY[0]
+      @VAR_ARRAY_INDEX = 0
     end
 
-    # Returns the last object from array.
+    # Set array index for the last object.
     #
     # Params:
     #
     # Returns:Object
     #
     # Throws:    
-    def last()
-      if(@VAR_ARRAY == nil)
-        return nil
-      end
-      
-      return @VAR_ARRAY[@VAR_ARRAY.size()-1]
+    def last() 
+       @VAR_ARRAY_INDEX = @VAR_ARRAY.size()-1
     end
 
     # Returns the next object from array.
@@ -61,10 +60,29 @@ module Common
       if(@VAR_ARRAY == nil)
         return nil
       end
-          
+      
+      # Checks nested complex object first
+      if(@VAR_NESTED_ITERATOR != nil)
+        if(@VAR_NESTED_ITERATOR.hasNext())
+          return @VAR_NESTED_ITERATOR.next()
+        end
+        
+        @VAR_NESTED_ITERATOR = nil
+      end
+      
+      # Current nested object doesn't exist, takes next object from the local array            
       if(hasNext())
         @VAR_ARRAY_INDEX += 1
-
+        
+        # Checks next object's type from the local array
+        if(QRES::Utils::isBagResult?(@VAR_ARRAY[@VAR_ARRAY_INDEX-1]) || QRES::Utils::isStructResult?(@VAR_ARRAY[@VAR_ARRAY_INDEX-1]))
+          
+          # Complex object found, calling nested method on it
+          @VAR_NESTED_ITERATOR = @VAR_ARRAY[@VAR_ARRAY_INDEX-1].nestedIterator()
+            
+          return @VAR_NESTED_ITERATOR.next()
+        end
+          
         return @VAR_ARRAY[@VAR_ARRAY_INDEX-1]
       end
      
@@ -82,8 +100,12 @@ module Common
     # Throws:
     def hasNext()
       if(@VAR_ARRAY_INDEX == @VAR_ARRAY.size())
-        return false
-      else
+        if(@VAR_NESTED_ITERATOR != nil)
+          return @VAR_NESTED_ITERATOR.hasNext()
+        end
+          
+        return false  
+      else        
         return true
       end
     end
@@ -96,13 +118,14 @@ module Common
     #
     # Throws:
     def to_s()
-       var_text = "Class=[" + self.class.to_s() + "], size=[" + @VAR_ARRAY.size().to_s() + "], value: ["
+       var_text = "Class=[" + self.class.to_s() + "], size=[" + @VAR_ARRAY.size().to_s() + "], current possition=[#{@VAR_ARRAY_INDEX.to_s()}], value: ["
 
         @VAR_ARRAY.each{|object| var_text += " " + object.to_s()}
 
         return var_text + " ]"
     end
+
+    attr_reader :VAR_NESTED_ITERATOR
         
   end
-  
 end

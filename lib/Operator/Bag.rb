@@ -27,11 +27,15 @@ require "lib/QRES/StructResult"
       var_Value.execute(var_AST)
       var_ExpressionResult = var_AST.VAR_QRES().pop()
       
-      var_StructResult = QRES::StructResult.new()
-      var_StructResult.push(var_ExpressionResult)
+      if(!var_ExpressionResult.is_a?(QRES::BagResult) && var_ExpressionResult.is_a?(QRES::StructResult))
+        var_StructResult = QRES::StructResult.new()
+        var_StructResult.push(var_ExpressionResult)    
+        
+        var_ExpressionResult = var_StructResult    
+      end
       
       var_BagResult = QRES::BagResult.new()
-      var_BagResult.push(var_StructResult)
+      var_BagResult.push(var_ExpressionResult)
       
       var_AST.VAR_QRES().push(var_BagResult)
 

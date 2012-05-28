@@ -32,10 +32,10 @@ require "lib/QRES/Utils"
     
       bagResult = QRES::BagResult.new()
       
-      iterator = var_LValue.iterator()
+      iterator = var_LValue.nestedIterator()
       
       while(iterator.hasNext())
-        object = QRES::Utils::dereference(QRES::Utils::getBagResultAsSimpleObject(iterator.next()), var_Store)
+        object = QRES::Utils::getBagResultAsSimpleObject(iterator.next())
         
         if(var_RValue.is_contained?(object))
           bagResult.push(object)

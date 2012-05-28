@@ -35,7 +35,7 @@ require "lib/QRES/Utils"
          
         var_AST.VAR_QRES().push(QRES::BinderResult.new(var_Name, var_ExpressionResult))
       else
-        iterator = var_ExpressionResult.iterator()
+        iterator = var_ExpressionResult.nestedIterator()
         
         # Result complex objects depends on the given type of complex object
         resultSet = nil
