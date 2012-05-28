@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/QRES/QRESComparator.rb</string>
+	<string>test/ASTComplexTest.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -71,100 +71,42 @@
 				<integer>1030</integer>
 			</dict>
 		</dict>
-		<key>lib/Common/NestedIterator.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>23</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>lib/Common/Stack.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>20</integer>
-				<key>line</key>
-				<integer>37</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>75</integer>
-		</dict>
 		<key>lib/Operator/OrderBy.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>6</integer>
+				<integer>53</integer>
 				<key>line</key>
-				<integer>32</integer>
+				<integer>33</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>lib/QRES/AbstractComplexQueryResult.rb</key>
+		<key>lib/QRES/AbstractSetQueryResult.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>42</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>24</integer>
+				<integer>346</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>16</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>42</integer>
-				<key>line</key>
-				<integer>24</integer>
-			</dict>
+			<integer>301</integer>
 		</dict>
 		<key>lib/QRES/QRESComparator.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>25</integer>
+				<integer>13</integer>
 				<key>line</key>
-				<integer>20</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>lib/QRES/Utils.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
+				<integer>35</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -204,30 +146,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>39</integer>
+				<integer>97</integer>
 				<key>line</key>
-				<integer>768</integer>
+				<integer>770</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>524</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>26</integer>
-				<key>line</key>
-				<integer>768</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>43</integer>
-				<key>line</key>
-				<integer>768</integer>
-			</dict>
+			<integer>753</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
@@ -235,11 +161,8 @@
 		<string>test/ASTComplexTest.rb</string>
 		<string>lib/AST/AST.rb</string>
 		<string>lib/Operator/OrderBy.rb</string>
-		<string>lib/Common/Stack.rb</string>
-		<string>lib/QRES/Utils.rb</string>
 		<string>lib/QRES/QRESComparator.rb</string>
-		<string>lib/QRES/AbstractComplexQueryResult.rb</string>
-		<string>lib/Common/NestedIterator.rb</string>
+		<string>lib/QRES/AbstractSetQueryResult.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>

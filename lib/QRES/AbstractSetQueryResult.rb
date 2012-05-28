@@ -331,6 +331,21 @@ require "lib/QRES/Utils"
 
         return bagResult
       end
+ 
+      # Sort QRES objects 
+      #
+      # Params:
+      #
+      # var_AST:AST - AST object
+      #
+      # Returns:
+      #
+      # Throws:      
+      def sort(var_AST)
+        Common::Logger.print(Common::VAR_DEBUG, self, "Calling operator on the object #{self.to_s()}")  
+
+        @VAR_OBJECT = self.VAR_OBJECT().VAR_STACK().sort{|a1, a2| a1.compare(a2, var_AST)}
+      end      
       
       # Compares QRES objects 
       #
@@ -340,7 +355,7 @@ require "lib/QRES/Utils"
       #
       # var_AST:AST - AST object
       #
-      # Returns:TrueClass/FalseClass
+      # Returns:Array
       #
       # Throws:      
       def compare(var_Value, var_AST)

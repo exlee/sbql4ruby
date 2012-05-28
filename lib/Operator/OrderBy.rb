@@ -29,11 +29,9 @@ require "lib/QRES/BagResult"
       
       var_BagResult = var_AST.VAR_QRES().pop()
       
-      var_Array = var_BagResult.VAR_OBJECT().VAR_STACK()
-      
-      var_Array.sort!{|a1, a2| a1.compare(a2, var_AST)}
-      
-      #var_AST.VAR_QRES().push(bagResult)
+      var_BagResult.sort(var_AST)
+
+      var_AST.VAR_QRES().push(var_BagResult)
 
       Common::Logger.print(Common::VAR_DEBUG, self, "[order by]: After operation, object name [#{var_LValue.to_s()}], attribute name [#{var_RValue.to_s()}]")
       Common::Logger.print(Common::VAR_DEBUG, self, "[order by]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")    

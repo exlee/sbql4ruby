@@ -767,8 +767,8 @@ require "lib/AST/AST"
             var_AST = AST.new("sampledata/data.xml")
             
             expression =  OrderByExpression.new(
-                            BagExpression.new(CommaExpression.new(IntegerTerminal.new(1), StringTerminal.new("test"))),
-                            BagExpression.new(CommaExpression.new(FloatTerminal.new(22.11), IntegerTerminal.new(347))))
+                            BagExpression.new(CommaExpression.new(IntegerTerminal.new(521), IntegerTerminal.new(128))),
+                            BagExpression.new(CommaExpression.new(IntegerTerminal.new(22), IntegerTerminal.new(256))))
 
             expression.execute(var_AST)
             
