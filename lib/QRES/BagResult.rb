@@ -6,13 +6,23 @@ require "lib/QRES/Utils"
 require "lib/QRES/InternalException"
 require "lib/QRES/AbstractSetQueryResult"
 
-
+  # Class: BagResult
+  # Extends: AbstractSetQueryResult
+  # 
+  # Implements Query result in Bag form
   class BagResult < AbstractSetQueryResult
     
+    # Method: initialize (constructor)
+    # 
+    # Initializes new Bag result
+    # 
+    # Params: None
     def initialize()
       super(Common::Stack.new())
     end
 
+    # Method: push
+    #
     # Push QRES object into BagResult 
     #
     # Params:
@@ -25,16 +35,17 @@ require "lib/QRES/AbstractSetQueryResult"
     def push(var_Object)
       
       # Pushing BagResult or StructResult to another BagResult
-      #if(var_Object.is_a?(BagResult) || var_Object.is_a?(StructResult))
-      if(var_Object.is_a?(BagResult))
+      if(var_Object.is_a?(BagResult) || var_Object.is_a?(StructResult))
         for i in 0..var_Object.VAR_OBJECT.size()-1
-          self.push(var_Object.VAR_OBJECT.get(i))
+          self.VAR_OBJECT.push(var_Object.VAR_OBJECT.get(i))
         end
       else
         self.VAR_OBJECT.push(var_Object)
       end
     end
 
+    # Method: pop
+    #
     # Gets QRES object from BagResult 
     #
     # Params:
@@ -46,6 +57,8 @@ require "lib/QRES/AbstractSetQueryResult"
       return self.VAR_OBJECT.pop()
     end
 
+    # Method: equals
+    #
     # Compares QRES value objects 
     #
     # Params:
@@ -114,6 +127,8 @@ require "lib/QRES/AbstractSetQueryResult"
       return var_SBAObject
     end
     
+    # Method: isSimpleObject?
+    #
     # Checks whether current BagResult object may be treated
     # as simple object (is has to provide exactly one simple object).
     #
@@ -136,6 +151,8 @@ require "lib/QRES/AbstractSetQueryResult"
      return true
     end
     
+    # Method: getAsSimpleResult
+    #
     # Checks whether current BagResult object may be treated
     # as simple object (is has to provide exactly one simple object).
     #
@@ -155,7 +172,9 @@ require "lib/QRES/AbstractSetQueryResult"
       
       return self.VAR_OBJECT.get(self.VAR_OBJECT.size()-1)
     end
-       
+              
+    # Method: to_s
+    #
     # Returns a string representation of QRES value object.
     #
     # Params:

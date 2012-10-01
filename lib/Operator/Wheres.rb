@@ -5,8 +5,14 @@ require "lib/Operator/Evaluate"
 
 require "lib/QRES/BagResult"  
   
+  # Class: Wheres
+  # Extends: AbstractOperator
+  #
+  # Class implementing Wheres operator
   class Wheres < AbstractOperator
     
+    # Static method: eval
+    #
     # Evaluates 'wheres' operator 
     #
     # Params:

@@ -3,9 +3,14 @@ module AST
 require "lib/AST/Expression"
 
 
+  # Class: UnaryExpression
+  # Extends: Expression
+  #
   # Abstract class for terminal expressions
   class UnaryExpression < Expression
       
+    # Method: initialize
+    #
     # Params:
     #
     # var_Expression:Expression - Expression
@@ -22,6 +27,8 @@ require "lib/AST/Expression"
       super(var_Expression)
      end
      
+     # Method: to_s
+     #
      # Returns a string representation of UnaryExpression object.
      #
      # Params:

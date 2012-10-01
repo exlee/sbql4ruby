@@ -6,9 +6,14 @@ require "lib/QRES/StructResult"
 require "lib/Common/exceptions"
 
 
+  # Class: StructResultIterator
+  # Extends: Common::Iterator
+  #
   # Extends iterator class for BagResult objects.
   class StructResultIterator < Common::Iterator
     
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_BagResult:StructResult - StructResult object

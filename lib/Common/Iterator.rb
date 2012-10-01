@@ -1,8 +1,12 @@
 module Common
   
+  # Class: Iterator
+  #
   # Simple iterator class
   class Iterator
 
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Array:Array - Array object
@@ -20,6 +24,8 @@ module Common
       @VAR_ARRAY_INDEX = 0
     end
     
+    # Method: first
+    #
     # Returns the first object from array.
     #
     # Params:
@@ -35,6 +41,8 @@ module Common
       return @VAR_ARRAY[0]
     end
 
+    # Method: last
+    #
     # Returns the last object from array.
     #
     # Params:
@@ -50,6 +58,8 @@ module Common
       return @VAR_ARRAY[@VAR_ARRAY.size()-1]
     end
 
+    # Method: next
+    #
     # Returns the next object from array.
     #
     # Params:
@@ -71,6 +81,8 @@ module Common
       return nil
     end
     
+    # Method: hasNext
+    #
     # Returns true when the array index is lower
     # than the number of objects kept by the array.
     # Otherwise it's false.
@@ -88,6 +100,8 @@ module Common
       end
     end
 
+    # Method: to_s
+    #
     # Returns a string representation of SBAObject.
     #
     # Params:

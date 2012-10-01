@@ -8,8 +8,14 @@ require "lib/AST/TerminalExpression"
 require "lib/QRES/IntegerResult"
 
 
+  # Class: IntegerTerminal
+  # Extends: TerminalExpression
+  #
+  # Class implementing Terminal in Integer form
   class IntegerTerminal < TerminalExpression
     
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Value:Integer
@@ -25,6 +31,8 @@ require "lib/QRES/IntegerResult"
       super(var_Value)
     end
     
+    # Method: execute
+    #
     # Executes current expression using given AST object.
     #
     # Params:
@@ -48,6 +56,8 @@ require "lib/QRES/IntegerResult"
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Done.")
     end
 
+    # Method: to_qres
+    #
     # Casts current object value into QRES object.
     #
     # Params:

@@ -5,8 +5,14 @@ require "lib/AST/IncorrectArgumentException"
 require "lib/QRES/FloatResult"
 
 
+  # Class: FloatTerminal
+  # Extends: TerminalExpression
+  #
+  # Class representing Terminal in Float form
   class FloatTerminal < TerminalExpression
     
+    # Method: initialize (constructor)
+    # 
     # Params:
     #
     # var_Value:Float
@@ -22,6 +28,8 @@ require "lib/QRES/FloatResult"
       super(var_Value)
     end
     
+    # Method: execute
+    #
     # Executes current expression using given AST object.
     #
     # Params:
@@ -45,6 +53,8 @@ require "lib/QRES/FloatResult"
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Done.")
     end
     
+    # Method: to_qres
+    #
     # Casts current object value into QRES object.
     #
     # Params:

@@ -4,12 +4,21 @@ require "lib/QRES/AbstractSetQueryResult"
 require "lib/QRES/StructResultIterator"
 
 
-  class StructResult < AbstractSetQueryResult
+  # Class: StructResult
+  # Extends: AbstractComplexQueryResult
+  #
+  # Implements query result for Struct object
+  class StructResult < AbstractComplexQueryResult
     
+    # Method: initialize (constructor)
+    # 
+    # Initializes new StructResult object
     def initialize()
       super(Common::Stack.new())
     end
 
+    # Method: push
+    #
     # Push QRES object into BagResult 
     #
     # Params:
@@ -32,6 +41,8 @@ require "lib/QRES/StructResultIterator"
       end
     end
 
+    # Method: pop
+    #
     # Gets QRES object from BagResult 
     #
     # Params:
@@ -43,6 +54,7 @@ require "lib/QRES/StructResultIterator"
       return self.VAR_OBJECT.pop()
     end
 
+    # Method: equals
     # Compares QRES value objects 
     #
     # Params:
@@ -83,7 +95,7 @@ require "lib/QRES/StructResultIterator"
       
       return false
     end
-
+         
     # Returns a string representation of QRES value object.
     #
     # Params:

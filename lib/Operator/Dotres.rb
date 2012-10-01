@@ -6,8 +6,14 @@ require "lib/Operator/Evaluate"
 require "lib/QRES/BagResult"
 
   
+  # Class: Dotres
+  # Extends: AbstractOperator
+  #
+  # Class implementing Dotres operator
   class Dotres < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'dotres' operator 
     #
     # Params:

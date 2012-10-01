@@ -3,6 +3,10 @@ module AST
 require "lib/AST/UnaryExpression"
   
 
+  # Class: AsExpression
+  # Extends: UnaryExpression
+  #
+  # Class implementing As expression
   class AsExpression < UnaryExpression
 
     # Params:

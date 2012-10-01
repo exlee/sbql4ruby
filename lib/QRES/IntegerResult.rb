@@ -7,8 +7,21 @@ require "lib/QRES/FloatResult"
 require "lib/QRES/StringResult"
 
 
+  # Class: IntegerResult
+  # Extends: AbstractSimpleQueryResult
+  # 
+  # Class which implements representation of query result for Integer datatype
   class IntegerResult < AbstractSimpleQueryResult
  
+    # Method: initialize (constructor)
+    # 
+    # Creates new IntegerResult object
+    # 
+    # Params:
+    # var_Object - object which will be transformed into IntegerResult type
+    #
+    # Throws:
+    # QRESTypeError - in case, when provided type is not castable into IntegerResult
     def initialize(var_Object)
       if(!SBAStore::SBAInteger.isValidType?(var_Object))
         raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + Integer.to_s() + " expected")
@@ -42,6 +55,8 @@ require "lib/QRES/StringResult"
       end
     end
 
+    # Method: - (overloaded substraction)
+    #
     # Overloaded operator subtracts the IntegerResult encapsulated values
     # and returns a new AbstractSimpleQueryResult object which provides 
     # result.
@@ -65,6 +80,7 @@ require "lib/QRES/StringResult"
       end
     end
 
+    # Method: * (overloaded multiplication)
     # Overloaded operator multiplies the IntegerResult encapsulated values
     # and returns a new AbstractSimpleQueryResult object which provides 
     # result.
@@ -88,6 +104,8 @@ require "lib/QRES/StringResult"
       end
     end
     
+    # Method: / (overloaded division)
+    #
     # Overloaded operator divides the IntegerResult encapsulated values
     # and returns a new AbstractSimpleQueryResult object which provides 
     # result.
@@ -113,6 +131,8 @@ require "lib/QRES/StringResult"
       end
     end
     
+    # Method: == (overloaded equal)
+    #
     # Overloaded operator 'equal'.
     #
     # Params:
@@ -136,7 +156,9 @@ require "lib/QRES/StringResult"
       return false
     end
     
-    # Overloaded operator 'greather'.
+    # Method: > (overloaded greater than)
+    #
+    # Overloaded operator 'greater'.
     #
     # Params:
     #
@@ -157,7 +179,9 @@ require "lib/QRES/StringResult"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
-    # Overloaded operator 'greather equal'.
+    # Method: >= (overloaded greater-equal than)
+    #
+    # Overloaded operator 'greathr equal'.
     #
     # Params:
     #
@@ -178,6 +202,8 @@ require "lib/QRES/StringResult"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: < (overloaded operator smaller than)
+    #
     # Overloaded operator 'less'.
     #
     # Params:
@@ -199,6 +225,8 @@ require "lib/QRES/StringResult"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: <= (overloaded operator smaller-equal than)
+    #
     # Overloaded operator 'less equal'.
     #
     # Params:
@@ -220,6 +248,8 @@ require "lib/QRES/StringResult"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: different
+    #
     # Overloaded operator 'different'.
     #
     # Params:
@@ -241,6 +271,8 @@ require "lib/QRES/StringResult"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: % (overloaded operator modulo)
+    #
     # Overloaded operator 'modulo'.
     #
     # Params:
@@ -262,6 +294,8 @@ require "lib/QRES/StringResult"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: and
+    #
     # Overloaded operator 'and'.
     #
     # Params:
@@ -277,6 +311,8 @@ require "lib/QRES/StringResult"
       return self.VAR_OBJECT && var_RValue.VAR_OBJECT()
     end
     
+    # Method: or
+    #
     # Overloaded operator 'or'.
     #
     # Params:
@@ -291,7 +327,9 @@ require "lib/QRES/StringResult"
        
       return self.VAR_OBJECT || var_RValue.VAR_OBJECT()
     end
-                
+            
+    # Method: to_sba
+    #
     # Casts current object value into SBA object.
     #
     # Params:

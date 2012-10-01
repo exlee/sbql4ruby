@@ -2,6 +2,7 @@ module Common
   
   
   class Stack
+  # Implements stack structure using internal array
 
     def initialize()
       @VAR_STACK = []

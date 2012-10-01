@@ -8,8 +8,21 @@ require "lib/QRES/BooleanResult"
 require "lib/QRES/AbstractSimpleQueryResultFactory"
   
 
+  # Class: FloatResult
+  # Extends: AbstractSimpleQueryResult
+  #
+  # Class which implements query result for Float type
   class FloatResult < AbstractSimpleQueryResult
  
+    # Method: initialize (constructor)
+    # 
+    # Creates new FloatResult object based on provided object
+    #
+    # Params:
+    # var_Object
+    #
+    # Throws:
+    # QRESTypeError - when type is incompatible with FloatResult
     def initialize(var_Object)
       if(!SBAStore::SBAFloat.isValidType?(var_Object))
         raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + Float.to_s() + " expected")
@@ -41,6 +54,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       end
     end
 
+    # Method: - (overloaded substraction)
+    #
     # Overloaded operator subtracts the FloatResult encapsulated values
     # and returns a new AbstractSimpleQueryResult object which provides 
     # result.
@@ -62,6 +77,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       end
     end
     
+    # Method: * (overloaded multiplication)
+    #
     # Overloaded operator multiplies the FloatResult encapsulated values
     # and returns a new AbstractSimpleQueryResult object which provides 
     # result.
@@ -83,6 +100,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       end
     end
     
+    # Method: / (overloaded division)
+    #
     # Overloaded operator divides the FloatResult encapsulated values
     # and returns a new AbstractSimpleQueryResult object which provides 
     # result.
@@ -104,6 +123,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       end
     end
     
+    # Method: == (overloaded equal)
+    #
     # Overloaded operator 'equal'.
     #
     # Params:
@@ -131,7 +152,9 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       return false        
     end
     
-    # Overloaded operator 'greather'.
+    # Method: > (overloaded greater than)
+    #
+    # Overloaded operator 'greater'.
     #
     # Params:
     #
@@ -152,7 +175,9 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
-    # Overloaded operator 'greather equal'.
+    # Method: >= (overloaded greater-equal than)
+    #
+    # Overloaded operator 'greater equal'.
     #
     # Params:
     #
@@ -173,6 +198,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: < (overloaded smaller than)
+    #
     # Overloaded operator 'less'.
     #
     # Params:
@@ -194,6 +221,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: <= (overloaded smaller-equal than)
+    #
     # Overloaded operator 'less equal'.
     #
     # Params:
@@ -215,6 +244,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: different
+    # 
     # Overloaded operator 'different'.
     #
     # Params:
@@ -236,6 +267,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
+    # Method: % (overloaded modulo)
+    #
     # Overloaded operator 'modulo'.
     #
     # Params:
@@ -257,6 +290,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
    
+    # Method: and
+    #
     # Overloaded operator 'and'.
     #
     # Params:
@@ -272,6 +307,8 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
       return self.VAR_OBJECT && var_RValue.VAR_OBJECT()
     end
     
+    # Method or
+    #
     # Overloaded operator 'or'.
     #
     # Params:
@@ -286,7 +323,9 @@ require "lib/QRES/AbstractSimpleQueryResultFactory"
        
       return self.VAR_OBJECT || var_RValue.VAR_OBJECT()
     end   
-          
+      
+    # Method to_sba
+    #
     # Casts current object value into SBA object.
     #
     # Params:

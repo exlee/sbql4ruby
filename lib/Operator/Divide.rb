@@ -6,8 +6,14 @@ require "lib/Operator/RuntimeException"
 require "lib/QRES/Utils"
 
   
+  # Class: Divide
+  # Extends: AbstractOperator
+  #
+  # Class implementing Divide operator
   class Divide < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'divide' operator 
     #
     # Params:

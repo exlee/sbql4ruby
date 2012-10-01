@@ -3,8 +3,14 @@ module AST
 require "lib/AST/BinaryExpression"
   
 
+  # Class: GreatherExpression
+  # Extends: BinaryExpression
+  #
+  # Class implementing Greather-Than expression
   class GreatherExpression < BinaryExpression
 
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_LeftExpression:Expression - L-Value
@@ -18,6 +24,8 @@ require "lib/AST/BinaryExpression"
       super(var_LeftExpression, var_RightExpression)
     end
     
+    # Method: execute
+    #
     # Executes current expression using given AST object.
     #
     # Params:

@@ -1,7 +1,11 @@
 module QRES
   
+  # Class: AbstractSimpleQueryResultFactory
+  # 
+  # Abstract class which represents SimpleQueryResult factory
   class AbstractSimpleQueryResultFactory
   
+    # Static Method: create
     # Verifies given simple object type and
     # creates a new QRES object depending
     # on the verify result.
@@ -51,6 +55,8 @@ module QRES
       end
     end
     
+    # Static Method: ignore_exceptions
+    #
     # Executes given code and ignores specified exceptions.
     #
     # Params:

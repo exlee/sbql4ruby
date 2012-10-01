@@ -4,9 +4,14 @@ require "lib/SBAStore/SBAObject"
 require "lib/Common/exceptions"
 
 
+  # Class: SBASimpleObject
+  # Extends: SBAObject
+  #
   # SBA store abstract class for simple objects 
   class SBASimpleObject < SBAObject
 
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Name:String - SBA store object name
@@ -22,6 +27,8 @@ require "lib/Common/exceptions"
       super(var_Name, var_Object, var_ID)
     end
     
+    # Static Method: isValidType?
+    #
     # Abstract method, should be implemented by the inheriting 
     # classes (valids given object).
     #
@@ -36,6 +43,8 @@ require "lib/Common/exceptions"
       raise AbstractMethodException.new("Abstract method")
     end
     
+    # Method: to_qres
+    #
     # Abstract method, should be implemented by the inheriting 
     # classes (valids given object).
     #

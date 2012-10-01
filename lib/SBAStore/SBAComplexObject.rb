@@ -6,9 +6,14 @@ require "lib/SBAStore/SBAComplexObjectIterator"
 require "lib/Common/exceptions"
 
 
+  # Class: SBAComplexObject
+  # Extends: SBAObject
+  #
   # SBA store class for simple objects 
   class SBAComplexObject < SBAObject
 
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Name:String - SBA store object name
@@ -22,6 +27,8 @@ require "lib/Common/exceptions"
       super(var_Name, Array.new(), var_ID)
     end
     
+    # Method: add
+    #
     # Adds a new object's identifier to the complex obejct 
     # (as attribute). 
     #
@@ -44,6 +51,8 @@ require "lib/Common/exceptions"
       @VAR_OBJECT.push(var_Id)
     end
     
+    # Method: find
+    #
     # Finds the given SBA object's identifier and returns array index.
     #
     # Params:
@@ -57,6 +66,8 @@ require "lib/Common/exceptions"
       return @VAR_OBJECT.index(var_Identifier)
     end
 
+    # Method: get
+    #
     # Returns SBA object taken from the array using given array index.
     #
     # Params:
@@ -70,6 +81,8 @@ require "lib/Common/exceptions"
       return @VAR_OBJECT[var_Index]
     end
 
+    # Method: iterator
+    #
     # Returns iterator.
     #
     # Params:
@@ -81,6 +94,8 @@ require "lib/Common/exceptions"
       return SBAComplexObjectIterator.new(self)
     end
     
+    # Method: is_a?
+    #
     # Compares given object's type with it's type,
     # returns true if those objects' types are
     # the same.
@@ -100,6 +115,8 @@ require "lib/Common/exceptions"
       return false
     end
          
+    # Method: to_s
+    #
     # Returns a string representation of SBAObject.
     #
     # Params:

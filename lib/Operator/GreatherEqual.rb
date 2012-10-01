@@ -7,8 +7,17 @@ require "lib/QRES/Utils"
 require "lib/QRES/BooleanResult"
 
   
+  # Class: GreatherEqual
+  # Extends: AbstractOperator
+  #
+  # Class implementing Greater-Equal operator
+  # NOTE: We're aware, that class name is typoed, yet
+  #       because of high level of complexity we leave it
+  #       as is.
   class GreatherEqual < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'greather equal' operator 
     #
     # Params:

@@ -3,6 +3,8 @@ module SBAStore
 require "lib/Common/exceptions"
 
 
+  # Class SBAObject
+  #
   # SBA store basic abstract class. 
   class SBAObject
 
@@ -12,6 +14,8 @@ require "lib/Common/exceptions"
     # VAR_OBJECT_COUNTER:Integer - SBAObject instances counter
     @@VAR_OBJECT_COUNTER = 0
     
+    # Method: initialize (constructor)
+    # 
     # Params:
     #
     # var_Name:String - SBA store object name
@@ -36,6 +40,8 @@ require "lib/Common/exceptions"
       @@VAR_OBJECT_COUNTER += 1
     end
 
+    # Static Method: isValidType?
+    #
     # Abstract method, should be implemented by the inheriting 
     # classes (valids given object).
     #
@@ -50,6 +56,8 @@ require "lib/Common/exceptions"
       raise AbstractMethodException.new("Abstract method")
     end
     
+    # Static Method: VAR_OBJECT_COUNTER
+    #
     # Gets SBAObjects instance counter.
     #
     # Params:
@@ -61,6 +69,8 @@ require "lib/Common/exceptions"
       @@VAR_OBJECT_COUNTER
     end
     
+    # Static Method: VAR_IDENTIFIER_PREFIX
+    #
     # Gets SBAObjects default identifier's prefix.
     #
     # Params:
@@ -72,6 +82,8 @@ require "lib/Common/exceptions"
       @@VAR_IDENTIFIER_PREFIX
     end    
     
+    # Method: to_s
+    #
     # Returns a string representation of SBAObject.
     #
     # Params:

@@ -3,8 +3,14 @@ module AST
 require "lib/AST/BinaryExpression"
 
   
+  # Class: ModuloExpression
+  # Extends: BinaryExpression
+  #
+  # Class implementing Modulo expression
   class ModuloExpression < BinaryExpression
     
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_LeftExpression:Expression - L-Value
@@ -18,6 +24,7 @@ require "lib/AST/BinaryExpression"
       super(var_LeftExpression, var_RightExpression)
     end
   
+    # Method: execute
     # Executes current expression using given AST object.
     #
     # Params:

@@ -3,12 +3,16 @@ module AST
 require "lib/AST/Expression"
 
 
+  # Class: BinaryExpression
+  # Extends: Expression
+  #
   # Abstract class for terminal expressions
   class BinaryExpression < Expression
     
     @@var_Left = "LEFT"
     @@var_Right = "RIGHT"
     
+    # Method: initialize (constructor)
     # Params:
     #
     # var_LeftExpression:Expression - Left expression
@@ -33,6 +37,8 @@ require "lib/AST/Expression"
       super(var_Value)
      end
 
+     # Method: getLeftExpression
+     #
      # Returns left expression.
      #
      # Params:
@@ -44,6 +50,8 @@ require "lib/AST/Expression"
        return self.VAR_VALUE[:var_Left]
      end    
 
+     # Method getRightExpression
+     #
      # Returns right expression.
      #
      # Params:
@@ -55,6 +63,8 @@ require "lib/AST/Expression"
        return self.VAR_VALUE[:var_Right]
      end
      
+     # Method: to_s
+     #
      # Returns a string representation of BinaryExpression object.
      #
      # Params:

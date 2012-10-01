@@ -9,6 +9,11 @@ require "lib/QRES/IncorrectArgumentException"
 require "lib/SBAStore/SBAStore"
   
   
+  # Class: ReferenceResult
+  # Extends: AbstractComplexQueryResult
+  #
+  # Implements query result for Reference objects
+
   class ReferenceResult < AbstractComplexQueryResult
       
     def initialize(var_Identifier)
@@ -19,6 +24,8 @@ require "lib/SBAStore/SBAStore"
       super(var_Identifier)
     end
 
+    # Method: push
+    #
     # Pushes object's identifier
     #
     # Params:
@@ -36,6 +43,8 @@ require "lib/SBAStore/SBAStore"
       self.VAR_OBJECT = var_Identifier
     end
 
+    # Method: pop
+    #
     # Returns kept object   
     #
     # Params:
@@ -47,6 +56,8 @@ require "lib/SBAStore/SBAStore"
       return self.VAR_OBJECT
     end
 
+    # Method: equals
+    #
     # Compares QRES value objects 
     #
     # Params:
@@ -64,6 +75,8 @@ require "lib/SBAStore/SBAStore"
       raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + ReferenceResult.to_s() + " expected")
     end
 
+    # Method: dereference
+    #
     # Dereferences current QRES object searching in SBA store.
     #
     # Params:
@@ -86,7 +99,9 @@ require "lib/SBAStore/SBAStore"
       
       return var_SBAObject
     end
-            
+        
+    # Method: to_s
+    #
     # Returns a string representation of QRES value object.
     #
     # Params:

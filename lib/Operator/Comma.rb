@@ -4,8 +4,14 @@ require "lib/Operator/AbstractOperator"
 require "lib/Operator/Evaluate"
 
   
+  # Class: Comma
+  # Extends: AbstractOperator
+  #
+  # Class which implements Comma operator
   class Comma < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'comma' operator 
     #
     # Params:

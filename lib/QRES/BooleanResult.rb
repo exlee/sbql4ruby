@@ -4,8 +4,21 @@ require "lib/SBAStore/SBABoolean"
 require "lib/QRES/AbstractSimpleQueryResult"
   
 
+  # Class: BooleanResult
+  # Extends: AbstractSimpleQueryResult
+  # 
+  # Class which implements representation of Query result in Boolean form
   class BooleanResult < AbstractSimpleQueryResult
  
+    # Method: initialize (constructor)
+    # 
+    # Initializes new BooleanResult object using provided data object
+    # 
+    # Params:
+    # var_Object - object for which create BooleanResult
+    #
+    # Throws:
+    # QRESTypeError - when types are incompatible
     def initialize(var_Object)
       if(!SBAStore::SBABoolean.isValidType?(var_Object))
         raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + TrueClass.to_s() + 
@@ -100,9 +113,8 @@ require "lib/QRES/AbstractSimpleQueryResult"
       if(var_RValue.is_a?(self.class))
         return self.VAR_OBJECT == var_RValue.VAR_OBJECT()
       end
-      
-      return false  
-      #raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
+        
+      raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
     
     # Overloaded operator 'greather' is not allowed for BooleanResult.
@@ -236,7 +248,7 @@ require "lib/QRES/AbstractSimpleQueryResult"
         
       raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}] ")
     end
-        
+    
     # Casts current object value into SBA object.
     #
     # Params:

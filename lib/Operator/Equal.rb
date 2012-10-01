@@ -6,8 +6,14 @@ require "lib/Operator/RuntimeException"
 require "lib/QRES/Utils"
 require "lib/QRES/BooleanResult"
   
+  # Class: Equal
+  # Extends: AbstractOperator
+  # 
+  # Class implementing Equal operator
   class Equal < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'equal' operator 
     #
     # Params:

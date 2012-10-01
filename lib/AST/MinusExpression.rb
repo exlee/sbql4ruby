@@ -3,8 +3,14 @@ module AST
 require "lib/AST/BinaryExpression"
   
 
+  # Class: MinusExpression
+  # Extends: BinaryExpression
+  #
+  # Class implementing Minus expression
   class MinusExpression < BinaryExpression
 
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_LeftExpression:Expression - L-Value
@@ -18,6 +24,8 @@ require "lib/AST/BinaryExpression"
       super(var_LeftExpression, var_RightExpression)
     end
     
+    # Method: execute
+    #
     # Executes current expression using given AST object.
     #
     # Params:

@@ -6,8 +6,18 @@ require "lib/QRES/BagResult"
 require "lib/ENVS/Binder"
 
 
+  # Class: Frame
+  # 
+  # Implements Environemnt Stack Frame
   class Frame
     
+    # Method: initialize (constructor)
+    # 
+    # Initializes frame, empty or with object fetched for it 
+    # 
+    # Params:
+    # *args - object which are provided in this frame
+
     def initialize(*args)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: Initialisation for the number of arguments [#{args.size().to_s()}]")
@@ -38,6 +48,14 @@ require "lib/ENVS/Binder"
       Common::Logger.print(Common::VAR_DEBUG, self, "[initialize]: End, length [#{@VAR_BINDER_LIST.size().to_s()}], data [#{@VAR_BINDER_LIST.to_s()}]")
     end
   
+    # Method: findAllByName
+    # 
+    # Gets object from the current frame, which names correspond to provided parameter
+    # 
+    # Params:
+    # var_Name - name for which ENVS Frame will be looking
+    # 
+    # Returns: Bag with parameters
     def findAllByName(var_Name)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[findAllByName]: Looking for the object [#{var_Name}] in the frame")
@@ -60,6 +78,8 @@ require "lib/ENVS/Binder"
       return bag
     end
      
+    # Method: to_s
+    #
     # Returns a string representation of Frame object.
     #
     # Params:

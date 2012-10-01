@@ -4,12 +4,22 @@ require "lib/QRES/AbstractQueryResult"
 require "lib/QRES/AbstractMethodException"
 
 
+  # Class: AbstractSimpleQueryResult
+  # Extends: AbstractQueryResult
+  # 
+  # Abstract class which represents simple-typed query results
   class AbstractSimpleQueryResult < AbstractQueryResult
       
+    # Method: initialize (constructor)
+    # 
+    # Initializes new AbstractSimpleQueryResult
+    # ( for use in subclasses )
     def initialize(var_Object)
       super(var_Object)
     end
       
+    # Method: equals
+    #
     # Compares QRES value objects 
     #
     # Params:
@@ -74,6 +84,7 @@ require "lib/QRES/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")
     end
 
+    # Method: - (overloaded substraction)
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -87,6 +98,8 @@ require "lib/QRES/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")     
     end
 
+    # Method: * (overloaded multiplication)
+    # 
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -100,6 +113,8 @@ require "lib/QRES/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")       
     end
     
+    # Method: / (overloaded division)
+    #
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -113,6 +128,8 @@ require "lib/QRES/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")  
     end
     
+    # Method: == (overloaded equal)
+    #
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -125,7 +142,7 @@ require "lib/QRES/AbstractMethodException"
     def ==(var_RValue)
       raise AbstractMethodException.new("Abstract method")  
     end
-
+    
     # Abstract method to be implemented by inheriting classes.
     #
     # Params:
@@ -239,6 +256,6 @@ require "lib/QRES/AbstractMethodException"
     # Throws:AbstractMethodExcepion    
     def to_sba()
       raise AbstractMethodExcepion.new("Abstract method")
-    end      
+    end  
   end
 end

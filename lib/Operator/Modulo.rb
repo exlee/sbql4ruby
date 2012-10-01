@@ -6,8 +6,14 @@ require "lib/Operator/RuntimeException"
 require "lib/QRES/Utils"
 
   
+  # Class: Modulo
+  # Extends: AbstractOperator
+  # 
+  # Class implementing Modulo operator
   class Modulo < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'modulo' operator 
     #
     # Params:

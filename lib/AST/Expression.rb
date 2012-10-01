@@ -3,8 +3,13 @@ module AST
 require "lib/AST/AbstractMethodException"
 
 
+  # Class: Expression
+  #
+  # Abstract class representing expression
   class Expression
  
+    # Method: initialize (constructor)
+    # 
     # Params:
     #
     # var_Value:Array - expressions
@@ -16,6 +21,8 @@ require "lib/AST/AbstractMethodException"
       @VAR_VALUE = var_Value
     end
     
+    # Method: execute
+    # 
     # Abstract method, should be implemented by the inheriting 
     # classes (valids given object).
     #
@@ -28,6 +35,7 @@ require "lib/AST/AbstractMethodException"
       raise AbstractMethodException.new("Abstract method")
     end
     
+    # Method: to_s
     # Returns a string representation of Expression object.
     #
     # Params:

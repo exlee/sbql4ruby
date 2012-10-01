@@ -6,9 +6,14 @@ require "lib/Common/exceptions"
 require "lib/QRES/FloatResult"
 
 
+  # Class: SBAFloat
+  # Extends: SBASimpleObject
+  #
   # SBA store Integer class 
   class SBAFloat < SBASimpleObject
     
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_Name:String - SBA store object name
@@ -28,6 +33,8 @@ require "lib/QRES/FloatResult"
       super(var_Name, var_Object, var_ID)
     end
 
+    # Static Method: isValidType?
+    #
     # Validates given object's type.
     #
     # Params:
@@ -45,6 +52,8 @@ require "lib/QRES/FloatResult"
       return false
     end
      
+    # Static Method: fromString
+    #
     # Casts given string value to float 
     # if possible.
     #
@@ -64,6 +73,8 @@ require "lib/QRES/FloatResult"
       return SBAFloat.new(var_Name, Float(var_Object))
     end   
     
+    # Method: to_qres
+    #
     # Casts object into QRES::FloatResult.
     #
     # Params:

@@ -7,8 +7,13 @@ require "lib/SBAStore/SBAStore"
 require "lib/XMLDB/Listener"
 
 
+  # Class: XMLParser
+  # 
+  # Class which implements XML parser for SBAStore use
   class XMLParser
      
+    # Method: loadXML
+    #
     # Loads given XML data and builds SBA store.
     #
     # Params:
@@ -38,6 +43,8 @@ require "lib/XMLDB/Listener"
       return var_Store
     end
     
+    # Static Method: validXML?
+    #
     # Valids given XML data.
     #
     # Params:

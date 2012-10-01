@@ -45,8 +45,13 @@ require "lib/Operator/Join"
 require "lib/Operator/OrderBy"
 
 
+  # Class: AST
+  # 
+  # Class implementing Abstract Syntax Tree for SBQL
   class AST
     
+    # Method: initialize (constructor)
+    #
     # Params:
     #
     # var_XMLDataPath:String - Path to data file
@@ -74,6 +79,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[initalize]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: integerTerminalExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -98,6 +105,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[integerTerminalExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: floatTerminalExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -122,6 +131,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[floatTerminalExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
 
+    # Method: booleanTerminalExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -146,6 +157,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[booleanTerminalExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: stringTerminalExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -170,6 +183,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[stringTerminalExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
         
+    # Method: plusExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -202,6 +217,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[plusExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: minusExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -234,6 +251,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[minusExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: multiplyExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -266,6 +285,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[multiplyExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: divideExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -298,6 +319,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[divideExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
 
+    # Method: equalExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -330,6 +353,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end    
     
+    # Method: greatherExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -362,6 +387,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[equalExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: greatherEqualExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -394,6 +421,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[greatherEqualExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: lessExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -426,6 +455,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[lessExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: lessEqualExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -458,6 +489,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[lessEqualExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: differentExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -490,6 +523,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[differentExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: moduloExpressionExec
+    # 
     # Executes AST object 
     #
     # Params:
@@ -522,6 +557,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[moduloExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: orExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -554,6 +591,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[orExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: andExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -586,6 +625,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[andExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: nameExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -610,6 +651,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[nameExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: dotExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -646,6 +689,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[dotExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: whereExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -682,6 +727,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[whereExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Method: commaExpressionExec
+    #
     # Executes AST object 
     #
     # Params:
@@ -704,6 +751,7 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[commaExpressionExec]: Execute finished")
     end
 
+    # Method:  bagExpressionExec
     # Executes AST object 
     #
     # Params:
@@ -726,6 +774,8 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[bagExpressionExec]: Execute finished")
     end
     
+    # Method: structExpressionExec
+    #
     # Executes AST object 
     #
     # Params:

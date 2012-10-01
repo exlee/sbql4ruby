@@ -2,10 +2,19 @@ module QRES
 
 require "lib/Common/Stack"
 require "lib/QRES/Utils"
+require "lib/QRES/AbstractQueryResult"
 
 
+  # Class: AbstractComplexQueryResult
+  # Extends: AbstractQueryResult
+  # 
+  # Abstract class for comple query results
   class AbstractComplexQueryResult < AbstractQueryResult
       
+      # Method: initialize (constructor)
+      # 
+      # Initializes new AbstractComplexQueryResult
+      # (for use in sub objects)
       def initialize(var_Object)
         #if(!var_Object.is_a?(Common::Stack))
         #  raise QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + Common::Stack.to_s() + " expected")
@@ -14,6 +23,8 @@ require "lib/QRES/Utils"
         super(var_Object)
       end
       
+      # Method: push
+      #
       # Abstract method, pushes QRES object into BagResult 
       #
       # Params:
@@ -27,7 +38,9 @@ require "lib/QRES/Utils"
         raise AbstractMethodException.new("Abstract method")
       end
 
-      # Abstract methid, gets QRES object from BagResult   
+      # Method: pop
+      #
+      # Abstract method, gets QRES object from BagResult   
       #
       # Params:
       #
@@ -38,6 +51,8 @@ require "lib/QRES/Utils"
        raise AbstractMethodException.new("Abstract method")
       end
       
+      # Method: equals
+      #
       # Compares QRES value objects 
       #
       # Params:
@@ -57,7 +72,7 @@ require "lib/QRES/Utils"
       #
       # var_Object:AbstractSimpleQueryResult - QRES object
       #
-      # Returns:
+      # Returns:BagResult
       #
       # Throws:AbstractMethodException    
       def is_contained?(var_Object)

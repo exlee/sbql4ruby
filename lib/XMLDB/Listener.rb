@@ -13,9 +13,13 @@ require "lib/SBAStore/SBASimpleObjectFactory"
 include REXML
 
 
+  # Class: Listener
+  # 
+  # Class which implements Simple API for XML tag listeners
   class Listener 
     include REXML::StreamListener
     
+    # Method: initialize (constructor) 
     # Params:
     #
     # var_Store:SBAStore - SBA store
@@ -41,6 +45,8 @@ include REXML
       @VAR_CURRENT_OBJECTS_NAME     = nil
     end
     
+    # Method: tag_start
+    #
     # Opening tag listener. 
     #
     # Params:
@@ -88,6 +94,8 @@ include REXML
         end
     end
   
+    # Method: text
+    #
     # Tag data listener. 
     #
     # Params:
@@ -109,6 +117,8 @@ include REXML
      Common::Logger.print(Common::VAR_DEBUG, self, "[TAG_DATA]: current object=[" + @VAR_CURRENT_OBJECT.to_s() + "], type=[" + @VAR_CURRENT_OBJECT.class.to_s() + "]")
    end
 
+   # Method: tag_end
+   #
    # Closing tag listener. 
    #
    # Params:
@@ -153,6 +163,8 @@ include REXML
      end
    end
    
+   # Method: addComplexObject
+   #
    # Adds complex object to the array. 
    #
    # Params:
@@ -185,6 +197,8 @@ include REXML
      Common::Logger.print(Common::VAR_DEBUG, self, "puts [#{var_Object.to_s()}] to the array")   
    end
   
+   # Method: storeObject
+   #
    # Puts given object to the SBA store. 
    #
    # Params:
@@ -214,6 +228,8 @@ include REXML
      end
    end
 
+   # Method: storeComplexObject
+   #
    # Puts complex object to the SBA store. 
    #
    # Params:

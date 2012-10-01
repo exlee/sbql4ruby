@@ -6,8 +6,14 @@ require "lib/Operator/RuntimeException"
 require "lib/QRES/Utils"
 
   
+  # Class: Multiply
+  # Extends: AbstractOperator
+  #
+  # Class implementing Multiply operator
   class Multiply < AbstractOperator
     
+    # Static Method: eval
+    #
     # Evaluates 'multiply' operator 
     #
     # Params:
