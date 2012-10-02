@@ -363,5 +363,22 @@ require "lib/QRES/Utils"
 
         return QRESComparator.compare(self, var_Value, var_AST)
       end      
+      
+      # Return random object 
+      #
+      # Params:
+      #
+      # var_Value:
+      #
+      # var_AST:AST - AST object
+      #
+      # Returns:AbstractQueryResult
+      #
+      # Throws:      
+      def pickRandom(var_AST)
+        Common::Logger.print(Common::VAR_DEBUG, self, "Calling operator on the object #{self.to_s()}")  
+        
+        return self.VAR_OBJECT.get(rand(self.VAR_OBJECT.size()-1))
+      end
     end
 end

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/Common/logger.rb</string>
+	<string>test/ASTComplexTest.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -41,20 +41,6 @@
 	<integer>194</integer>
 	<key>metaData</key>
 	<dict>
-		<key>lib/Common/logger.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>4</integer>
-				<key>line</key>
-				<integer>16</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>6</integer>
-		</dict>
 		<key>lib/SBAStore/NotInitialisedStoreException.rb</key>
 		<dict>
 			<key>caret</key>
@@ -69,10 +55,24 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>test/ASTComplexTest.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>39</integer>
+				<key>line</key>
+				<integer>823</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>778</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>lib/Common/logger.rb</string>
+		<string>test/ASTComplexTest.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>

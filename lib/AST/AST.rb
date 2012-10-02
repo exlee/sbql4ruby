@@ -43,6 +43,7 @@ require "lib/Operator/As"
 require "lib/Operator/GroupAs"
 require "lib/Operator/Join"
 require "lib/Operator/OrderBy"
+require "lib/Operator/PickRandom"
 
 
   # Class: AST
@@ -1084,6 +1085,28 @@ require "lib/Operator/OrderBy"
       Common::Logger.print(Common::VAR_DEBUG, self, "[orderByExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def pickRandomExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(PickRandomExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + PickRandomExpression.to_s() + " expected") 
+      end
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[pickRandomExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")     
+
+      Operator::PickRandom.eval(var_Object.VAR_VALUE(), self)
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[pickRandomExpressionExec]: Execute finished")
+    end
+       
     attr_reader :VAR_QRES
     attr_reader :VAR_ENVS
     attr_reader :VAR_STORE

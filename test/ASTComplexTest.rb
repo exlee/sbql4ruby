@@ -25,6 +25,7 @@ require "lib/AST/AsExpression"
 require "lib/AST/GroupAsExpression"
 require "lib/AST/JoinExpression"
 require "lib/AST/OrderByExpression"
+require "lib/AST/PickRandomExpression"
 
 require "lib/QRES/ReferenceResult"
 require "lib/QRES/StructResult"
@@ -801,5 +802,27 @@ require "lib/AST/AST"
             assert_equal(128, _result.pop().VAR_OBJECT())
             }
         end
+        
+        # Tests for AST
+        #
+        # Params:
+        #
+        # Returns:
+        #
+        # Throws:     
+        def test_9ePickRandomExpression
+
+          assert_nothing_thrown("Creating AST objects") {  
+
+            # Set debug log level
+            Common::Logger.setLogLevel(Common::VAR_DEBUG)
+
+            var_AST = AST.new("sampledata/data.xml")
+
+            expression = PickRandomExpression.new(StructExpression.new(CommaExpression.new(IntegerTerminal.new(1), StringTerminal.new("test"))))
+                             
+            expression.execute(var_AST)
+            }
+         end
     end
 end
