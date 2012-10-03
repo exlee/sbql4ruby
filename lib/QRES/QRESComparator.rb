@@ -2,6 +2,9 @@ module QRES
   
   require "lib/QRES/Utils"
   
+  # Sort directions
+  VAR_ASC = 1
+  VAR_DSC = 2
   
   class QRESComparator
     
@@ -26,6 +29,7 @@ module QRES
           return 0
         end
         
+        puts "DUPA: #{var_Arg1.to_s()} <=> #{var_Arg2.to_s()}"
         # Simple iterator
         arg1Iterator = var_Arg1.iterator()
         arg2Iterator = var_Arg2.iterator()

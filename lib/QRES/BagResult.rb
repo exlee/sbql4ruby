@@ -35,9 +35,10 @@ require "lib/QRES/AbstractSetQueryResult"
     def push(var_Object)
       
       # Pushing BagResult or StructResult to another BagResult
-      if(var_Object.is_a?(BagResult) || var_Object.is_a?(StructResult))
+      #if(var_Object.is_a?(BagResult) || var_Object.is_a?(StructResult))
+      if(var_Object.is_a?(BagResult))
         for i in 0..var_Object.VAR_OBJECT.size()-1
-          self.VAR_OBJECT.push(var_Object.VAR_OBJECT.get(i))
+          self.push(var_Object.VAR_OBJECT.get(i))
         end
       else
         self.VAR_OBJECT.push(var_Object)

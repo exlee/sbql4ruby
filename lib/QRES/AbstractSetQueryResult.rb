@@ -338,13 +338,19 @@ require "lib/QRES/Utils"
       #
       # var_AST:AST - AST object
       #
+      # var_SortDirection - sort direction declared with QRESComparator
+      #
       # Returns:
       #
       # Throws:      
-      def sort(var_AST)
+      def sort(var_AST, var_SortDirection)
         Common::Logger.print(Common::VAR_DEBUG, self, "Calling operator on the object #{self.to_s()}")  
 
-        @VAR_OBJECT = self.VAR_OBJECT().VAR_STACK().sort{|a1, a2| a1.compare(a2, var_AST)}
+        if(var_SortDirection == VAR_ASC)
+          @VAR_OBJECT = self.VAR_OBJECT().VAR_STACK().sort{|a1, a2| a1.compare(a2, var_AST)}
+        else
+          @VAR_OBJECT = self.VAR_OBJECT().VAR_STACK().sort{|a1, a2| a1.compare(a2, var_AST)}.reverse!
+        end          
       end      
       
       # Compares QRES objects 

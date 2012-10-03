@@ -25,6 +25,7 @@ require "lib/AST/AsExpression"
 require "lib/AST/GroupAsExpression"
 require "lib/AST/JoinExpression"
 require "lib/AST/OrderByExpression"
+require "lib/AST/OrderByDescExpression"
 require "lib/AST/PickRandomExpression"
 
 require "lib/QRES/ReferenceResult"
@@ -771,6 +772,10 @@ require "lib/AST/AST"
                             BagExpression.new(CommaExpression.new(IntegerTerminal.new(521), IntegerTerminal.new(128))),
                             BagExpression.new(CommaExpression.new(IntegerTerminal.new(22), IntegerTerminal.new(256))))
 
+            #expression =  OrderByExpression.new(
+            #                BagExpression.new(CommaExpression.new(IntegerTerminal.new(3), IntegerTerminal.new(18))),
+            #                BagExpression.new(CommaExpression.new(IntegerTerminal.new(18), IntegerTerminal.new(0))))
+
             expression.execute(var_AST)
             
             result = var_AST.VAR_QRES().pop()
@@ -810,7 +815,64 @@ require "lib/AST/AST"
         # Returns:
         #
         # Throws:     
-        def test_9ePickRandomExpression
+        def test_9eOrderByDescExpression
+
+          assert_nothing_thrown("Creating AST objects") {  
+
+            # Set debug log level
+            Common::Logger.setLogLevel(Common::VAR_DEBUG)
+
+            var_AST = AST.new("sampledata/data.xml")
+            
+            expression =  OrderByDescExpression.new(
+                            BagExpression.new(CommaExpression.new(IntegerTerminal.new(521), IntegerTerminal.new(128))),
+                            BagExpression.new(CommaExpression.new(IntegerTerminal.new(22), IntegerTerminal.new(256))))
+
+            expression.execute(var_AST)
+            
+            # Join result
+            #QRES::BagResult[Common::Stack, (QRES::StructResult[Common::Stack, ([Fixnum, 521], [Fixnum, 22])], QRES::StructResult[Common::Stack, ([Fixnum, 521], [Fixnum, 256])], QRES::StructResult[Common::Stack, ([Fixnum, 128], [Fixnum, 22])], QRES::StructResult[Common::Stack, ([Fixnum, 128], [Fixnum, 256])])]
+            # Sort result
+            #Class->[order by]: QRES::QRES(QRES::BagResult[Array, QRES::StructResult[Common::Stack, ([Fixnum, 128], [Fixnum, 22])]QRES::StructResult[Common::Stack, ([Fixnum, 128], [Fixnum, 256])]QRES::StructResult[Common::Stack, ([Fixnum, 521], [Fixnum, 22])]QRES::StructResult[Common::Stack, ([Fixnum, 521], [Fixnum, 256])]])
+            
+            result = var_AST.VAR_QRES().pop()
+
+            assert_equal("QRES::BagResult", result.class.to_s())
+           
+            _result = result.pop()
+            assert_equal("QRES::StructResult", _result.class.to_s())
+            
+            assert_equal(22, _result.pop().VAR_OBJECT())
+            assert_equal(128, _result.pop().VAR_OBJECT())
+            
+            _result = result.pop()
+            assert_equal("QRES::StructResult", _result.class.to_s())
+            
+            assert_equal(256, _result.pop().VAR_OBJECT())
+            assert_equal(128, _result.pop().VAR_OBJECT())
+
+            _result = result.pop()
+            assert_equal("QRES::StructResult", _result.class.to_s())
+            
+            assert_equal(22, _result.pop().VAR_OBJECT())
+            assert_equal(521, _result.pop().VAR_OBJECT())
+
+            _result = result.pop()
+            assert_equal("QRES::StructResult", _result.class.to_s())
+
+            assert_equal(256, _result.pop().VAR_OBJECT())
+            assert_equal(521, _result.pop().VAR_OBJECT())
+            }
+        end
+        
+        # Tests for AST
+        #
+        # Params:
+        #
+        # Returns:
+        #
+        # Throws:     
+        def test_9fPickRandomExpression
 
           assert_nothing_thrown("Creating AST objects") {  
 

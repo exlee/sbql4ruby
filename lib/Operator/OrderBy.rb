@@ -16,20 +16,22 @@ require "lib/QRES/BagResult"
     #
     # var_RValue:AbstractQueryResult - right side of expression
     #
+    # var_SortDirection - sort direction declared with QRESComparator
+    #
     # var_AST:AST - AST visitor
     #
     # Throws:
-    def OrderBy.eval(var_LValue, var_RValue, var_AST)
+    def OrderBy.eval(var_LValue, var_RValue, var_SortDirection, var_AST)
       
       Common::Logger.print(Common::VAR_DEBUG, self, 
-        "[order by]: Beginning operation for object name [#{var_LValue.to_s()}], attribute name [#{var_RValue.to_s()}]")
+        "[order by]: Beginning operation for object name [#{var_LValue.to_s()}], attribute name [#{var_RValue.to_s()}], sort direction [#{var_SortDirection.to_s()}]")
       Common::Logger.print(Common::VAR_DEBUG, self, "[order by]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
 
       Join.eval(var_LValue, var_RValue, var_AST)
       
       var_BagResult = var_AST.VAR_QRES().pop()
       
-      var_BagResult.sort(var_AST)
+      var_BagResult.sort(var_AST, var_SortDirection)
 
       var_AST.VAR_QRES().push(var_BagResult)
 

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>test/ASTComplexTest.rb</string>
+	<string>lib/Operator/OrderBy.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -41,6 +41,20 @@
 	<integer>194</integer>
 	<key>metaData</key>
 	<dict>
+		<key>lib/Operator/OrderBy.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>4</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>lib/SBAStore/NotInitialisedStoreException.rb</key>
 		<dict>
 			<key>caret</key>
@@ -67,12 +81,13 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>778</integer>
+			<integer>758</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>test/ASTComplexTest.rb</string>
+		<string>lib/Operator/OrderBy.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>

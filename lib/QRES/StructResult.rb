@@ -8,7 +8,7 @@ require "lib/QRES/StructResultIterator"
   # Extends: AbstractComplexQueryResult
   #
   # Implements query result for Struct object
-  class StructResult < AbstractComplexQueryResult
+  class StructResult < AbstractSetQueryResult
     
     # Method: initialize (constructor)
     # 

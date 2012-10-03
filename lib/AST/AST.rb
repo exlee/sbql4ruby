@@ -12,6 +12,7 @@ require "lib/AST/FloatTerminal"
 
 require "lib/QRES/IntegerResult"
 require "lib/QRES/ReferenceResult"
+require "lib/QRES/QRESComparator"
 
 require "lib/Operator/Plus"
 require "lib/Operator/Minus"
@@ -1079,10 +1080,40 @@ require "lib/Operator/PickRandom"
       #Getting results from QRES
       var_LeftValue = @VAR_QRES.pop()
       
-      Operator::OrderBy.eval(var_LeftValue, var_Object.getRightExpression(), self)
+      Operator::OrderBy.eval(var_LeftValue, var_Object.getRightExpression(), QRES::VAR_ASC, self)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[orderByExpressionExec]: Execute finished, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[orderByExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
+    end
+    
+    # Executes AST object 
+    #
+    # Params:
+    #
+    # var_Object:Expression - An object taken from AST to be executed
+    #
+    # Returns:
+    #
+    # Throws: IncorrectArgumentException
+    def orderByDescExpressionExec(var_Object)
+      
+      if(!var_Object.is_a?(OrderByDescExpression))
+        raise IncorrectArgumentException.new("Incorrect object type [#{var_Object.class.to_s()}], " + OrderByDescExpression.to_s() + " expected") 
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orderByDescExpressionExec]: Executing for arguments: [#{var_Object.to_s()}], stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orderByDescExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")      
+      
+      # Executing left query side
+      var_Object.getLeftExpression().execute(self)
+    
+      #Getting results from QRES
+      var_LeftValue = @VAR_QRES.pop()
+      
+      Operator::OrderBy.eval(var_LeftValue, var_Object.getRightExpression(), QRES::VAR_DSC, self)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orderByDescExpressionExec]: Execute finished, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[orderByDescExpressionExec]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
     end
     
     # Executes AST object 
