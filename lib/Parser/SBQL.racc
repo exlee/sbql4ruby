@@ -4,7 +4,7 @@ class SBQLParser
 prechigh
 left COMMA
 left WHERE
-left ANY JOIN  UNION  INTERSECT ALL  EXISTS  GROUPAS  MAX  MIN  NAME  NOT  PICKRANDOM  SUM  AS DIFFERENCE
+left ANY JOIN  UNION IN AS SET_MINUS  INTERSECT ALL  EXISTS  GROUPAS  MAX  MIN  NAME  NOT  PICKRANDOM  SUM  AS DIFFERENCE AVG
 left EQUAL GREATEREQUAL  GREATER  SMALLEREQUAL  SMALLER
 left AND OR
 left MULTIPLY  DIVIDE  MODULO 
@@ -14,25 +14,28 @@ left STRUCT BAG
 left DOT
 left ORDERBY
 preclow
-
 rule
     target   : expr
 
-    expr      : expr COMMA expr { result = new CommaExpression(e1,e2) }
+    expr      : expr COMMA expr { result = CommaExpression.new(val[0],val[2]) }
     |   expr_without_coma { result = e }
-	|	LEFT_ROUND_BRACKET expr RIGHT_ROUND_BRACKET { result = val[1] }
-    |   ANY expr expr { result = new AnyExpression(val[0],val[2]) }
+	  |	  LEFT_ROUND_BRACKET expr RIGHT_ROUND_BRACKET { result = StructExpression.new(val[1]) }
+    |   ANY expr expr { result = AnyExpression.new(val[1],val[2]) }
+    |   expr AS expr  { result = AsExpression.new(val[0], val[2]) }
     |   ALL expr expr { result = AllExpression.new(val[0],val[2]) }
+    |   AVG expr {result = AvgExpression.new(val[1]) }
     |   expr DIFFERENCE expr { result = DifferentExpression.new(val[0],val[2]) }
     |   expr DOT expr { result = DotExpression.new(val[0],val[2]) }
     |   expr EQUAL expr { result = EqualExpression.new(val[0],val[2]) }
-    |   expr GREATEREQUAL expr { result = GreaterEqualExpression.new(val[0],val[2]) }
-    |   expr GREATER expr { result = GreaterExpression.new(val[0],val[2]) }
+    |   expr GREATEREQUAL expr { result = GreatherEqualExpression.new(val[0],val[2]) }
+    |   expr GREATER expr { result = GreatherExpression.new(val[0],val[2]) }
     |   expr JOIN expr { result = JoinExpression.new(val[0],val[2]) }
     |   expr ORDERBY expr { result = OrderByExpression.new(val[0],val[2]) }
-    |   expr SMALLEREQUAL expr { result = SmallerEqualExpression.new(val[0],val[2]) }
-    |   expr SMALLER expr { result = SmallerExpression.new(val[0],val[2]) }
+    |   expr SMALLEREQUAL expr { result = LessEqualExpression.new(val[0],val[2]) }
+    |   expr SMALLER expr { result = LessExpression.new(val[0],val[2]) }
     |   expr UNION expr { result = UnionExpression.new(val[0],val[2]) }
+    |   expr SET_MINUS expr { result = SetMinusExpression.new(val[0], val[2]) }
+    |   expr IN expr { result = InExpression.new(val[0], val[2])}
     |   expr INTERSECT expr { result = IntersectExpression.new(val[0],val[2]) }
     |   expr WHERE expr { result = WhereExpression.new(val[0],val[2]) }
     |   BAG expr { result = BagExpression.new(val[1]) }
@@ -40,8 +43,7 @@ rule
     |   MAX expr { result = MaxExpression.new(val[1]) }
     |   MIN expr { result = MinExpression.new(val[1]) }
     |   UNIQUE expr { result = new UniqueExpression(val[1]) }
-    |   expr AS NAME { result = new AsExpression(val[0], val[2]) }
-    |   expr GROUPAS NAME { result = new GroupAsExpression(val[0], val[2]) }
+    |   expr GROUPAS NAME { result = GroupAsExpression.new(val[0], val[2]) }
     |   INTEGER_LITERAL  { result = (val[0]) }
     |   DOUBLE_LITERAL  { result = (val[0]) }
     |   STRING_LITERAL  { result = (val[0]) }
@@ -55,7 +57,7 @@ rule
     |   expr MINUS expr { result = MinusExpression.new(val[0],val[2]) }
     |   expr MULTIPLY expr { result = MultiplyExpression.new(val[0],val[2]) }
     |   expr MODULO expr { result = ModuloExpression.new(val[0],val[2]) }
-    |   expr DIVIDE expr { result = DivisionExpression.new(val[0],val[2]) }
+    |   expr DIVIDE expr { result = DivideExpression.new(val[0],val[2]) }
     |   expr AND expr { result = AndExpression.new(val[0],val[2]) }
     |   expr OR expr { result = OrExpression.new(val[0],val[2]) }
 ---- header ----
@@ -82,6 +84,7 @@ require "lib/AST/GreatherExpression"
 require "lib/AST/GroupAsExpression"
 require "lib/AST/IncorrectArgumentException"
 require "lib/AST/IntegerTerminal"
+require "lib/AST/InExpression"
 require "lib/AST/IntersectExpression"
 require "lib/AST/LessEqualExpression"
 require "lib/AST/LessExpression"
@@ -99,6 +102,7 @@ require "lib/AST/UnionExpression"
 require "lib/AST/UniqueExpression"
 require "lib/AST/Utils"
 require "lib/AST/WhereExpression"
+require "lib/AST/SetMinusExpression"
 
 require 'lib/Parser/SBQL.rex'
 

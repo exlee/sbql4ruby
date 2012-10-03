@@ -42,6 +42,8 @@ require "lib/AST/UnionExpression"
 require "lib/AST/UniqueExpression"
 require "lib/AST/Utils"
 require "lib/AST/WhereExpression"
+require "lib/AST/SetMinusExpression"
+require "lib/AST/InExpression"
 
 include AST
 
@@ -92,7 +94,7 @@ class SBQLParser < Racc::Parser
       case state
       when nil
         case
-        when (text = ss.scan(/\s/i))
+        when (text = ss.scan(/\s+/i))
           ;
 
         when (text = ss.scan(/\r|\n|\r\n/i))
@@ -161,6 +163,9 @@ class SBQLParser < Racc::Parser
         when (text = ss.scan(/order_by/i))
            @rex_tokens.push action { [:ORDERBY,nil] }
 
+        when (text = ss.scan(/avg/i))
+           @rex_tokens.push action { [:AVG, nil] }
+
         when (text = ss.scan(/<=/i))
            @rex_tokens.push action { [:SMALLEREQUAL,nil] }
 
@@ -184,6 +189,9 @@ class SBQLParser < Racc::Parser
 
         when (text = ss.scan(/all/i))
            @rex_tokens.push action { [:ALL,nil] }
+
+        when (text = ss.scan(/in/i))
+           @rex_tokens.push action { [:IN, nil] }
 
         when (text = ss.scan(/bag/i))
            @rex_tokens.push action { [:BAG,nil] }
@@ -223,6 +231,9 @@ class SBQLParser < Racc::Parser
 
         when (text = ss.scan(/or/i))
            @rex_tokens.push action { [:OR,nil] }
+
+        when (text = ss.scan(/substract/i))
+           @rex_tokens.push action { [:SET_MINUS,nil] }
 
         when (text = ss.scan(/[_a-zA-Z][0-9a-zA-Z]*/i))
            @rex_tokens.push action { [:NAME, text] }

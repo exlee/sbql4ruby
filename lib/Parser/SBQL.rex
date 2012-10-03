@@ -35,6 +35,8 @@ require "lib/AST/UnionExpression"
 require "lib/AST/UniqueExpression"
 require "lib/AST/Utils"
 require "lib/AST/WhereExpression"
+require "lib/AST/SetMinusExpression"
+require "lib/AST/InExpression"
 
 include AST
 
@@ -47,7 +49,7 @@ macro
  	MULTIPLY			 \*
  	MODULO 			 %
  	DIVIDE				 \/
- 	LEFT_ROUND_BRACKET	 \(
+ 	LEFT_ROUND_BRACKET  \(
  	RIGHT_ROUND_BRACKET \)
      COMMA ,
      DIFFERENCE !=
@@ -58,9 +60,11 @@ macro
      GREATER >
      JOIN join
      ORDERBY order_by
+     AVG avg
      SMALLEREQUAL <=
      SMALLER <
      UNION union
+     IN in
      UNIQUE unique
      INTERSECT intersect
      WHERE where
@@ -72,6 +76,7 @@ macro
      GROUPAS group as
      MAX max
      MIN min
+     SET_MINUS substract
      NOT not
      PICKRANDOM pickrandom
      STRUCT struct
@@ -86,7 +91,7 @@ macro
     STRING          [\"][^\"]*[\"]
     CHAR            [\'][^\"][\']
     LineTerminator  \r|\n|\r\n 
-    WHITESPACE      \s
+    WHITESPACE      \s+
 rule
     {WHITESPACE}
     {LineTerminator}
@@ -111,6 +116,7 @@ rule
 	{GREATER}		{ [:GREATER,nil] }
 	{JOIN}			{ [:JOIN,nil] }
 	{ORDERBY}		{ [:ORDERBY,nil] }
+	{AVG}       { [:AVG, nil] }
 	{SMALLEREQUAL}	{ [:SMALLEREQUAL,nil] }
 	{SMALLER}		{ [:SMALLER,nil] }
 	{UNION}			{ [:UNION,nil] }
@@ -119,6 +125,7 @@ rule
 	{WHERE}			{ [:WHERE,nil] }
 	{ANY}			{ [:ANY,nil] }
 	{ALL}			{ [:ALL,nil] }
+	{IN}      { [:IN, nil] }
 	{BAG}			{ [:BAG,nil] }
 	{EXISTS}		{ [:EXISTS,nil] }
 	{GROUPAS}		{ [:GROUPAS,nil] }
@@ -132,6 +139,7 @@ rule
 	{AS}			{ [:AS,nil] }
 	{AND}			{ [:AND,nil] }
 	{OR}			{ [:OR,nil] }
+	{SET_MINUS} { [:SET_MINUS,nil] }
     {NAME}          { [:NAME, text] }
     .               { [text, text] }
 end

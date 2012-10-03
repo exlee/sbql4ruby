@@ -6,6 +6,7 @@
 		<number>s0000</number>
 		<fName>Anna</fName>
 		<lName>Kowalska</lName>
+		<dept_id>2</dept_id>
 		
 		<address>
 			<street>al. Jerozolimskie</street>
@@ -26,6 +27,7 @@
 		<number>s0001</number>
 		<fName>Maciej</fName>
 		<lName>Nowak</lName>
+		<dept_id>1</dept_id>
 		
 		<address>
 			<street>Koszykowa</street>
