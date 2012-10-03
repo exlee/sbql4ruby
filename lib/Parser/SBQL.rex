@@ -47,7 +47,7 @@ macro
  	MULTIPLY			 \*
  	MODULO 			 %
  	DIVIDE				 \/
- 	LEFT_ROUND_BRACKET	 \(
+ 	LEFT_ROUND_BRACKET  \(
  	RIGHT_ROUND_BRACKET \)
      COMMA ,
      DIFFERENCE !=
@@ -58,6 +58,7 @@ macro
      GREATER >
      JOIN join
      ORDERBY order_by
+     AVG avg
      SMALLEREQUAL <=
      SMALLER <
      UNION union
@@ -86,7 +87,7 @@ macro
     STRING          [\"][^\"]*[\"]
     CHAR            [\'][^\"][\']
     LineTerminator  \r|\n|\r\n 
-    WHITESPACE      \s
+    WHITESPACE      \s+
 rule
     {WHITESPACE}
     {LineTerminator}
@@ -111,6 +112,7 @@ rule
 	{GREATER}		{ [:GREATER,nil] }
 	{JOIN}			{ [:JOIN,nil] }
 	{ORDERBY}		{ [:ORDERBY,nil] }
+	{AVG}       { [:AVG, nil] }
 	{SMALLEREQUAL}	{ [:SMALLEREQUAL,nil] }
 	{SMALLER}		{ [:SMALLER,nil] }
 	{UNION}			{ [:UNION,nil] }

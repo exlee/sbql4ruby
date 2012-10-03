@@ -1,4 +1,4 @@
-require "lib/Parser/grammar.tab"
+require "lib/Parser/SBQL.tab"
 # Simple extension to the String class which allows to parse
 # entry as an SBQL
 

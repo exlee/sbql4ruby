@@ -92,7 +92,7 @@ class SBQLParser < Racc::Parser
       case state
       when nil
         case
-        when (text = ss.scan(/\s/i))
+        when (text = ss.scan(/\s+/i))
           ;
 
         when (text = ss.scan(/\r|\n|\r\n/i))
@@ -160,6 +160,9 @@ class SBQLParser < Racc::Parser
 
         when (text = ss.scan(/order_by/i))
            @rex_tokens.push action { [:ORDERBY,nil] }
+
+        when (text = ss.scan(/avg/i))
+           @rex_tokens.push action { [:AVG, nil] }
 
         when (text = ss.scan(/<=/i))
            @rex_tokens.push action { [:SMALLEREQUAL,nil] }
