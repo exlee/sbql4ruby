@@ -77,7 +77,7 @@ require "lib/Common/Stack"
     # Returns:
     #
     # Throws:   
-    def test_QRES
+    def test_QRES2
       
       assert_nothing_thrown("Creating QRES objects") {
         

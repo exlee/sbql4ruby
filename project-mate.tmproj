@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/Operator/OrderBy.rb</string>
+	<string>lib/QRES/Utils.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -41,19 +41,107 @@
 	<integer>194</integer>
 	<key>metaData</key>
 	<dict>
-		<key>lib/Operator/OrderBy.rb</key>
+		<key>lib/QRES/AbstractSetQueryResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>37</integer>
+				<key>line</key>
+				<integer>168</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>143</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>26</integer>
+				<key>line</key>
+				<integer>168</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>37</integer>
+				<key>line</key>
+				<integer>168</integer>
+			</dict>
+		</dict>
+		<key>lib/QRES/FloatResult.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>4</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+		</dict>
+		<key>lib/QRES/IntegerResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>75</integer>
+				<key>line</key>
+				<integer>47</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>8</integer>
+				<key>line</key>
+				<integer>47</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>75</integer>
+				<key>line</key>
+				<integer>47</integer>
+			</dict>
+		</dict>
+		<key>lib/QRES/StringResult.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>51</integer>
+				<key>line</key>
+				<integer>45</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>14</integer>
+		</dict>
+		<key>lib/QRES/Utils.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>23</integer>
+				<key>line</key>
+				<integer>154</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>138</integer>
 		</dict>
 		<key>lib/SBAStore/NotInitialisedStoreException.rb</key>
 		<dict>
@@ -69,25 +157,107 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>test/ASTComplexTest.rb</key>
+		<key>lib/SBAStore/SBASimpleObjectFactory.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>39</integer>
+				<integer>91</integer>
 				<key>line</key>
-				<integer>823</integer>
+				<integer>35</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>758</integer>
+			<integer>13</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>89</integer>
+				<key>line</key>
+				<integer>35</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>99</integer>
+				<key>line</key>
+				<integer>35</integer>
+			</dict>
+		</dict>
+		<key>lib/XMLDB/Listener.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>50</integer>
+				<key>line</key>
+				<integer>114</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>88</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>37</integer>
+				<key>line</key>
+				<integer>114</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>59</integer>
+				<key>line</key>
+				<integer>114</integer>
+			</dict>
+		</dict>
+		<key>lib/XMLDB/XMLParser.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>20</integer>
+				<key>line</key>
+				<integer>40</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>16</integer>
+				<key>line</key>
+				<integer>40</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>38</integer>
+				<key>line</key>
+				<integer>40</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>test/ASTComplexTest.rb</string>
-		<string>lib/Operator/OrderBy.rb</string>
+		<string>lib/QRES/StringResult.rb</string>
+		<string>lib/XMLDB/XMLParser.rb</string>
+		<string>lib/XMLDB/Listener.rb</string>
+		<string>lib/SBAStore/SBASimpleObjectFactory.rb</string>
+		<string>lib/QRES/FloatResult.rb</string>
+		<string>lib/QRES/IntegerResult.rb</string>
+		<string>lib/QRES/AbstractSetQueryResult.rb</string>
+		<string>lib/QRES/Utils.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
