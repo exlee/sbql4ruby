@@ -60,18 +60,34 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_bag
-          expression = BagExpression.new(CommaExpression.new(IntegerTerminal.new(1), CommaExpression.new(IntegerTerminal.new(2), IntegerTerminal.new(3))))
+          expression = BagExpression.new(
+            CommaExpression.new(
+              CommaExpression.new(
+                IntegerTerminal.new(1),
+                IntegerTerminal.new(2)
+              ),
+              IntegerTerminal.new(3)
+            )
+          )
           self.execute(expression)
           
           expected = BagResult.new()
           expected.push(IntegerResult.new(1))
           expected.push(IntegerResult.new(2))
           expected.push(IntegerResult.new(3))
+          
+          puts @result
           assert(expected.equals(@result), "Bag(1,2,3) -> BagResult(1,2,3)")
         end
         
         def test_comma
-          expression = CommaExpression.new(CommaExpression.new(IntegerTerminal.new(1), IntegerTerminal.new(2)), IntegerTerminal.new(3))
+          expression = CommaExpression.new(
+            CommaExpression.new(
+              IntegerTerminal.new(1),
+              IntegerTerminal.new(2)
+            ),
+            IntegerTerminal.new(3)
+          )
           self.execute(expression)
           
           expected = StructResult.new()
@@ -108,7 +124,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_equal
-          expression = DifferentExpression.new(IntegerTerminal.new(2), FloatTerminal.new(2.0))
+          expression = EqualExpression.new(IntegerTerminal.new(2), FloatTerminal.new(2.0))
           self.execute(expression)
           
           expected = BooleanResult.new(true)
