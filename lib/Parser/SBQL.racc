@@ -4,7 +4,7 @@ class SBQLParser
 prechigh
 left COMMA
 left WHERE
-left ANY JOIN  UNION  INTERSECT ALL  EXISTS  GROUPAS  MAX  MIN  NAME  NOT  PICKRANDOM  SUM  AS DIFFERENCE AVG
+left ANY JOIN  UNION IN AS SET_MINUS  INTERSECT ALL  EXISTS  GROUPAS  MAX  MIN  NAME  NOT  PICKRANDOM  SUM  AS DIFFERENCE AVG
 left EQUAL GREATEREQUAL  GREATER  SMALLEREQUAL  SMALLER
 left AND OR
 left MULTIPLY  DIVIDE  MODULO 
@@ -14,7 +14,6 @@ left STRUCT BAG
 left DOT
 left ORDERBY
 preclow
-# AS
 rule
     target   : expr
 
@@ -35,6 +34,8 @@ rule
     |   expr SMALLEREQUAL expr { result = LessEqualExpression.new(val[0],val[2]) }
     |   expr SMALLER expr { result = LessExpression.new(val[0],val[2]) }
     |   expr UNION expr { result = UnionExpression.new(val[0],val[2]) }
+    |   expr SET_MINUS expr { result = SetMinusExpression.new(val[0], val[2]) }
+    |   expr IN expr { result = InExpression.new(val[0], val[2])}
     |   expr INTERSECT expr { result = IntersectExpression.new(val[0],val[2]) }
     |   expr WHERE expr { result = WhereExpression.new(val[0],val[2]) }
     |   BAG expr { result = BagExpression.new(val[1]) }
@@ -83,6 +84,7 @@ require "lib/AST/GreatherExpression"
 require "lib/AST/GroupAsExpression"
 require "lib/AST/IncorrectArgumentException"
 require "lib/AST/IntegerTerminal"
+require "lib/AST/InExpression"
 require "lib/AST/IntersectExpression"
 require "lib/AST/LessEqualExpression"
 require "lib/AST/LessExpression"
@@ -100,6 +102,7 @@ require "lib/AST/UnionExpression"
 require "lib/AST/UniqueExpression"
 require "lib/AST/Utils"
 require "lib/AST/WhereExpression"
+require "lib/AST/SetMinusExpression"
 
 require 'lib/Parser/SBQL.rex'
 

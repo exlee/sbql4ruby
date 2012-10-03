@@ -313,7 +313,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_simple_setminus
-          expression = SBQLParser.new.scan_str("Bag(1,2) minus Bag(2,3)")
+          expression = SBQLParser.new.scan_str("Bag(1,2) substract Bag(2,3)")
           self.execute(expression)
           
           expected = BagResult.new()
