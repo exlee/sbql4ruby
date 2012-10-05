@@ -103,8 +103,8 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           expression = SBQLParser.new.scan_str("1 as x")
           self.execute(expression)
           
-          expected = BinderResult.new(IntegerResult.new(1), StringResult.new("x"))
-          assert_equal(expected.equals(@result))          
+          expected = BinderResult.new("x",IntegerResult.new(1))
+          assert(expected.equals(@result), "1 as x -> Binder(x, 1)")          
         end
         
         def test_simple_bag
@@ -184,7 +184,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         
         def test_simple_groupas
           # TODO: Do dopisania jak będzie wiadomo jak
-          expression = SBQLParser.new.scan_str("Bag(1,2) as X")
+          expression = SBQLParser.new.scan_str("Bag(1,2) as x")
           self.execute(expression)
                 
         end
