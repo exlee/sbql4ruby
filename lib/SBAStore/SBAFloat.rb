@@ -45,9 +45,10 @@ require "lib/QRES/FloatResult"
     #
     # Throws:
     def SBAFloat.isValidType?(var_Object)
-      if(var_Object.is_a? Float)  
+      if(var_Object.is_a? Numeric)  
         return true
       end
+      
        
       return false
     end
