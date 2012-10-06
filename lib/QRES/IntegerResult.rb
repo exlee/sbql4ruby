@@ -43,6 +43,9 @@ require "lib/QRES/StringResult"
     # Throws:SyntaxError    
     def +(var_RValue)
       Common::Logger.print(Common::VAR_DEBUG, self, "[+]: Executing for: [#{self.to_s()}] + [#{var_RValue.to_s()}]")
+      if(var_RValue.is_a?AbstractSetQueryResult and var_RValue.isSimpleObject?)
+        var_RValue = var_RValue.getAsSimpleResult()
+      end
       
       if(var_RValue.is_a?(self.class))
         return IntegerResult.new(self.VAR_OBJECT + var_RValue.VAR_OBJECT())
@@ -50,6 +53,7 @@ require "lib/QRES/StringResult"
         return FloatResult.new(self.VAR_OBJECT + var_RValue.VAR_OBJECT())
       elsif(var_RValue.is_a?(StringResult))
         return StringResult.new(self.VAR_OBJECT.to_s() + var_RValue.VAR_OBJECT())
+
       else
         raise SyntaxError.new("[#{var_RValue.class.to_s()}] can't be coerced into [#{self.class.to_s()}]")
       end

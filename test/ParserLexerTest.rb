@@ -42,7 +42,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
             expression = SBQLParser.new.scan_str("2+(1)")
             self.execute(expression)
             
-            assert_equal(IntegerResult.new(3).equals(@result))
+            assert(IntegerResult.new(3).equals(@result))
         end
 
         def test_operatorPrecedence
