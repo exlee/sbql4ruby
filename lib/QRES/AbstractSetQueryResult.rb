@@ -89,58 +89,7 @@ require "lib/QRES/Utils"
         end
           
         return bagResult
-      end 
-      
-      # Evaluates 'comma' function 
-      #
-      # Params:
-      #
-      # var_RValue:AbstractSimpleQueryResult - QRES simple object
-      #
-      # Returns:BagResult
-      #
-      # Throws:
-      def comma(var_RValue, var_AST)
-        
-        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: Calling operator on the object #{self.to_s()}")
-        
-        bagResult = BagResult.new()
-        
-        # Evaluating the right side of the expression
-        var_RValue.execute(var_AST)
-
-        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue is executed, stacks dump:")
-        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
-        
-        rValue =  Utils.getSimpleObjectAsBagResult(var_AST.VAR_QRES().pop())
-        
-        leftIterator = self.nestedIterator()
-        
-        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: lValue iterator: #{leftIterator.to_s()}")
-         
-        while(leftIterator.hasNext())
-          leftObject = leftIterator.next()
-
-          rightIterator = rValue.nestedIterator()
-          
-          Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")
-          
-          while(rightIterator.hasNext())
-            tmpResult = StructResult.new()
-          
-            rightObject = rightIterator.next()
-            
-            tmpResult.push(leftObject)
-            tmpResult.push(rightObject)
-            
-            bagResult.push(tmpResult)
-          end  
-        end
-        
-        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
-        
-        return bagResult
-      end
+      end       
 
       # Evaluates 'min' function 
       #
@@ -346,11 +295,20 @@ require "lib/QRES/Utils"
       def sort(var_AST, var_SortDirection)
         Common::Logger.print(Common::VAR_DEBUG, self, "Calling operator on the object #{self.to_s()}")  
 
+        # Temporary result
+        @VAR_RESULT = nil
+        
         if(var_SortDirection == VAR_ASC)
-          @VAR_OBJECT = self.VAR_OBJECT().VAR_STACK().sort{|a1, a2| a1.compare(a2, var_AST)}
+          @VAR_RESULT = self.VAR_OBJECT().VAR_STACK().sort{|a1, a2| a1.compare(a2, var_AST)}
         else
-          @VAR_OBJECT = self.VAR_OBJECT().VAR_STACK().sort{|a1, a2| a1.compare(a2, var_AST)}.reverse!
-        end          
+          @VAR_RESULT = self.VAR_OBJECT().VAR_STACK().sort{|a1, a2| a1.compare(a2, var_AST)}.reverse!
+        end     
+        
+        @VAR_OBJECT = Common::Stack.new()
+        
+        for i in 0..@VAR_RESULT.length-1
+          @VAR_OBJECT.push(@VAR_RESULT[i])
+        end
       end      
       
       # Compares QRES objects 

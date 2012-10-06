@@ -95,7 +95,130 @@ require "lib/QRES/StructResultIterator"
       
       return false
     end
-         
+
+    # Method: isSimpleObject?
+    #
+    # Checks whether current complex object object may be treated
+    # as simple object (is has to provide exactly one simple object).
+    #
+    # Params:
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:
+    def isSimpleObject?()     
+      if(self.VAR_OBJECT.size() != 1)
+       return false
+      end
+
+      var_Object = self.VAR_OBJECT.get(self.VAR_OBJECT.size()-1)
+
+      if(!var_Object.is_a?(AbstractSimpleQueryResult) && !var_Object.is_a?(ReferenceResult))
+        return false
+      end
+
+      return true
+    end
+
+    # Method: getAsSimpleResult
+    #
+    # Checks whether current complex object may be treated
+    # as simple object (is has to provide exactly one simple object).
+    #
+    # Params:
+    #
+    # Returns:TrueClass/FalseClass
+    #
+    # Throws:AbstractSimpleQueryResult
+    def getAsSimpleResult()
+      Common::Logger.print(Common::VAR_DEBUG, self, "[getAsSimpleResult]: Executing in context of current object: [#{self.to_s()}]")
+
+      if(!self.isSimpleObject?())
+        raise InternalException.new("Currect BagResult can't be treated as simple object [#{self.to_s()}]")
+      end
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[getAsSimpleResult]: Returning: [#{self.VAR_OBJECT.get(self.VAR_OBJECT.size()-1)}]")
+
+      return self.VAR_OBJECT.get(self.VAR_OBJECT.size()-1)
+    end
+
+    # Evaluates 'comma' function 
+    #
+    # Params:
+    #
+    # var_RValue:AbstractSimpleQueryResult - QRES simple object
+    #
+    # Returns:BagResult
+    #
+    # Throws:
+    def comma(var_RValue, var_AST)
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: Calling operator on the object #{self.to_s()}")
+      
+      bagResult = BagResult.new()
+      
+      # Evaluating the right side of the expression
+      if(!var_RValue.is_a?(AbstractQueryResult))
+
+        # Executing right hand side
+        var_RValue.execute(var_AST)
+
+        var_RValue = var_AST.VAR_QRES().pop()
+      end      
+
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue is executed, stacks dump:")
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
+      
+      puts "AAA/Struct/: lValue=#{self.to_s()}, rValue=#{var_RValue.to_s()}"
+      
+      # s(1,2), s(3,4) = b(s(1,2,3,4)) = proxy[b(s(1,2,3,4))]
+      # s(1,2), 3 = b(s(1,2,3)) = proxy[b(s(1,2,3))]
+      
+      # Struct Simple - tutaj jest problem
+      if(Utils::isStructResult?(var_RValue) || Utils::isBagQualifiedForProxy(var_RValue) || Utils::isSimpleObject?(var_RValue))
+        #tmpResult = StructResult.new()
+        
+        puts "AAA/Struct/Struct or simple/ self=#{self.to_s()}, rval=#{var_RValue.to_s()}"
+        
+        if(Utils::isSimpleObject?(var_RValue))
+          self.push(var_RValue)
+          bagResult.push(self)
+        else
+          bagResult.push(self)
+          bagResult.push(var_RValue)
+        end
+        
+        #bagResult.push(tmpResult)
+        
+        puts "AAA/Struct/Struct or simple/ result=#{bagResult.to_s()}"        
+        
+        return bagResult
+      end
+       
+      # s(3,4), b(5,6) = b(s(3,4,5), s(3,4,6))
+      rightIterator = self.iterator()
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")
+       
+      while(rightIterator.hasNext())
+        
+        rightObject = rightIterator.next()
+
+        puts "AAA/Struct/bag/: #{rightObject.to_s()}"
+        
+        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")
+        
+        aaa = leftObject.comma(rightObject)
+        bagResult.push(aaa)
+
+        puts "AAA/bag/matching/: #{aaa.to_s()}"
+      end
+      
+      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
+      
+      return bagResult
+    end
+
     # Returns a string representation of QRES value object.
     #
     # Params:
@@ -116,6 +239,17 @@ require "lib/QRES/StructResultIterator"
     # Returns:
     #
     # Throws:
-    alias add push         
+    alias add push  
+    
+    # Alias for push method.
+    #
+    # Params:
+    #
+    # var_Object:AbstractQueryResult - QRES object
+    #
+    # Returns:
+    #
+    # Throws:   
+    alias == equals    
   end
 end
