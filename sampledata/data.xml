@@ -6,6 +6,7 @@
 		<number>s0000</number>
 		<fName>Anna</fName>
 		<lName>Kowalska</lName>
+		<salary>3800</salary>
 		<dept_id>2</dept_id>
 		
 		<address>
@@ -27,6 +28,7 @@
 		<number>s0001</number>
 		<fName>Maciej</fName>
 		<lName>Nowak</lName>
+		<salary>3500</salary>
 		<dept_id>1</dept_id>
 		
 		<address>
@@ -39,6 +41,48 @@
 		<married>false</married>
 	</emp>
 	
+	<emp>
+		<number>s0002</number>
+		<fName>Łukasz</fName>
+		<lName>Wiśniewski</lName>
+		<salary>3600</salary>
+		<dept_id>1</dept_id>
+		
+		<address>
+			<street>Mickiewicza</street>
+			<number>33</number>
+			<zip>30-001</zip>
+			<city>Kraków</city>
+		</address>
+		
+		<married>false</married>
+	</emp>
+	
+	<emp>
+		<number>s0003</number>
+		<fName>Marzena</fName>
+		<lName>Ignasiewicz</lName>
+		<dept_id>2</dept_id>
+		<salary>2200</salary>
+		
+		<address>
+			<street>Słowackiego</street>
+			<number>36</number>
+			<zip>61-301</zip>
+			<city>Poznań</city>
+		</address>
+		
+		<married>true</married>
+	</emp>
+	
+	<dept>
+		<dept_id>1</dept_id>
+		<name>IT</name>
+	</dept>
+	<dept>
+		<dept_id>2</dept_id>
+		<name>Accounting</name>
+	</dept>
 	<realNumber>234.35</realNumber>
 		
 </root>
