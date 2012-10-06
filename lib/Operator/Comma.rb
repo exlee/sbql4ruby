@@ -28,9 +28,6 @@ require "lib/Operator/Evaluate"
       Common::Logger.print(Common::VAR_DEBUG, self, 
           "[comma]: Beginning operation for lValue=[#{var_LValue.to_s()}], rValue=[#{var_RValue.to_s()}]")
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
-
-      #operatorResult = QRES::BagResult.new()
-      operatorResult = QRES::StructResult.new()
       
       # Evaluating the left side of the expression
       var_LValue.execute(var_AST)
@@ -38,7 +35,7 @@ require "lib/Operator/Evaluate"
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: lValue is executed, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
         
-      var_LValue =  QRES::Utils.getSimpleObjectAsBagResult(var_AST.VAR_QRES().pop())
+      var_LValue = var_AST.VAR_QRES().pop()
           
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: lValue is executed, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")

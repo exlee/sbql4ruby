@@ -144,12 +144,13 @@ require "lib/QRES/StringResult"
     # Throws:SyntaxError    
     def ==(var_RValue)
       Common::Logger.print(Common::VAR_DEBUG, self, "[==]: Executing for: [#{self.to_s()}] == [#{var_RValue.to_s()}]")
-
+       
       if(var_RValue.is_a?(NilClass))
         return false
       end
-
+      
       if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
+        puts "AAA porówanie: #{(self.VAR_OBJECT == var_RValue.VAR_OBJECT()).to_s()}"
         return self.VAR_OBJECT == var_RValue.VAR_OBJECT()
       end
               

@@ -90,8 +90,8 @@ module Common
         return false
       end
       
-      for i in (0...@VAR_STACK.length)
-        if(!@VAR_STACK[i] == var_Object.get(i))
+      for i in (0...@VAR_STACK.length)        
+        if(!(@VAR_STACK[i] == var_Object.get(i)))
           return false
         end
       end
