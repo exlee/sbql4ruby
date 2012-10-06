@@ -175,12 +175,12 @@ require "lib/Common/exceptions"
         Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for " +
           "[#{QRES::BinderResult.to_s()}], creating binder")
         
-        binerList = Binder.new(object.VAR_NAME, object.VAR_OBJECT)
+        binderList = [Binder.new(var_Object.VAR_NAME, var_Object.VAR_OBJECT)]
         
         Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder, length " +
           "[#{binderList.length().to_s()}]")
         
-        binderList.each{|biner| var_BinderList.push(binder)}
+        binderList.each{|binder| var_BinderList.push(binder)}
         
         Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array after join, length " +
           "[#{var_BinderList.length().to_s()}]")
@@ -216,8 +216,8 @@ require "lib/Common/exceptions"
         
         Common::Logger.print(Common::VAR_DEBUG, self, "[bind]: Searching for object name [#{var_Name}], frame [#{i.to_s()}]")
         
+        
         bag = @VAR_STACK[i].findAllByName(var_Name)
-             
         if(bag.VAR_OBJECT().size() > 0)
           Common::Logger.print(Common::VAR_DEBUG, self, "[bind]: Found [#{bag.to_s()}], breaking")
           
