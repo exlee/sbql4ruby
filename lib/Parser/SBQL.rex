@@ -54,38 +54,37 @@ macro
      COMMA ,
      DIFFERENCE !=
      DOT \.
-     EQUAL =
-     EQUAL ==
+     EQUAL ={1,2}
      GREATEREQUAL >=
-     GREATER >
-     JOIN join
-     ORDERBY order_by
-     AVG avg
+     GREATER >={0}
+     JOIN \bjoin\b
+     ORDERBY \border_by\b
+     AVG \bavg\b
      SMALLEREQUAL <=
-     SMALLER <
-     UNION union
-     IN in
-     UNIQUE unique
-     INTERSECT intersect
-     WHERE where
-     ANY any
-     ALL all
-     BAG bag
-     EXISTS exists
-     GROUPAS groupas
-     GROUPAS group as
-     MAX max
-     MIN min
-     SET_MINUS substract
-     NOT not
-     PICKRANDOM pickrandom
-     STRUCT struct
-     SUM sum
-     AS as
-     AND and
-     OR or
+     SMALLER <={0}
+     UNION \bunion\b
+     IN \bin\b
+     UNIQUE \bunique\b
+     INTERSECT \bintersect\b
+     WHERE \bwhere\b
+     ANY \bany\b
+     ALL \ball\b
+     BAG \bbag\b
+     EXISTS \bexists\b
+     GROUPAS \bgroupas\b
+     GROUPAS \bgroup\sas\b
+     MAX \bmax\b
+     MIN \bmin\b
+     SET_MINUS \bsubstract\b
+     NOT \bnot\b
+     PICKRANDOM \bpickrandom\b
+     STRUCT \bstruct\b
+     SUM \bsum\b
+     AS \bas\b
+     AND \band\b
+     OR \bor\b
     BOOLEAN         true|false
-    NAME            [_a-zA-Z][0-9a-zA-Z]*
+    NAME            [0-9a-zA-Z_]*
     DOUBLE          [0-9]+\.[0-9]+
     INTEGER         [0-9]+
     STRING          [\"][^\"]*[\"]
@@ -110,7 +109,6 @@ rule
 	{COMMA}			{ [:COMMA,nil] }
 	{DIFFERENCE}	{ [:DIFFERENCE,nil] }
 	{DOT}			{ [:DOT,nil] }
-	{EQUAL}			{ [:EQUAL,nil] }
 	{EQUAL}			{ [:EQUAL,nil] }
 	{GREATEREQUAL}	{ [:GREATEREQUAL,nil] }
 	{GREATER}		{ [:GREATER,nil] }

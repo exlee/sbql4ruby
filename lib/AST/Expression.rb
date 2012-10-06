@@ -51,6 +51,26 @@ require "lib/AST/AbstractMethodException"
       end
     end
     
+    def print(indent=0)
+      indenting = 4
+      
+      if(self.is_a?(NameExpression))
+        puts " "*indent + "[Type=#{self.class.to_s()}, Name = #{@VAR_NAME}]\n"
+      elsif(self.is_a?(AsExpression))
+        puts " "*indent + "[Type=#{self.class.to_s()}, Name = #{@VAR_NAME}, Value = \n"
+        @VAR_VALUE.print(indent+indenting)
+        puts " "*indent+"]\n"
+      elsif(@VAR_VALUE == nil)
+        puts " "*indent + "[Type=#{self.class.to_s()}, Value = nil]"
+      elsif(@VAR_VALUE.is_a?(Expression))
+        puts " "*indent + "[Type=#{self.class.to_s()}, Value = \n"
+        @VAR_VALUE.print(indent+indenting)
+        puts " "*indent+"]\n"
+      else
+        puts " "*indent + "[Type=#{self.class.to_s()}, Value = #{@VAR_VALUE.to_s}]\n"
+      end
+    end
+    
     # Getter for VAR_VALUE variable
     attr_reader :VAR_VALUE
   end

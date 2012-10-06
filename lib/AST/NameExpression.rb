@@ -80,6 +80,7 @@ require "lib/AST/UnaryExpression"
         return super() + ", [Name=#{@VAR_NAME}]"
     end
     
+    
     attr_reader :VAR_NAME
   end
 end

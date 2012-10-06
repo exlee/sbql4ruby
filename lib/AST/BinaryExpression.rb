@@ -79,5 +79,21 @@ require "lib/AST/Expression"
          return "[Type=#{self.class.to_s()}, LeftValue=#{self.VAR_VALUE[:var_Left].to_s()}, RightValue=#{self.VAR_VALUE[:var_Right].to_s()}]"
        end
      end
+     
+     def print(indent=0)
+       indenting = 4
+
+       if(@VAR_VALUE == nil)
+         return
+       else
+         puts " "*indent + "["
+         puts " "*indent + " Type=#{self.class.to_s()},"
+         puts " "*indent + " LeftValue=\n"
+         self.VAR_VALUE[:var_Left].print(indent+indenting)
+         puts " "*indent + " RightValue=\n"
+         self.VAR_VALUE[:var_Right].print(indent+indenting)
+         puts " "*indent + "]\n"
+       end
+     end
   end
 end

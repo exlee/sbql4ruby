@@ -145,97 +145,94 @@ class SBQLParser < Racc::Parser
         when (text = ss.scan(/\./i))
            @rex_tokens.push action { [:DOT,nil] }
 
-        when (text = ss.scan(/==/i))
-           @rex_tokens.push action { [:EQUAL,nil] }
-
-        when (text = ss.scan(/==/i))
+        when (text = ss.scan(/={1,2}/i))
            @rex_tokens.push action { [:EQUAL,nil] }
 
         when (text = ss.scan(/>=/i))
            @rex_tokens.push action { [:GREATEREQUAL,nil] }
 
-        when (text = ss.scan(/>/i))
+        when (text = ss.scan(/>={0}/i))
            @rex_tokens.push action { [:GREATER,nil] }
 
-        when (text = ss.scan(/join/i))
+        when (text = ss.scan(/\bjoin\b/i))
            @rex_tokens.push action { [:JOIN,nil] }
 
-        when (text = ss.scan(/order_by/i))
+        when (text = ss.scan(/\border_by\b/i))
            @rex_tokens.push action { [:ORDERBY,nil] }
 
-        when (text = ss.scan(/avg/i))
+        when (text = ss.scan(/\bavg\b/i))
            @rex_tokens.push action { [:AVG, nil] }
 
         when (text = ss.scan(/<=/i))
            @rex_tokens.push action { [:SMALLEREQUAL,nil] }
 
-        when (text = ss.scan(/</i))
+        when (text = ss.scan(/<={0}/i))
            @rex_tokens.push action { [:SMALLER,nil] }
 
-        when (text = ss.scan(/union/i))
+        when (text = ss.scan(/\bunion\b/i))
            @rex_tokens.push action { [:UNION,nil] }
 
-        when (text = ss.scan(/unique/i))
+        when (text = ss.scan(/\bunique\b/i))
            @rex_tokens.push action { [:UNIQUE,nil] }
 
-        when (text = ss.scan(/intersect/i))
+        when (text = ss.scan(/\bintersect\b/i))
            @rex_tokens.push action { [:INTERSECT,nil] }
 
-        when (text = ss.scan(/where/i))
+        when (text = ss.scan(/\bwhere\b/i))
            @rex_tokens.push action { [:WHERE,nil] }
 
-        when (text = ss.scan(/any/i))
+        when (text = ss.scan(/\bany\b/i))
            @rex_tokens.push action { [:ANY,nil] }
 
-        when (text = ss.scan(/all/i))
+        when (text = ss.scan(/\ball\b/i))
            @rex_tokens.push action { [:ALL,nil] }
 
-        when (text = ss.scan(/in/i))
+        when (text = ss.scan(/\bin\b/i))
            @rex_tokens.push action { [:IN, nil] }
 
-        when (text = ss.scan(/bag/i))
+        when (text = ss.scan(/\bbag\b/i))
            @rex_tokens.push action { [:BAG,nil] }
 
-        when (text = ss.scan(/exists/i))
+        when (text = ss.scan(/\bexists\b/i))
            @rex_tokens.push action { [:EXISTS,nil] }
 
-        when (text = ss.scan(/group/i))
+        when (text = ss.scan(/\bgroup\sas\b/i))
            @rex_tokens.push action { [:GROUPAS,nil] }
 
-        when (text = ss.scan(/group/i))
+        when (text = ss.scan(/\bgroup\sas\b/i))
            @rex_tokens.push action { [:GROUPAS,nil] }
 
-        when (text = ss.scan(/max/i))
+        when (text = ss.scan(/\bmax\b/i))
            @rex_tokens.push action { [:MAX,nil] }
 
-        when (text = ss.scan(/min/i))
+        when (text = ss.scan(/\bmin\b/i))
            @rex_tokens.push action { [:MIN,nil] }
 
-        when (text = ss.scan(/not/i))
+        when (text = ss.scan(/\bnot\b/i))
            @rex_tokens.push action { [:NOT,nil] }
 
-        when (text = ss.scan(/pickrandom/i))
+        when (text = ss.scan(/\bpickrandom\b/i))
            @rex_tokens.push action { [:PICKRANDOM,nil] }
 
-        when (text = ss.scan(/struct/i))
+        when (text = ss.scan(/\bstruct\b/i))
            @rex_tokens.push action { [:STRUCT,nil] }
 
-        when (text = ss.scan(/sum/i))
+        when (text = ss.scan(/\bsum\b/i))
            @rex_tokens.push action { [:SUM,nil] }
 
-        when (text = ss.scan(/as/i))
+        when (text = ss.scan(/\bas\b/i))
            @rex_tokens.push action { [:AS,nil] }
 
-        when (text = ss.scan(/and/i))
+        when (text = ss.scan(/\band\b/i))
            @rex_tokens.push action { [:AND,nil] }
 
-        when (text = ss.scan(/or/i))
+        when (text = ss.scan(/\bor\b/i))
            @rex_tokens.push action { [:OR,nil] }
 
-        when (text = ss.scan(/substract/i))
+        when (text = ss.scan(/\bsubstract\b/i))
            @rex_tokens.push action { [:SET_MINUS,nil] }
 
-        when (text = ss.scan(/[_a-zA-Z][0-9a-zA-Z]*/i))
+        when (text = ss.scan(/[0-9a-zA-Z_]*/i))
            @rex_tokens.push action { [:NAME, text] }
 
         when (text = ss.scan(/./i))
