@@ -237,7 +237,9 @@ require "lib/QRES/Utils"
 
         while(iterator.hasNext())
           object = Utils::getBagResultAsSimpleObject(iterator.next())
-
+          if(object.is_a?(ReferenceResult)) 
+            object = object.dereference(var_AST.VAR_STORE)
+          end
           if(!var_RValue.is_contained?(object))
             bagResult.push(object)
           end
