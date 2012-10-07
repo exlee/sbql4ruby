@@ -437,17 +437,24 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
-        def test_parser_14
-          expression = SBQLParser.new.scan_str("(dept as d join (max((emp where dept_id=d.dept_id).salary) as maxSal)).(d.name,maxSal)")
+        def test_parser_14_sub1
+          expression = SBQLParser.new.scan_str("dept as d join max((emp where dept_id=d.dept_id).salary) as maxSal")
           self.execute(expression)
-          expected = ""
+          expected = "bag(struct(([1,IT]) as d,(3600) as maxSal),struct(([2,Accounting]) as d,(3800) as maxSal))"
+          assert_equal(expected,@result.print(@AST.VAR_STORE))
+        end
+        
+        def test_parser_14
+          expression = SBQLParser.new.scan_str("(dept as d join max((emp where dept_id=d.dept_id).salary) as maxSal).(d.name,maxSal)")
+          self.execute(expression)
+          expected = "XYZZY"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_15
           expression = SBQLParser.new.scan_str("(dept as d join (avg((emp where dept_id=d.dept_id).salary) as avgSal)).(d.name,avgSal)")
           self.execute(expression)
-          expected = ""
+          expected = "XYZZY"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
@@ -480,9 +487,9 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_parser_20
-          expression = SBQLParser.new.scan_str("emp.(fName,lName, (salary/avg(emp.salary) * 100.0 as SalaryAvgRel))")
+          expression = SBQLParser.new.scan_str("emp.(fName,lName, ((salary/avg(emp.salary))*100) as SalaryAvgRel)")
           self.execute(expression)
-          expected = ""
+          expected = "bag(struct([Anna],[Kowalska],(116.030534351145) as SalaryAvgRel),struct([Maciej],[Nowak],(106.870229007634) as SalaryAvgRel),struct([Łukasz],[Wiśniewski],(109.923664122137) as SalaryAvgRel),struct([Marzena],[Ignasiewicz],(67.175572519084) as SalaryAvgRel))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
