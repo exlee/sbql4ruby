@@ -110,7 +110,7 @@ class SBQLParser < Racc::Parser
            @rex_tokens.push action { [:INTEGER_LITERAL, IntegerTerminal.new(text.to_i)] }
 
         when (text = ss.scan(/[\"][^\"]*[\"]/i))
-           @rex_tokens.push action { [:STRING_LITERAL, StringTerminal.new(text)] }
+           @rex_tokens.push action { [:STRING_LITERAL, StringTerminal.new(text[1..-2])] }
 
         when (text = ss.scan(/[\'][^\"][\']/i))
            @rex_tokens.push action { [:CHAR_LITERAL, text] }

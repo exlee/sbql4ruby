@@ -25,6 +25,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           expression.execute(@AST)
           @result = @AST.VAR_QRES().pop()
           
+          
         end
 
         def test_SimpleExpression
@@ -365,33 +366,41 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           assert_nothing_thrown do
             expression = SBQLParser.new.scan_str("emp.address where city=\"Warszawa\"")
             self.execute(expression)
+            
           end
         end
         
         def test_parser_6
           assert_nothing_thrown do
-            expression = SBQLParser.new.scan_str("((osoba where married).book.author)")
+            expression = SBQLParser.new.scan_str("((emp where married).book.author)")
+            self.execute(expression)
+          end
+        end
+        
+        def test_parser_7_sub1
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("(emp where fName=\"Maciej\")")
             self.execute(expression)
           end
         end
         
         def test_parser_7
           assert_nothing_thrown do
-            expression = SBQLParser.new.scan_str("((osoba where fName=\"Maciej\").address.street)")
+            expression = SBQLParser.new.scan_str("((emp where fName=\"Maciej\").address.street)")
             self.execute(expression)
           end
         end
         
         def test_parser_8
           assert_nothing_thrown do
-            expression = SBQLParser.new.scan_str("((osoba.adress) where numer=50).(street)")
+            expression = SBQLParser.new.scan_str("((emp.adress) where numer=50).(street)")
             self.execute(expression)
           end
         end
         
         def test_parser_9
           assert_nothing_thrown do
-            expression = SBQLParser.new.scan_str("((osoba.adress) where kod=\"00-222\").(city)")
+            expression = SBQLParser.new.scan_str("((emp.adress) where kod=\"00-222\").(city)")
             self.execute(expression)
           end
         end

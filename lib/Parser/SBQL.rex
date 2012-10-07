@@ -97,7 +97,7 @@ rule
     {BOOLEAN}	    { [:BOOLEAN_LITERAL, BooleanTerminal.new(text.downcase == "true")] }
     {DOUBLE}	    { [:DOUBLE_LITERAL, FloatTerminal.new(text.to_f)] }
     {INTEGER}	    { [:INTEGER_LITERAL, IntegerTerminal.new(text.to_i)] }
-    {STRING}	    { [:STRING_LITERAL, StringTerminal.new(text)] }
+    {STRING}	    { [:STRING_LITERAL, StringTerminal.new(text[1..-2])] }
     {CHAR}	        { [:CHAR_LITERAL, text] }
 	{PLUS}			{ [:PLUS,nil] }
 	{MINUS}			{ [:MINUS,nil] }

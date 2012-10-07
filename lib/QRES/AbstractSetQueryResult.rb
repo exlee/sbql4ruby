@@ -49,12 +49,11 @@ require "lib/QRES/Utils"
       # Throws:
       def wheres(var_RValue, var_AST)
         
-        Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: Calling perator on the object #{self.to_s()}")
+        Common::Logger.print(Common::VAR_DEBUG, self, "[wheres]: Calling operator on the object #{self.to_s()}")
         
         bagResult = BagResult.new()
         
         bagIterator = self.iterator()
-         
         while(bagIterator.hasNext())
           object = bagIterator.next()
 
