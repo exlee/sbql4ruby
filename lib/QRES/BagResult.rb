@@ -253,7 +253,7 @@ require "lib/QRES/AbstractSetQueryResult"
         Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: Result=#{bagResult.to_s()}")
         return bagResult
       end
-              
+      var_RValue = Utils::getSimpleObjectAsBagResult(var_RValue)      
       # proxy[b(s(1,2))], b(3,4) = b(s(1,2), s(1,4), s(2,3), s(2,4)) 
       if(Utils::isBagQualifiedForProxy(self) && Utils::isSimpleBag?(var_RValue))
         var_LValue = Utils::bagResultProxy(self)

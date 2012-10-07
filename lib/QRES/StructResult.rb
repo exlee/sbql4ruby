@@ -193,22 +193,22 @@ require "lib/QRES/StructResultIterator"
       end
        
       # s(3,4), b(5,6) = b(s(3,4,5), s(3,4,6))
-      rightIterator = self.iterator()
+      leftIterator = self.iterator()
       
-      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")
-       
-      while(rightIterator.hasNext())
-        
-        rightObject = rightIterator.next()
+      #Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")
+      
+      leftIterator.each do |left|
+        var_RValue = Utils.getSimpleObjectAsBagResult(var_RValue)
+        rightIterator = var_RValue.iterator()
 
-        
-        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")
-        
-        aaa = leftObject.comma(rightObject)
-        bagResult.push(aaa)
-
-        
+        #Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")        
+        rightIterator.each do |right|
+          bagResult.push(
+            left.comma(right, var_AST)
+          )
+        end
       end
+
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
       

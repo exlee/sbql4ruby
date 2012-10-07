@@ -291,6 +291,7 @@ require "lib/QRES/AbstractMethodException"
         # 1 = s(2,3)
         # 1,bag(2,3) = b(s(1,2,3)) = proxy[b(1,2,3)]
         # 1,bag(s(2,3), s(4,5)) = b(s(1,2,3), s(1,4,5))
+        var_RValue = Utils::getSimpleObjectAsBagResult(var_RValue)
         rightIterator = var_RValue.nestedIterator()
 
         Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")

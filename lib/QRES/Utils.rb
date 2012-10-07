@@ -156,7 +156,7 @@ require "lib/QRES/AbstractSimpleQueryResult"
     #
     # Throws:    
     def Utils::getSimpleObjectAsBagResult(var_Object)
-      if(!var_Object.is_a?(AbstractSimpleQueryResult))
+      if(!var_Object.is_a?(AbstractSimpleQueryResult) && !var_Object.is_a?(BinderResult))
         return var_Object
       end
 
@@ -280,7 +280,6 @@ require "lib/QRES/AbstractSimpleQueryResult"
     #
     # Throws:    
     def Utils::isSimpleBag?(var_Object)
-      
       # Proxy
       if(Utils::isBagQualifiedForProxy(var_Object))
         return true

@@ -113,6 +113,11 @@ require "lib/SBAStore/SBAStore"
       return self.class.to_s() + "(value=" + super() + ")"
     end
     
+    def comma(var_RValue, var_AST)
+      object = self.dereference(var_AST.VAR_STORE).to_qres()
+      return object.comma(var_RValue, var_AST)
+    end
+    
     # Alias for push method
     #
     # Params:
