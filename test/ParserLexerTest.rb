@@ -22,19 +22,10 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           
         end
         def execute(expression)
-          #expression.print
           expression.execute(@AST)
           @result = @AST.VAR_QRES().pop()
           
         end
-        # Test for basic object flow (initializing object etc. based on 
-        # empty expression.
-        #
-        # Params:
-        #
-        # Returns:
-        #
-        # Throws:
 
         def test_SimpleExpression
             
@@ -57,12 +48,11 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_structExpression
-          expression = SBQLParser.new.scan_str("emp.(fName,lName)")
-          self.execute(expression)
-          
-          #puts @result
-         
-          
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp.(fName,lName)")
+            self.execute(expression)
+          end
+
         end
         
         def test_simple_avgExpression
@@ -116,7 +106,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           expected.push(IntegerResult.new(1))
           expected.push(IntegerResult.new(2))
           expected.push(IntegerResult.new(3))
-          assert(expected.equals(@result), "Bag(1,2,3) -> BagResult(1,2,3)")
+          assert(Utils::bagResultProxy(expected).equals(Utils::bagResultProxy(@result)), "Bag(1,2,3) -> BagResult(1,2,3)")
         end
         
         def test_simple_comma
@@ -128,7 +118,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           expected.push(IntegerResult.new(2))
           expected.push(IntegerResult.new(3))
           
-          assert(expected.equals(@result), "1,2,3 -> BagResult(1,2,3)")
+          assert(Utils::bagResultProxy(expected).equals(Utils::bagResultProxy(@result)), "1,2,3 -> BagResult(1,2,3)")
         end
         
         def test_simple_different
@@ -149,10 +139,11 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_simple_dot
-          expression = SBQLParser.new.scan_str("emp.number")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp.number")
+            self.execute(expression)
+          end
           
-          #TODO: Do weryfikacji
           
         end
         
@@ -184,9 +175,10 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_simple_groupas
-          # TODO: Do dopisania jak będzie wiadomo jak
-          expression = SBQLParser.new.scan_str("Bag(1,2) as x")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("Bag(1,2) as x")
+            self.execute(expression)
+          end
                 
         end
         
@@ -208,10 +200,6 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           expected.push(IntegerResult.new(2))
           
           assert(expected.equals(@result), "(1,2) intersect (2,3) -> BagResult(2)")
-        end
-        
-        def test_simple_join
-          # Cannot be tested as for now
         end
         
         def test_simple_less
@@ -301,10 +289,6 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           assert(expected.equals(@result), "true or false -> BooleanResult(true)")
         end
         
-        def test_simple_orderby
-          #TODO: Cannot be tested right now
-        end
-        
         def test_simple_plus
           expression = SBQLParser.new.scan_str("10 + 5")
           self.execute(expression)
@@ -349,137 +333,172 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           assert(expected.equals(@result), "(1,2) union (2,3) -> BagResult(1,2,2,3)")
         end
         
-        def test_simple_where
-          #TODO: Cannot be tested as for now
-        end
-        
-        def test_simple_pickrandom
-          #TODO: Cannot be tested as for now
-        end
-
-        def test_simple_orderbydesc
-          #TODO: Cannot be tested as for now
-        end
-        
         def test_parser_1
-          expression = SBQLParser.new.scan_str("bag(1,2,3)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("bag(1,2,3)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_2
-          expression = SBQLParser.new.scan_str("struct(1,2,3)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("struct(1,2,3)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_3
-          expression = SBQLParser.new.scan_str("bag(1, bag(2,3))")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("bag(1, bag(2,3))")
+            self.execute(expression)
+          end
         end
         
         def test_parser_4
-          expression = SBQLParser.new.scan_str("emp where fName=\"Anna\"")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp where fName=\"Anna\"")
+            self.execute(expression)
+          end
         end
         
         def test_parser_5
-          expression = SBQLParser.new.scan_str("emp.address where city=\"Warszawa\"")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp.address where city=\"Warszawa\"")
+            self.execute(expression)
+          end
         end
         
         def test_parser_6
-          expression = SBQLParser.new.scan_str("((osoba where married).book.author)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("((osoba where married).book.author)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_7
-          expression = SBQLParser.new.scan_str("((osoba where fName=\"Maciej\").address.street)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("((osoba where fName=\"Maciej\").address.street)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_8
-          expression = SBQLParser.new.scan_str("((osoba.adress) where numer=50).(street)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("((osoba.adress) where numer=50).(street)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_9
-          expression = SBQLParser.new.scan_str("((osoba.adress) where kod=\"00-222\").(city)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("((osoba.adress) where kod=\"00-222\").(city)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_10
-          expression = SBQLParser.new.scan_str("((emp where married).book.author) union (test)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("((emp where married).book.author) union (test)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_11
-          expression = SBQLParser.new.scan_str("((emp where fName=\"Maciej\").address.street)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("((emp where fName=\"Maciej\").address.street)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_12
-          expression = SBQLParser.new.scan_str("((emp.adress) where number > 20).(street,city)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("((emp.adress) where number > 20).(street,city)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_13
-          expression = SBQLParser.new.scan_str("emp as e join (dept where dept_id=e.dept_id)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp as e join (dept where dept_id=e.dept_id)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_14
-          expression = SBQLParser.new.scan_str("(dept as d join (max((emp where dept_id=d.dept_id).salary) as maxSal)).(d.name,maxSal)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("(dept as d join (max((emp where dept_id=d.dept_id).salary) as maxSal)).(d.name,maxSal)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_15
-          expression = SBQLParser.new.scan_str("(dept as d join (avg((emp where dept_id=d.dept_id).salary) as avgSal)).(d.name,avgSal)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("(dept as d join (avg((emp where dept_id=d.dept_id).salary) as avgSal)).(d.name,avgSal)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_16
-          expression = SBQLParser.new.scan_str("emp substract (emp where salary = max(emp.salary) or salary = min(emp.salary))")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp substract (emp where salary = max(emp.salary) or salary = min(emp.salary))")
+            self.execute(expression)
+          end
         end
         
         def test_parser_17
-          expression = SBQLParser.new.scan_str("emp where salary < avg(emp.salary)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp where salary < avg(emp.salary)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_18
-          expression = SBQLParser.new.scan_str("emp join dept")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp join dept")
+            self.execute(expression)
+          end
         end
         
         def test_parser_19
-          expression = SBQLParser.new.scan_str("emp,dept")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp,dept")
+            self.execute(expression)
+          end
         end
         
         def test_parser_20
-          expression = SBQLParser.new.scan_str("emp.(fName,lName, salary/avg(emp.salary) * 100 as SalaryAvgRel)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp.(fName,lName, salary/avg(emp.salary) * 100 as SalaryAvgRel)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_21
-          expression = SBQLParser.new.scan_str("emp.(fName,lName, salary/min(emp.salary) * 100 as SalaryMinRel)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp.(fName,lName, salary/min(emp.salary) * 100 as SalaryMinRel)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_22
-          expression = SBQLParser.new.scan_str("emp.(fName,lName, salary/max(emp.salary) * 100 as SalaryMinRel)")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("emp.(fName,lName, salary/max(emp.salary) * 100 as SalaryMinRel)")
+            self.execute(expression)
+          end
         end
         
         def test_parser_23
-          expression = SBQLParser.new.scan_str("\"Hello\" + \" \" + \"World!\"")
-          self.execute(expression)
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("\"Hello\" + \" \" + \"World!\"")
+            self.execute(expression)
+          end
         end
         
         def test_parser_24
-          expression = SBQLParser.new.scan_str("\"Hello\" + \" \" + \"World!\" as text")
-          self.execute(expression)
-          expression
+          assert_nothing_thrown do
+            expression = SBQLParser.new.scan_str("\"Hello\" + \" \" + \"World!\" as text")
+            self.execute(expression)
+          end
         end
         
     end
