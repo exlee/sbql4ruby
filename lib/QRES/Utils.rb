@@ -156,7 +156,11 @@ require "lib/QRES/AbstractSimpleQueryResult"
     #
     # Throws:    
     def Utils::getSimpleObjectAsBagResult(var_Object)
-      if(!var_Object.is_a?(AbstractSimpleQueryResult) && !var_Object.is_a?(BinderResult))
+      if(
+        !var_Object.is_a?(BinderResult) and
+        !var_Object.is_a?(ReferenceResult) and
+        !var_Object.is_a?(AbstractSimpleQueryResult)
+        )
         return var_Object
       end
 

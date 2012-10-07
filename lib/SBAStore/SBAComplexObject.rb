@@ -131,7 +131,8 @@ require "lib/Common/exceptions"
 
         return var_text + " ]"
     end
-          
+    
+    
     # Alias for find method.
     #
     # Params:
@@ -143,6 +144,7 @@ require "lib/Common/exceptions"
     # Throws:
     alias push add
 
+    
   end
 
 end

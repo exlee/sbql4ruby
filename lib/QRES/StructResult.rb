@@ -83,7 +83,9 @@ require "lib/QRES/StructResultIterator"
     #
     # Throws:
     def is_contained?(var_Object)
-      if(!var_Object.is_a?(AbstractSimpleQueryResult))
+      var_Object = Utils::getBagResultAsSimpleObject(var_Object)
+      
+      if(!var_Object.is_a?(AbstractSimpleQueryResult) && !var_Object.is_a?(BinderResult) && !var_Object.is_a?(ReferenceResult))
         throw QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + AbstractSimpleQueryResult.to_s() + " expected")
       end
      

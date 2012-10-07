@@ -294,8 +294,8 @@ require "lib/QRES/AbstractSetQueryResult"
           
           rightIterator = var_RValue.iterator()
           
-          else
-          rightIterator = var_RValue.iterator()
+        else
+          rightIterator = Utils::getSimpleObjectAsBagResult(var_RValue).iterator()
         end
           
         while(rightIterator.hasNext())
@@ -324,6 +324,18 @@ require "lib/QRES/AbstractSetQueryResult"
     # Throws:
     def to_s()
       return self.class.to_s() + super()
+    end
+    
+    # Method: to_s
+    #
+    # Return self. Method made for SBAComplexObject, which sometimes
+    # can return bag, where SBAObject is expected.
+    #
+    # Params:
+    #
+    # Returns: Bag
+    def to_qres()
+      return self
     end
     
         
