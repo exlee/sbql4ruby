@@ -188,7 +188,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_simple_groupas
-          expression = SBQLParser.new.scan_str("Bag(1,2) as x")
+          expression = SBQLParser.new.scan_str("Bag(1,2) group as x")
           self.execute(expression)
           expected = "(bag(1,2)) as x"
           assert_equal(expected,@result.print(@AST.VAR_STORE))

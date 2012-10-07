@@ -97,25 +97,25 @@ require "lib/QRES/AbstractMethodException"
           end
         end
         
-#      puts "EEE-being: after conv: #{tmpObject.class.to_s()}, #{tmpObject.to_s()}"
+#     puts "EEE-being: after conv: #{tmpObject.class.to_s()}, #{tmpObject.to_s()}"
        
         if(tmpObject.is_a?(ReferenceResult))
           result = Utils::dereference(tmpObject, var_Store)
  
           if(result.is_a?(AbstractSetQueryResult))
-            str = ""  
+            str = "["  
             for i in 0..result.VAR_OBJECT.VAR_STACK.size()-1
               if(i!=0)
                 str += ","
               end  
               str += result.VAR_OBJECT.get(i).print(var_Store)
             end
-            str += ""
+            str += "]"
           else
-            return result.print(var_Store)
+            return "[" + result.print(var_Store) + "]"
           end
              
-#       puts "EEE-rr-after: #{str.to_s()}"
+      puts "EEE-rr-after: #{str.to_s()}"
         
           return str
         elsif(tmpObject.is_a?(BinderResult))
