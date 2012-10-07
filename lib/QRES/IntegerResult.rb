@@ -123,10 +123,9 @@ require "lib/QRES/StringResult"
     # Throws:SyntaxError    
     def /(var_RValue)
       Common::Logger.print(Common::VAR_DEBUG, self, "[/]: Executing for: [#{self.to_s()}] / [#{var_RValue.to_s()}]")
-        
       if(var_RValue.is_a?(self.class) || (var_RValue.is_a?(FloatResult)))
         if((self.VAR_OBJECT % var_RValue.VAR_OBJECT()) > 0)
-          return FloatResult.new(self.VAR_OBJECT / var_RValue.VAR_OBJECT())
+          return FloatResult.new(1.0 * self.VAR_OBJECT / var_RValue.VAR_OBJECT())
         else
           return IntegerResult.new(self.VAR_OBJECT / var_RValue.VAR_OBJECT())
         end
