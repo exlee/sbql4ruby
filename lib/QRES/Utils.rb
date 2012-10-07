@@ -169,7 +169,26 @@ require "lib/QRES/AbstractSimpleQueryResult"
        
       return var_Result
     end
-    
+
+    # Gets an object provided by StructResult treated as QRES 
+    # simple object (StructResult must provide exactly one simple 
+    # object).
+    #
+    # Params:
+    #
+    # var_Object:StructResult - QRES object
+    #
+    # Returns:AbstractQueryResult
+    #
+    # Throws:    
+    def Utils::getStructResultAsSimpleObject(var_Object)
+      if(!var_Object.is_a?(StructResult))
+        return var_Object
+      end
+
+      return var_Object.getAsSimpleResult()
+    end
+        
     # Static Method: getSimpleObjectAsStructResult
     #
     # Puts given object into new StructResult.

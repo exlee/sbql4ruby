@@ -374,7 +374,6 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           assert_nothing_thrown do
             expression = SBQLParser.new.scan_str("emp.address where city=\"Warszawa\"")
             self.execute(expression)
-            
           end
         end
         
@@ -382,6 +381,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           assert_nothing_thrown do
             expression = SBQLParser.new.scan_str("((emp where married).book.author)")
             self.execute(expression)
+             puts "Result #{@result.to_s()}, #{@result.print(@AST.VAR_STORE())}"
           end
         end
         
@@ -389,6 +389,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           assert_nothing_thrown do
             expression = SBQLParser.new.scan_str("(emp where fName=\"Maciej\")")
             self.execute(expression)
+            puts "Res=#{@result.to_s()} -> #{@result.print(@AST.VAR_STORE)}"
           end
         end
         
@@ -438,6 +439,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           assert_nothing_thrown do
             expression = SBQLParser.new.scan_str("emp as e join (dept where dept_id=e.dept_id)")
             self.execute(expression)
+             puts "Res=#{@result.to_s()} -> #{@result.print(@AST.VAR_STORE)}"
           end
         end
         

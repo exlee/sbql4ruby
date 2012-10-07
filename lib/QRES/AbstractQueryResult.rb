@@ -82,13 +82,48 @@ require "lib/QRES/AbstractMethodException"
       #
       # Throws:
       def print(var_Store)
+  
+#        puts "EEE-being: Who iam: #{self.to_s()}"
+         
         tmpObject = Utils::bagResultProxy(self)
         
+        if(tmpObject.is_a?(BagResult))
+          if(tmpObject.VAR_OBJECT.size == 1)
+            tmpObject = Utils::getBagResultAsSimpleObject(tmpObject)
+          end
+        elsif(tmpObject.is_a?(StructResult))
+          if(tmpObject.VAR_OBJECT.size == 1)
+            tmpObject = Utils::getStructResultAsSimpleObject(tmpObject)
+          end
+        end
+        
+#       puts "EEE-being: after conv: #{tmpObject.to_s()}"
+       
         if(tmpObject.is_a?(ReferenceResult))
-          return (Utils::dereference(tmpObject, var_Store)).VAR_OBJECT
+          result = Utils::dereference(tmpObject, var_Store)
+ #             puts "EEE-rr-before: #{result.class.to_s()}, #{result.to_s()}"
+          
+          str = ""
+          
+          if(result.is_a?(AbstractSetQueryResult))
+            for i in 0..result.VAR_OBJECT.VAR_STACK.size()-1
+              if(i!=0)
+                str += ","
+              end  
+              str += result.VAR_OBJECT.get(i).print(var_Store)
+            end
+          else
+            return result.print(var_Store)
+          end
+             
+#       puts "EEE-rr-after: #{str.to_s()}"
+        
+          return str
+        elsif(tmpObject.is_a?(BinderResult))
+          return "(#{tmpObject.VAR_OBJECT.print(var_Store)}) as #{tmpObject.VAR_NAME}"
         elsif(self.is_a?(AbstractSimpleQueryResult))
           return @VAR_OBJECT.to_s()
-        elsif(self.is_a?(AbstractSetQueryResult))  
+        elsif(self.is_a?(AbstractSetQueryResult))
           if(tmpObject.is_a?(BagResult))
             str = "bag("
           else
