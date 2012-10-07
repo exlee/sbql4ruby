@@ -52,11 +52,11 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_as
-          expression = AsExpression.new(IntegerTerminal.new(1), NameExpression.new("x"))
+          expression = AsExpression.new(IntegerTerminal.new(1), "x")
           self.execute(expression)
           
-          expected = BinderResult.new(IntegerResult.new(1), StringResult.new("x"))
-          assert_equal(expected.equals(@result))          
+          expected = BinderResult.new("x",IntegerResult.new(1))
+          assert(expected.equals(@result))          
         end
         
         def test_bag
@@ -91,12 +91,12 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           )
           self.execute(expression)
           
-          expected = StructResult.new()
+          expected = BagResult.new()
           expected.push(IntegerResult.new(1))
           expected.push(IntegerResult.new(2))
           expected.push(IntegerResult.new(3))
           
-          assert(expected.equals(@result), "1,2,3 -> StructResult(1,2,3)")
+          assert(Utils::bagResultProxy(expected).equals(Utils::bagResultProxy(@result)), "1,2,3 -> BagResult(1,2,3)")
         end
         
         def test_different
@@ -161,7 +161,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
                   IntegerTerminal.new(2)
                 )
               ),
-              NameExpression.new("x")
+              "x"
             )
             self.execute(expression)
                 
