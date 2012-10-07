@@ -71,6 +71,43 @@ require "lib/QRES/AbstractMethodException"
       def is_numeric?
         return self.is_a?(IntegerResult) || self.is_a?(FloatResult)
       end
+
+      # Method: to_s
+      #
+      # Returns a printable string representation of QRES value object.
+      #
+      # Params:
+      #
+      # Returns:String
+      #
+      # Throws:
+      def print(var_Store)
+        tmpObject = Utils::bagResultProxy(self)
+        
+        if(tmpObject.is_a?(ReferenceResult))
+          return (Utils::dereference(tmpObject, var_Store)).VAR_OBJECT
+        elsif(self.is_a?(AbstractSimpleQueryResult))
+          return @VAR_OBJECT.to_s()
+        elsif(self.is_a?(AbstractSetQueryResult))  
+          if(tmpObject.is_a?(BagResult))
+            str = "bag("
+          else
+            str = "struct("
+          end
+          
+          for i in 0..tmpObject.VAR_OBJECT.VAR_STACK.size()-1
+            object = tmpObject.VAR_OBJECT.get(i)
+             
+            if(i!=0)
+             str += ","
+            end
+            str += object.print(var_Store)  
+          end
+
+          str += ")" 
+          return str
+        end  
+      end
       
       # VAR_OBJECT:Object - object identifier of the structure of identifires
       attr_reader :VAR_OBJECT

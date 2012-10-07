@@ -676,6 +676,8 @@ require "lib/QRES/BooleanResult"
         plusExpression = PlusExpression.new(PlusExpression.new(stringTerminal, floatTerminal), integerTerminal)
         plusExpression.execute(var_AST)
         
+        result = var_AST.VAR_QRES().pop()
+        
         minusExpression = MinusExpression.new(floatTerminal, integerTerminal)
         minusExpression.execute(var_AST)
         
