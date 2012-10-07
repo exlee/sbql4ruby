@@ -115,7 +115,7 @@ require "lib/QRES/AbstractMethodException"
             return "[" + result.print(var_Store) + "]"
           end
              
-      puts "EEE-rr-after: #{str.to_s()}"
+      #puts "EEE-rr-after: #{str.to_s()}"
         
           return str
         elsif(tmpObject.is_a?(BinderResult))

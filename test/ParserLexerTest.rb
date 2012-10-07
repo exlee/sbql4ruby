@@ -59,7 +59,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         def test_emp
             expression = SBQLParser.new.scan_str("emp")
             self.execute(expression)
-            expected = "bag(emp,emp,emp,emp)"
+            expected = "bag([s0000,Anna,Kowalska,3800,2,[al. Jerozolimskie,50,00-111,Warszawa],true,[Adam Mickiewicz,Pan Tadeusz]],[s0001,Maciej,Nowak,3500,1,[Koszykowa,86,00-222,Warszawa],false],[s0002,Łukasz,Wiśniewski,3600,1,[Mickiewicza,33,30-001,Kraków],false],[s0003,Marzena,Ignasiewicz,2,2200,[Słowackiego,36,61-301,Poznań],true])"
             assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
@@ -67,7 +67,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           assert_nothing_thrown do
             expression = SBQLParser.new.scan_str("emp.(fName,lName)")
             self.execute(expression)
-            expected = "bag(struct(Anna,Kowalska),struct(Maciej,Nowak),struct(Łukasz,Wiśniewski),struct(Marzena,Ignasiewicz))"
+            expected = "bag(struct([Anna],[Kowalska]),struct([Maciej],[Nowak]),struct([Łukasz],[Wiśniewski]),struct([Marzena],[Ignasiewicz]))"
             assert_equal(expected,@result.print(@AST.VAR_STORE))
           end
 
@@ -143,10 +143,10 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_simple_divide
-          expression = SBQLParser.new.scan_str("10/5")
+          expression = SBQLParser.new.scan_str("13/2")
           self.execute(expression)
           
-          expected = "2"
+          expected = "6.5"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
@@ -154,7 +154,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           
           expression = SBQLParser.new.scan_str("emp.number")
           self.execute(expression)
-          expected = "bag(s0000,s0001,s0002,s0003)"
+          expected = "bag([s0000],[s0001],[s0002],[s0003])"
           
           assert_equal(expected,@result.print(@AST.VAR_STORE))
           
@@ -363,77 +363,77 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         def test_parser_4
           expression = SBQLParser.new.scan_str("emp where fName=\"Anna\"")
           self.execute(expression)
-          expected = "s0000,Anna,Kowalska,3800,2,al. Jerozolimskie,50,00-111,Warszawa,true,Adam Mickiewicz,Pan Tadeusz"
+          expected = "[s0000,Anna,Kowalska,3800,2,[al. Jerozolimskie,50,00-111,Warszawa],true,[Adam Mickiewicz,Pan Tadeusz]]"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_5
           expression = SBQLParser.new.scan_str("emp.address where city=\"Warszawa\"")
           self.execute(expression)
-          expected = "bag(al. Jerozolimskie,50,00-111,Warszawa,Koszykowa,86,00-222,Warszawa)"
+          expected = "bag([al. Jerozolimskie,50,00-111,Warszawa],[Koszykowa,86,00-222,Warszawa])"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_6
           expression = SBQLParser.new.scan_str("((emp where married).book.author)")
           self.execute(expression)
-          expected = "Adam Mickiewicz"
+          expected = "[Adam Mickiewicz]"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_7_sub1
           expression = SBQLParser.new.scan_str("(emp where fName=\"Maciej\")")
           self.execute(expression)
-          expected = "s0001,Maciej,Nowak,3500,1,Koszykowa,86,00-222,Warszawa,false"
+          expected = "[s0001,Maciej,Nowak,3500,1,[Koszykowa,86,00-222,Warszawa],false]"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_7
           expression = SBQLParser.new.scan_str("((emp where fName=\"Maciej\").address.street)")
           self.execute(expression)
-          expected = "Koszykowa"
+          expected = "[Koszykowa]"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_8
           expression = SBQLParser.new.scan_str("((emp.address) where number=50).(street)")
           self.execute(expression)
-          expected = "al. Jerozolimskie"
+          expected = "[al. Jerozolimskie]"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_9
           expression = SBQLParser.new.scan_str("((emp.address) where zip=\"00-222\").(city)")
           self.execute(expression)
-          expected = "Warszawa"
+          expected = "[Warszawa]"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_10
           expression = SBQLParser.new.scan_str("((emp where married).book.author) union (test)")
           self.execute(expression)
-          expected = "bag(Adam Mickiewicz,TEST)"
+          expected = "bag([Adam Mickiewicz],[TEST])"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_11
           expression = SBQLParser.new.scan_str("((emp where fName=\"Maciej\").address.street)")
           self.execute(expression)
-          expected = "Koszykowa"
+          expected = "[Koszykowa]"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_12
           expression = SBQLParser.new.scan_str("((emp.address) where number > 20).(street,city)")
           self.execute(expression)
-          expected = ""
+          expected = "bag(struct([al. Jerozolimskie],[Warszawa]),struct([Koszykowa],[Warszawa]),struct([Mickiewicza],[Kraków]),struct([Słowackiego],[Poznań]))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_13
           expression = SBQLParser.new.scan_str("emp as e join (dept where dept_id=e.dept_id)")
           self.execute(expression)
-          expected = "bag(struct((s0000,Anna,Kowalska,3800,2,al. Jerozolimskie,50,00-111,Warszawa,true,Adam Mickiewicz,Pan Tadeusz) as e,2,Accounting),struct((s0001,Maciej,Nowak,3500,1,Koszykowa,86,00-222,Warszawa,false) as e,1,IT),struct((s0002,\305\201ukasz,Wi\305\233niewski,3600,1,Mickiewicza,33,30-001,Krak\303\263w,false) as e,1,IT),struct((s0003,Marzena,Ignasiewicz,2,2200,S\305\202owackiego,36,61-301,Pozna\305\204,true) as e,2,Accounting))"
+          expected = "bag(struct(([s0000,Anna,Kowalska,3800,2,[al. Jerozolimskie,50,00-111,Warszawa],true,[Adam Mickiewicz,Pan Tadeusz]]) as e,[2,Accounting]),struct(([s0001,Maciej,Nowak,3500,1,[Koszykowa,86,00-222,Warszawa],false]) as e,[1,IT]),struct(([s0002,Łukasz,Wiśniewski,3600,1,[Mickiewicza,33,30-001,Kraków],false]) as e,[1,IT]),struct(([s0003,Marzena,Ignasiewicz,2,2200,[Słowackiego,36,61-301,Poznań],true]) as e,[2,Accounting]))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
@@ -454,49 +454,49 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         def test_parser_16
           expression = SBQLParser.new.scan_str("emp substract (emp where salary = max(emp.salary) or salary = min(emp.salary))")
           self.execute(expression)
-          expected = ""
+          expected = "bag([s0000,Anna,Kowalska,3800,2,[al. Jerozolimskie,50,00-111,Warszawa],true,[Adam Mickiewicz,Pan Tadeusz]],[s0001,Maciej,Nowak,3500,1,[Koszykowa,86,00-222,Warszawa],false],[s0002,Łukasz,Wiśniewski,3600,1,[Mickiewicza,33,30-001,Kraków],false],[s0003,Marzena,Ignasiewicz,2,2200,[Słowackiego,36,61-301,Poznań],true])"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_17
-          expression = SBQLParser.new.scan_str("emp where salary > avg(emp.salary)")
+          expression = SBQLParser.new.scan_str("emp where salary < avg(emp.salary)")
           self.execute(expression)
-          expected = ""
+          expected = "[s0003,Marzena,Ignasiewicz,2,2200,[Słowackiego,36,61-301,Poznań],true]"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_18
           expression = SBQLParser.new.scan_str("emp join dept")
           self.execute(expression)
-          expected = ""
+          expected = "bag(struct([s0000,Anna,Kowalska,3800,2,[al. Jerozolimskie,50,00-111,Warszawa],true,[Adam Mickiewicz,Pan Tadeusz]],[1,IT]),struct([s0000,Anna,Kowalska,3800,2,[al. Jerozolimskie,50,00-111,Warszawa],true,[Adam Mickiewicz,Pan Tadeusz]],[2,Accounting]),struct([s0001,Maciej,Nowak,3500,1,[Koszykowa,86,00-222,Warszawa],false],[1,IT]),struct([s0001,Maciej,Nowak,3500,1,[Koszykowa,86,00-222,Warszawa],false],[2,Accounting]),struct([s0002,Łukasz,Wiśniewski,3600,1,[Mickiewicza,33,30-001,Kraków],false],[1,IT]),struct([s0002,Łukasz,Wiśniewski,3600,1,[Mickiewicza,33,30-001,Kraków],false],[2,Accounting]),struct([s0003,Marzena,Ignasiewicz,2,2200,[Słowackiego,36,61-301,Poznań],true],[1,IT]),struct([s0003,Marzena,Ignasiewicz,2,2200,[Słowackiego,36,61-301,Poznań],true],[2,Accounting]))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_19
-          expression = SBQLParser.new.scan_str("emp,dept")
+          expression = SBQLParser.new.scan_str("(emp),(dept)")
           self.execute(expression)
-          expected = ""
+          expected = "bag(struct([s0000,Anna,Kowalska,3800,2,[al. Jerozolimskie,50,00-111,Warszawa],true,[Adam Mickiewicz,Pan Tadeusz]],[s0001,Maciej,Nowak,3500,1,[Koszykowa,86,00-222,Warszawa],false],[s0002,Łukasz,Wiśniewski,3600,1,[Mickiewicza,33,30-001,Kraków],false],[s0003,Marzena,Ignasiewicz,2,2200,[Słowackiego,36,61-301,Poznań],true]),struct([1,IT],[2,Accounting]))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_20
-          expression = SBQLParser.new.scan_str("emp.(fName,lName, salary/avg(emp.salary) * 100.0 as SalaryAvgRel)")
+          expression = SBQLParser.new.scan_str("emp.(fName,lName, (salary/avg(emp.salary) * 100.0 as SalaryAvgRel))")
           self.execute(expression)
           expected = ""
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_21
-          expression = SBQLParser.new.scan_str("emp.(fName,lName, salary/min(emp.salary) * 100.0 as SalaryMinRel)")
+          expression = SBQLParser.new.scan_str("emp.(fName,lName, (salary/min(emp.salary) * 100.0 as SalaryMinRel))")
           self.execute(expression)
-          expected = ""
+          expected = "bag(struct([Anna],[Kowalska],(172.727272727273) as SalaryMinRel),struct([Maciej],[Nowak],(159.090909090909) as SalaryMinRel),struct([Łukasz],[Wiśniewski],(163.636363636364) as SalaryMinRel),struct([Marzena],[Ignasiewicz],(100.0) as SalaryMinRel))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_22
-          expression = SBQLParser.new.scan_str("emp.(fName,lName, Struct(salary/max(emp.salary) * 100.0 as SalaryMaxRel))")
+          expression = SBQLParser.new.scan_str("emp.(fName,lName, (salary/max(emp.salary) * 100.0 as SalaryMaxRel))")
           self.execute(expression)
-          expected = ""
+          expected = "bag(struct([Anna],[Kowalska],(100.0) as SalaryMaxRel),struct([Maciej],[Nowak],(92.1052631578947) as SalaryMaxRel),struct([Łukasz],[Wiśniewski],(94.7368421052632) as SalaryMaxRel),struct([Marzena],[Ignasiewicz],(57.8947368421053) as SalaryMaxRel))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
