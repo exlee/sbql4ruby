@@ -154,7 +154,6 @@ require "lib/QRES/StringResult"
       end
       
       if(var_RValue.is_a?(self.class) || var_RValue.is_a?(FloatResult))
-        puts "AAA porówanie: #{(self.VAR_OBJECT == var_RValue.VAR_OBJECT()).to_s()}"
         return self.VAR_OBJECT == var_RValue.VAR_OBJECT()
       end
               

@@ -169,7 +169,6 @@ require "lib/QRES/StructResultIterator"
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue is executed, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
       
-      puts "AAA/Struct/: lValue=#{self.to_s()}, rValue=#{var_RValue.to_s()}"
       
       # s(1,2), s(3,4) = b(s(1,2,3,4)) = proxy[b(s(1,2,3,4))]
       # s(1,2), 3 = b(s(1,2,3)) = proxy[b(s(1,2,3))]
@@ -178,7 +177,6 @@ require "lib/QRES/StructResultIterator"
       if(Utils::isStructResult?(var_RValue) || Utils::isBagQualifiedForProxy(var_RValue) || Utils::isSimpleObject?(var_RValue))
         #tmpResult = StructResult.new()
         
-        puts "AAA/Struct/Struct or simple/ self=#{self.to_s()}, rval=#{var_RValue.to_s()}"
         
         if(Utils::isSimpleObject?(var_RValue))
           self.push(var_RValue)
@@ -190,7 +188,6 @@ require "lib/QRES/StructResultIterator"
         
         #bagResult.push(tmpResult)
         
-        puts "AAA/Struct/Struct or simple/ result=#{bagResult.to_s()}"        
         
         return bagResult
       end
@@ -204,14 +201,13 @@ require "lib/QRES/StructResultIterator"
         
         rightObject = rightIterator.next()
 
-        puts "AAA/Struct/bag/: #{rightObject.to_s()}"
         
         Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{rightIterator.to_s()}")
         
         aaa = leftObject.comma(rightObject)
         bagResult.push(aaa)
 
-        puts "AAA/bag/matching/: #{aaa.to_s()}"
+        
       end
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")

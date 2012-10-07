@@ -203,7 +203,6 @@ require "lib/QRES/AbstractSimpleQueryResult"
     # Throws:    
     def Utils::isBagQualifiedForProxy(var_Object)
       
-      puts "\nAAA/isBagQualifiedForProxy/ #{var_Object.to_s()}"
       # Given object has to be BagResult
       if(!var_Object.is_a?(BagResult))
         return false
@@ -221,7 +220,6 @@ require "lib/QRES/AbstractSimpleQueryResult"
         return false
       end
       
-      puts "AAA EQUAL!"
       return true
     end
 

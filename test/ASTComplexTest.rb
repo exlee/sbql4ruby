@@ -182,10 +182,8 @@ require "lib/AST/AST"
         #improvement
         struct = QRES::StructResult.new()
         
-        puts "DUPA result = #{result.to_s()}"
 
         struct.push(result)
-        puts "DUPA struct = #{struct.to_s()}"                
       }
     end   
 

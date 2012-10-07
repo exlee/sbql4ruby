@@ -76,7 +76,6 @@ require "lib/QRES/AbstractSetQueryResult"
       # In this case pop on the bag needs to be treated
       # like pop on the encapsulated struct.
       
-      puts "aaa: qualified as bag->struct proxy"
       return self.VAR_OBJECT.get(0).pop()
     end
 
@@ -236,7 +235,6 @@ require "lib/QRES/AbstractSetQueryResult"
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue is executed, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
       
-      puts "AAA\BAG\: lValue=#{self.to_s()}, rlValue=#{var_RValue.to_s()}"
       
       #var_TmpRValue = Uitls::getBagResultAsSimpleObject(var_RValue)
             
@@ -247,20 +245,17 @@ require "lib/QRES/AbstractSetQueryResult"
           (Utils::isBagQualifiedForProxy(self)  && Utils::isSimpleObject?(var_RValue)))
         
         tmpResult = StructResult.new()   
-        puts "\n\nDUPA PRZED: #{self.to_s()}, #{var_RValue.to_s()}"
         tmpResult.push(self)
         tmpResult.push(var_RValue)
         
         bagResult.push(tmpResult)   
         
         Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: Result=#{bagResult.to_s()}")
-        puts "\n\nAAA\BAG\GDUPA: #{bagResult.to_s()}"
         return bagResult
       end
               
       # proxy[b(s(1,2))], b(3,4) = b(s(1,2), s(1,4), s(2,3), s(2,4)) 
       if(Utils::isBagQualifiedForProxy(self) && Utils::isSimpleBag?(var_RValue))
-        puts "ERROR"
         var_LValue = Utils::bagResultProxy(self)
       else
         var_LValue = self
@@ -271,7 +266,6 @@ require "lib/QRES/AbstractSetQueryResult"
         var_RValue = Utils::bagResultProxy(var_RValue)
       end
       
-      puts "AAA CIPA #{var_LValue.to_s()}, #{var_RValue.to_s()}"
       
       # b(s(1,2)), s(3,4) = b(s(1,2),s(3,4))
       # b(s(1,2), s(3,4)), 5 = b(s(1,2,5), s(3,4,5))
@@ -286,7 +280,6 @@ require "lib/QRES/AbstractSetQueryResult"
         
         Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{leftIterator.to_s()}")
 
-        puts "dupa/left-bag-iterator/: #{leftIterator.to_s()}, object already taken from iterator #{leftObject.to_s()}"
         
         # Proxy
         if(Utils::isSimpleBag?(var_RValue))
@@ -301,8 +294,7 @@ require "lib/QRES/AbstractSetQueryResult"
           
           rightIterator = var_RValue.iterator()
           
-          puts "AAA right val will be change into bag(s): #{var_RValue.to_s()}"
-        else
+          else
           rightIterator = var_RValue.iterator()
         end
           
@@ -310,16 +302,12 @@ require "lib/QRES/AbstractSetQueryResult"
           
           rightObject = rightIterator.next()
           
-          puts "AAA DUPA #{leftObject.to_s()} comma #{rightObject.to_s()}"
-          
           aaa = leftObject.comma(rightObject, var_AST)
           bagResult.push(aaa)
 
-          puts "AAA/bag/matching/: #{aaa.to_s()}"          
-        end
+          end
       end
       
-      puts "AAA Final #{bagResult.to_s()}"
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
       
       return bagResult

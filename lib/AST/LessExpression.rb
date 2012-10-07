@@ -42,7 +42,6 @@ require "lib/AST/BinaryExpression"
       end
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Executing for arguments: [#{self.class.to_s()}], [#{var_AST.class.to_s()}]")
-      puts "\n\n NIE DUPA!!!"
       var_AST.lessExpressionExec(self)
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[execute]: Done.")

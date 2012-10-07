@@ -274,7 +274,6 @@ require "lib/QRES/AbstractMethodException"
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue is executed, stacks dump:")
       Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
       
-      puts "AAA/Simple/IN/: lValue=#{self.to_s()}, rValue=#{var_RValue.to_s()}"
       
       # 1,2 = bag(1,2)
       # 1,struct(2,3) = b(s(1,2,3)) = proxy[b(1,2,3)]
@@ -300,8 +299,7 @@ require "lib/QRES/AbstractMethodException"
 
           rightObject = rightIterator.next()
 
-          puts "AAA/right-bag-iterator/: #{rightIterator.to_s()}, object already taken from iterator #{rightObject.to_s()}"
-
+          
           Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue: #{var_RValue.to_s()}")
 
           tmpResult = StructResult.new()     
@@ -310,7 +308,6 @@ require "lib/QRES/AbstractMethodException"
 
           bagResult.push(tmpResult)
 
-          puts "AAA/right-struct/: #{bagResult.to_s()}"
          end     
       end
       
