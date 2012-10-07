@@ -169,13 +169,14 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           expression = 
             InExpression.new(
               IntegerTerminal.new(1),
-              BagExpression.new(
+              StructExpression.new(
                 CommaExpression.new(
                   IntegerTerminal.new(1),
                   IntegerTerminal.new(2)
                 )
               )
             )
+            
             
             self.execute(expression)
             

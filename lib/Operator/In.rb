@@ -29,10 +29,10 @@ require "lib/QRES/Utils"
     # Throws:AbstractMethodException
     def In.eval(var_LValue, var_RValue, var_QRES, var_ENVS, var_Store)
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: #{var_LValue.to_s()} IN #{var_RValue.to_s()}")  
-    
       foundResult = QRES::BagResult.new()
       notFoundResult = QRES::BagResult.new()
       
+      var_LValue = QRES::Utils::getSimpleObjectAsBagResult(var_LValue)
       iterator = var_LValue.nestedIterator()
       
       objectNotFound = 0
@@ -48,12 +48,12 @@ require "lib/QRES/Utils"
       end
           
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: Obejcts found=#{foundResult.VAR_OBJECT().size().to_s()}, objects not found=#{notFoundResult.VAR_OBJECT().size()}")  
-             
-      if(notFoundResult.VAR_OBJECT().size()>0)
-        foundResult = QRES::BagResult.new()
+           
+      if(foundResult.VAR_OBJECT().size()>0)
+        var_QRES.push(QRES::BooleanResult.new(true))
+      else
+        var_QRES.push(QRES::BooleanResult.new(false))
       end  
-      
-      var_QRES.push(foundResult)  
       
       Common::Logger.print(Common::VAR_DEBUG, self, "[eval]: END")  
     end
