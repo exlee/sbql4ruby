@@ -121,7 +121,6 @@ require "lib/Common/Stack"
         
         qres.push(BinderResult.new("x", qres.pop()))
         
-        puts qres.to_s()
       }
     end
     

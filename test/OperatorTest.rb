@@ -38,7 +38,6 @@ require "lib/Operator/Dotres"
         
         Operator::Dotres.eval("emp", "address", qres, envs, store)
         
-        puts "#{store.to_s()}"
       }
     end
     

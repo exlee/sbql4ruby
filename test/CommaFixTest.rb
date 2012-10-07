@@ -179,8 +179,6 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           
           # s(1,2),s(3,4) = b(s(1,2,3,4))
           
-          puts "AAA RES Final #{@result.to_s()} -> #{(Utils::bagResultProxy(@result)).to_s()} / expected=#{expected.to_s()}"
-          
           assert(expected.equals(Utils::bagResultProxy(@result)), "s(1,2),3 -> StructResult(1,2,3)")
         end
     end

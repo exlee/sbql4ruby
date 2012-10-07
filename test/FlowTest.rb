@@ -76,8 +76,6 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           expected.push(IntegerResult.new(2))
           expected.push(IntegerResult.new(3))
           
-          puts "AAA #{Utils::bagResultProxy(@result)}"
-          
           assert(expected.equals(Utils::bagResultProxy(@result)), "Bag(1,2,3) -> BagResult(1,2,3)")
         end
         

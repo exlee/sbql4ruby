@@ -773,7 +773,6 @@ require "lib/AST/AST"
             assert_equal("QRES::BagResult", result.class.to_s())
            
             _result = result.pop()
-            puts "AAA1:test:=#{_result.to_s()}, #{_result.class.to_s()}"
             assert_equal("QRES::StructResult", _result.class.to_s())
             
             assert_equal(256, _result.pop().VAR_OBJECT())

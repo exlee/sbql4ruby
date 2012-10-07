@@ -48,7 +48,6 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         def test_operatorPrecedence
             expression = SBQLParser.new.scan_str("2+2*2")
             self.execute(expression)
-            puts @result
             assert(IntegerResult.new(6).equals(@result))
         end
 

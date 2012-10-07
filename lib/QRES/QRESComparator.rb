@@ -37,8 +37,6 @@ module QRES
           arg1Object = Utils::dereference(arg1Iterator.next(), var_AST)
           arg2Object = Utils::dereference(arg2Iterator.next(), var_AST)
         
-          puts "[Comparator]: arg1=#{arg1Object.to_s()}, arg2=#{arg2Object.to_s()}"
-          
           if(self.compare(arg1Object, arg2Object, var_AST) != 0)
             return self.compare(arg1Object, arg2Object, var_AST)
           end
