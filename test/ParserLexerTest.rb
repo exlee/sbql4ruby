@@ -1,13 +1,12 @@
 module ParserLexerTest
 
 require "test/unit"
-require "lib/Common/Logger"
 
 require "rubygems"
 require "ruby-debug"
 #require "lib/Parser/SBQL.tab"
 require 'YAML'
-Dir["lib/QRES/*.rb"].each {|file| require file }
+Dir["lib/QRES/*.rb"].each {|file| require file}
 Dir["lib/Operator/*.rb"].each {|file| require file }
 Dir["lib/AST/*.rb"].each {|file| require file }
 

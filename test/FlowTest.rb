@@ -1,7 +1,7 @@
 module FlowTest
 
 require "test/unit"
-require "lib/Common/Logger"
+require "lib/Common/logger"
 require 'YAML'
 
 Dir["lib/QRES/*.rb"].each {|file| require file }

@@ -1,7 +1,7 @@
 module SBAStore
   
 require "lib/Common/exceptions"
-require "lib/Common/Logger"
+require "lib/Common/logger"
 require "lib/SBAStore/SBAInteger"
 require "lib/SBAStore/SBAFloat"
 require "lib/SBAStore/SBABoolean"

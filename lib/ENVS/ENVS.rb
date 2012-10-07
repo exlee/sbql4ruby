@@ -12,7 +12,7 @@ require "lib/ENVS/Frame"
 
 require "lib/Operator/DataTypeException"
 
-require 'lib/Common/logger'
+require "lib/Common/logger"
 require "lib/Common/exceptions"
 
 

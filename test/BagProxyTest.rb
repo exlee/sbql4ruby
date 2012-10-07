@@ -1,7 +1,7 @@
 module BagProxyTest
 
 require "test/unit"
-require "lib/Common/Logger"
+require "lib/Common/logger"
 
 Dir["lib/QRES/*.rb"].each {|file| require file }
 Dir["lib/Operator/*.rb"].each {|file| require file }
