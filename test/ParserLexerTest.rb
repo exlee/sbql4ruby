@@ -60,7 +60,7 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         def test_structExpression
           expression = SBQLParser.new.scan_str("emp.(fName,lName)")
           self.execute(expression)
-          
+          puts "Results: #{@result.to_s()} -> #{@result.print(@AST.VAR_STORE())}"
           #puts @result
          
           

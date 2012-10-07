@@ -8,7 +8,7 @@ Dir["lib/Operator/*.rb"].each {|file| require file }
 Dir["lib/AST/*.rb"].each {|file| require file }
 
 
-    class ParserLexerTest < Test::Unit::TestCase
+    class BagProxyTest < Test::Unit::TestCase
         include AST
         include QRES
         def setup
