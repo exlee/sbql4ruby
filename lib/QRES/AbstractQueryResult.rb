@@ -59,6 +59,19 @@ require "lib/QRES/AbstractMethodException"
         return "[#{@VAR_OBJECT.class.to_s()}, #{@VAR_OBJECT.to_s()}]"
       end
       
+      # Method: is_numeric?
+      #
+      # Checks if object is numeric and can be used in numeric operations
+      #
+      # Params:
+      #
+      # Returns:Boolean
+      #
+      # Throws:
+      def is_numeric?
+        return self.is_a?(IntegerResult) || self.is_a?(FloatResult)
+      end
+      
       # VAR_OBJECT:Object - object identifier of the structure of identifires
       attr_reader :VAR_OBJECT
   end

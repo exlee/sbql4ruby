@@ -225,6 +225,8 @@ require "lib/QRES/StructResultIterator"
     def to_s()
       return self.class.to_s() + super()
     end
+    
+    
         
     # Alias for push method.
     #

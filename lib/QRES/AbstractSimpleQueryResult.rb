@@ -316,7 +316,7 @@ require "lib/QRES/AbstractMethodException"
       
       return bagResult
     end
-      
+    
               
     # Abstract method to be implemented by inheriting classes.
     #

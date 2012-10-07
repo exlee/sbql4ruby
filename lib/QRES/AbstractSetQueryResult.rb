@@ -199,7 +199,13 @@ require "lib/QRES/Utils"
 
           Common::Logger.print(Common::VAR_DEBUG, self, "[avg]: An object taken from the iterator: [#{object.to_s()}]")
 
+          if(object.is_a?(BinderResult))
+            object = object.VAR_OBJECT
+          end
+          
           object = Utils::dereference(object, var_Store)
+          
+          
 
           if(!Utils::isNumericType?(object))
             raise SyntaxError.new("Incorrect object type #{object.to_s()}")
@@ -345,6 +351,81 @@ require "lib/QRES/Utils"
         Common::Logger.print(Common::VAR_DEBUG, self, "Calling operator on the object #{self.to_s()}")  
         
         return self.VAR_OBJECT.get(rand(self.VAR_OBJECT.size()-1))
+      end
+      
+      # Method: *
+      #
+      # Overloads * operator for Set structure
+      #
+      # Params:
+      #
+      # Returns:Bag of results
+      #
+      # Throws:
+      def *(right)
+        if(!right.is_numeric?)
+          raise QRESTypeError.new("Incorrect object type [#{right.class}], Numeric expected")
+        end
+
+        result = BagResult.new()
+        self.iterator.each do |left|
+          if(!left.is_numeric?)
+            raise QRESTypeError.new("Incorrect object type [#{left.class}], Numeric expected")
+          end
+          result.push(left*right)
+        end
+
+        return result
+      end
+      
+      # Method: +
+      #
+      # Overloads + operator for Set structure
+      #
+      # Params:
+      #
+      # Returns:Bag of results
+      #
+      # Throws:
+      def +(right)
+        if(!right.is_numeric?)
+          raise QRESTypeError.new("Incorrect object type [#{right.class}], Numeric expected")
+        end
+
+        result = BagResult.new()
+        self.iterator.each do |left|
+          if(!left.is_numeric?)
+            raise QRESTypeError.new("Incorrect object type [#{left.class}], Numeric expected")
+          end
+          result.push(left+right)
+        end
+
+        return result
+      end
+      
+      # Method: /
+      #
+      # Overloads / operator for Set structure
+      #
+      # Params:
+      #
+      # Returns:Bag of results
+      #
+      # Throws:
+      def /(right)
+        if(!right.is_numeric?)
+          raise QRESTypeError.new("Incorrect object type [#{right.class}], Numeric expected")
+        end
+
+        result = BagResult.new()
+        self.iterator.each do |left|
+          if(!left.is_numeric?)
+            raise QRESTypeError.new("Incorrect object type [#{left.class}], Numeric expected")
+          end
+          result.push(left/right)
+        end
+
+        return result
       end
     end
 end

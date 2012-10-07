@@ -306,6 +306,15 @@ require "lib/QRES/AbstractSimpleQueryResult"
     #
     # Throws:    
     def Utils::dereference(var_Reference, var_Store)
+      if(var_Reference.is_a?(AbstractSetQueryResult))
+        result = var_Reference.class.new()
+        
+        var_Reference.iterator.each do |item|
+          result.push(Utils::dereference(item,var_Store))
+        end
+        
+        return result
+      end
       if(var_Reference.is_a?(ReferenceResult))
         return var_Reference.dereference(var_Store).to_qres()
       end
