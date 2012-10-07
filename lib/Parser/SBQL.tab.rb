@@ -573,301 +573,301 @@ Racc_debug_parser = false
 
 # reduce 1 omitted
 
-module_eval(<<'.,.,', 'SBQL.racc', 23)
+module_eval(<<'.,.,', 'SBQL.racc', 24)
   def _reduce_2(val, _values, result)
      result = CommaExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 24)
+module_eval(<<'.,.,', 'SBQL.racc', 25)
   def _reduce_3(val, _values, result)
      result = e 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 25)
+module_eval(<<'.,.,', 'SBQL.racc', 26)
   def _reduce_4(val, _values, result)
-     result = StructExpression.new(val[1]) 
+     result = val[1] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 26)
+module_eval(<<'.,.,', 'SBQL.racc', 27)
   def _reduce_5(val, _values, result)
      result = AnyExpression.new(val[1],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 27)
+module_eval(<<'.,.,', 'SBQL.racc', 28)
   def _reduce_6(val, _values, result)
      result = AsExpression.new(val[0], val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 28)
+module_eval(<<'.,.,', 'SBQL.racc', 29)
   def _reduce_7(val, _values, result)
      result = AllExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 29)
+module_eval(<<'.,.,', 'SBQL.racc', 30)
   def _reduce_8(val, _values, result)
     result = AvgExpression.new(val[1]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 30)
+module_eval(<<'.,.,', 'SBQL.racc', 31)
   def _reduce_9(val, _values, result)
      result = DifferentExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 31)
+module_eval(<<'.,.,', 'SBQL.racc', 32)
   def _reduce_10(val, _values, result)
      result = DotExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 32)
+module_eval(<<'.,.,', 'SBQL.racc', 33)
   def _reduce_11(val, _values, result)
      result = EqualExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 33)
+module_eval(<<'.,.,', 'SBQL.racc', 34)
   def _reduce_12(val, _values, result)
      result = GreatherEqualExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 34)
+module_eval(<<'.,.,', 'SBQL.racc', 35)
   def _reduce_13(val, _values, result)
      result = GreatherExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 35)
+module_eval(<<'.,.,', 'SBQL.racc', 36)
   def _reduce_14(val, _values, result)
      result = JoinExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 36)
+module_eval(<<'.,.,', 'SBQL.racc', 37)
   def _reduce_15(val, _values, result)
      result = OrderByExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 37)
+module_eval(<<'.,.,', 'SBQL.racc', 38)
   def _reduce_16(val, _values, result)
      result = LessEqualExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 38)
+module_eval(<<'.,.,', 'SBQL.racc', 39)
   def _reduce_17(val, _values, result)
      result = LessExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 39)
+module_eval(<<'.,.,', 'SBQL.racc', 40)
   def _reduce_18(val, _values, result)
      result = UnionExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 40)
+module_eval(<<'.,.,', 'SBQL.racc', 41)
   def _reduce_19(val, _values, result)
      result = SetMinusExpression.new(val[0], val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 41)
+module_eval(<<'.,.,', 'SBQL.racc', 42)
   def _reduce_20(val, _values, result)
      result = InExpression.new(val[0], val[2])
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 42)
+module_eval(<<'.,.,', 'SBQL.racc', 43)
   def _reduce_21(val, _values, result)
      result = IntersectExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 43)
+module_eval(<<'.,.,', 'SBQL.racc', 44)
   def _reduce_22(val, _values, result)
      result = WhereExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 44)
+module_eval(<<'.,.,', 'SBQL.racc', 45)
   def _reduce_23(val, _values, result)
      result = BagExpression.new(val[1]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 45)
+module_eval(<<'.,.,', 'SBQL.racc', 46)
   def _reduce_24(val, _values, result)
      result = ExistsExpression.new(val[1]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 46)
+module_eval(<<'.,.,', 'SBQL.racc', 47)
   def _reduce_25(val, _values, result)
      result = MaxExpression.new(val[1]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 47)
+module_eval(<<'.,.,', 'SBQL.racc', 48)
   def _reduce_26(val, _values, result)
      result = MinExpression.new(val[1]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 48)
+module_eval(<<'.,.,', 'SBQL.racc', 49)
   def _reduce_27(val, _values, result)
      result = new UniqueExpression(val[1]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 49)
+module_eval(<<'.,.,', 'SBQL.racc', 50)
   def _reduce_28(val, _values, result)
      result = GroupAsExpression.new(val[0], val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 50)
+module_eval(<<'.,.,', 'SBQL.racc', 51)
   def _reduce_29(val, _values, result)
      result = (val[0]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 51)
+module_eval(<<'.,.,', 'SBQL.racc', 52)
   def _reduce_30(val, _values, result)
      result = (val[0]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 52)
+module_eval(<<'.,.,', 'SBQL.racc', 53)
   def _reduce_31(val, _values, result)
      result = (val[0]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 53)
+module_eval(<<'.,.,', 'SBQL.racc', 54)
   def _reduce_32(val, _values, result)
      result = (val[0]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 54)
+module_eval(<<'.,.,', 'SBQL.racc', 55)
   def _reduce_33(val, _values, result)
      result = NameExpression.new(val[0])
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 55)
+module_eval(<<'.,.,', 'SBQL.racc', 56)
   def _reduce_34(val, _values, result)
      result = NotExpression.new(val[1])  
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 56)
+module_eval(<<'.,.,', 'SBQL.racc', 57)
   def _reduce_35(val, _values, result)
      result = SumExpression.new(val[1])  
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 57)
+module_eval(<<'.,.,', 'SBQL.racc', 58)
   def _reduce_36(val, _values, result)
      result = PickRandomExpression.new(val[1])  
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 58)
+module_eval(<<'.,.,', 'SBQL.racc', 59)
   def _reduce_37(val, _values, result)
      result = StructExpression.new(val[1]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 59)
+module_eval(<<'.,.,', 'SBQL.racc', 60)
   def _reduce_38(val, _values, result)
      result = PlusExpression.new(val[0], val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 60)
+module_eval(<<'.,.,', 'SBQL.racc', 61)
   def _reduce_39(val, _values, result)
      result = MinusExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 61)
+module_eval(<<'.,.,', 'SBQL.racc', 62)
   def _reduce_40(val, _values, result)
      result = MultiplyExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 62)
+module_eval(<<'.,.,', 'SBQL.racc', 63)
   def _reduce_41(val, _values, result)
      result = ModuloExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 63)
+module_eval(<<'.,.,', 'SBQL.racc', 64)
   def _reduce_42(val, _values, result)
      result = DivideExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 64)
+module_eval(<<'.,.,', 'SBQL.racc', 65)
   def _reduce_43(val, _values, result)
      result = AndExpression.new(val[0],val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'SBQL.racc', 65)
+module_eval(<<'.,.,', 'SBQL.racc', 66)
   def _reduce_44(val, _values, result)
      result = OrExpression.new(val[0],val[2]) 
     result

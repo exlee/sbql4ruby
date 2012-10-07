@@ -17,13 +17,14 @@ left JOIN
 left DOT COMMA ORDERBY
 left EQUAL GREATEREQUAL GREATER SMALLEREQUAL SMALLER DIFFERENCE
 left WHERE
+
 preclow
 rule
     target   : expr
 
     expr      : expr COMMA expr { result = CommaExpression.new(val[0],val[2]) }
     |   expr_without_coma { result = e }
-	  |	  LEFT_ROUND_BRACKET expr RIGHT_ROUND_BRACKET { result = StructExpression.new(val[1]) }
+	  |	  LEFT_ROUND_BRACKET expr RIGHT_ROUND_BRACKET { result = val[1] }
     |   ANY expr expr { result = AnyExpression.new(val[1],val[2]) }
     |   expr AS NAME  { result = AsExpression.new(val[0], val[2]) }
     |   ALL expr expr { result = AllExpression.new(val[0],val[2]) }
