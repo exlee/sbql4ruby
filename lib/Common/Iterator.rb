@@ -116,6 +116,19 @@ module Common
 
         return var_text + " ]"
     end
+    
+    # Method: each
+    #
+    # Works block of code on each item of SBAObject.
+    #
+    # Params: each block of code
+    #
+    # Returns: result of the block of code
+    #
+    # Throws:
+    def each(&block)
+      @VAR_ARRAY.each(&block)
+    end
         
   end
   
