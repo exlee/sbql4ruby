@@ -312,6 +312,10 @@ require "lib/QRES/AbstractSetQueryResult"
       
       return bagResult
     end
+    
+    def size
+      return self.VAR_OBJECT.size()
+    end
               
     # Method: to_s
     #
