@@ -168,8 +168,9 @@ require "lib/Common/exceptions"
           Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array length " +
             "[#{var_BinderList.length().to_s()}]")
           
-          return var_BinderList
-        end    
+          
+        end
+        return var_BinderList
       elsif(var_Object.is_a?(QRES::BinderResult))
         
         Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for " +
