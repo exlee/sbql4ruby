@@ -146,15 +146,14 @@ require "lib/Common/exceptions"
  
         return binderList
       elsif(var_Object.is_a?(QRES::BagResult) || var_Object.is_a?(QRES::StructResult))
-        
         Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Creating binder for " +
           "[#{var_Object.class.to_s()}], searching in the store")
         
         iterator = var_Object.iterator()
         
         while(iterator.hasNext())
-          object = var_Store.find(iterator.next().VAR_OBJECT())
-
+          
+          object = iterator.next()
           Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Found object [#{object.to_s()}], " + 
             "creating binder")
           
@@ -163,7 +162,7 @@ require "lib/Common/exceptions"
           Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Created binder array, length " +
             "[#{binder.length().to_s()}]")
 
-          binder.each{|biner| var_BinderList.push(binder)}
+          binder.each{|binder| var_BinderList.push(binder)}
           
           Common::Logger.print(Common::VAR_DEBUG, self, "[createBinder]: Current binder array length " +
             "[#{var_BinderList.length().to_s()}]")

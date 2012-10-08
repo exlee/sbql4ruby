@@ -20,7 +20,15 @@ Dir["lib/AST/*.rb"].each {|file| require file }
           @AST = AST.new("sampledata/data.xml")
           
         end
+        
+        def teardown
+          @AST.finalize()
+          SBAStore::SBAObject.reset_counter
+          @result = nil
+        end
+        
         def execute(expression)
+          #puts "Test: " + @method_name
           expression.execute(@AST)
           @result = @AST.VAR_QRES().pop()
           
@@ -447,14 +455,21 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         def test_parser_14
           expression = SBQLParser.new.scan_str("(dept as d join max((emp where dept_id=d.dept_id).salary) as maxSal).(d.name,maxSal)")
           self.execute(expression)
-          expected = "XYZZY"
+          expected = "bag(struct([IT],3600),struct([Accounting],3800))"
+          assert_equal(expected,@result.print(@AST.VAR_STORE))
+        end
+        
+        def test_parser_15_sub1
+          expression = SBQLParser.new.scan_str("(dept as d join (avg((emp where dept_id=d.dept_id).salary) as avgSal))")
+          self.execute(expression)
+          expected = "bag(struct(([1,IT]) as d,(3550.0) as avgSal),struct(([2,Accounting]) as d,(3000.0) as avgSal))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
         def test_parser_15
-          expression = SBQLParser.new.scan_str("(dept as d join (avg((emp where dept_id=d.dept_id).salary) as avgSal)).(d.name,avgSal)")
+          expression = SBQLParser.new.scan_str("(dept as d join avg((emp where dept_id=d.dept_id).salary) as avgSal).(d.name,avgSal)")
           self.execute(expression)
-          expected = "XYZZY"
+          expected = "bag(struct([IT],3550.0),struct([Accounting],3000.0))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         
@@ -480,9 +495,9 @@ Dir["lib/AST/*.rb"].each {|file| require file }
         end
         
         def test_parser_19
-          expression = SBQLParser.new.scan_str("(emp),(dept)")
+          expression = SBQLParser.new.scan_str("emp,dept")
           self.execute(expression)
-          expected = "bag(struct([s0000,Anna,Kowalska,3800,2,[al. Jerozolimskie,50,00-111,Warszawa],true,[Adam Mickiewicz,Pan Tadeusz]],[s0001,Maciej,Nowak,3500,1,[Koszykowa,86,00-222,Warszawa],false],[s0002,Łukasz,Wiśniewski,3600,1,[Mickiewicza,33,30-001,Kraków],false],[s0003,Marzena,Ignasiewicz,2,2200,[Słowackiego,36,61-301,Poznań],true]),struct([1,IT],[2,Accounting]))"
+          expected = "bag(struct([s0000,Anna,Kowalska,3800,2,[al. Jerozolimskie,50,00-111,Warszawa],true,[Adam Mickiewicz,Pan Tadeusz]],[1,IT],[2,Accounting]),struct([s0001,Maciej,Nowak,3500,1,[Koszykowa,86,00-222,Warszawa],false],[1,IT],[2,Accounting]),struct([s0002,Łukasz,Wiśniewski,3600,1,[Mickiewicza,33,30-001,Kraków],false],[1,IT],[2,Accounting]),struct([s0003,Marzena,Ignasiewicz,2,2200,[Słowackiego,36,61-301,Poznań],true],[1,IT],[2,Accounting]))"
           assert_equal(expected,@result.print(@AST.VAR_STORE))
         end
         

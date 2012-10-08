@@ -109,7 +109,7 @@ require "lib/QRES/AbstractSetQueryResult"
     #
     # Throws:
     def is_contained?(var_Object)
-      if(!var_Object.is_a?(AbstractSimpleQueryResult))
+      if(!var_Object.is_a?(AbstractSimpleQueryResult) and !var_Object.is_a?(ReferenceResult))
         throw QRESTypeError.new("Incorrect object type [#{var_Object.class}], " + AbstractSimpleQueryResult.to_s() + " expected")
       end
      
@@ -223,93 +223,25 @@ require "lib/QRES/AbstractSetQueryResult"
       
       bagResult = BagResult.new()
       
-      # Evaluating the right side of the expression
-      if(!var_RValue.is_a?(AbstractQueryResult))
-
-        # Evaluating the right side of the expression
+      if(var_RValue.is_a?(AST::Expression))
         var_RValue.execute(var_AST)
-
-        var_RValue = var_AST.VAR_QRES().pop()
-      end      
-
-      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue is executed, stacks dump:")
-      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
-      
-      
-      #var_TmpRValue = Uitls::getBagResultAsSimpleObject(var_RValue)
-            
-      # b(1,2), 3 = b(1,2,3)
-      # b(s(1,2)), 3 = b(s(1,2,3)) = proxy[b(s(1,2,3))]
-      #if(Utils::isSimpleBag?(self) || (Utils::isBagQualifiedForProxy(self) && Utils::isSimpleObject?(var_RValue)))
-      if( (Utils::isSimpleBag?(self)            && Utils::isSimpleObject?(var_RValue)) || 
-          (Utils::isBagQualifiedForProxy(self)  && Utils::isSimpleObject?(var_RValue)))
-        
-        tmpResult = StructResult.new()   
-        tmpResult.push(self)
-        tmpResult.push(var_RValue)
-        
-        bagResult.push(tmpResult)   
-        
-        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: Result=#{bagResult.to_s()}")
-        return bagResult
-      end
-      var_RValue = Utils::getSimpleObjectAsBagResult(var_RValue)      
-      # proxy[b(s(1,2))], b(3,4) = b(s(1,2), s(1,4), s(2,3), s(2,4)) 
-      if(Utils::isBagQualifiedForProxy(self) && Utils::isSimpleBag?(var_RValue))
-        var_LValue = Utils::bagResultProxy(self)
+        rightResult = var_AST.VAR_QRES().pop()
+      elsif(var_RValue.is_a?AbstractQueryResult)
+        rightResult = var_RValue
       else
-        var_LValue = self
+        raise IncorrectArgumentException.new("Unsupported data type: " + var_RValue.class.to_s)
       end
       
-      #  b(1,2), proxy[b(s(3,4))]= b(s(1,2), s(1,4), s(2,3), s(2,4)) 
-      if(Utils::isSimpleBag?(var_RValue) && Utils::isBagQualifiedForProxy(self))
-        var_RValue = Utils::bagResultProxy(var_RValue)
-      end
-      
-      
-      # b(s(1,2)), s(3,4) = b(s(1,2),s(3,4))
-      # b(s(1,2), s(3,4)), 5 = b(s(1,2,5), s(3,4,5))
-      # b(s(1,2), s(3,4)), s(5, 6) = b(s(1,2,5,6), s(3,4,5,6))
-      # b(s(1,2), s(3,4)), b(5,6) = b(s(1,2,5), s(1,2,6), s(3,4,5), s(3,4,6)))           
-      leftIterator = var_LValue.iterator()
-      
-      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: lValue iterator: #{leftIterator.to_s()}")
-       
-      while(leftIterator.hasNext())
-        leftObject = leftIterator.next()
+      self.iterator.each do |item|
+        struct = StructResult.new
+        struct.push(item)
+        struct.push(rightResult)
         
-        Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: rValue iterator: #{leftIterator.to_s()}")
-
+        bagResult.push(struct)
         
-        # Proxy
-        if(Utils::isSimpleBag?(var_RValue))
-          rightIterator = var_RValue.nestedIterator() 
-        elsif(Utils::isStructResult?(var_RValue))
-          
-          # proxy[b(s(3,4))], s(1,2) -> proxy[b(s(3,4))], s(1,2) <- interator
-          tmpBag = BagResult.new()
-          tmpBag.push(var_RValue)
-
-          var_RValue = tmpBag
-          
-          rightIterator = var_RValue.iterator()
-          
-        else
-          rightIterator = Utils::getSimpleObjectAsBagResult(var_RValue).iterator()
-        end
-          
-        while(rightIterator.hasNext())
-          
-          rightObject = rightIterator.next()
-          
-          aaa = leftObject.comma(rightObject, var_AST)
-          bagResult.push(aaa)
-
-          end
+        
       end
-      
-      Common::Logger.print(Common::VAR_DEBUG, self, "[comma]: #{var_AST.VAR_QRES().to_s()}\n#{var_AST.VAR_ENVS().to_s()}")
-      
+
       return bagResult
     end
     

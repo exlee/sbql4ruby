@@ -1,7 +1,7 @@
 module XMLDB
 
 require 'lib/Common/exceptions'
-require 'lib/Common/logger'
+require "lib/Common/logger"
 
 require 'rexml/document'
 require 'rexml/streamlistener'

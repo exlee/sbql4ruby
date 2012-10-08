@@ -52,6 +52,18 @@ require "lib/Operator/PickRandom"
   # Class implementing Abstract Syntax Tree for SBQL
   class AST
     
+    # Method: finalize (destructor)
+    #
+    # Params:
+    # 
+    # Returns:
+    #
+    def finalize
+      @VAR_STORE = nil
+      @VAR_ENVS = nil
+      @VAR_QRES = nil
+    end
+    
     # Method: initialize (constructor)
     #
     # Params:
@@ -72,6 +84,7 @@ require "lib/Operator/PickRandom"
       Common::Logger.print(Common::VAR_DEBUG, self, "[initalize]: #{@VAR_QRES.to_s()}\n#{@VAR_ENVS.to_s()}")
       
       var_parser = XMLDB::XMLParser.new()
+      
       
       @VAR_STORE = var_parser.loadXML(var_XMLDataPath)
       @VAR_ENVS  = ENVS::ENVS.new(@VAR_STORE)

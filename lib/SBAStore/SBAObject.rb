@@ -14,6 +14,19 @@ require "lib/Common/exceptions"
     # VAR_OBJECT_COUNTER:Integer - SBAObject instances counter
     @@VAR_OBJECT_COUNTER = 0
     
+    # Method: reset_counter (static)
+    #
+    # It resets counter so during the test we don't have very large
+    # numbers.
+    #
+    # Params:
+    # 
+    # Returns:
+    #
+    def SBAObject.reset_counter
+      @@VAR_OBJECT_COUNTER = 0
+    end
+    
     # Method: initialize (constructor)
     # 
     # Params:
